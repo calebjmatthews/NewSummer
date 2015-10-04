@@ -1,0 +1,158 @@
+Weather
+function WeatherProb(multiplier, weatherObj)
+- MOI (Moisture)
+	~ XX% Drought
+	~ XX% Flood
+	~ XX% Dry
+	~ XX% Rain
+	~ XX% Gentle
+- TEM (Temperature)
+	~ XX% Searing
+	~ XX% Freezing
+	~ XX% Heat
+	~ XX% Cold
+	~ XX% Mild
+- eIPD (Insect Predation)
+	~ XX% Plague
+	~ XX% High
+	~ XX% Low
+	~ XX% None
+- eAPD (Animal Predation)
+	~ XX% High
+	~ XX% Low
+	~ XX% None
+
+{
+	name : "Temperate"
+	MOI  : [5, 5, 30, 30, 30],
+	TEM  : [5, 5, 30, 30, 30],
+	eIPD : [5, 15, 30, 50],
+	eAPD : [20, 30, 50]
+}
+- Tropical: Wet and hot
+- Arid: Dry and hot
+- Mesothermal: Changeable, dry and hot summers with wet and cold winters
+- Boreal: Wet and cold
+- Polar: Dry and cold
+
+this.CalcInvestment = function(envMoisture, envTemperature, envInsect, envMammal)
+
+Game Flow
+~~~~~~~~~
+- Poaceae have 8 forms/stages:
+	~ Seed (Gt), before selecting a field and planting
+	~ Used Seed (Gt), the inactive genotype remnant after planting seed
+	~ Pollen (Gt), 3 produced by every immature plant
+	~ Used Pollen (Gt), the inactive genotype remnant after breeding with pollen
+	~ Unfertilized (Pt), before selecting other plant/self to pollinate
+	~ Fertilized (Pt), produces seed for planting or selling, default is to keep 2
+	~ Expired (Pt), the inactive phenotype remnant after harvesting
+	~ Cutting (Gt), left behind after harvesting perennial, can be replanted
+
+Adjectives
+~~~~~~~~~~
+- Randomly assigned at plant creation, can be changed by the user
+- MOI: Desert, Prairie, Wetland
+- TEM: Summer, Spring, Winter
+- FL1: Sweet
+- FL2: Savory
+- FL3: Bitter
+- CL1: Red
+- CL2: Blue
+- CL3: Gold
+- CLX: Vermillion
+- CLX: Indigo
+- CLX: Cerulean
+- CLX: Carmine
+
+Detailed Explanation
+~~~~~~~~~~~~~~~~~~~~
+Vigor: Weak, Moderate, Strong (Aa / Aa / Aa)
+Form: Seed Head, Cane, Fox Tail, Ear, Husk (Aa / Aa / Aa)
+Period: Annual, Perennial (Aa)
+Carbon Fixation: C3, C4 (Aa)
+Seed Scattering: Seeds hold together, Seeds disperse (Aa)
+Moisture: Tolerates dryness, Tolerates some dryness and flooding, Tolerates flooding (Aa)
+Temperature: Tolerates heat, Tolerates some heat and cold, Tolerates cold (Aa)
+Soil: Tolerates no poor soil, Tolerates some poor soil, Tolerates poor soil (Aa)
+Seed Size: Worthless, Small, Large (Aa / Aa)
+Seed Quantity: Worthless, Sparse, Plentiful (Aa / Aa)
+Plant Size: Large, Medium, Small (Aa / Aa)
+Toughness: Tough, Mild, Soft
+Defense Structure: Thorns, Spines, None (Aa)
+Defense Compounds: Strong, Weak, Absent (Aa)
+Protein: High, Low, Absent (Aa)
+Vitamins: High, Low, Absent (Aa)
+Flavor: Sweet, Starchy, Mild, Savory, Bitter (Aa / Aa / Aa)
+Color: Plain, Red, Blue, Gold, Vermillion, Indigo, Cerulean, Carmine (Aa / Aa / Aa)
+
+Simple Explanation (example)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Type: Moderately strong annual C3 plant with grain in ears
+Ideal Conditions: High moisture, hot temperatures, in any quality soil
+Pests: Strong insect resistance, some mammal resistance
+Produces: Medium size, low quantity, starchy grain with low protein and no vitamins
+
+var propertyValue = plantGenotypes[currID][property];
+
+0 1 1 1 2 2 2 2 2
+0 0 1 1 0 1 1 2 2
+0 0 0 1 0 0 1 1 2
+0 1 2 3 2 3 4 5 6
+
+Fields
+~~~~~~
+
+Visually:
+*———————*———————*
+|	|	|
+|	|	|
+|	|	|
+*———————*———————*
+|	|	|
+|	|	|
+|	|	|
+*———————*———————*
+
+- In a new year, clicking harvests the field (or harvest all).  Options are:
+	~ New Plant
+		- Plant seed X
+		- Plant seed Y
+		- Plant seed Z
+		- Perennial plant cutting X
+	~ Summary
+		- Environmental damage (High, med, low, none)
+		- Economic demand for this plant (High, med, low, none)
+		- Actual plant value ### k$
+	~ Environment Detail
+		- This year’s frequent rain…
+		- It was not bothered…
+		- There was some harm done…
+		- Also, the low number of grazing…
+	~ Plant Detail
+		- BriefExplain of the phenotype
+	~ Cancel
+
+- After some growing time, clicking collects pollen (or collect all).  Options are:
+	~ Breed
+		- Self
+		- Plant pollen X
+		- Plant pollen Y
+		- Plant pollen Z
+	~ Cancel
+
+- After pollination, move forward to new year
+
+In test, we have 
+ul, 		ul li, 		ul li ul, 	ul li ul li
+harvested, 	newPlant,	plantList,	plantA
+
+	High	Med	Low
+Pen	0	10	20
+	Tol	Some	No
+Def	20	10	0
+Inv	10	5	0
+
+Changed variables:  newPlant, seedList, summary, envDetail, plantDetail, breedUsing, 
+	pollenList
+	class -> id

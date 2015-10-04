@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Summer</title>
+	<link rel="stylesheet" href="van_style.css">
+	<meta charset="UTF-8"></meta>
+</head>
+
+<body>
+	
+	<div id="NeuNeu" class="bg"></div>
+	<div id="DryHot" class="bg fadeOut"></div>
+	<div id="DryCld" class="bg fadeOut"></div>
+	<div id="WetHot" class="bg fadeOut"></div>
+	<div id="WetCld" class="bg fadeOut"></div>
+	
+	<div id="output">
+	</div>
+	
+	<div id="stats">
+		<div id="menu">
+			<input class="btn" type="button" value="Test" 
+				onclick="Test()" />
+			<input class="btn" type="button" value="Search"/>
+			<input class="btn" type="button" value="Change Land"/>
+			<input class="btn" type="button" value="Storage"/>
+		</div>
+		
+		<span id="landLabel">Temperate Fields:</span> <br>
+		
+		<div id="field0Wrapper">
+		<input class="field harvsted" type="button" value="Empty" id="field0"
+			onclick="FieldClick(0)" />
+
+		<ul id="hFieldMenu0" class="invisible harvestedList">
+			<li class="newPlant">New Plant
+				<ul class="seedList">
+				</ul> </li>
+			<li class="summary">Summary</li>
+			<li class="envDetail">Environment Detail</li>
+			<li class="plantDetail">Plant Detail</li>
+			<li class="cancel" onclick="CloseMenu(0)">Cancel</li>
+		</ul>
+		<ul id="cFieldMenu0" class="invisible collectedList">
+			<li class="breed">Breed 
+				<ul class="pollenList">
+				</ul> </li>
+			<li class="cancel" onclick="CloseMenu(0)">Cancel</li>
+		</ul>
+
+		</div> 
+		
+		<div id="field1Wrapper">
+		<input class="field harvsted" type="button" value="Empty" id="field1"
+			onclick="FieldClick(1)" />
+
+		<ul id="hFieldMenu1" class="invisible harvestedList">
+			<li class="newPlant">New Plant
+				<ul class="seedList">
+				</ul> </li>
+			<li class="summary">Summary</li>
+			<li class="envDetail">Environment Detail</li>
+			<li class="plantDetail">Plant Detail</li>
+			<li class="cancel" onclick="CloseMenu(1)">Cancel</li>
+		</ul>
+		<ul id="cFieldMenu1" class="invisible collectedList">
+			<li class="breed">Breed 
+				<ul class="pollenList">
+				</ul> </li>
+			<li class="cancel" onclick="CloseMenu(1)">Cancel</li>
+		</ul>
+
+		</div>
+		
+		<div id="field2Wrapper">
+		<input class="field harvsted" type="button" value="Empty" id="field2"
+			onclick="FieldClick(2)" />
+
+		<ul id="hFieldMenu2" class="invisible harvestedList">
+			<li class="newPlant">New Plant 
+				<ul class="seedList">
+				</ul> </li>
+			<li class="summary">Summary</li>
+			<li class="envDetail">Environment Detail</li>
+			<li class="plantDetail">Plant Detail</li>
+			<li class="cancel" onclick="CloseMenu(2)">Cancel</li>
+		</ul>
+		<ul id="cFieldMenu2" class="invisible collectedList">
+			<li class="breed">Breed 
+				<ul class="pollenList">
+				</ul> </li>
+			<li class="cancel" onclick="CloseMenu(2)">Cancel</li>
+		</ul>
+
+		</div>
+		
+		<div id="field3Wrapper">
+		<input class="field harvsted" type="button" value="Empty" id="field3"
+			onclick="FieldClick(3)" />
+
+		<ul id="hFieldMenu3" class="invisible harvestedList">
+			<li class="newPlant">New Plant
+				<ul class="seedList">
+				</ul> </li>
+			<li class="summary">Summary</li>
+			<li class="envDetail">Environment Detail</li>
+			<li class="plantDetail">Plant Detail</li>
+			<li class="cancel" onclick="CloseMenu(3)">Cancel</li>
+		</ul>
+		<ul id="cFieldMenu3" class="invisible collectedList">
+			<li class="breed">Breed 
+				<ul class="pollenList">
+				</ul> </li>
+			<li class="cancel" onclick="CloseMenu(3)">Cancel</li>
+		</ul>
+
+		</div>
+
+	</div>
+	
+</body>
+	<script type="text/javascript" src="van_NewSummer.js">
+	</script>
+</html>
