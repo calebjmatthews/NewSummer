@@ -1,0 +1,266 @@
+[
+	{
+		"specName" : "Wild Grain",
+		"CFX" : [false, false],
+		"RCH" : [false, false],
+		"SZ1" : [true, true],
+		"SZ2" : [[true, true], [false, false]],
+		"QT1" : [true, true],
+		"QT2" : [[true, true], [false, false]],
+		"TOF" : [false, false],
+		"DCP" : [false, false],
+		"PRT" : [true, true],
+		"VIT" : [true, true],
+		"TI1" : [true, true],
+		"TI2" : [true, true],
+		"TI3" : [true, true]
+	},
+
+	{
+		"specName" : "Wild Corn",
+		"CFX" : [false, false],
+		"RCH" : [false, false],
+		"SZ1" : [true, true],
+		"SZ2" : [[true, true], [false, false]],
+		"QT1" : [true, true],
+		"QT2" : [[true, true], [false, false]],
+		"MIV" : [false, false],
+		"MM2" : [[true, true], [false, false]],
+		"TOF" : [false, false],
+		"DCP" : [false, false],
+		"PRT" : [true, true],
+		"VIT" : [true, true],
+		"TI1" : [true, true],
+		"TI2" : [true, true],
+		"TI3" : [true, true]
+	},
+
+	{
+		"specName" : "Wild Wheat",
+		"CFX" : [false, false],
+		"RCH" : [false, false],
+		"SZ1" : [true, true],
+		"SZ2" : [[true, true], [false, false]],
+		"QT1" : [true, true],
+		"QT2" : [[true, true], [false, false]],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]],
+		"TOF" : [false, false],
+		"DCP" : [false, false],
+		"PRT" : [true, true],
+		"VIT" : [true, true],
+		"TI1" : [true, true],
+		"TI2" : [true, true],
+		"TI3" : [true, true]
+	},
+
+	{
+		"specName" : "Wild Oats",
+		"CFX" : [false, false],
+		"RCH" : [false, false],
+		"SZ1" : [true, true],
+		"SZ2" : [[true, true], [false, false]],
+		"QT1" : [true, true],
+		"QT2" : [[true, true], [false, false]],
+		"MIV" : [false, false],
+		"MM2" : [[true, true], [true, false], [false, true]],
+		"TOF" : [false, false],
+		"DCP" : [false, false],
+		"PRT" : [true, true],
+		"VIT" : [true, true],
+		"TI1" : [true, true],
+		"TI2" : [true, true],
+		"TI3" : [true, true]
+	},
+
+	{
+		"specName" : "Wild Cane",
+		"CFX" : [false, false],
+		"MIV" : [[true, true], [true, false], [false, true]],
+		"TOF" : [false, false],
+		"DCP" : [false, false],
+		"PS1" : [true, true],
+		"PS2" : [true, true],
+		"PRT" : [true, true],
+		"VIT" : [true, true],
+		"TI1" : [true, true],
+		"TI2" : [true, true],
+		"TI3" : [true, true]
+	},
+
+	{
+		"specName" : "Wild Millet",
+		"CFX" : [false, false],
+		"RCH" : [false, false],
+		"SZ1" : [true, true],
+		"SZ2" : [[true, true], [false, false]],
+		"QT1" : [true, true],
+		"QT2" : [[true, true], [false, false]],
+		"MIV" : [false, false],
+		"MM1" : [[true, true], [true, false], [false, true]],
+		"MM2" : [[true, false], [false, true], [false, false]],
+		"TOF" : [false, false],
+		"DCP" : [false, false],
+		"PRT" : [true, true],
+		"VIT" : [true, true],
+		"TI1" : [true, true],
+		"TI2" : [true, true],
+		"TI3" : [true, true]
+	},
+
+	{
+		"specName" : "Primitive Corn",
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MIV" : [false, false],
+		"MM2" : [[true, true], [false, false]]
+	},
+
+	{
+		"specName" : "Emmer Wheat",
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]]
+	},
+
+	{
+		"specName" : "Primitive Oats",
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MIV" : [false, false],
+		"MM2" : [[true, true], [true, false], [false, true]]
+	},
+
+	{
+		"specName" : "Primitive Cane",
+		"MIV" : [[true, true], [true, false], [false, true]],
+		"PS1" : [false, false],
+		"PS2" : [false, false]
+	},
+
+	{
+		"specName" : "Primitive Millet",
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MIV" : [false, false],
+		"MM1" : [[true, true], [true, false], [false, true]],
+		"MM2" : [[true, false], [false, true], [false, false]]
+	},
+
+	{
+		"specName" : "Corn",
+		"PER" : [false, false],
+		"CFX" : [[true, true], [true, false], [false, true]],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MOI" : [[true, true], [false, false]],
+		"TEM" : [[true, true], [false, false]],
+		"MIV" : [false, false],
+		"MM2" : [[true, true], [false, false]]
+	},
+
+	{
+		"specName" : "Wheat",
+		"PER" : [false, false],
+		"CFX" : [false, false],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MOI" : [[true, true], [false, false]],
+		"TEM" : [true, true],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]]
+	},
+
+	{
+		"specName" : "Rice",
+		"PER" : [false, false],
+		"CFX" : [false, false],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MOI" : [[true, true], [true, false], [false, true]],
+		"TEM" : [true, true],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]]
+	},
+
+	{
+		"specName" : "Barley",
+		"PER" : [false, false],
+		"CFX" : [false, false],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"TEM" : [false, false],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]],
+		"PST" : [true, true]
+	},
+
+	{
+		"specName" : "Millet",
+		"PER" : [false, false],
+		"CFX" : [[true, true], [true, false], [false, true]],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MOI" : [false, false],
+		"MIV" : [false, false],
+		"MM1" : [[true, true], [true, false], [false, true]],
+		"MM2" : [[true, false], [false, true], [false, false]]
+	},
+
+	{
+		"specName" : "Sorghum",
+		"PER" : [false, false],
+		"CFX" : [[true, true], [true, false], [false, true]],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MOI" : [false, false],
+		"TEM" : [false, false],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]]
+	},
+
+	{
+		"specName" : "Oats",
+		"PER" : [false, false],
+		"CFX" : [false, false],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"MOI" : [true, true],
+		"TEM" : [true, true],
+		"MIV" : [false, false],
+		"MM2" : [[true, true], [true, false], [false, true]]
+	},
+
+	{
+		"specName" : "Rye",
+		"PER" : [false, false],
+		"CFX" : [false, false],
+		"RCH" : [[true, true], [true, false], [false, true]],
+		"TEM" : [true, true],
+		"MIV" : [false, false],
+		"MM1" : [false, false],
+		"MM2" : [[true, false], [false, true], [false, false]],
+		"FL3" : [[true, true], [true, false], [false, true]],
+		"PST" : [true, true]
+	},
+
+	{
+		"specName" : "Sugar Cane",
+		"PER" : [[true, true], [true, false], [false, true]],
+		"CFX" : [[true, true], [true, false], [false, true]],
+		"MIV" : [[true, true], [true, false], [false, true]],
+		"MOI" : [true, true],
+		"TEM" : [false, false],
+		"PS1" : [false, false],
+		"PS2" : [false, false],
+		"FL1" : [[true, true], [true, false], [false, true]],
+		"FL2" : [false, false],
+		"FL3" : [false, false]
+	},
+
+	{
+		"specName" : "Bamboo",
+		"PER" : [[true, true], [true, false], [false, true]],
+		"CFX" : [false, false],
+		"MIV" : [[true, true], [true, false], [false, true]],
+		"PS1" : [false, false],
+		"PS2" : [false, false],
+		"TOF" : [false, false]
+	}
+]

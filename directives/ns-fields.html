@@ -1,0 +1,11 @@
+<div ng-controller="ScaffoldCtrl as scaffold">
+	<div ng-repeat="field in fields" class="nsFieldSpace">
+		{{ getName() }}
+		<br>
+		<canvas class="plantCanvas" width="160" height="280"></canvas>
+		<progressbar class="progress-striped active animated nsBar" type="success"
+			value= "currPlants[field.spot].progress">
+			{{ currPlants[field.spot].progress + "%" }}
+		</progressbar>
+	</div>
+</div>

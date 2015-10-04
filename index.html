@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="newSummer">
+<head>
+	<meta charset="utf-8">
+	<title>New Summer</title>
+	<!-- Include CSS and Libraries -->
+	<script type="text/javascript" src="js/jquery-1.11.3.js">
+	</script>
+	<script type="text/javascript" src="js/angular.js">
+	</script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.13.4.min.js">
+	</script>
+	<script type="text/javascript" src="js/app.js">
+	</script>
+	<script type="text/javascript" src="directives/directives.js">
+	</script>
+	<script type="text/javascript" src="gene-processing/fieldControllers.js">
+	</script>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+</head>
+
+<body ng-controller="GameController as game">
+	
+	<div id="nsWrapper">
+	
+	<ns-navbar></ns-navbar>
+	
+	<ns-fields></ns-fields>
+	
+	</div>
+	
+</body>
+</html>

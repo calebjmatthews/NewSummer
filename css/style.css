@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+#nsWrapper {
+	width: 100%;
+  height: 100%;
+	position: absolute;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+	background: -moz-linear-gradient(#C19E95, #907465, #332525);
+	background:	-webkit-linear-gradient(#C19E95, #907465, #332525);
+	
+}
+
+#nsLogo {
+	margin: 0 10px 0 5px;
+}
+#nsMenu {
+	font-size: large;
+	color: #F7DAD0;
+	padding: 5px;
+	background: #402E2E;
+}
+.nsMenuButton {
+	width: 10%;
+	min-width: 40px;
+	outline: 0;
+	background: none;
+	border: 0;
+	box-shadow: none;
+}
+.nsMenuButton:hover, .nsMenuButton:focus {
+	color: #FBECE8;
+	background: -moz-linear-gradient(rgba(245,215,208,0.15),rgba(245,215,208,0.05));
+	background: -webkit-linear-gradient(rgba(245,215,208,0.15),rgba(245,215,208,0.05));
+}
+
+.nsFieldSpace {
+	float: left;
+	text-align: center;
+	color: #F7DAD0;
+	width: 22.5%;
+	min-width: 200px;
+	height: 350px;
+	margin: 2% 0 2% 2%;
+	background: -moz-linear-gradient(rgba(245,215,208,0.15),rgba(245,215,208,0.05));
+	background: -webkit-linear-gradient(rgba(245,215,208,0.15),rgba(245,215,208,0.05));
+}
+.nsFieldSpace:hover {
+	color: #FBECE8;
+	background: -moz-linear-gradient(rgba(245,215,208,0.2),rgba(245,215,208,0.1));
+	background: -webkit-linear-gradient(rgba(245,215,208,0.2),rgba(245,215,208,0.1));
+}
+.plantCanvas {
+	background: #FBECE8;
+	margin: 5px;
+}
+.nsBar {
+	width: 80%;
+	margin: 0 10% 0 10%;
+}
+
+.sun {
+	color: #F7DAD0;
+}
