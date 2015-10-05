@@ -7,28 +7,19 @@ fieldControllers.controller('ScaffoldCtrl', ['$scope', 'plantService', '$window'
 		$scope.currPlants = [];
 		plantService.getPlants().then(function(returnValues){
 			$scope.currPlants = returnValues.data;
+		
+			$scope.fields = [];
+			for (var iii=0; iii<4; iii++) {
+				this.fieldTemplate = {
+					'spot': iii,
+					'planted': iii,
+					'quality': 5,
+					'plantName': ($scope.currPlants[iii]['adjective']
+											+ " " + $scope.currPlants[iii]['specName'])
+				}
+				$scope.fields.push(this.fieldTemplate);
+			};
 		});
-
-		// Initial values for fields
-		$scope.fields = [];
-		for (var iii=0; iii<4; iii++) {
-			this.fieldTemplate = {
-				'spot': iii,
-				'planted': iii,
-				'quality': 5
-			}
-			$scope.fields.push(this.fieldTemplate);
-		};
-
-		$scope.getName = function() {
-			if (this.field.planted === null) {
-				return "Empty";
-			}
-			else {
-				return ($scope.currPlants[this.field.planted]['adjective'] 
-					+ " " + $scope.currPlants[this.field.planted]['specName']);
-			}
-		}
 
 		function DrawPlant(spot) {
 			// Initialize canvas image objects

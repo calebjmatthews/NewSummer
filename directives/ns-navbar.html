@@ -8,9 +8,20 @@
 		<button class="btn btn-success nsMenuButton" tooltip-placement="bottom"
 			tooltip="Store"><span class="glyphicon sun glyphicon-tags">
 		</span></button>
-		<button class="btn btn-success nsMenuButton" tooltip-placement="bottom" 
-			tooltip="Gather Wild Seeds"><span class="glyphicon sun glyphicon-leaf">
-		</span></button>
+		
+    <span dropdown ng-controller="GatherController">
+			<button class="btn btn-success nsMenuButton" tooltip-placement="bottom"
+				dropdown-toggle ng-disabled="disabled" tooltip="Gather Wild Seeds">
+				<span class="glyphicon sun glyphicon-leaf">
+				</span> <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li ng-repeat="area in gatheringAreas">
+					<a href>{{ area }}</a>
+				</li>
+			</ul>
+    </span>
+		
 		<button class="btn btn-success nsMenuButton" tooltip-placement="bottom" 
 			tooltip="Quests"><span class="glyphicon sun glyphicon-globe">
 		</span></button>
