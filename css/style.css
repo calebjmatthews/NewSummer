@@ -64,6 +64,9 @@
 	margin: 0 10% 0 10%;
 }
 
-.sun {
+.nsBright {
 	color: #F7DAD0;
+}
+.nsOnTop {
+	z-index: 2000;
 }

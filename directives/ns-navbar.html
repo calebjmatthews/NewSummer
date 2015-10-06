@@ -3,19 +3,19 @@
 		New Summer
 		</span>
 		<button class="btn btn-success nsMenuButton" tooltip-placement="bottom" 
-			tooltip="Save"><span class="glyphicon sun glyphicon-floppy-disk">
+			tooltip="Save"><span class="glyphicon nsBright glyphicon-floppy-disk">
 		</span></button>
 		<button class="btn btn-success nsMenuButton" tooltip-placement="bottom"
-			tooltip="Store"><span class="glyphicon sun glyphicon-tags">
+			tooltip="Store"><span class="glyphicon nsBright glyphicon-tags">
 		</span></button>
 		
     <span dropdown ng-controller="GatherController">
 			<button class="btn btn-success nsMenuButton" tooltip-placement="bottom"
 				dropdown-toggle ng-disabled="disabled" tooltip="Gather Wild Seeds">
-				<span class="glyphicon sun glyphicon-leaf">
+				<span class="glyphicon nsBright glyphicon-leaf">
 				</span> <span class="caret"></span>
 			</button>
-			<ul class="dropdown-menu" role="menu">
+			<ul class="dropdown-menu nsOnTop" role="menu">
 				<li ng-repeat="area in gatheringAreas">
 					<a href>{{ area }}</a>
 				</li>
@@ -23,6 +23,6 @@
     </span>
 		
 		<button class="btn btn-success nsMenuButton" tooltip-placement="bottom" 
-			tooltip="Quests"><span class="glyphicon sun glyphicon-globe">
+			tooltip="Quests"><span class="glyphicon nsBright glyphicon-globe">
 		</span></button>
 	</div>
