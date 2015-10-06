@@ -19,21 +19,22 @@ fieldControllers.controller('ScaffoldCtrl', ['$scope', 'plantService', '$window'
 				}
 				$scope.fields.push(this.fieldTemplate);
 			};
-		});
 
-		function DrawPlant(spot) {
-			// Initialize canvas image objects
-			var nsBackground = new Image();
-			nsBackground.src = "img/field-space.png";
+			function DrawPlant(spot) {
+				// Initialize canvas image objects
+				var nsBackground = new Image();
+				nsBackground.src = "img/field-space.png";
 
-			nsBackground.onload = function() {
-				var eleCanvas = $window.document.getElementsByClassName("plantCanvas")[spot];
-				var pCanvas = eleCanvas.getContext('2d');
-				pCanvas.drawImage(nsBackground, (120*(spot+1)), 70, 160, 280, 0, 0, 160, 280);
+				nsBackground.onload = function() {
+					var eleCanvas = $window.document.getElementsByClassName("plantCanvas")[spot];
+					var pCanvas = eleCanvas.getContext('2d');
+					pCanvas.drawImage(nsBackground, (120*(spot+1)), 70, 160, 280, 0, 0, 160, 280);
+				}
 			}
-		}
 
-		for (var iii=0; iii<4; iii++) {
-			DrawPlant(iii);
-		}
+			for (var iii=0; iii<4; iii++) {
+				DrawPlant(iii);
+			}
+
+		});
 	}]);

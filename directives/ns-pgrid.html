@@ -1,0 +1,22 @@
+<div class="nsGridWrapper">
+	<span class="nsBright">Seeds:</span>
+	<br>
+	<div class="nsGridContainer" ng-controller="SeedGridCtrl as sgrid">
+		<div ng-repeat="plant in gridPlants" 
+			class="nsGridUnit" tooltip="{{ plant.plantName }}">
+			<span ng-class="plant.plantClass">
+			</span>
+		</div>
+	</div> 
+</div>
+<div class="nsGridWrapper">
+	<span class="nsBright">Pollen:</span>
+	<br>
+	<div class="nsGridContainer" ng-controller="PollenGridCtrl as pgrid">
+		<div ng-repeat="plant in gridPlants" 
+			class="nsGridUnit" tooltip="{{ plant.plantName }}">
+			<span ng-class="plant.plantClass">
+			</span>
+		</div>
+	</div>
+</div>

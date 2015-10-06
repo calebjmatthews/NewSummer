@@ -46,7 +46,7 @@
 	width: 22.5%;
 	min-width: 200px;
 	height: 350px;
-	margin: 2% 0 2% 2%;
+	margin: 2% 0 0% 2%;
 	background: -moz-linear-gradient(rgba(245,215,208,0.15),rgba(245,215,208,0.05));
 	background: -webkit-linear-gradient(rgba(245,215,208,0.15),rgba(245,215,208,0.05));
 }
@@ -58,10 +58,36 @@
 .plantCanvas {
 	background: #FBECE8;
 	margin: 5px;
+	border-radius: 5px;
 }
 .nsBar {
 	width: 80%;
 	margin: 0 10% 0 10%;
+}
+.nsGridWrapper {
+	float: left;
+	margin: 2% 0 0 2%;
+	width: 47%;
+}
+.nsGridContainer {
+	min-width: 360px;
+	height: 122px;
+	overflow: scroll;
+	border: solid 1px #F7DAD0;
+}
+.nsGridUnit {
+	float: left;
+	min-width: 30px;
+	width: 8.3334%;
+	height: 30px;
+	border: solid 1px #F7DAD0;
+	font-size: large;
+	text-align: center;
+	padding: 1px;
+}
+.nsGridUnit:hover {
+	background: -moz-linear-gradient(rgba(245,215,208,0.2),rgba(245,215,208,0.1));
+	background: -webkit-linear-gradient(rgba(245,215,208,0.2),rgba(245,215,208,0.1));
 }
 
 .nsBright {

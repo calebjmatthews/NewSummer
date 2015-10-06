@@ -14,4 +14,11 @@
   		templateUrl: 'directives/ns-fields.html'
   	};
   });
+
+  app.directive("nsPgrid", function() {
+    return{
+      restrict: 'E',
+      templateUrl: 'directives/ns-pgrid.html'
+    };
+  });
 })();

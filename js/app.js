@@ -4,7 +4,8 @@
   var app = angular.module('newSummer', ['ui.bootstrap', 
     'game-directives',
     'fieldControllers',
-    'menuControllers']);
+    'menuControllers',
+    'gridControllers']);
 
   app.service('plantService', function($http) {
     return {
