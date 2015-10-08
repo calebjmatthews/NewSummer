@@ -24,6 +24,14 @@
     }
   });
 
+  app.service('globalService', function($http) {
+    return {
+      getGlobals: function() {
+        return $http.get('./other-logic/globals.json');
+      }
+    }
+  })
+
   app.controller('GameController', ['$http', function($http) {
     // App-wide logic goes here
     
