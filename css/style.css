@@ -74,6 +74,8 @@
 	height: 122px;
 	overflow: scroll;
 	border: solid 1px #F7DAD0;
+	background: -moz-linear-gradient(rgba(245,215,208,0.2),rgba(245,215,208,0.1));
+	background: -webkit-linear-gradient(rgba(245,215,208,0.2),rgba(245,215,208,0.1));
 }
 .nsGridUnit {
 	float: left;

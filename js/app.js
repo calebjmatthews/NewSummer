@@ -11,16 +11,21 @@
     return {
       getPlants: function() {
         return $http.get('./gene-processing/plants.json');
+      },
+      postPlants: function(currPlants) {
+        return $http({
+          withCredentials: false,
+          method: 'post',
+          url: './gene-processing/plants.json',
+          data: currPlants,
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
       }
     }
   });
 
   app.controller('GameController', ['$http', function($http) {
-    // var nsData = this;
-    // nsData.cultivars = [];
-    // $http.get('./gene-processing/cultivars.json').success(function(data){
-    //   nsData.cultivars = data;
-    // });
+    // App-wide logic goes here
     
   }]);
 

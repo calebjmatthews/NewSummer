@@ -8,22 +8,58 @@ gridControllers.controller('SeedGridCtrl', ['$scope', 'plantService',
 		$scope.gridPlants = [];
 		plantService.getPlants().then(function(returnValues){
 			$scope.currPlants = returnValues.data;
+			// Select only plants that fit the current username, or template
 
+			// Fill grid spaces with seeds/cuttings
 			for (var iii=0; iii<96; iii++) {
 				if ($scope.currPlants[iii] != undefined) {
-					this.gridTemplate = {
-						'plantName': ($scope.currPlants[iii]['adjective']
-		 							+ " " + $scope.currPlants[iii]['specName']),
-						'plantClass': ("glyphicon nsBright glyphicon-grain")
-					};
+					// If the genotype has both a seed and a cutting, make a grid unit for each
+					if (($scope.currPlants[iii]['numSeeds'] > 0)
+					 && ($scope.currPlants[iii]['numCuttings'] > 0)) {
+						this.seedGrid = {
+							'plantName': ($scope.currPlants[iii]['adjective']
+			 							+ " " + $scope.currPlants[iii]['specName']),
+							'plantClass': ("glyphicon nsBright glyphicon-grain")
+						};
+						$scope.gridPlants.push(this.seedGrid);
+						this.seedGrid = {
+							'plantName': ($scope.currPlants[iii]['adjective']
+			 							+ " " + $scope.currPlants[iii]['specName']),
+							'plantClass': ("glyphicon nsBright glyphicon-tree-deciduous")
+						}
+					}
+					// Grid unit for seed
+					else if ($scope.currPlants[iii]['numSeeds'] > 0) {
+						this.seedGrid = {
+							'plantName': ($scope.currPlants[iii]['adjective']
+			 							+ " " + $scope.currPlants[iii]['specName']),
+							'plantClass': ("glyphicon nsBright glyphicon-grain")
+						};
+					}
+					// Grid unit for cutting
+					else if ($scope.currPlants[iii]['numCuttings'] > 0) {
+						this.seedGrid = {
+							'plantName': ($scope.currPlants[iii]['adjective']
+			 							+ " " + $scope.currPlants[iii]['specName']),
+							'plantClass': ("glyphicon nsBright glyphicon-tree-deciduous")
+						}
+					}
+					// Grid unit for a present genotype, but used up seeds and cuttings
+					else {
+						this.seedGrid = {
+							'plantName': "",
+							'plantClass': ("empty")
+						};
+					}
 				}
+				// Fill in remaining 96 spots
 				else {
-					this.gridTemplate = {
+					this.seedGrid = {
 						'plantName': "",
 						'plantClass': ("empty")
 					};
 				}
-				$scope.gridPlants.push(this.gridTemplate);
+				$scope.gridPlants.push(this.seedGrid);
 			}
 		});
 	}]);
@@ -39,19 +75,19 @@ gridControllers.controller('PollenGridCtrl', ['$scope', 'plantService',
 
 			for (var iii=0; iii<96; iii++) {
 				if ($scope.currPlants[iii] != undefined) {
-					this.gridTemplate = {
+					this.pollenGrid = {
 						'plantName': ($scope.currPlants[iii]['adjective']
 		 							+ " " + $scope.currPlants[iii]['specName']),
 						'plantClass': ("glyphicon nsBright glyphicon-certificate")
 					};
 				}
 				else {
-					this.gridTemplate = {
+					this.pollenGrid = {
 						'plantName': "",
 						'plantClass': ("empty")
 					};
 				}
-				$scope.gridPlants.push(this.gridTemplate);
+				$scope.gridPlants.push(this.pollenGrid);
 			}
 		});
 	}]);

@@ -9,5 +9,8 @@
     "angular-route": "1.4.x",
     "angular-resource": "1.4.x",
     "angular-animate": "1.4.x"
+  },
+  "devDependencies": {
+    "angular-post-fix": "~0.1.0"
   }
 }
