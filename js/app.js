@@ -10,13 +10,13 @@
   app.service('plantService', function($http) {
     return {
       getPlants: function() {
-        return $http.get('./gene-processing/plants.json');
+        return $http.get('./gene-processing/demeter.json');
       },
       postPlants: function(currPlants) {
         return $http({
           withCredentials: false,
           method: 'post',
-          url: './gene-processing/plants.json',
+          url: './gene-processing/demeter.json',
           data: currPlants,
           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         })

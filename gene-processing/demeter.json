@@ -1,7 +1,6 @@
 [
 	{
 		"plantID" : 0,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Sweet",
 		"specName" : "Wild Wheat",
@@ -43,7 +42,6 @@
 	},
 	{
 		"plantID" : 1,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Red",
 		"specName" : "Wild Wheat",
@@ -85,7 +83,6 @@
 	},
 	{
 		"plantID" : 2,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Savory",
 		"specName" : "Wild Cane",
@@ -127,7 +124,6 @@
 	},
 	{
 		"plantID" : 3,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Spring",
 		"specName" : "Wild Oats",
@@ -169,7 +165,6 @@
 	},
 	{
 		"plantID" : 4,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Sweet",
 		"specName" : "Wild Wheat",
@@ -211,7 +206,6 @@
 	},
 	{
 		"plantID" : 5,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Red",
 		"specName" : "Wild Wheat",
@@ -253,7 +247,6 @@
 	},
 	{
 		"plantID" : 6,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Savory",
 		"specName" : "Wild Cane",
@@ -295,7 +288,6 @@
 	},
 	{
 		"plantID" : 7,
-		"owner" : "Demeter",
 		"family" : "Poaceae",
 		"adjective" : "Spring",
 		"specName" : "Wild Oats",
@@ -334,47 +326,5 @@
 		"CL1" : [false, false],
 		"CL2" : [true, false],
 		"CL3" : [false, true]
-	},
-	{
-		"plantID" : 8,
-		"owner" : "dummy",
-		"family" : "Poaceae",
-		"adjective" : "Invisible",
-		"specName" : "Wild Wheat",
-		"sireID" : null,
-		"state" : null,
-		"progress" : null,
-		"numSeeds" : 0,
-		"numPollen" : 0,
-		"numCuttings" : 0,
-		"TI1" : [true, false],
-		"TI2" : [false, true],
-		"TI3" : [false, true],
-		"MIV" : [true, false],
-		"MM1" : [true, true],
-		"MM2" : [true, true],
-		"PER" : [false, false],
-		"CFX" : [false, true],
-		"RCH" : [true, false],
-		"MOI" : [true, false],
-		"TEM" : [true, true],
-		"PST" : [true, true],
-		"SZ1" : [true, false],
-		"SZ2" : [true, false],
-		"QT1" : [false, false],
-		"QT2" : [false, true],
-		"PS1" : [false, false],
-		"PS2" : [false, false],
-		"TOF" : [true, true],
-		"DFS" : [false, false],
-		"DCP" : [true, false],
-		"PRT" : [false, false],
-		"VIT" : [true, false],
-		"FL1" : [false, false],
-		"FL2" : [true, false],
-		"FL3" : [true, true],
-		"CL1" : [false, true],
-		"CL2" : [false, true],
-		"CL3" : [true, true]
 	}
 ]

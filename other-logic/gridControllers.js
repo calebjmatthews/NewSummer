@@ -4,17 +4,10 @@ gridControllers.controller('SeedGridCtrl', ['$scope', 'plantService', 'globalSer
 	function($scope, plantService, globalService) {
 
 		// Pull plant data from plantService
-		this.allPlants = [];
 		$scope.myPlants = [];
 		$scope.gridPlants = [];
 		plantService.getPlants().then(function(returnValues) {
-			this.allPlants = returnValues.data;
-			// Select only plants that fit the current username
-			for (var iii=0; iii < this.allPlants.length; iii++) {
-				if (this.allPlants[iii]["owner"] === "Demeter") {
-					$scope.myPlants.push(this.allPlants[iii]);
-				}
-			}
+			$scope.myPlants = returnValues.data;
 
 			// Fill grid spaces with seeds/cuttings
 			for (var iii=0; iii<96; iii++) {
@@ -74,17 +67,10 @@ gridControllers.controller('PollenGridCtrl', ['$scope', 'plantService',
 	function($scope, plantService) {
 
 		// Pull plant data from plantService
-		this.allPlants = [];
 		$scope.myPlants = [];
 		$scope.gridPlants = [];
 		plantService.getPlants().then(function(returnValues){
-			this.allPlants = returnValues.data;
-			// Select only plants that fit the current username
-			for (var iii=0; iii < this.allPlants.length; iii++) {
-				if (this.allPlants[iii]["owner"] === "Demeter") {
-					$scope.myPlants.push(this.allPlants[iii]);
-				}
-			}
+			$scope.myPlants = returnValues.data;
 
 			for (var iii=0; iii<96; iii++) {
 				if ($scope.myPlants[iii] != undefined) {
