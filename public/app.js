@@ -7,19 +7,13 @@
     'menuControllers',
     'gridControllers']);
 
-  app.service('plantService', function($http) {
+  app.factory('plantService', function($http) {
     return {
       getPlants: function() {
         return $http.get('/api/plants');
       },
       postPlants: function(currPlants) {
-        return $http({
-          withCredentials: false,
-          method: 'post',
-          url: './gene-processing/demeter.json',
-          data: currPlants,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
+        // Post logic
       }
     }
   });

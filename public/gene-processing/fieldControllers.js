@@ -8,6 +8,7 @@ fieldControllers.controller('ScaffoldCtrl',
 		$scope.myPlants = [];
 		plantService.getPlants().then(function(returnValues){
 			$scope.myPlants = returnValues.data;
+			console.log($scope.myPlants);
 		
 			// Set the initial state for fields
 			$scope.fields = [];
