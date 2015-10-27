@@ -14,10 +14,11 @@ var db = require('./config/db.js');
 var port = process.env.PORT || 8080;
 
 // connect to our mongoDB database
-var data = mongoose.connect(db.dev_url);
+mongoose.connect(db.uri);
+var data = mongoose.connection;
 data.on('error', console.error.bind(console, 'Connection error:'));
 data.once('open', function(callback) {
-	console.log('Connection success.');
+	console.log('Database connection success.');
 });
 
 // acquire data/logic =====================
@@ -37,7 +38,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 
 // routes =================================
-require('./app/routes')(app); // configure our routes
+require('./app/routes.js')(app); // configure our routes
 
 // start app ==============================
 // statup the app

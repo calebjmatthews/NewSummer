@@ -12,22 +12,24 @@
       getPlants: function() {
         return $http.get('/api/plants');
       },
-      postPlants: function(currPlants) {
-        return $http({
-          withCredentials: false,
-          method: 'post',
-          url: './gene-processing/demeter.json',
-          data: currPlants,
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
+      getTemplates: function() {
+        return $http.get('gene-processing/templates.json');
+      },
+      postPlant: function(currPlant) {
+        return $http('/api/plants', currPlant);
       }
     }
   });
 
   app.service('globalService', function($http) {
     return {
+      // Get all global data
       getGlobals: function() {
-        return $http.get('./other-logic/globals.json');
+        return $http.get('/api/globals');
+      },
+      // Register a new user
+      postGlobal: function(newUser) {
+        return $http('/api/globals', newUser);
       }
     }
   })

@@ -1,6 +1,13 @@
 (function(){
   var app = angular.module('game-directives', []);
 
+  app.directive("nsLoginModal", function() {
+    return{
+      restrict: 'E',
+      templateUrl: 'directives/ns-login-modal.html'
+    };
+  });
+
   app.directive("nsNavbar", function() {
   	return{
   		restrict: 'E',

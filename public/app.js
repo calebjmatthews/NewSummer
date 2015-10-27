@@ -12,8 +12,11 @@
       getPlants: function() {
         return $http.get('/api/plants');
       },
-      postPlants: function(currPlants) {
-        // Post logic
+      getTemplates: function() {
+        return $http.get('/gene-processing/templates.json');
+      }
+      postPlant: function(currPlant) {
+        return $http.post('/api/plants', currPlant);
       }
     }
   });

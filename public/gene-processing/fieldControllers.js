@@ -6,37 +6,36 @@ fieldControllers.controller('ScaffoldCtrl',
 
 		// Pull plant data from plantService
 		$scope.myPlants = [];
-		plantService.getPlants().then(function(returnValues){
-			$scope.myPlants = returnValues.data;
-			console.log($scope.myPlants);
+		plantService.getTemplates().then(function(returnValues){
+			$scope.myPlants = returnValues.data['templates'];
 		
 			// Set the initial state for fields
 			$scope.fields = [];
 			for (var iii=0; iii<4; iii++) {
 				this.fieldTemplate = {
 					'spot': iii,
-					'planted': (iii + 4),
+					'planted': 0,
 					'quality': 5,
-					'plantName': ($scope.myPlants[iii]['adjective']
-											+ " " + $scope.myPlants[iii]['specName'])
+					'plantName': ($scope.myPlants[0]['adjective']
+											+ " " + $scope.myPlants[0]['specName'])
 				}
 				$scope.fields.push(this.fieldTemplate);
 			};
 
 			function DrawPlant(spot) {
 				// Initialize canvas image objects
-				var poaBaseA   = new Image(); poaBaseA.src = "img/poa-basea.png";
-				var poaBaseB   = new Image(); poaBaseB.src = "img/poa-baseb.png";
-				var poaStem1A  = new Image(); poaStem1A.src = "img/poa-stem1a.png";
-				var poaStem1B  = new Image(); poaStem1B.src = "img/poa-stem1b.png";
-				var poaStem2A  = new Image(); poaStem2A.src = "img/poa-stem2a.png";
-				var poaStem2B  = new Image(); poaStem2B.src = "img/poa-stem2b.png";
-				var poaStem3A  = new Image(); poaStem3A.src = "img/poa-stem3a.png";
-				var poaStem3B  = new Image(); poaStem3B.src = "img/poa-stem3b.png";
+				var poaBaseA   = new Image(); poaBaseA.src   = "img/poa-basea.png";
+				var poaBaseB   = new Image(); poaBaseB.src   = "img/poa-baseb.png";
+				var poaStem1A  = new Image(); poaStem1A.src  = "img/poa-stem1a.png";
+				var poaStem1B  = new Image(); poaStem1B.src  = "img/poa-stem1b.png";
+				var poaStem2A  = new Image(); poaStem2A.src  = "img/poa-stem2a.png";
+				var poaStem2B  = new Image(); poaStem2B.src  = "img/poa-stem2b.png";
+				var poaStem3A  = new Image(); poaStem3A.src  = "img/poa-stem3a.png";
+				var poaStem3B  = new Image(); poaStem3B.src  = "img/poa-stem3b.png";
 				var poaPenultA = new Image(); poaPenultA.src = "img/poa-penulta.png";
 				var poaPenultB = new Image(); poaPenultB.src = "img/poa-penultb.png";
-				var poaCrownA  = new Image(); poaCrownA.src = "img/poa-crowna.png";
-				var poaCrownB  = new Image(); poaCrownB.src = "img/poa-crownb.png";
+				var poaCrownA  = new Image(); poaCrownA.src  = "img/poa-crowna.png";
+				var poaCrownB  = new Image(); poaCrownB.src  = "img/poa-crownb.png";
 
 				var nsBackground = new Image(); nsBackground.src = "img/field-space.png";
 
@@ -50,6 +49,9 @@ fieldControllers.controller('ScaffoldCtrl',
 					var eleCanvas = $window.document.getElementsByClassName("plantCanvas")[spot];
 					var pCanvas = eleCanvas.getContext('2d');
 					pCanvas.drawImage(nsBackground, (120*(spot+1)), 70, 160, 280, 0, 0, 160, 280);
+					if ($scope.fields[spot]["planted"] === 0) {
+						return 0;
+					}
 					if (Math.random() > .5) {
 						pCanvas.drawImage(poaBaseA, (xanc-anc[0][0]), (ysum-anc[0][1]));
 						ysum -= anc[0][1];
@@ -108,10 +110,11 @@ fieldControllers.controller('ScaffoldCtrl',
 				}
 			}
 
-			PassTime = $interval(function() {
+			var PassTime = $interval(function() {
 				for (var iii=0; iii<4; iii++) {
 					console.log();
-					if ($scope.myPlants[$scope.fields[iii]["planted"]]["progress"] < 100) {
+					if (($scope.myPlants[$scope.fields[iii]["planted"]]["progress"] < 100)
+					 && ($scope.fields[iii]["planted"] != 0)) {
 						$scope.myPlants[$scope.fields[iii]["planted"]]["progress"] += 1;
 					}
 					else {
