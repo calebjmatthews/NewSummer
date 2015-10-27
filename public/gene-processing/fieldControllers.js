@@ -112,7 +112,6 @@ fieldControllers.controller('ScaffoldCtrl',
 
 			var PassTime = $interval(function() {
 				for (var iii=0; iii<4; iii++) {
-					console.log();
 					if (($scope.myPlants[$scope.fields[iii]["planted"]]["progress"] < 100)
 					 && ($scope.fields[iii]["planted"] != 0)) {
 						$scope.myPlants[$scope.fields[iii]["planted"]]["progress"] += 1;

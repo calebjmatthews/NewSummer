@@ -1,0 +1,18 @@
+<div class="modal-header">
+	<h3 class="modal-title">Select a Username:</h3>
+</div>
+<div class="modal-body">
+	<ul>
+		<li ng-repeat="username in usernames">
+			<a href="#" ng-click="$event.preventDefault(); selected.username = username">
+				{{ username }}
+			</a>
+		</li>
+	</ul>
+	Selected: <b>{{ selected.username }}</b>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-success nsMenuButton" type="button" ng-click="ok()">
+		OK
+	</button>
+</div>

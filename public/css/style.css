@@ -16,10 +16,10 @@
 	
 }
 
-#nsLogo {
+.nsLogo {
 	margin: 0 10px 0 5px;
 }
-#nsMenu {
+.nsMenu {
 	font-size: large;
 	color: #F7DAD0;
 	padding: 5px;
@@ -94,6 +94,15 @@
 
 .nsBright {
 	color: #F7DAD0;
+}
+.nsLightBG {
+	background: #C19E95;
+}
+.nsMediumBG {
+	background: #907465;
+}
+.nsDarkBG {
+	background: #332525;
 }
 .nsOnTop {
 	z-index: 2000;

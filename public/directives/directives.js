@@ -1,10 +1,10 @@
 (function(){
   var app = angular.module('game-directives', []);
 
-  app.directive("nsLoginModal", function() {
+  app.directive("nsLogin", function() {
     return{
       restrict: 'E',
-      templateUrl: 'directives/ns-login-modal.html'
+      templateUrl: 'directives/ns-login.html'
     };
   });
 

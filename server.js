@@ -14,7 +14,7 @@ var db = require('./config/db.js');
 var port = process.env.PORT || 8080;
 
 // connect to our mongoDB database
-mongoose.connect(db.uri);
+mongoose.connect(db.dev_uri);
 var data = mongoose.connection;
 data.on('error', console.error.bind(console, 'Connection error:'));
 data.once('open', function(callback) {

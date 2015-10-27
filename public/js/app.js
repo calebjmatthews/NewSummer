@@ -1,11 +1,13 @@
 'use strict';
 
 (function() {
-  var app = angular.module('newSummer', ['ui.bootstrap', 
+  var app = angular.module('newSummer', 
+    ['ui.bootstrap', 
     'game-directives',
     'fieldControllers',
     'menuControllers',
-    'gridControllers']);
+    'gridControllers',
+    'accountControllers']);
 
   app.service('plantService', function($http) {
     return {

@@ -1,0 +1,23 @@
+<div ng-controller="LoginCtrl">
+	<script type="text/ng-template" id="loginModalContent.html">
+		<div class="modal-header nsDarkBG">
+			<h3 class="modal-title nsBright">Select a User:</h3>
+		</div>
+		<div class="modal-body nsMediumBG">
+			<ul>
+				<li ng-repeat="username in usernames">
+					<a href="#" ng-click="$event.preventDefault(); selected.username = username"
+						class="text-success">
+						{{ username }}
+					</a>
+				</li>
+			</ul>
+			Selected: <b>{{ selected.username }}</b>
+		</div>
+		<div class="modal-footer nsDarkBG">
+			<button class="btn btn-success nsMenuButton" type="button" ng-click="ok()">
+				OK
+			</button>
+		</div>
+	</script>
+</div>
