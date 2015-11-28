@@ -1,40 +1,54 @@
 'use strict';
 
 (function() {
-  var app = angular.module('newSummer', 
-    ['ui.bootstrap', 
+  var app = angular.module('newSummer', ['ui.bootstrap', 
     'game-directives',
     'fieldControllers',
     'menuControllers',
     'gridControllers',
     'accountControllers']);
 
-  app.service('plantService', function($http) {
+  app.factory('plantService', function($http) {
+    // Initial values for plant array
+    var plants = [];
+
     return {
       getPlants: function() {
-        return $http.get('/api/plants');
+        return plants;
       },
+      updatePlants: function(newPlants) {
+        plants = newPlants;
+      },
+      // getTemplates to be obsoleted
       getTemplates: function() {
-        return $http.get('gene-processing/templates.json');
+        return $http.get('/gene-processing/templates.json');
       },
-      postPlant: function(currPlant) {
-        return $http('/api/plants', currPlant);
+      pullPlants: function(user_id) {
+        return $http.get('/api/ns/:' + user_id + '/plants');
+      },
+      postPlants: function(user_id) {
+        $http.delete('/api/ns/:' + user_id + '/plants')
+        return $http.post('/api/ns/plants', plants);
       }
     }
   });
 
-  app.service('globalService', function($http) {
-    return {
-      // Get all global data
-      getGlobals: function() {
-        return $http.get('/api/globals');
+  app.factory('globalService', function($http) {
+
+    var globals = [];
+
+    return { 
+      pullAllUsers: function() {
+        return $http.get('/api/ns');
       },
-      // Register a new user
-      postGlobal: function(newUser) {
-        return $http('/api/globals', newUser);
+      getGlobals: function() {
+        return globals;
+      },
+      pullGlobals: function(user_id) {
+        return $http.get('/api/ns/:' + user_id);
       }
     }
-  })
+  });
 
   app.controller('GameController', ['$http', function($http) {
     // App-wide logic goes here

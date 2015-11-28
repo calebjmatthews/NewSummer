@@ -5,25 +5,19 @@ accountControllers.controller('LoginCtrl',
 function(globalService, $scope, $uibModal) {
 
 	// Pull available users from global data
-	globalService.getGlobals().then(function(returnValues) {
-		$scope.users = returnValues.data;
-		$scope.usernames = [];
-		for (var iii=0; iii<$scope.users.length; iii++) {
-			this.username = $scope.users[iii].username;
-			$scope.usernames.push(this.username);
-		};
+	globalService.pullAllUsers().then(function(returnValues) {
+		$scope.nsUsers = returnValues.data;
 
 		$scope.modalOpen = function() {
 
-			console.log("Usernames: " + $scope.usernames);
 			var modalInstance = $uibModal.open({
 				templateUrl: 'loginModalContent.html',
 				controller: 'LoginContentCtrl',
 				size: 'lg',
 				backdrop: 'static',
 				resolve: {
-					usernames: function() {
-						return $scope.usernames;
+					getUsers: function() {
+						return $scope.nsUsers;
 					}
 				}
 			});
@@ -41,17 +35,22 @@ function(globalService, $scope, $uibModal) {
 }]);
 
 accountControllers.controller('LoginContentCtrl', 
-	['$scope', '$uibModalInstance', 'usernames', 
-function($scope, $uibModalInstance, usernames) {
+	['$scope', '$uibModalInstance', 'getUsers', 
+function($scope, $uibModalInstance, getUsers) {
 
-	$scope.usernames = usernames;
-	$scope.usernames.sort();
+	$scope.nsUsers = getUsers;
+	console.log("Users received: " + $scope.nsUsers.length);
+	//$scope.users.username.sort();
 	$scope.selected = {
-		username: $scope.usernames[0]
+		getUsers: $scope.nsUsers[0]
 	};
 
 	$scope.ok = function() {
-		$uibModalInstance.close($scope.selected.username);
+		$uibModalInstance.close($scope.selected.nsUsers);
+		console.log("Selected user: " + $scope.selected.nsUsers.username);
+
+		// Pull global variables and plant array from database
+
 	};
 
 	// $scope.cancel = function() {

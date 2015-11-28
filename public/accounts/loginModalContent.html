@@ -3,13 +3,14 @@
 </div>
 <div class="modal-body">
 	<ul>
-		<li ng-repeat="username in usernames">
-			<a href="#" ng-click="$event.preventDefault(); selected.username = username">
-				{{ username }}
+		<li ng-repeat="user in nsUsers">
+			{{ user.username }}
+			<a href="#" ng-click="$event.preventDefault(); selected.user.username = getUsers">
+				{{ user.username }}
 			</a>
 		</li>
 	</ul>
-	Selected: <b>{{ selected.username }}</b>
+	Selected: <b>{{ selected.user.username }}</b>
 </div>
 <div class="modal-footer">
 	<button class="btn btn-success nsMenuButton" type="button" ng-click="ok()">

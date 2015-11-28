@@ -6,61 +6,56 @@ gridControllers.controller('SeedGridCtrl', ['$scope', 'plantService', 'globalSer
 		// Pull plant data from plantService
 		$scope.myPlants = [];
 		$scope.gridPlants = [];
-		plantService.getPlants().then(function(returnValues) {
-			$scope.myPlants = returnValues.data;
+		plantService.getTemplates().then(function(returnValues) {
+			$scope.myPlants = returnValues.data['templates'];
 
 			// Fill grid spaces with seeds/cuttings
-			for (var iii=0; iii<96; iii++) {
-				if ($scope.myPlants[iii] != undefined) {
-					// If the genotype has both a seed and a cutting, make a grid unit for each
-					if (($scope.myPlants[iii]['numSeeds'] > 0)
-					 && ($scope.myPlants[iii]['numCuttings'] > 0)) {
-						this.seedGrid = {
-							'plantName': ($scope.myPlants[iii]['adjective']
-			 							+ " " + $scope.myPlants[iii]['specName']),
-							'plantClass': ("glyphicon nsBright glyphicon-grain")
-						};
-						$scope.gridPlants.push(this.seedGrid);
-						this.seedGrid = {
-							'plantName': ($scope.myPlants[iii]['adjective']
-			 							+ " " + $scope.myPlants[iii]['specName']),
-							'plantClass': ("glyphicon nsBright glyphicon-tree-deciduous")
-						}
-					}
-					// Grid unit for seed
-					else if ($scope.myPlants[iii]['numSeeds'] > 0) {
-						this.seedGrid = {
-							'plantName': ($scope.myPlants[iii]['adjective']
-			 							+ " " + $scope.myPlants[iii]['specName']),
-							'plantClass': ("glyphicon nsBright glyphicon-grain")
-						};
-					}
-					// Grid unit for cutting
-					else if ($scope.myPlants[iii]['numCuttings'] > 0) {
-						this.seedGrid = {
-							'plantName': ($scope.myPlants[iii]['adjective']
-			 							+ " " + $scope.myPlants[iii]['specName']),
-							'plantClass': ("glyphicon nsBright glyphicon-tree-deciduous")
-						}
-					}
-					// Grid unit for a present genotype, but used up seeds and cuttings
-					else {
-						this.seedGrid = {
-							'plantName': "",
-							'plantClass': ("empty")
-						};
-					}
-				}
-				// Fill in remaining 96 spots
-				else {
+			for (var iii=0; iii<$scope.myPlants.length; iii++) {
+				// If the genotype has both a seed and a cutting, make a grid unit for each
+				if (($scope.myPlants[iii]['numSeeds'] > 0)
+				 && ($scope.myPlants[iii]['numCuttings'] > 0)) {
 					this.seedGrid = {
-						'plantName': "",
-						'plantClass': ("empty")
+						'plantName': ($scope.myPlants[iii]['adjective']
+		 							+ " " + $scope.myPlants[iii]['specName']),
+						'plantClass': ("glyphicon nsBright glyphicon-grain")
 					};
+					$scope.gridPlants.push(this.seedGrid);
+					this.seedGrid = {
+						'plantName': ($scope.myPlants[iii]['adjective']
+		 							+ " " + $scope.myPlants[iii]['specName']),
+						'plantClass': ("glyphicon nsBright glyphicon-tree-deciduous")
+					};
+					$scope.gridPlants.push(this.seedGrid);
 				}
+				// Grid unit for seed
+				else if ($scope.myPlants[iii]['numSeeds'] > 0) {
+					this.seedGrid = {
+						'plantName': ($scope.myPlants[iii]['adjective']
+		 							+ " " + $scope.myPlants[iii]['specName']),
+						'plantClass': ("glyphicon nsBright glyphicon-grain")
+					};
+					$scope.gridPlants.push(this.seedGrid);
+				}
+				// Grid unit for cutting
+				else if ($scope.myPlants[iii]['numCuttings'] > 0) {
+					this.seedGrid = {
+						'plantName': ($scope.myPlants[iii]['adjective']
+		 							+ " " + $scope.myPlants[iii]['specName']),
+						'plantClass': ("glyphicon nsBright glyphicon-tree-deciduous")
+					};
+					$scope.gridPlants.push(this.seedGrid);
+				}
+			}
+			// Fill in remaining 96 spots
+			while ($scope.gridPlants.length < 96) {
+				this.seedGrid = {
+					'plantName': "",
+					'plantClass': ("empty")
+				};
 				$scope.gridPlants.push(this.seedGrid);
 			}
 		});
+	
 	}]);
 
 gridControllers.controller('PollenGridCtrl', ['$scope', 'plantService',
@@ -69,7 +64,7 @@ gridControllers.controller('PollenGridCtrl', ['$scope', 'plantService',
 		// Pull plant data from plantService
 		$scope.myPlants = [];
 		$scope.gridPlants = [];
-		plantService.getPlants().then(function(returnValues){
+		plantService.getTemplates().then(function(returnValues){
 			$scope.myPlants = returnValues.data;
 
 			for (var iii=0; iii<96; iii++) {

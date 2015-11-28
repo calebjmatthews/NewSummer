@@ -13,8 +13,8 @@ module.exports = function(app) {
 		next();
 	});
 
-	router.route('/globals')
-
+	router.route('/ns') 
+		
 		// Post a new user
 		.post(function(req, res) {
 			// Copy data of the new user
@@ -40,7 +40,18 @@ module.exports = function(app) {
 			});
 		})
 
-	router.route('/globals/:user_id')
+	router.route('/ns/:user_id/globals')
+
+		.get(function(req, res) {
+			Global.find(function(err, globals) {
+				if (err)
+					res.send(err);
+
+				res.json(globals);
+			});
+		})
+
+	router.route('/ns/:user_id')
 
 		// Remove a user
 		.delete(function(req, res) {
@@ -54,7 +65,7 @@ module.exports = function(app) {
 			});
 		});
 
-	router.route('/plants')
+	router.route('/ns/:user_id/plants')
 
 		// Post a plant
 		.post(function(req, res) {
