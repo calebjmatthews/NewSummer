@@ -22,8 +22,8 @@ function(globalService, $scope, $uibModal) {
 				}
 			});
 
-			modalInstance.result.then(function(selectedItem) {
-				$scope.selected = selectedItem;
+			modalInstance.result.then(function(returnedUser) {
+				$scope.nsEnteredUser = returnedUser;
 			}, function() {
 				console.log('Modal dismissed at: ' + new Date());
 			});
@@ -35,22 +35,54 @@ function(globalService, $scope, $uibModal) {
 }]);
 
 accountControllers.controller('LoginContentCtrl', 
-	['$scope', '$uibModalInstance', 'getUsers', 
-function($scope, $uibModalInstance, getUsers) {
+	['$scope', '$uibModalInstance', 'getUsers', 'globalService', 'plantService', 
+function($scope, $uibModalInstance, getUsers, globalService, plantService) {
 
 	$scope.nsUsers = getUsers;
-	console.log("Users received: " + $scope.nsUsers.length);
-	//$scope.users.username.sort();
-	$scope.selected = {
-		getUsers: $scope.nsUsers[0]
-	};
+	$scope.nsMessage = "Things are normal.";
+
+	$scope.newUser = function() {
+		// Initialize user global values
+		var newGlobals = {
+			'username': $scope.nsEnteredUser,
+			'beganDate': Date.now,
+			'money': 330,
+			'fields': [{
+				'planted': 0,
+				'quality': 5
+			}, {
+				'planted': 0,
+				'quality': 5
+			}, {
+				'planted': 0,
+				'quality': 5
+			}, {
+				'planted': 0,
+				'quality': 5
+			}]
+		}
+		globalService.postUser(newGlobals);
+		globalService.updateGlobals(newGlobals);
+		console.log("Money is: " + globalService.getGlobals()['money']);
+		$uibModalInstance.close();
+	}
 
 	$scope.ok = function() {
-		$uibModalInstance.close($scope.selected.nsUsers);
-		console.log("Selected user: " + $scope.selected.nsUsers.username);
+		var userMatch = -1;
+		for (var iii=0; iii<$scope.nsUsers.length; iii++) {	
+			if ($scope.nsEnteredUser === $scope.nsUsers[iii].username) {
+				userMatch = iii;
+			}
+			else {
+				$scope.nsMessage = "Username not found."
+			}
+		}
 
-		// Pull global variables and plant array from database
-
+		if (userMatch != -1) {
+			// Pull global variables and plant array from database
+			globalService.updateGlobals($scope.nsUsers[userMatch]);
+			$uibModalInstance.close();
+		}
 	};
 
 	// $scope.cancel = function() {

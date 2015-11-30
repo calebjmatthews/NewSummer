@@ -19,14 +19,19 @@ module.exports = function(app) {
 		.post(function(req, res) {
 			// Copy data of the new user
 			var user = new User();
-			user.username = req.body.username;
+			var keys = Object.keys(req);
+			res.json({ message: keys.length });
+			for (var iii=0; iii<keys.length; iii++) {
+				res.json({ message: ("user's" + keys[iii] + " = " + req.body[keys[iii]]) });
+				user[keys[iii]] = req.body[keys[iii]];
+			}
 
-			// Save the copied plant
+			// Save the copied user
 			user.save(function(err) {
 			if (err)
 				res.send(err);	
 
-			res.json({ message: 'User created!' });
+			res.json({ message: 'User successfully created!' });
 			});
 		})
 
@@ -40,17 +45,6 @@ module.exports = function(app) {
 			});
 		})
 
-	router.route('/ns/:user_id/globals')
-
-		.get(function(req, res) {
-			Global.find(function(err, globals) {
-				if (err)
-					res.send(err);
-
-				res.json(globals);
-			});
-		})
-
 	router.route('/ns/:user_id')
 
 		// Remove a user
@@ -61,7 +55,7 @@ module.exports = function(app) {
 				if (err)
 					res.send(err);
 
-				res.json({ message: 'Successfully deleted' });
+				res.json({ message: 'Successfully deleted.' });
 			});
 		});
 
