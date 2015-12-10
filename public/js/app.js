@@ -19,7 +19,7 @@
       updatePlants: function(newPlants) {
         plants = newPlants;
       },
-      // getTemplates to be obsoleted
+      // getTemplates to be obsoleted... maybe
       getTemplates: function() {
         return $http.get('/gene-processing/templates.json');
       },

@@ -19,10 +19,8 @@ module.exports = function(app) {
 		.post(function(req, res) {
 			// Copy data of the new user
 			var user = new User();
-			var keys = Object.keys(req);
-			res.json({ message: keys.length });
+			var keys = Object.keys(req.body);
 			for (var iii=0; iii<keys.length; iii++) {
-				res.json({ message: ("user's" + keys[iii] + " = " + req.body[keys[iii]]) });
 				user[keys[iii]] = req.body[keys[iii]];
 			}
 
@@ -43,6 +41,21 @@ module.exports = function(app) {
 
 				res.json(users);
 			});
+		})
+
+		// Delete all users
+		.delete(function(req, res) {
+			User.find(function(err, users) {
+				if (err)
+					res.send(err);
+
+				users.remove(), function(err, user) {
+					if (err)
+						res.send(err);
+
+					res.json({ message: 'Successfully deleted all users.' });
+				}
+			})
 		})
 
 	router.route('/ns/:user_id')

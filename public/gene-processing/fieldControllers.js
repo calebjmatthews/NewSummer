@@ -14,10 +14,10 @@ fieldControllers.controller('ScaffoldCtrl',
 			for (var iii=0; iii<4; iii++) {
 				this.fieldTemplate = {
 					'spot': iii,
-					'planted': 0,
+					'planted': iii+1,
 					'quality': 5,
-					'plantName': ($scope.myPlants[0]['adjective']
-											+ " " + $scope.myPlants[0]['specName'])
+					'plantName': ($scope.myPlants[iii+1]['adjective']
+											+ " " + $scope.myPlants[iii+1]['specName'])
 				}
 				$scope.fields.push(this.fieldTemplate);
 			};
