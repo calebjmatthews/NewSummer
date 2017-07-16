@@ -1,6 +1,7 @@
-$ cat .gitignore
-.DS_Store
-_old/
-img/working/PlantSketches.psd
-bower_components/
+*.DS_STORE
+.gitignore
+NewSummerv0.1/
+*.pyc
 node_modules/
+typings/
+venv/

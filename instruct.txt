@@ -1,0 +1,10 @@
+To activate virtual environment:
+. venv/bin/activate
+To deactivate:
+deactivate
+
+To compile:
+tsc
+
+To run:
+python server.py
