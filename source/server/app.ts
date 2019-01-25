@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 const server = require('http').Server(app);
 import setRoutes from './routes';

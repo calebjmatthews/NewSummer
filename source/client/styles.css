@@ -1,0 +1,18 @@
+.container-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #56AB2E;
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 1px 2px #000;
+  font-weight: bold;
+}
+
+.field-card {
+  height: 80vh;
+  width: 80vw;
+  background: #fff;
+}

@@ -4,36 +4,28 @@ const historyApiFallback = require('connect-history-api-fallback');
 const watch = require('gulp-watch');
 const ts = require('gulp-typescript');
 
-const tsOptions = {
-  "module": "commonjs",
-  "esModuleInterop": true,
-  "target": "es6",
-  "noImplicitAny": false,
-  "moduleResolution": "node",
-  "sourceMap": true,
-  "outDir": "dist",
-  "baseUrl": ".",
-  "paths": {
-    "*": [
-      "node_modules/*",
-      "src/types/*"]
-  }
-}
+var tsServerProject = ts.createProject('tsconfig.json');
+var tsClientProject = ts.createProject('tsconfig.json');
 
 gulp.task('html', (done) => {
   return gulp.src('source/client/**/*.html')
     .pipe(gulp.dest('dist/client'));
 });
 
+gulp.task('styles', (done) => {
+  return gulp.src('source/client/**/*.css')
+    .pipe(gulp.dest('dist/client'));
+});
+
 gulp.task('scripts-server', (done) => {
   return gulp.src('source/server/**/*.ts')
-    .pipe(ts(tsOptions))
+    .pipe(tsServerProject())
     .pipe(gulp.dest('dist/server'));
 })
 
 gulp.task('scripts-client', (done) => {
   return gulp.src('source/client/**/*.ts')
-    .pipe(ts(tsOptions))
+    .pipe(tsClientProject())
     .pipe(gulp.dest('dist/client'));
 })
 
@@ -65,7 +57,8 @@ gulp.task('browser-sync', (done) => {
 });
 
 // build task
-gulp.task('build', gulp.parallel('html', 'scripts-server', 'scripts-client'));
+gulp.task('build', gulp.parallel('html', 'styles', 'scripts-server',
+  'scripts-client'));
 
 // server
-gulp.task('serve', gulp.series('build', 'watch', 'browser-sync'));
+gulp.task('serve', gulp.series('build', 'watch'));
