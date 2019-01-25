@@ -86,15 +86,15 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/actions/test.js":
-/*!********************************!*\
-  !*** ./client/actions/test.js ***!
-  \********************************/
-/*! exports provided: TEST_ACTION, testAction */
+/***/ "./client/actions/field.js":
+/*!*********************************!*\
+  !*** ./client/actions/field.js ***!
+  \*********************************/
+/*! exports provided: AGE_CROP, ageCrop */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"TEST_ACTION\", function() { return TEST_ACTION; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"testAction\", function() { return testAction; });\nconst TEST_ACTION = 'TEST_ACTION';\nfunction testAction(text) {\n  return {\n    type: TEST_ACTION,\n    text: text\n  };\n}\n;\n\n//# sourceURL=webpack:///./client/actions/test.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AGE_CROP\", function() { return AGE_CROP; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ageCrop\", function() { return ageCrop; });\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\nconst AGE_CROP = 'AGE_CROP';\n\nfunction ageCrop(field) {\n  field.ageCrop();\n  return {\n    type: AGE_CROP,\n    field: field\n  };\n}\n;\n\n//# sourceURL=webpack:///./client/actions/field.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      class: \"container-main\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      class: \"field-card\"\n    }, \"Hello world!\")));\n  }\n\n}\n\nfunction mapStateToProps({\n  testState\n}) {\n  return {\n    testState\n  };\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps)(App));\n\n//# sourceURL=webpack:///./client/containers/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  componentDidMount() {\n    setInterval(() => {\n      this.props.ageCrop(this.props.fieldState.field);\n    }, 250);\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"container-main\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"field-card\"\n    }, \"Crop name: \", this.props.fieldState.field.cropPlanted.name, \"Crop age: \", this.props.fieldState.field.cropAge)));\n  }\n\n}\n\nfunction mapStateToProps({\n  fieldState\n}) {\n  return {\n    fieldState\n  };\n}\n\nfunction mapDispatchToProps(dispatch) {\n  return Object(redux__WEBPACK_IMPORTED_MODULE_2__[\"bindActionCreators\"])({\n    ageCrop: _actions_field__WEBPACK_IMPORTED_MODULE_3__[\"ageCrop\"]\n  }, dispatch);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(App));\n\n//# sourceURL=webpack:///./client/containers/app.js?");
 
 /***/ }),
 
@@ -122,6 +122,30 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 
 /***/ }),
 
+/***/ "./client/models/field.js":
+/*!********************************!*\
+  !*** ./client/models/field.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Field; });\nclass Field {\n  constructor(fieldId, fieldName) {\n    this.fieldId = 0;\n    this.fieldName = 'Stone Row';\n    this.cropPlanted = {\n      name: 'Wild Wheat'\n    };\n    this.cropAge = 0;\n  }\n\n  ageCrop() {\n    this.cropAge++;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/field.js?");
+
+/***/ }),
+
+/***/ "./client/reducers/field.js":
+/*!**********************************!*\
+  !*** ./client/reducers/field.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (state = {\n  field: new _models_field__WEBPACK_IMPORTED_MODULE_1__[\"default\"]()\n}, action = null) {\n  switch (action.type) {\n    case _actions_field__WEBPACK_IMPORTED_MODULE_0__[\"AGE_CROP\"]:\n      return Object.assign({}, state, {\n        field: action.field\n      });\n\n    default:\n      return state;\n  }\n});\n;\n\n//# sourceURL=webpack:///./client/reducers/field.js?");
+
+/***/ }),
+
 /***/ "./client/reducers/index.js":
 /*!**********************************!*\
   !*** ./client/reducers/index.js ***!
@@ -130,19 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _test__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./test */ \"./client/reducers/test.js\");\n\n\nconst rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  testState: _test__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./client/reducers/index.js?");
-
-/***/ }),
-
-/***/ "./client/reducers/test.js":
-/*!*********************************!*\
-  !*** ./client/reducers/test.js ***!
-  \*********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_test__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/test */ \"./client/actions/test.js\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (state = {\n  isLoading: false,\n  text: ''\n}, action = null) {\n  switch (action.type) {\n    case _actions_test__WEBPACK_IMPORTED_MODULE_0__[\"TEST_ACTION\"]:\n      return Object.assign({}, state, {\n        isLoading: true,\n        text: action.text\n      });\n\n    default:\n      return state;\n  }\n});\n;\n\n//# sourceURL=webpack:///./client/reducers/test.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./field */ \"./client/reducers/field.js\");\n\n\nconst rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  fieldState: _field__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./client/reducers/index.js?");
 
 /***/ }),
 

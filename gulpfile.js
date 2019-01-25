@@ -18,7 +18,7 @@ gulp.task('scripts', () => {
 })
 
 function watchFiles() {
-  gulp.watch("./client/**/*.ts", gulp.registry().get('scripts'));
+  gulp.watch("./client/**/*.js", gulp.registry().get('scripts'));
   gulp.watch("./client/**/*.html", gulp.registry().get('html'));
   gulp.watch("./client/**/*.css", gulp.registry().get('styles'));
 }
