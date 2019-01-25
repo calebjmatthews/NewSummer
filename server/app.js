@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-import setRoutes from './routes';
+const setRoutes = require('./routes');
 
 setRoutes(app);
 
