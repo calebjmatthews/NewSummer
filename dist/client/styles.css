@@ -1,5 +1,11 @@
+body {
+  margin: unset;
+}
+
 .container-main {
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   background: #56AB2E;
   background: linear-gradient(to right, #56ab2f, #a8e063);
