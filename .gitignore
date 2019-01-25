@@ -1,7 +1,1 @@
-*.DS_STORE
-.gitignore
-NewSummerv0.1/
-*.pyc
-node_modules/
-typings/
-venv/
+/node_modules
