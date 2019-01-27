@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ageCrop } from '../actions/field';
+import { ageSeed } from '../actions/field';
 
 class App extends Component {
   componentDidMount() {
     setInterval(() => {
-      this.props.ageCrop(this.props.fieldState.field);
+      this.props.ageSeed(this.props.fieldState.field);
     }, 250)
   }
   render() {
@@ -14,8 +14,12 @@ class App extends Component {
       <div className="container-main">
   			<div>
   				<div className="field-card">
-            Crop name: {this.props.fieldState.field.cropPlanted.name}
-            Crop age: {this.props.fieldState.field.cropAge}
+            <div>
+              Seed name: {this.props.fieldState.field.seedPlanted.seedName}
+            </div>
+            <div>
+              Seed age: {this.props.fieldState.field.seedAge}
+            </div>
   				</div>
   			</div>
       </div>
@@ -29,7 +33,7 @@ function mapStateToProps({ fieldState }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    ageCrop
+    ageSeed
   }, dispatch)
 }
 

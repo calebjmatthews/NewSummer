@@ -90,11 +90,11 @@
 /*!*********************************!*\
   !*** ./client/actions/field.js ***!
   \*********************************/
-/*! exports provided: AGE_CROP, ageCrop */
+/*! exports provided: AGE_SEED, ageSeed */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AGE_CROP\", function() { return AGE_CROP; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ageCrop\", function() { return ageCrop; });\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\nconst AGE_CROP = 'AGE_CROP';\n\nfunction ageCrop(field) {\n  field.ageCrop();\n  return {\n    type: AGE_CROP,\n    field: field\n  };\n}\n;\n\n//# sourceURL=webpack:///./client/actions/field.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AGE_SEED\", function() { return AGE_SEED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ageSeed\", function() { return ageSeed; });\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\nconst AGE_SEED = 'AGE_SEED';\n\nfunction ageSeed(field) {\n  field.ageSeed();\n  return {\n    type: AGE_SEED,\n    field: field\n  };\n}\n;\n\n//# sourceURL=webpack:///./client/actions/field.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  componentDidMount() {\n    setInterval(() => {\n      this.props.ageCrop(this.props.fieldState.field);\n    }, 250);\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"container-main\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"field-card\"\n    }, \"Crop name: \", this.props.fieldState.field.cropPlanted.name, \"Crop age: \", this.props.fieldState.field.cropAge)));\n  }\n\n}\n\nfunction mapStateToProps({\n  fieldState\n}) {\n  return {\n    fieldState\n  };\n}\n\nfunction mapDispatchToProps(dispatch) {\n  return Object(redux__WEBPACK_IMPORTED_MODULE_2__[\"bindActionCreators\"])({\n    ageCrop: _actions_field__WEBPACK_IMPORTED_MODULE_3__[\"ageCrop\"]\n  }, dispatch);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(App));\n\n//# sourceURL=webpack:///./client/containers/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  componentDidMount() {\n    setInterval(() => {\n      this.props.ageSeed(this.props.fieldState.field);\n    }, 250);\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"container-main\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"field-card\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"Seed name: \", this.props.fieldState.field.seedPlanted.seedName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"Seed age: \", this.props.fieldState.field.seedAge))));\n  }\n\n}\n\nfunction mapStateToProps({\n  fieldState\n}) {\n  return {\n    fieldState\n  };\n}\n\nfunction mapDispatchToProps(dispatch) {\n  return Object(redux__WEBPACK_IMPORTED_MODULE_2__[\"bindActionCreators\"])({\n    ageSeed: _actions_field__WEBPACK_IMPORTED_MODULE_3__[\"ageSeed\"]\n  }, dispatch);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(App));\n\n//# sourceURL=webpack:///./client/containers/app.js?");
 
 /***/ }),
 
@@ -122,6 +122,90 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 
 /***/ }),
 
+/***/ "./client/instances/cultivars.js":
+/*!***************************************!*\
+  !*** ./client/instances/cultivars.js ***!
+  \***************************************/
+/*! exports provided: WILD_GRASS, wildGrass, GRAIN, grain */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"WILD_GRASS\", function() { return WILD_GRASS; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"wildGrass\", function() { return wildGrass; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GRAIN\", function() { return GRAIN; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"grain\", function() { return grain; });\n/* harmony import */ var _models_cultivar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/cultivar */ \"./client/models/cultivar.js\");\n\nconst WILD_GRASS = 'Wild Grass';\nconst wildGrass = new _models_cultivar__WEBPACK_IMPORTED_MODULE_0__[\"default\"]('Wild Grass', [{\n  stat: 'Seed Quality',\n  comparitor: 'less than',\n  values: [3]\n}], null);\nconst GRAIN = 'Grain';\nconst grain = new _models_cultivar__WEBPACK_IMPORTED_MODULE_0__[\"default\"](GRAIN, null, null);\n\n//# sourceURL=webpack:///./client/instances/cultivars.js?");
+
+/***/ }),
+
+/***/ "./client/instances/families.js":
+/*!**************************************!*\
+  !*** ./client/instances/families.js ***!
+  \**************************************/
+/*! exports provided: POACEAE, families */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"POACEAE\", function() { return POACEAE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"families\", function() { return families; });\n/* harmony import */ var _models_cache__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/cache */ \"./client/models/cache.js\");\n/* harmony import */ var _models_family__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/family */ \"./client/models/family.js\");\n/* harmony import */ var _models_trait__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../models/trait */ \"./client/models/trait.js\");\n/* harmony import */ var _cultivars__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./cultivars */ \"./client/instances/cultivars.js\");\n\n\n\n\nconst POACEAE = 'Poaceae';\nconst poaceae = new _models_family__WEBPACK_IMPORTED_MODULE_1__[\"default\"](POACEAE, 'Grasses', [new _models_trait__WEBPACK_IMPORTED_MODULE_2__[\"default\"]('Seed Size', 3)], [_cultivars__WEBPACK_IMPORTED_MODULE_3__[\"wildGrass\"], _cultivars__WEBPACK_IMPORTED_MODULE_3__[\"grain\"]], _cultivars__WEBPACK_IMPORTED_MODULE_3__[\"GRAIN\"]);\nconst families = new _models_cache__WEBPACK_IMPORTED_MODULE_0__[\"default\"]([poaceae]);\n\n//# sourceURL=webpack:///./client/instances/families.js?");
+
+/***/ }),
+
+/***/ "./client/instances/seeds.js":
+/*!***********************************!*\
+  !*** ./client/instances/seeds.js ***!
+  \***********************************/
+/*! exports provided: SEED_DEMO_ID, seedDemo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SEED_DEMO_ID\", function() { return SEED_DEMO_ID; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"seedDemo\", function() { return seedDemo; });\n/* harmony import */ var _models_seed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/seed */ \"./client/models/seed.js\");\n/* harmony import */ var _models_gene__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/gene */ \"./client/models/gene.js\");\n/* harmony import */ var _families__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./families */ \"./client/instances/families.js\");\n/* harmony import */ var _traits__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./traits */ \"./client/instances/traits.js\");\n\n\n\n\nconst SEED_DEMO_ID = 0;\nconst seedDemo = new _models_seed__WEBPACK_IMPORTED_MODULE_0__[\"default\"](SEED_DEMO_ID, _families__WEBPACK_IMPORTED_MODULE_2__[\"POACEAE\"], 'Sweet Wild Grass', [new _models_gene__WEBPACK_IMPORTED_MODULE_1__[\"default\"](_traits__WEBPACK_IMPORTED_MODULE_3__[\"SEED_SIZE\"], 0, [true, false]), new _models_gene__WEBPACK_IMPORTED_MODULE_1__[\"default\"](_traits__WEBPACK_IMPORTED_MODULE_3__[\"SEED_SIZE\"], 1, [true, false]), new _models_gene__WEBPACK_IMPORTED_MODULE_1__[\"default\"](_traits__WEBPACK_IMPORTED_MODULE_3__[\"SEED_SIZE\"], 2, [false, false])]);\n\n//# sourceURL=webpack:///./client/instances/seeds.js?");
+
+/***/ }),
+
+/***/ "./client/instances/traits.js":
+/*!************************************!*\
+  !*** ./client/instances/traits.js ***!
+  \************************************/
+/*! exports provided: SEED_SIZE, seedSize */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SEED_SIZE\", function() { return SEED_SIZE; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"seedSize\", function() { return seedSize; });\n/* harmony import */ var _models_trait__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/trait */ \"./client/models/trait.js\");\n\nconst SEED_SIZE = 'Seed Size';\nconst seedSize = new _models_trait__WEBPACK_IMPORTED_MODULE_0__[\"default\"](SEED_SIZE, 3);\n\n//# sourceURL=webpack:///./client/instances/traits.js?");
+
+/***/ }),
+
+/***/ "./client/models/cache.js":
+/*!********************************!*\
+  !*** ./client/models/cache.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Cache; });\nclass Cache {\n  constructor(members) {\n    this.members = members;\n  }\n\n  getIndex(id) {\n    for (var iii = 0; iii < this.members.length; iii++) {\n      if (this.members[iii].id == id) {\n        return iii;\n      }\n    }\n\n    return null;\n  }\n\n  get(id) {\n    var index = this.getIndex(id);\n\n    if (index != null) {\n      return this.members[index];\n    }\n\n    return null;\n  }\n\n  getAll() {\n    return this.members;\n  }\n\n  set(members) {\n    this.members = members.slice();\n  }\n\n  add(member) {\n    this.members.push(member);\n  }\n\n  remove(id) {\n    this.members.splice(this.getIndex(id), 1);\n  }\n\n  edit(id, params, values) {\n    for (var iii = 0; iii < params.length; iii++) {\n      var index = this.getIndex(id);\n      this.members[index][params[iii]] = values[iii];\n    }\n  }\n\n  clone() {\n    var membersClone = [];\n\n    for (var iii = 0; iii < this.members.length; iii++) {\n      membersClone.push(this.members[iii]);\n    }\n\n    return membersClone;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/cache.js?");
+
+/***/ }),
+
+/***/ "./client/models/cultivar.js":
+/*!***********************************!*\
+  !*** ./client/models/cultivar.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Cultivar; });\nclass Cultivar {\n  constructor(name, statsDefinitional, bonus) {\n    this.name = name;\n\n    if (Array.isArray(statsDefinitional)) {\n      this.statsDefinitional = statsDefinitional.slice();\n    } else {\n      this.statsDefinitional = statsDefinitional;\n    }\n\n    this.bonus = bonus;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/cultivar.js?");
+
+/***/ }),
+
+/***/ "./client/models/family.js":
+/*!*********************************!*\
+  !*** ./client/models/family.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Family; });\nclass Family {\n  constructor(nameScientific, nameCommon, traits, cultivars, defaultCultivar) {\n    this.nameScientific = nameScientific;\n    this.nameCommon = nameCommon;\n    this.traits = traits;\n    this.cultivars = cultivars;\n    this.defaultCultivar = defaultCultivar;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/family.js?");
+
+/***/ }),
+
 /***/ "./client/models/field.js":
 /*!********************************!*\
   !*** ./client/models/field.js ***!
@@ -130,7 +214,43 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Field; });\nclass Field {\n  constructor(fieldId, fieldName) {\n    this.fieldId = 0;\n    this.fieldName = 'Stone Row';\n    this.cropPlanted = {\n      name: 'Wild Wheat'\n    };\n    this.cropAge = 0;\n  }\n\n  ageCrop() {\n    this.cropAge++;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/field.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Field; });\nclass Field {\n  constructor(fieldId, fieldName) {\n    this.fieldId = fieldId;\n    this.fieldName = fieldName;\n    this.seedPlanted = null;\n    this.seedAge = 0;\n  }\n\n  plantSeed(aSeed) {\n    this.seedPlanted = aSeed;\n  }\n\n  ageSeed() {\n    if (this.seedPlanted != null) {\n      this.seedAge++;\n    }\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/field.js?");
+
+/***/ }),
+
+/***/ "./client/models/gene.js":
+/*!*******************************!*\
+  !*** ./client/models/gene.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Gene; });\nclass Gene {\n  constructor(traitName, locusIndex, genotype) {\n    this.traitName = traitName;\n    this.locusIndex = locusIndex;\n    this.genotype = genotype.slice();\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/gene.js?");
+
+/***/ }),
+
+/***/ "./client/models/seed.js":
+/*!*******************************!*\
+  !*** ./client/models/seed.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Seed; });\nclass Seed {\n  constructor(seedId, familyName, seedName, genome) {\n    this.seedId = seedId;\n    this.familyName = familyName;\n    this.seedName = seedName;\n    this.genome = genome;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/seed.js?");
+
+/***/ }),
+
+/***/ "./client/models/trait.js":
+/*!********************************!*\
+  !*** ./client/models/trait.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Trait; });\nclass Trait {\n  constructor(traitName, loci) {\n    this.traitName = traitName;\n    this.loci = loci;\n  }\n\n  calcEffect() {\n    let anEffect = {\n      statProperty: 'EmptyProperty',\n      statValue: 'EmptyValue'\n    };\n    return anEffect;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/trait.js?");
 
 /***/ }),
 
@@ -142,7 +262,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (state = {\n  field: new _models_field__WEBPACK_IMPORTED_MODULE_1__[\"default\"]()\n}, action = null) {\n  switch (action.type) {\n    case _actions_field__WEBPACK_IMPORTED_MODULE_0__[\"AGE_CROP\"]:\n      return Object.assign({}, state, {\n        field: action.field\n      });\n\n    default:\n      return state;\n  }\n});\n;\n\n//# sourceURL=webpack:///./client/reducers/field.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\n/* harmony import */ var _instances_seeds__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../instances/seeds */ \"./client/instances/seeds.js\");\n\n\n\nconst FIELD_DEMO_ID = 0;\nlet fieldDemo = new _models_field__WEBPACK_IMPORTED_MODULE_1__[\"default\"](FIELD_DEMO_ID, 'Stone Row');\nfieldDemo.plantSeed(_instances_seeds__WEBPACK_IMPORTED_MODULE_2__[\"seedDemo\"]);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (state = {\n  field: fieldDemo\n}, action = null) {\n  switch (action.type) {\n    case _actions_field__WEBPACK_IMPORTED_MODULE_0__[\"AGE_SEED\"]:\n      return Object.assign({}, state, {\n        field: action.field\n      });\n\n    default:\n      return state;\n  }\n});\n;\n\n//# sourceURL=webpack:///./client/reducers/field.js?");
 
 /***/ }),
 

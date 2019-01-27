@@ -1,11 +1,16 @@
 export default class Field {
   constructor(fieldId, fieldName) {
-    this.fieldId = 0;
-    this.fieldName = 'Stone Row';
-    this.cropPlanted = {name: 'Wild Wheat'};
-    this.cropAge = 0;
+    this.fieldId = fieldId;
+    this.fieldName = fieldName;
+    this.seedPlanted = null;
+    this.seedAge = 0;
   }
-  ageCrop() {
-    this.cropAge++;
+  plantSeed(aSeed) {
+    this.seedPlanted = aSeed;
+  }
+  ageSeed() {
+    if (this.seedPlanted != null) {
+      this.seedAge++;
+    }
   }
 }

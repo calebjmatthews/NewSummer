@@ -1,11 +1,11 @@
-export const AGE_CROP = 'AGE_CROP';
+export const AGE_SEED = 'AGE_SEED';
 
 import Field from '../models/field';
 
-export function ageCrop(field) {
-  field.ageCrop();
+export function ageSeed(field) {
+  field.ageSeed();
 	return {
-    type: AGE_CROP,
+    type: AGE_SEED,
     field: field
   };
 };

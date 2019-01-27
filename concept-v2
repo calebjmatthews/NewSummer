@@ -119,62 +119,80 @@ Defects:
 	- Weak: Vulnerable to pests or temperature
 
 Classes:
-	Plant
-	~~~~~
-	- Gene: Boolean / Boolean genetic value, associated methods, name, dominance/codominance, names
-		for possible gene results
-	- Trait: The expressed result of a single or multiple contribruting Genes, for example the flavor
-		of a crop could be determined by starch, sweetness, and chemical defense, this contains pixel
-		drawing information as well
-	- Family: Contains a long list of associated Gene ids, scientific and common names, Gene
-		combinations for member species, and various Gene restrictions for wild cultivars of member
-		species
-	- Plant: Has a family, genotype (array of Gene objects), phenotype (array of Trait objects after
-		dominance, resources, and pest/disease factors are taken into account), and timing info
+Plant
+~~~~~
+- Gene: Boolean / Boolean genetic value, associated methods, name, dominance/codominance, names
+	for possible gene results
+- Trait: The expressed result of a single or multiple contribruting Genes, for example the flavor
+	of a crop could be determined by starch, sweetness, and chemical defense, this contains pixel
+	drawing information as well
+- Family: Contains a long list of associated Gene ids, scientific and common names, Gene
+	combinations for member species, and various Gene restrictions for wild cultivars of member
+	species
+- Plant: Has a family, genotype (array of Gene objects), phenotype (array of Trait objects after
+	dominance, resources, and pest/disease factors are taken into account), and timing info
 
-	Player
-	~~~~~~
-	- Field: Has weather, soil quality, and associated plant (or nothing, if empty)
-	- FieldEffect: A gameplay effect that is active at a field level (such as a plant that positively
-		or negatively effects its neighbors)
-	- Player: Has five spots for current cultivars of each plant species, owned fields, current
-		money, total accumulated money, a record of all discovered species
-	- PlayerEffect: A gameplay effect that is active at a player level (such as Seeding Moon)
+Player
+~~~~~~
+- Field: Has weather, soil quality, and associated plant (or nothing, if empty)
+- FieldEffect: A gameplay effect that is active at a field level (such as a plant that positively
+	or negatively effects its neighbors)
+- Player: Has five spots for current cultivars of each plant species, owned fields, current
+	money, total accumulated money, a record of all discovered species
+- PlayerEffect: A gameplay effect that is active at a player level (such as Seeding Moon)
 
-	Visual
-	~~~~~~
-	- Pixie: Basic visual unit, with z-order, transition type and methods (e.g. opacity or velocity)
-	- Menu: Abstract class that houses buttons and matches their positions and sizes with the with of
-		the screen
-	- Button: Describes buttons that exist on a menu, including order, relative size, functional type
-	- Label: Non-interactive text objects that exist as part of a menu or display
-	- RadialMenu: A circular array of choices somewhere within the game area (e.g. for choices about
-		what to do after harvesting a field)
-	- UITheme: The set of colors and sizes used by the UI objects
-	- VisField: Draws the field background depending on the time of day, kind of field, etc
-	- Pixel: Used by the VisPlant object to draw the plant pixel by pixel
-	- VisPlant: Uses the plant's phenotype gene by gene to create an HTML Canvas object that
-		represents the plant.
-	- VisPlantPart: An individually determined part that makes up the plant (such as a flower, stem,
-		etc.)
-	- VisNotif: A notification (such as a congratulations banner) that is displayed to the player at
-		an appropriate time
-	- VisParticle: A single particle within a particle effect
-	- VisParticleCloud: An entire particle effect, with an array of associated particles and timing
-		methods
+Visual
+~~~~~~
+- Pixie: Basic visual unit, with z-order, transition type and methods (e.g. opacity or velocity)
+- Menu: Abstract class that houses buttons and matches their positions and sizes with the with of
+	the screen
+- Button: Describes buttons that exist on a menu, including order, relative size, functional type
+- Label: Non-interactive text objects that exist as part of a menu or display
+- RadialMenu: A circular array of choices somewhere within the game area (e.g. for choices about
+	what to do after harvesting a field)
+- UITheme: The set of colors and sizes used by the UI objects
+- VisField: Draws the field background depending on the time of day, kind of field, etc
+- Pixel: Used by the VisPlant object to draw the plant pixel by pixel
+- VisPlant: Uses the plant's phenotype gene by gene to create an HTML Canvas object that
+	represents the plant.
+- VisPlantPart: An individually determined part that makes up the plant (such as a flower, stem,
+	etc.)
+- VisNotif: A notification (such as a congratulations banner) that is displayed to the player at
+	an appropriate time
+- VisParticle: A single particle within a particle effect
+- VisParticleCloud: An entire particle effect, with an array of associated particles and timing
+	methods
 
-	Game
-	~~~~
-	- Game: Contains the current state of the game, the FieldOfView, the current player, and global
-		variables as attributes
-	- State: Varying functional states of the game, and properties they contain (such as whether
-		the user can take action, or whether notifications can be displayed), also acts as a listener for events
-	- PixieEvent: Events that are tied to Pixie instancies, to be called when the area the instance
-		occupies is clicked, for example
-	- FieldOfView: Contains all visual elements and the screen size when the app is opened
+Game
+~~~~
+- Game: Contains the current state of the game, the FieldOfView, the current player, and global
+	variables as attributes
+- State: Varying functional states of the game, and properties they contain (such as whether
+	the user can take action, or whether notifications can be displayed), also acts as a listener for events
+- PixieEvent: Events that are tied to Pixie instancies, to be called when the area the instance
+	occupies is clicked, for example
+- FieldOfView: Contains all visual elements and the screen size when the app is opened
 
-	Other ideas
-	~~~~~~~~~~~
-	- Send out expeditions for new plant types, using harvested crops as supplies
-	- New crop discover (based on degree of variation from previously discovered) contributes to global population
-	- Quests (Jobs? Tasks?) that reward player for breeding a specific kind of plant, no time limit
+Other ideas
+~~~~~~~~~~~
+- Send out expeditions for new plant types, using harvested crops as supplies
+- New crop discover (based on degree of variation from previously discovered) contributes to global population
+- Quests (Jobs? Tasks?) that reward player for breeding a specific kind of plant, no time limit
+
+Main game loop
+~~~~~~~~~~~~~~
+- Four times each second the game checks progress of plants toward maturity
+- Clicking field brings up seed options (family->cultivar->seed)
+- Clicking seed option plants seed
+- Clicking experimental garden brings up seed options
+
+Brainstorming
+~~~~~~~~~~~~~
+A family:
+Scientific name, common name, list of possible traits, list of identified cultivars
+A cultivar:
+Name, list of definitional traits, optional bonus, method for turning stats into quantity/quality/visual appearance/name/description
+A trait:
+Name, number of loci, method for turning loci into stats
+A seed:
+Name, description, cultivar, genome, method of breeding with another seed
