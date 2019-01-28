@@ -18,7 +18,7 @@ class App extends Component {
               Seed name: {this.props.fieldState.field.seedPlanted.name}
             </div>
             <div>
-              Seed age: {this.props.fieldState.field.seedAge}
+              Seed age: {this.props.fieldState.field.getSeedsAge()}
             </div>
   				</div>
   			</div>

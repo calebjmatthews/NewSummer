@@ -9,8 +9,6 @@ export default class Seed {
     this.name = this.determineNameFromGenome();
     this.traitTotalDict = this.determineTraitsFromGenome();
     this.stats = this.determineStatsFromTraits(this.traitTotalDict);
-    console.log('seed this:');
-    console.log(this);
   }
   determineTraitsFromGenome() {
     let family = families.getByProperty('nameScientific', this.familyName);

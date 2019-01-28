@@ -10,7 +10,12 @@ export default class Field {
   }
   ageSeed() {
     if (this.seedPlanted != null) {
-      this.seedAge++;
+      this.seedAge += 0.25;
     }
+  }
+  getSeedsAge() {
+    let age = ((this.seedAge
+      / this.seedPlanted.stats["Growing Time"].value) * 100).toFixed(2);
+    return (age + '%');
   }
 }
