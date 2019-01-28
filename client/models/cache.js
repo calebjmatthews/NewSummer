@@ -13,12 +13,14 @@ export default class Cache {
     return null;
   }
 
-  get(id) {
-    var index = this.getIndex(id);
-    if (index != null) {
-      return this.members[index];
-    }
-    return null;
+  getByProperty(propName, propValue) {
+    let match = null;
+    this.members.map((member) => {
+      if (member[propName] == propValue) {
+        match = member;
+      }
+    })
+    return match;
   }
 
   getAll() {

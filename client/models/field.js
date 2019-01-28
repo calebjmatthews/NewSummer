@@ -1,7 +1,7 @@
 export default class Field {
-  constructor(fieldId, fieldName) {
+  constructor(fieldId, name) {
     this.fieldId = fieldId;
-    this.fieldName = fieldName;
+    this.name = name;
     this.seedPlanted = null;
     this.seedAge = 0;
   }

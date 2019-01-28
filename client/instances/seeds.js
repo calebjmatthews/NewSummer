@@ -5,7 +5,7 @@ import {POACEAE} from './families';
 import {SEED_SIZE, seedSize} from './traits';
 
 export const SEED_DEMO_ID = 0;
-export const seedDemo = new Seed(SEED_DEMO_ID, POACEAE, 'Sweet Wild Grass',
+export const seedDemo = new Seed(SEED_DEMO_ID, POACEAE,
   [
     new Gene(SEED_SIZE, 0, [true, false]),
     new Gene(SEED_SIZE, 1, [true, false]),

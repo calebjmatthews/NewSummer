@@ -1,14 +1,8 @@
 export default class Trait {
-  constructor(traitName, loci) {
-    this.traitName = traitName;
+  constructor(name, loci, statNames, statModifiers) {
+    this.name = name;
     this.loci = loci;
-  }
-
-  calcEffect() {
-    let anEffect = {
-      statProperty: 'EmptyProperty',
-      statValue: 'EmptyValue'
-    }
-    return anEffect;
+    this.statNames = statNames;
+    this.statModifiers = statModifiers;
   }
 }
