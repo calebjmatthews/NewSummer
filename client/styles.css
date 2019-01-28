@@ -13,8 +13,11 @@ body {
 }
 
 .field-card {
-  height: 80vh;
-  width: 80vw;
+  max-height: 450px;
+  max-width: 275px;
+  height: calc(100vh - 60px);
+  width: calc(100vw - 60px);
   background: #fff;
   padding: 5px;
+  border-radius: 10px;
 }
