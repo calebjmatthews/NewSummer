@@ -90,11 +90,23 @@
 /*!*********************************!*\
   !*** ./client/actions/field.js ***!
   \*********************************/
-/*! exports provided: AGE_SEED, ageSeed */
+/*! exports provided: AGE_SEED, ageSeed, HARVEST_SEED, harvestSeed */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AGE_SEED\", function() { return AGE_SEED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ageSeed\", function() { return ageSeed; });\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\nconst AGE_SEED = 'AGE_SEED';\n\nfunction ageSeed(field) {\n  field.ageSeed();\n  return {\n    type: AGE_SEED,\n    field: field\n  };\n}\n;\n\n//# sourceURL=webpack:///./client/actions/field.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"AGE_SEED\", function() { return AGE_SEED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"ageSeed\", function() { return ageSeed; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"HARVEST_SEED\", function() { return HARVEST_SEED; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"harvestSeed\", function() { return harvestSeed; });\n/* harmony import */ var _models_field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/field */ \"./client/models/field.js\");\n/* harmony import */ var _storehouse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storehouse */ \"./client/actions/storehouse.js\");\n\n\nconst AGE_SEED = 'AGE_SEED';\nfunction ageSeed(field) {\n  field.ageSeed();\n  return {\n    type: AGE_SEED,\n    field: field\n  };\n}\n;\nconst HARVEST_SEED = 'HARVEST_SEED';\nfunction harvestSeed(field, storehouse) {\n  const dollars = field.harvestSeed();\n  return function (dispatch) {\n    dispatch(Object(_storehouse__WEBPACK_IMPORTED_MODULE_1__[\"gainDollars\"])(storehouse, dollars));\n    return {\n      type: HARVEST_SEED,\n      field: field\n    };\n  };\n}\n\n//# sourceURL=webpack:///./client/actions/field.js?");
+
+/***/ }),
+
+/***/ "./client/actions/storehouse.js":
+/*!**************************************!*\
+  !*** ./client/actions/storehouse.js ***!
+  \**************************************/
+/*! exports provided: GAIN_DOLLARS, gainDollars */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GAIN_DOLLARS\", function() { return GAIN_DOLLARS; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"gainDollars\", function() { return gainDollars; });\n/* harmony import */ var _models_storehouse__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/storehouse */ \"./client/models/storehouse.js\");\n\nconst GAIN_DOLLARS = 'GAIN_DOLLARS';\nfunction gainDollars(storehouse, dollarsGained) {\n  storehouse.gainDollars(dollarsGained);\n  return {\n    type: GAIN_DOLLARS,\n    storehouse: storehouse\n  };\n}\n\n//# sourceURL=webpack:///./client/actions/storehouse.js?");
 
 /***/ }),
 
@@ -106,7 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  componentDidMount() {\n    setInterval(() => {\n      this.props.ageSeed(this.props.fieldState.field);\n    }, 250);\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"container-main\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"field-card\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"Seed name: \", this.props.fieldState.field.seedPlanted.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, \"Seed age: \", this.props.fieldState.field.getSeedsAge()))));\n  }\n\n}\n\nfunction mapStateToProps({\n  fieldState\n}) {\n  return {\n    fieldState\n  };\n}\n\nfunction mapDispatchToProps(dispatch) {\n  return Object(redux__WEBPACK_IMPORTED_MODULE_2__[\"bindActionCreators\"])({\n    ageSeed: _actions_field__WEBPACK_IMPORTED_MODULE_3__[\"ageSeed\"]\n  }, dispatch);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(App));\n\n//# sourceURL=webpack:///./client/containers/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ \"./node_modules/react-redux/es/index.js\");\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _actions_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/field */ \"./client/actions/field.js\");\n\n\n\n\nconst TIME_STEP = 0.025 * 1000;\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  componentDidMount() {\n    setInterval(() => {\n      this.props.ageSeed(this.props.fieldState.field);\n    }, TIME_STEP);\n    this.fieldCardClick = this.fieldCardClick.bind(this);\n  }\n\n  fieldCardClick(ev) {\n    if (this.props.fieldState.field.seedIsMature() == true) {\n      this.props.harvestSeed(this.props.fieldState.field, this.props.storehouseState.storehouse);\n    }\n  }\n\n  render() {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"container-main\"\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"header\"\n    }, this.props.storehouseState.storehouse.dollars + '$'), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n      className: \"field-card\",\n      onClick: ev => this.fieldCardClick(ev)\n    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, this.props.fieldState.field.getSeedName()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", null, this.props.fieldState.field.getSeedsState() + ' ', this.props.fieldState.field.getSeedsAge())));\n  }\n\n}\n\nfunction mapStateToProps({\n  fieldState,\n  storehouseState\n}) {\n  return {\n    fieldState,\n    storehouseState\n  };\n}\n\nfunction mapDispatchToProps(dispatch) {\n  return Object(redux__WEBPACK_IMPORTED_MODULE_2__[\"bindActionCreators\"])({\n    ageSeed: _actions_field__WEBPACK_IMPORTED_MODULE_3__[\"ageSeed\"],\n    harvestSeed: _actions_field__WEBPACK_IMPORTED_MODULE_3__[\"harvestSeed\"]\n  }, dispatch);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__[\"connect\"])(mapStateToProps, mapDispatchToProps)(App));\n\n//# sourceURL=webpack:///./client/containers/app.js?");
 
 /***/ }),
 
@@ -170,6 +182,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./client/instances/storehouse.js":
+/*!****************************************!*\
+  !*** ./client/instances/storehouse.js ***!
+  \****************************************/
+/*! exports provided: storehouse */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"storehouse\", function() { return storehouse; });\n/* harmony import */ var _models_storehouse__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/storehouse */ \"./client/models/storehouse.js\");\n\nlet storehouse = new _models_storehouse__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n\n//# sourceURL=webpack:///./client/instances/storehouse.js?");
+
+/***/ }),
+
 /***/ "./client/instances/traits.js":
 /*!************************************!*\
   !*** ./client/instances/traits.js ***!
@@ -226,7 +250,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Field; });\nclass Field {\n  constructor(fieldId, name) {\n    this.fieldId = fieldId;\n    this.name = name;\n    this.seedPlanted = null;\n    this.seedAge = 0;\n  }\n\n  plantSeed(aSeed) {\n    this.seedPlanted = aSeed;\n  }\n\n  ageSeed() {\n    if (this.seedPlanted != null) {\n      this.seedAge += 0.25;\n    }\n  }\n\n  getSeedsAge() {\n    let age = (this.seedAge / this.seedPlanted.stats[\"Growing Time\"].value * 100).toFixed(2);\n    return age + '%';\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/field.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Field; });\n/* harmony import */ var _instances_stats__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../instances/stats */ \"./client/instances/stats.js\");\n\nclass Field {\n  constructor(fieldId, name) {\n    this.fieldId = fieldId;\n    this.name = name;\n    this.seedPlanted = null;\n    this.seedAge = 0;\n  }\n\n  plantSeed(aSeed) {\n    this.seedPlanted = aSeed;\n  }\n\n  ageSeed() {\n    if (this.seedPlanted != null) {\n      this.seedAge += 0.25;\n    }\n\n    if (this.seedAge >= this.seedPlanted.stats[_instances_stats__WEBPACK_IMPORTED_MODULE_0__[\"GROWING_TIME\"]].value) {\n      this.seedAge = this.seedPlanted.stats[_instances_stats__WEBPACK_IMPORTED_MODULE_0__[\"GROWING_TIME\"]].value;\n    }\n  }\n\n  seedIsMature() {\n    return this.seedAge / this.seedPlanted.stats[_instances_stats__WEBPACK_IMPORTED_MODULE_0__[\"GROWING_TIME\"]].value >= 1;\n  }\n\n  getSeedName() {\n    if (this.seedPlanted) {\n      return 'Name: ' + this.seedPlanted.name;\n    } else {\n      return 'Nothing planted';\n    }\n  }\n\n  getSeedsAge() {\n    if (this.seedPlanted) {\n      let age = (this.seedAge / this.seedPlanted.stats[_instances_stats__WEBPACK_IMPORTED_MODULE_0__[\"GROWING_TIME\"]].value * 100).toFixed(2);\n      return '(' + age + '%)';\n    } else {\n      return '';\n    }\n  }\n\n  getSeedsState() {\n    if (this.seedPlanted) {\n      let seedsState = '';\n      let growthNumber = Math.floor(this.seedAge / this.seedPlanted.stats[_instances_stats__WEBPACK_IMPORTED_MODULE_0__[\"GROWING_TIME\"]].value * 5);\n\n      switch (growthNumber) {\n        case 0:\n          seedsState = 'Seed';\n          break;\n\n        case 1:\n          seedsState = 'Seedling';\n          break;\n\n        case 2:\n          seedsState = 'Wee Grass';\n          break;\n\n        case 3:\n          seedsState = 'Knee High';\n          break;\n\n        case 4:\n          seedsState = 'Proud Grass';\n          break;\n\n        case 5:\n          seedsState = 'Mature';\n          break;\n      }\n\n      return 'Age: ' + seedsState;\n    } else {\n      return '';\n    }\n  }\n\n  harvestSeed() {\n    let seedQuality = this.seedPlanted.stats[_instances_stats__WEBPACK_IMPORTED_MODULE_0__[\"SEED_QUALITY\"]];\n    this.seedPlanted = null;\n    return seedQuality;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/field.js?");
 
 /***/ }),
 
@@ -263,6 +287,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Stat; });\nclass Stat {\n  constructor(name, defaultValue) {\n    this.name = name;\n    this.defaultValue = defaultValue;\n    this.value = defaultValue;\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/stat.js?");
+
+/***/ }),
+
+/***/ "./client/models/storehouse.js":
+/*!*************************************!*\
+  !*** ./client/models/storehouse.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Storehouse; });\nclass Storehouse {\n  constructor() {\n    this.dollars = 0;\n    this.timeBells = 0;\n  }\n\n  gainDollars(dollarsGained) {\n    this.dollars += dollarsGained;\n  }\n\n  spendDollars(dollarsSpent) {\n    if (this.dollars <= dollarsSpent) {\n      return false;\n    } else {\n      this.dollars -= dollarsSpent;\n      return true;\n    }\n  }\n\n}\n\n//# sourceURL=webpack:///./client/models/storehouse.js?");
 
 /***/ }),
 
@@ -310,7 +346,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _act
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./field */ \"./client/reducers/field.js\");\n\n\nconst rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  fieldState: _field__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./client/reducers/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ \"./node_modules/redux/es/redux.js\");\n/* harmony import */ var _field__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./field */ \"./client/reducers/field.js\");\n/* harmony import */ var _storehouse__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storehouse */ \"./client/reducers/storehouse.js\");\n\n\n\nconst rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__[\"combineReducers\"])({\n  fieldState: _field__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  storehouseState: _storehouse__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (rootReducer);\n\n//# sourceURL=webpack:///./client/reducers/index.js?");
+
+/***/ }),
+
+/***/ "./client/reducers/storehouse.js":
+/*!***************************************!*\
+  !*** ./client/reducers/storehouse.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_storehouse__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/storehouse */ \"./client/actions/storehouse.js\");\n/* harmony import */ var _instances_storehouse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../instances/storehouse */ \"./client/instances/storehouse.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (state = {\n  storehouse: _instances_storehouse__WEBPACK_IMPORTED_MODULE_1__[\"storehouse\"]\n}, action = null) {\n  switch (action.type) {\n    case _actions_storehouse__WEBPACK_IMPORTED_MODULE_0__[\"GAIN_DOLLARS\"]:\n      return Object.assign({}, state, {\n        storehouse: action.storehouse\n      });\n\n    default:\n      return state;\n  }\n});\n\n//# sourceURL=webpack:///./client/reducers/storehouse.js?");
 
 /***/ }),
 

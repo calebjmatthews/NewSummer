@@ -189,10 +189,27 @@ Main game loop
 Brainstorming
 ~~~~~~~~~~~~~
 A family:
-Scientific name, common name, list of possible traits, list of identified cultivars
+Scientific name, common name, list of possible traits, list of identified cultivars, method for turning stats into quantity/quality/visual appearance/name/description
 A cultivar:
-Name, list of definitional traits, optional bonus, method for turning stats into quantity/quality/visual appearance/name/description
+Name, list of definitional stats, optional bonus
 A trait:
 Name, number of loci, method for turning loci into stats
 A seed:
 Name, description, cultivar, genome, method of breeding with another seed
+
+Development Checklist
+~~~~~~~~~~~~~~~~~~~~~
+X React boilerplate
+X Basic plant class architecture
+X Seed genome and stat calculation
+_ Plant harvesting
+_ Plant breeding in experimental garden
+_ Classification of seeds into cultivars
+_ Plant naming
+_ Plant description based on notable traits
+_ Rudimentary pixi.js pixel graphics
+_ Additional traits
+_ Pixel graphics linked with traits
+_ Environmental effects from fields
+_ Seeds from trader
+_ Pixel graphics for different cultivars
