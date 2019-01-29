@@ -24,7 +24,7 @@ export default class Cache {
   }
 
   getAll() {
-    return this.members;
+    return this.members.slice();
   }
 
   set(members) {
