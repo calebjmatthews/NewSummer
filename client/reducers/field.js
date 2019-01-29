@@ -1,5 +1,5 @@
 import {
-  AGE_SEED, HARVEST_SEED, PLANT_SEED
+  SET_FIELD
 } from '../actions/field';
 import Field from '../models/field';
 
@@ -12,13 +12,7 @@ export default function
   },
     action = null) {
 	switch(action.type) {
-    case AGE_SEED:
-      return Object.assign(
-        {}, state, { field: action.field });
-    case HARVEST_SEED:
-      return Object.assign(
-        {}, state, { field: action.field });
-    case PLANT_SEED:
+    case SET_FIELD:
       return Object.assign(
         {}, state, { field: action.field });
 		default:

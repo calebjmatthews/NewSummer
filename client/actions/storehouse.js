@@ -1,10 +1,18 @@
 import Storehouse from '../models/storehouse';
 
-export const GAIN_DOLLARS = 'GAIN_DOLLARS';
+export const SET_STOREHOUSE = 'SET_STOREHOUSE';
 export function gainDollars(storehouse, dollarsGained) {
   storehouse.gainDollars(dollarsGained);
   return {
-    type: GAIN_DOLLARS,
+    type: SET_STOREHOUSE,
+    storehouse: storehouse
+  }
+}
+
+export function spendDollars(storehouse, dollarsSpent) {
+  storehouse.spendDollars(dollarsSpent);
+  return {
+    type: SET_STOREHOUSE,
     storehouse: storehouse
   }
 }
