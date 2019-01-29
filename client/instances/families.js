@@ -26,7 +26,7 @@ class Poaceae extends Family {
     );
   }
   determineNameFromGenome(genome) {
-    const name = 'Sweet Wild Wheat';
+    const name = 'Wild Wheat';
     return name;
   }
   determineTraitsFromGenome(genome) {
@@ -57,7 +57,7 @@ class Poaceae extends Family {
     let statDict = {};
     const stats = this.stats.getAll();
     stats.map((stat) => {
-      statDict[stat.name] = stat;
+      statDict[stat.name] = Object.create(stat);
     })
     const traitNames = Object.keys(traitTotalDict);
     traitNames.map((traitName) => {
