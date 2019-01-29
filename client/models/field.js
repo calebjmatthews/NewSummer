@@ -75,6 +75,7 @@ export default class Field {
   harvestSeed() {
     let seedQuality = this.seedPlanted.stats[SEED_QUALITY].value;
     this.seedPlanted = null;
+    this.seedAge = 0;
     return seedQuality;
   }
 }

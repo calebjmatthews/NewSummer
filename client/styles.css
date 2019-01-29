@@ -26,6 +26,7 @@ body {
   max-width: 275px;
   height: calc(100vh - 60px);
   width: calc(100vw - 60px);
+  overflow-y: scroll;
   background: #fff;
   padding: 5px;
   border-radius: 10px;

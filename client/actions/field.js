@@ -22,3 +22,12 @@ export function harvestSeed(field, storehouse) {
     }
   }
 }
+
+export const PLANT_SEED = 'PLANT_SEED';
+export function plantSeed(field, seed) {
+  field.plantSeed(seed);
+  return {
+    type: PLANT_SEED,
+    field: field
+  }
+}

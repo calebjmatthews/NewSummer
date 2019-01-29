@@ -1,6 +1,9 @@
 import {GAIN_DOLLARS, gainDollars} from '../actions/storehouse';
 import {storehouse} from '../instances/storehouse';
 
+import {seedDemo} from '../instances/seeds';
+storehouse.addSeed(seedDemo);
+
 export default function
   (state = {
     storehouse: storehouse
