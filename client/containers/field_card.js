@@ -37,10 +37,11 @@ class FieldCard extends Component {
   render() {
     if (this.state.seedChoosing == true) {
       return (
-        <div className="field-card"
+        <div className="game-card" style={this.props.transStyle}
           onClick={() => this.fieldCardClick()}>
           Choose a seed:
-          {this.props.storehouseState.storehouse.seeds.getAll().map((seed) => {
+          {this.props.storehouseState.storehouse
+            .seeds.getAll().map((seed) => {
             return (
               <div key={seed.id}
                 onClick={() => this.seedPlantClick(seed)}>
@@ -53,7 +54,7 @@ class FieldCard extends Component {
     }
     else {
       return (
-        <div className="field-card"
+        <div className="game-card" style={this.props.transStyle}
           onClick={() => this.fieldCardClick()}>
           <div>
             {this.props.fieldState.field.getSeedName()}
