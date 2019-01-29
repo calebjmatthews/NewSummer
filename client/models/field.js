@@ -13,9 +13,9 @@ export default class Field {
   ageSeed() {
     if (this.seedPlanted != null) {
       this.seedAge += 0.25;
-    }
-    if (this.seedAge >= this.seedPlanted.stats[GROWING_TIME].value) {
-      this.seedAge = this.seedPlanted.stats[GROWING_TIME].value;
+      if (this.seedAge >= this.seedPlanted.stats[GROWING_TIME].value) {
+        this.seedAge = this.seedPlanted.stats[GROWING_TIME].value;
+      }
     }
   }
   seedIsMature() {
@@ -73,7 +73,7 @@ export default class Field {
   }
 
   harvestSeed() {
-    let seedQuality = this.seedPlanted.stats[SEED_QUALITY];
+    let seedQuality = this.seedPlanted.stats[SEED_QUALITY].value;
     this.seedPlanted = null;
     return seedQuality;
   }

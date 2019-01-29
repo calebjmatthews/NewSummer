@@ -202,7 +202,10 @@ Development Checklist
 X React boilerplate
 X Basic plant class architecture
 X Seed genome and stat calculation
-_ Plant harvesting
+X Plant harvesting
+_ Seed planting
+_ Scroll between pages in react app
+_ Purchase additional fields
 _ Plant breeding in experimental garden
 _ Classification of seeds into cultivars
 _ Plant naming
