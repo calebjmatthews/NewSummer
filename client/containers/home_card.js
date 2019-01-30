@@ -9,8 +9,11 @@ class HomeCard extends Component {
   }
   buyClick(toBuy) {
     if (toBuy == 'field') {
-      this.props.buyFieldAttempt(this.props.economyState.economy,
-        this.props.storehouseState.storehouse);
+      this.props.buyFieldAttempt(
+        this.props.economyState.economy,
+        this.props.storehouseState.storehouse,
+        this.props.fieldsState.fields
+      );
     }
   }
   render() {
@@ -26,8 +29,8 @@ class HomeCard extends Component {
   }
 }
 
-function mapStateToProps({ storehouseState, economyState }) {
-  return { storehouseState, economyState }
+function mapStateToProps({ storehouseState, economyState, fieldsState }) {
+  return { storehouseState, economyState, fieldsState }
 }
 
 function mapDispatchToProps(dispatch) {

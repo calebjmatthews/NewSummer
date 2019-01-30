@@ -2,30 +2,35 @@ import Field from '../models/field';
 
 import {gainDollars} from './storehouse';
 
-export const SET_FIELD = 'SET_FIELD';
-export function ageSeed(field) {
-  field.ageSeed();
-	return {
-    type: SET_FIELD,
-    field: field
+export const SET_FIELDS = 'SET_FIELDS';
+function setFields(fields) {
+  return {
+    type: SET_FIELDS,
+    fields: fields
   };
+}
+
+export function ageAllSeeds(fields) {
+  fields.getAll().map((field) => {
+    field.ageSeed();
+  })
+	return setFields;
 };
 
-export function harvestSeed(field, storehouse) {
-  const dollars = field.harvestSeed();
+export function harvestSeed(fields, storehouse, fieldId) {
+  const dollars = fields.getByProperty('id', fieldId).harvestSeed();
   return function(dispatch) {
     dispatch(gainDollars(storehouse, dollars));
-    return {
-      type: SET_FIELD,
-      field: field
-    }
+    return setFields;
   }
 }
 
-export function plantSeed(field, seed) {
-  field.plantSeed(seed);
-  return {
-    type: SET_FIELD,
-    field: field
-  }
+export function plantSeed(fields, fieldId, seed) {
+  fields.getByProperty('id', fieldId).plantSeed(seed);
+  return setFields;
+}
+
+export function addField(fields, field) {
+  fields.add(field);
+  return setFields;
 }

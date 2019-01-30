@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import fieldReducer from './field';
+import fieldsReducer from './fields';
 import storehouseReducer from './storehouse';
 import economyReducer from './economy';
 
 const rootReducer = combineReducers({
-  fieldState: fieldReducer,
+  fieldsState: fieldsReducer,
   storehouseState: storehouseReducer,
   economyState: economyReducer
 })

@@ -16,21 +16,23 @@ class FieldCard extends Component {
   }
 
   fieldCardClick() {
-    if (this.props.fieldState.field.seedPlanted == null) {
+    if (this.props.field.seedPlanted == null) {
       this.setState({seedChoosing: true});
     }
     else {
-      if (this.props.fieldState.field.seedIsMature() == true) {
+      if (this.props.field.seedIsMature() == true) {
         this.props.harvestSeed(
-          this.props.fieldState.field,
-          this.props.storehouseState.storehouse
+          this.props.fieldsState.fields,
+          this.props.storehouseState.storehouse,
+          this.props.field.id
         );
       }
     }
   }
 
   seedPlantClick(seed) {
-    this.props.plantSeed(this.props.fieldState.field, seed);
+    this.props.plantSeed(this.props.fieldsState.fields,
+      this.props.field.id, seed);
     this.setState({seedChoosing: false});
   }
 
@@ -57,11 +59,11 @@ class FieldCard extends Component {
         <div className="game-card" style={this.props.transStyle}
           onClick={() => this.fieldCardClick()}>
           <div>
-            {this.props.fieldState.field.getSeedName()}
+            {this.props.field.getSeedName()}
           </div>
           <div>
-            {this.props.fieldState.field.getSeedsState() + ' '}
-            {this.props.fieldState.field.getSeedsAge()}
+            {this.props.field.getSeedsState() + ' '}
+            {this.props.field.getSeedsAge()}
           </div>
         </div>
       )
@@ -69,8 +71,8 @@ class FieldCard extends Component {
   }
 }
 
-function mapStateToProps({ fieldState, storehouseState }) {
-  return { fieldState, storehouseState }
+function mapStateToProps({ fieldsState, storehouseState }) {
+  return { fieldsState, storehouseState }
 }
 
 function mapDispatchToProps(dispatch) {

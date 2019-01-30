@@ -1,8 +1,9 @@
 import {SEED_QUALITY, GROWING_TIME} from '../instances/stats';
 
 export default class Field {
-  constructor(fieldId, name) {
-    this.fieldId = fieldId;
+  constructor(id, index, name) {
+    this.id = id;
+    this.index = index;
     this.name = name;
     this.seedPlanted = null;
     this.seedAge = 0;
@@ -32,7 +33,7 @@ export default class Field {
   }
   getSeedsAge() {
     if (this.seedPlanted) {
-      let age = ((this.seedAge
+      let age = parseFloat((this.seedAge
         / this.seedPlanted.stats[GROWING_TIME].value) * 100).toFixed(2);
       return ('(' + age + '%)');
     }

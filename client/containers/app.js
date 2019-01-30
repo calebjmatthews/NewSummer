@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { ageSeed, harvestSeed, plantSeed } from '../actions/field';
+import { ageAllSeeds, harvestSeed, plantSeed } from '../actions/field';
 import FieldCard from './field_card';
 import HomeCard from './home_card';
 
@@ -17,7 +17,7 @@ class App extends Component {
   }
   componentDidMount() {
     setInterval(() => {
-      this.props.ageSeed(this.props.fieldState.field);
+      this.props.ageAllSeeds(this.props.fieldsState.fields);
     }, TIME_STEP);
     this.navLeftClick = this.navLeftClick.bind(this);
     this.navRightClick = this.navRightClick.bind(this);
@@ -68,20 +68,25 @@ class App extends Component {
             <div>{'>'}</div>
           </div>
           <HomeCard transStyle={this.getCardStyle(0)} />
-          <FieldCard transStyle={this.getCardStyle(1)} />
+          {this.props.fieldsState.fields.getAll().map((field) => {
+            return (
+              <FieldCard key={field.id} field={field}
+                transStyle={this.getCardStyle(field.index+1)} />
+            );
+          })}
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ fieldState, storehouseState }) {
-  return { fieldState, storehouseState }
+function mapStateToProps({ fieldsState, storehouseState }) {
+  return { fieldsState, storehouseState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    ageSeed
+    ageAllSeeds
   }, dispatch)
 }
 

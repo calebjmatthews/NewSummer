@@ -27,6 +27,10 @@ export default class Cache {
     return this.members.slice();
   }
 
+  getLength() {
+    return this.members.length;
+  }
+
   set(members) {
     this.members = members.slice();
   }

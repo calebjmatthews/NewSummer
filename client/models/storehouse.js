@@ -7,14 +7,14 @@ export default class Storehouse {
     this.seeds = new Cache([]);
   }
   gainDollars(dollarsGained) {
-    this.dollars = (this.dollars + dollarsGained).toFixed(2);
+    this.dollars = parseFloat((this.dollars + dollarsGained).toFixed(2));
   }
   spendDollars(dollarsSpent) {
     if (this.dollars <= dollarsSpent) {
       return false;
     }
     else {
-      this.dollars = (this.dollars - dollarsSpent).toFixed(2);
+      this.dollars = parseFloat((this.dollars - dollarsSpent).toFixed(2));
       return true;
     }
   }
