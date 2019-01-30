@@ -56,7 +56,7 @@ class App extends Component {
     return (
       <div className="container-main">
         <div className="header">
-          {this.props.storehouseState.storehouse.dollars + '$'}
+          {'$' + this.props.storehouseState.storehouse.dollars}
         </div>
         <div className="game-card-wrapper">
           <div className="nav-button nav-button-left"
