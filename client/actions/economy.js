@@ -12,7 +12,7 @@ export function buyFieldAttempt(economy, storehouse, fields) {
     return function(dispatch) {
       economy.recordBoughtField();
       let newField = new Field(Math.floor(Math.random() * 10000),
-        (fields.getLength()+1), ('Field #' + fields.getLength()));
+        (fields.getLength()), ('Field #' + (fields.getLength()-1)));
 
       dispatch(spendDollars(storehouse, fieldCost));
       dispatch(addField(fields, newField));

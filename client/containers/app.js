@@ -11,8 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      spotCurrent: 1,
-      spotQuantity: 2
+      spotCurrent: 1
     }
   }
   componentDidMount() {
@@ -29,13 +28,14 @@ class App extends Component {
       this.setState({spotCurrent: newSpot});
     }
     else {
-      const newSpot = this.state.spotQuantity - 1;
+      const newSpot = this.props.fieldsState.fields.getLength();
       this.setState({spotCurrent: newSpot});
     }
   }
 
   navRightClick() {
-    if (this.state.spotCurrent <= (this.state.spotQuantity-2)) {
+    if (this.state.spotCurrent <=
+      (this.props.fieldsState.fields.getLength()-1)) {
       const newSpot = this.state.spotCurrent + 1;
       this.setState({spotCurrent: newSpot});
     }

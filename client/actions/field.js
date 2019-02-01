@@ -14,7 +14,7 @@ export function ageAllSeeds(fields) {
   fields.getAll().map((field) => {
     field.ageSeed();
   })
-	return setFields;
+	return setFields(fields);
 };
 
 export function harvestSeed(fields, storehouse, fieldId) {
