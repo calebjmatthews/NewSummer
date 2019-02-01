@@ -1,20 +1,24 @@
 export default class Cultivar {
-  constructor(name, statsDefinitional, bonus) {
+  constructor(name, traitsDefinitional, bonus) {
     this.name = name;
-    if (Array.isArray(statsDefinitional)) {
-      this.statsDefinitional = statsDefinitional.slice();
+    if (Array.isArray(traitsDefinitional)) {
+      this.traitsDefinitional = traitsDefinitional.slice();
     }
     else {
-      this.statsDefinitional = statsDefinitional;
+      this.traitsDefinitional = traitsDefinitional;
     }
     this.bonus = bonus;
   }
 
-  areStatsMatch(stats) {
+  areTraitsMatch(traits) {
     let isMatch = true;
-    this.statsDefinitional.map((defStat) => {
-      if (defStat.comparitor == 'less than') {
-        if (stats[defStat.stat].value >= defStat.values[0]) {
+    this.traitsDefinitional.map((defTrait) => {
+      console.log('Comparing:');
+      console.log(defTrait);
+      console.log('against:');
+      console.log(traits);
+      if (defTrait.comparitor == 'less than') {
+        if (traits[defTrait.trait].numerator >= defTrait.values[0]) {
           isMatch = false;
         }
       }

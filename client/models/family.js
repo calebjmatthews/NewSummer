@@ -58,10 +58,10 @@ export default class Family {
   }
   // The first cultivar in the list is the default, check all others for a
   //  match, with later matches overwriting those earlier
-  determineCultivarNameFromStats(stats) {
+  determineCultivarNameFromTraits(traits) {
     let cultivarName = this.cultivars[0].name;
     this.cultivars.slice(1, this.cultivars.length).map((cultivar) => {
-      if (cultivar.areStatsMatch(stats)) {
+      if (cultivar.areTraitsMatch(traits)) {
         cultivarName = cultivar.name;
       }
     })

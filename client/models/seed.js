@@ -9,7 +9,8 @@ export default class Seed {
 
     this.traitTotalDict = this.determineTraitsFromGenome(this.genome);
     this.stats = this.determineStatsFromTraits(this.traitTotalDict);
-    this.cultivarName = this.determineCultivarNameFromStats(this.stats);
+    this.cultivarName =
+      this.determineCultivarNameFromTraits(this.traitTotalDict);
     this.name =
       this.determineNameFromTraits(this.traitTotalDict, this.cultivarName);
   }
@@ -32,9 +33,9 @@ export default class Seed {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineStatsFromTraits(traitTotalDict);
   }
-  determineCultivarNameFromStats(stats) {
+  determineCultivarNameFromTraits(traits) {
     const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineCultivarNameFromStats(stats);
+    return family.determineCultivarNameFromTraits(traits);
   }
   determineNameFromTraits(traits, cultivarName) {
     const family = families.getByProperty('nameScientific', this.familyName);

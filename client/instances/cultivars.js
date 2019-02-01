@@ -1,8 +1,9 @@
 import Cultivar from '../models/cultivar';
+import {SEED_SIZE} from './traits';
 
 export const WILD_GRASS = 'Wild Grass';
 export const wildGrass = new Cultivar('Wild Grass', [
-  {stat: 'Seed Quality', comparitor: 'less than', values: [80.0]}
+  {trait: SEED_SIZE, comparitor: 'less than', values: [3]}
 ], null)
 
 export const GRAIN = 'Grain';

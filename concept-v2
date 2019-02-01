@@ -83,8 +83,7 @@ Traits:
 	- A newly bred or discovered cultivar also has an adjective to accompany their name, randomly selected from the cultivar's notable traits (see below)
 
 Adjectives:
-	- Bitter, Sweet, Sour, Spicy, Aromatic, Wetland, Highland, Summer, Winter, Hearty,
-		Plentiful, Glorious, Thorny, Tough, Delicious, Healthy
+	- Bitter, Sweet, Sour, Spicy, Aromatic, Wetland, Highland, Summer, Winter, Hearty, Plentiful, Glorious, Thorny, Tough, Delicious, Healthy
 
 Purchaseable:
 	- New wild seeds, new seeds of discovered cultivars, more crossbreeding choice slots (4, 5, 6), more seed storage space
@@ -174,7 +173,7 @@ X Separate field cards/seed choices into separate containers
 X Scroll between pages in react app
 X Purchase additional fields
 X Plant breeding in experimental garden
-_ Classification of seeds into cultivars
+X Classification of seeds into cultivars
 _ Plant naming
 _ Plant description based on notable traits
 _ Rudimentary pixi.js pixel graphics
