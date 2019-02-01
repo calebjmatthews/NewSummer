@@ -6,6 +6,7 @@ import { buyFieldAttempt } from '../actions/economy';
 class HomeCard extends Component {
   componentDidMount() {
     this.buyClick = this.buyClick.bind(this);
+    this.breedClick = this.breedClick.bind(this);
   }
   buyClick(toBuy) {
     if (toBuy == 'field') {
@@ -16,6 +17,12 @@ class HomeCard extends Component {
       );
     }
   }
+  breedClick() {
+    console.log('this');
+    console.log(this);
+    this.props.storehouseState.storehouse.seeds.members[0]
+    .breedWith(this.props.storehouseState.storehouse.seeds.members[1]);
+  }
   render() {
     return (
       <div className="game-card" style={this.props.transStyle}>
@@ -23,6 +30,9 @@ class HomeCard extends Component {
         <div onClick={() => this.buyClick('field')}>
           {'Purchase a new field for $'
             + this.props.economyState.economy.getFieldPrice()}
+        </div>
+        <div onClick={() => this.breedClick()}>
+          {'Breed two seeds'}
         </div>
       </div>
     );
