@@ -7,9 +7,11 @@ export default class Seed {
     this.familyName = familyName;
     this.genome = genome;
 
-    this.name = this.determineNameFromGenome();
-    this.traitTotalDict = this.determineTraitsFromGenome();
+    this.traitTotalDict = this.determineTraitsFromGenome(this.genome);
     this.stats = this.determineStatsFromTraits(this.traitTotalDict);
+    this.cultivarName = this.determineCultivarNameFromStats(this.stats);
+    this.name =
+      this.determineNameFromTraits(this.traitTotalDict, this.cultivarName);
   }
 
   getGeneByNameAndLocus(traitName, locusIndex) {
@@ -22,17 +24,21 @@ export default class Seed {
     return matchingGene;
   }
 
-  determineTraitsFromGenome() {
-    let family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineTraitsFromGenome(this.genome);
-  }
-  determineNameFromGenome() {
-    let family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineNameFromGenome(this.genome);
+  determineTraitsFromGenome(genome) {
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.determineTraitsFromGenome(genome);
   }
   determineStatsFromTraits(traitTotalDict) {
-    let family = families.getByProperty('nameScientific', this.familyName);
+    const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineStatsFromTraits(traitTotalDict);
+  }
+  determineCultivarNameFromStats(stats) {
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.determineCultivarNameFromStats(stats);
+  }
+  determineNameFromTraits(traits, cultivarName) {
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.determineNameFromTraits(traits, cultivarName);
   }
 
   breedWith(otherParent) {

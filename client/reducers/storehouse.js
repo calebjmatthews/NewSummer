@@ -3,7 +3,7 @@ import {storehouse} from '../instances/storehouse';
 
 import {seedDemo1, seedDemo2} from '../instances/seeds';
 storehouse.addSeed(seedDemo1);
-storehouse.addSeed(seedDemo2)
+storehouse.addSeed(seedDemo2);
 
 export default function
   (state = {

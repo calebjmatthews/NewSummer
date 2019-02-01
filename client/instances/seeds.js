@@ -17,7 +17,7 @@ export const SEED_DEMO_2_ID =  Math.floor(Math.random() * 10000);
 export const seedDemo2 = new Seed(SEED_DEMO_2_ID, POACEAE,
   [
     new Gene(SEED_SIZE, 0, [false, false]),
-    new Gene(SEED_SIZE, 1, [false, false]),
+    new Gene(SEED_SIZE, 1, [true, true]),
     new Gene(SEED_SIZE, 2, [true, false])
   ]
 );
