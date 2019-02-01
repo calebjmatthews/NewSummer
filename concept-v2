@@ -176,8 +176,10 @@ Game
 Other ideas
 ~~~~~~~~~~~
 - Send out expeditions for new plant types, using harvested crops as supplies
-- New crop discover (based on degree of variation from previously discovered) contributes to global population
+- New crop discovery (based on degree of variation from previously discovered) contributes to global population
 - Quests (Jobs? Tasks?) that reward player for breeding a specific kind of plant, no time limit
+- Economy that rewards novelty as well as quality/quantity
+- Specific family that can only be bred during contest events, with seeds that disappear when the event is over (roses? orchids?)
 
 Main game loop
 ~~~~~~~~~~~~~~
@@ -206,8 +208,8 @@ X Plant harvesting
 X Seed planting
 X Separate field cards/seed choices into separate containers
 X Scroll between pages in react app
-_ Purchase additional fields
-_ Plant breeding in experimental garden
+X Purchase additional fields
+X Plant breeding in experimental garden
 _ Classification of seeds into cultivars
 _ Plant naming
 _ Plant description based on notable traits
