@@ -16,3 +16,12 @@ export function spendDollars(storehouse, dollarsSpent) {
     storehouse: storehouse
   }
 }
+
+export function breedSeeds(storehouse, seedA, seedB) {
+  const newSeed = storehouse.breedSeeds(seedA, seedB);
+  storehouse.addSeed(newSeed);
+  return {
+    type: SET_STOREHOUSE,
+    storehouse: storehouse
+  }
+}

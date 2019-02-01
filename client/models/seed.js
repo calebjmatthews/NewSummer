@@ -50,5 +50,6 @@ export default class Seed {
       this.familyName,
       newGenome
     );
+    return newSeed;
   }
 }

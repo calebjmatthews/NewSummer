@@ -21,4 +21,7 @@ export default class Storehouse {
   addSeed(seed) {
     this.seeds.add(seed);
   }
+  breedSeeds(seedA, seedB) {
+    return seedA.breedWith(seedB);
+  }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { buyFieldAttempt } from '../actions/economy';
+import { breedSeeds } from '../actions/storehouse';
 
 class HomeCard extends Component {
   componentDidMount() {
@@ -18,10 +19,10 @@ class HomeCard extends Component {
     }
   }
   breedClick() {
-    console.log('this');
-    console.log(this);
-    this.props.storehouseState.storehouse.seeds.members[0]
-    .breedWith(this.props.storehouseState.storehouse.seeds.members[1]);
+    this.props.breedSeeds(
+      this.props.storehouseState.storehouse,
+      this.props.storehouseState.storehouse.seeds.members[0],
+      this.props.storehouseState.storehouse.seeds.members[1]);
   }
   render() {
     return (
@@ -45,7 +46,7 @@ function mapStateToProps({ storehouseState, economyState, fieldsState }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    buyFieldAttempt
+    buyFieldAttempt, breedSeeds
   }, dispatch)
 }
 
