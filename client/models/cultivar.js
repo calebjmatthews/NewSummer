@@ -13,10 +13,6 @@ export default class Cultivar {
   areTraitsMatch(traits) {
     let isMatch = true;
     this.traitsDefinitional.map((defTrait) => {
-      console.log('Comparing:');
-      console.log(defTrait);
-      console.log('against:');
-      console.log(traits);
       if (defTrait.comparitor == 'less than') {
         if (traits[defTrait.trait].numerator >= defTrait.values[0]) {
           isMatch = false;
