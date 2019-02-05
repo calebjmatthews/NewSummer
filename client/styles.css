@@ -70,5 +70,6 @@ body {
   background: #fff;
   padding: 5px;
   border-radius: 10px;
+  text-align: center;
   transition: transform 0.4s ease-in-out;
 }

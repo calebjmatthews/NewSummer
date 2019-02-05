@@ -161,6 +161,29 @@ A trait:
 Name, number of loci, method for turning loci into stats
 A seed:
 Name, description, cultivar, genome, method of breeding with another seed
+A field:
+Cold vs hot, wet vs dry, pest vs none, disease vs none, nitrogen level, increased pollination
+
+Randomly generated seeds come from family-specific lists of trait numerators with a count of traits to be truly randomly generated. They are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
+
+Differentiating cultivars
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Poaceae:
+- Seed morpholohy:
+	- Emmer: Spiked, hulled, awned, small ears
+	- Corn: Kernels in husk covered ears (600 kernals per ear)
+	- Wheat: Spiked, hulled, small ears
+	- Oats: Seeds in florets, tolerates high moisture
+	- Rye: Spiked, hulled, awned, small ears
+	- Rice: Seed in mini-florets in seeds heads
+	- Millet: Seed in fox tails
+	- Sorghum: Seeds in denser seed heads
+	- Sugar Cane: Cane investment
+	- Bamboo: Cane investment
+
+- Corn = no floret, no spikes, leafy outer husks, many seeds in single bunch
+- Wheat-types = no floret, yes spikes, no outer husks, few seeds in bunch
+
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
@@ -174,9 +197,10 @@ X Scroll between pages in react app
 X Purchase additional fields
 X Plant breeding in experimental garden
 X Classification of seeds into cultivars
-_ Small number of additional traits
-_ Plant naming
+X Small number of additional traits
+_ Basic plant naming
 _ Plant description based on notable traits
+_ Random generation of seeds based on cultivar
 _ Rudimentary pixi.js pixel graphics
 _ Additional traits
 _ Pixel graphics linked with traits

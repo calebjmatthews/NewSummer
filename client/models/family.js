@@ -67,8 +67,47 @@ export default class Family {
     })
     return cultivarName;
   }
-  determineNameFromTraits(traits, cultivarName) {
-    const name = cultivarName;
+  determineNameFromStats(stats, cultivarName) {
+    console.log('stats');
+    console.log(stats);
+
+    let adjectives = [{word: 'Common', extent: 0}];
+
+    Object.keys(stats).map((statKey) => {
+      const stat = stats[statKey];
+      stat.adjectiveDefinitions.map((adjectiveDefinition) => {
+        if (adjectiveDefinition.comparitor == 'less than') {
+          if (stat.value < adjectiveDefinition.values[0]) {
+            const extent = calcExtent(stat, adjectiveDefinition);
+            adjectives.push({
+              word: adjectiveDefinition.adjective, extent: extent
+            });
+          }
+        }
+        if (adjectiveDefinition.comparitor == 'greater than') {
+          if (stat.value > adjectiveDefinition.values[0]) {
+            const extent = calcExtent(stat, adjectiveDefinition);
+            adjectives.push({
+              word: adjectiveDefinition.adjective, extent: extent
+            });
+          }
+        }
+      })
+    })
+
+    adjectives.sort((a, b) => {
+      return b.extent - a.extent;
+    });
+    console.log('adjectives');
+    console.log(adjectives);
+
+    const name = adjectives[0].word + ' ' + cultivarName;
     return name;
+
+    function calcExtent(stat, adjectiveDefinition) {
+      const defValue = adjectiveDefinition.values[0];
+      return ((Math.abs(stat.value - defValue)) / defValue)
+        + adjectiveDefinition.bonus;
+    }
   }
 }
