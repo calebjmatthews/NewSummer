@@ -19,6 +19,8 @@ export function spendDollars(storehouse, dollarsSpent) {
 
 export function breedSeeds(storehouse, seedA, seedB) {
   const newSeed = storehouse.breedSeeds(seedA, seedB);
+  console.log('newSeed');
+  console.log(newSeed);
   storehouse.addSeed(newSeed);
   return {
     type: SET_STOREHOUSE,

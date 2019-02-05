@@ -67,42 +67,44 @@ export default class Family {
     })
     return cultivarName;
   }
-  determineNameFromStats(stats, cultivarName) {
-    console.log('stats');
-    console.log(stats);
-
+  determineAdjectivesFromStats(stats, cultivarName) {
     let adjectives = [{word: 'Common', extent: 0}];
 
     Object.keys(stats).map((statKey) => {
       const stat = stats[statKey];
+      let newStat = null;
       stat.adjectiveDefinitions.map((adjectiveDefinition) => {
         if (adjectiveDefinition.comparitor == 'less than') {
           if (stat.value < adjectiveDefinition.values[0]) {
             const extent = calcExtent(stat, adjectiveDefinition);
-            adjectives.push({
+            newStat = {
               word: adjectiveDefinition.adjective, extent: extent
-            });
+            }
           }
         }
         if (adjectiveDefinition.comparitor == 'greater than') {
           if (stat.value > adjectiveDefinition.values[0]) {
             const extent = calcExtent(stat, adjectiveDefinition);
-            adjectives.push({
+            newStat = {
               word: adjectiveDefinition.adjective, extent: extent
-            });
+            }
           }
         }
-      })
-    })
+      });
+      if (newStat != null) {
+        adjectives.push(newStat);
+      }
+    });
+
+    if (adjectives.length > 1) {
+      adjectives.splice(0, 1);
+    }
 
     adjectives.sort((a, b) => {
       return b.extent - a.extent;
     });
-    console.log('adjectives');
-    console.log(adjectives);
 
-    const name = adjectives[0].word + ' ' + cultivarName;
-    return name;
+    return adjectives;
 
     function calcExtent(stat, adjectiveDefinition) {
       const defValue = adjectiveDefinition.values[0];

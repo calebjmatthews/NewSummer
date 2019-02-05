@@ -198,8 +198,8 @@ X Purchase additional fields
 X Plant breeding in experimental garden
 X Classification of seeds into cultivars
 X Small number of additional traits
-_ Basic plant naming
-_ Plant description based on notable traits
+X Basic plant naming
+X Plant descriptive adjectives based on notable traits
 _ Random generation of seeds based on cultivar
 _ Rudimentary pixi.js pixel graphics
 _ Additional traits

@@ -11,8 +11,9 @@ export default class Seed {
     this.stats = this.determineStatsFromTraits(this.traitTotalDict);
     this.cultivarName =
       this.determineCultivarNameFromTraits(this.traitTotalDict);
-    this.name =
-      this.determineNameFromStats(this.stats, this.cultivarName);
+    this.adjectives =
+      this.determineAdjectivesFromStats(this.stats, this.cultivarName);
+    this.name = this.adjectives[0].word + ' ' + this.cultivarName;
   }
 
   getGeneByNameAndLocus(traitName, locusIndex) {
@@ -37,9 +38,9 @@ export default class Seed {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineCultivarNameFromTraits(traits);
   }
-  determineNameFromStats(stats, cultivarName) {
+  determineAdjectivesFromStats(stats, cultivarName) {
     const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineNameFromStats(stats, cultivarName);
+    return family.determineAdjectivesFromStats(stats, cultivarName);
   }
 
   breedWith(otherParent) {
