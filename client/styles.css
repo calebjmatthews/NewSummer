@@ -9,8 +9,8 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
-  background: #56AB2E;
-  background: linear-gradient(to right, #56ab2f, #a8e063);
+  /* background: #56AB2E;
+  background: linear-gradient(to right, #56ab2f, #a8e063); */
 }
 
 .header {

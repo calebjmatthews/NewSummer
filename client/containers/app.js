@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as PIXI from 'pixi.js';
+
 import { ageAllSeeds, harvestSeed, plantSeed } from '../actions/field';
 import FieldCard from './field_card';
 import HomeCard from './home_card';
 
-const TIME_STEP = (0.025 * 1000);
+const pixiApp = new PIXI.Application({
+  width: window.innerWidth, height: window.innerHeight
+});
+
+const TIME_STEP = (0.25 * 1000);
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +24,23 @@ class App extends Component {
     setInterval(() => {
       this.props.ageAllSeeds(this.props.fieldsState.fields);
     }, TIME_STEP);
+
+    document.getElementById('root').appendChild(pixiApp.view);
+    PIXI.loader.add('soil', './dist/images/soil.png')
+    .load((loader, resources) => {
+      const soil = new PIXI.extras.TilingSprite(
+        resources.soil.texture, window.innerWidth, window.innerHeight
+      );
+
+      soil.x = 0;
+      soil.y = 0;
+
+      soil.anchor.x = 0;
+      soil.anchor.y = 0;
+
+      pixiApp.stage.addChild(soil);
+    });
+
     this.navLeftClick = this.navLeftClick.bind(this);
     this.navRightClick = this.navRightClick.bind(this);
   }
