@@ -28,17 +28,39 @@ class App extends Component {
     document.getElementById('root').appendChild(pixiApp.view);
     PIXI.loader.add('soil', './dist/images/soil.png')
     .load((loader, resources) => {
-      const soil = new PIXI.extras.TilingSprite(
+      const bgSprite = new PIXI.Graphics();
+      bgSprite.beginFill(0x277249);
+      bgSprite.drawRect(0, 0, window.innerWidth, window.innerHeight);
+      bgSprite.endFill();
+      bgSprite.x = 0;
+      bgSprite.y = 0;
+
+      pixiApp.stage.addChild(bgSprite);
+
+      const containerCards = new PIXI.Container();
+
+      const cardMask = new PIXI.Graphics();
+      cardMask.beginFill(0x000000);
+      cardMask.drawRoundedRect(27, 43, 267, 424, 10);
+      cardMask.endFill();
+      cardMask.x = 27;
+      cardMask.y = 43;
+
+      const soil0 = new PIXI.extras.TilingSprite(
         resources.soil.texture, window.innerWidth, window.innerHeight
       );
+      soil0.x = 27; soil0.y = 0; soil0.anchor.x = 0; soil0.anchor.y = 0;
+      soil0.mask = cardMask;
+      containerCards.addChild(soil0);
+      const soil1 = new PIXI.extras.TilingSprite(
+        resources.soil.texture, window.innerWidth, window.innerHeight
+      );
+      soil1.x = -window.innerWidth; soil1.y = 0;
+      soil1.anchor.x = 0; soil1.anchor.y = 0;
+      soil1.mask = cardMask;
+      containerCards.addChild(soil1);
 
-      soil.x = 0;
-      soil.y = 0;
-
-      soil.anchor.x = 0;
-      soil.anchor.y = 0;
-
-      pixiApp.stage.addChild(soil);
+      pixiApp.stage.addChild(containerCards);
     });
 
     this.navLeftClick = this.navLeftClick.bind(this);
@@ -70,7 +92,7 @@ class App extends Component {
   getCardStyle(thisIndex) {
     let position = (this.state.spotCurrent - thisIndex) * -1;
     let cardStyle = {
-      transform: ('translateX(' + (110 * position) + '%)')
+      transform: ('translateX(' + (100 * position) + 'vw)')
     };
     return cardStyle;
   }

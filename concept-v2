@@ -151,21 +151,6 @@ Main game loop
 - Clicking seed option plants seed
 - Clicking experimental garden brings up seed options
 
-Brainstorming
-~~~~~~~~~~~~~
-A family:
-Scientific name, common name, list of possible traits, list of identified cultivars, method for turning stats into quantity/quality/visual appearance/name/description
-A cultivar:
-Name, list of definitional stats, optional bonus
-A trait:
-Name, number of loci, method for turning loci into stats
-A seed:
-Name, description, cultivar, genome, method of breeding with another seed
-A field:
-Cold vs hot, wet vs dry, pest vs none, disease vs none, nitrogen level, increased pollination
-
-Randomly generated seeds come from family-specific lists of trait numerators with a count of traits to be truly randomly generated. They are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
-
 Differentiating cultivars
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 Poaceae:
@@ -184,6 +169,24 @@ Poaceae:
 - Corn = no floret, no spikes, leafy outer husks, many seeds in single bunch
 - Wheat-types = no floret, yes spikes, no outer husks, few seeds in bunch
 
+Pixi.js drawing
+~~~~~~~~~~~~~~~
+
+
+Brainstorming
+~~~~~~~~~~~~~
+A family:
+Scientific name, common name, list of possible traits, list of identified cultivars, method for turning stats into quantity/quality/visual appearance/name/description
+A cultivar:
+Name, list of definitional stats, optional bonus
+A trait:
+Name, number of loci, method for turning loci into stats
+A seed:
+Name, description, cultivar, genome, method of breeding with another seed
+A field:
+Cold vs hot, wet vs dry, pest vs none, disease vs none, nitrogen level, increased pollination
+
+Randomly generated seeds come from family-specific lists of trait numerators with a count of traits to be truly randomly generated. They are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
@@ -200,8 +203,8 @@ X Classification of seeds into cultivars
 X Small number of additional traits
 X Basic plant naming
 X Plant descriptive adjectives based on notable traits
-_ Random generation of seeds based on cultivar
 _ Rudimentary pixi.js pixel graphics
+_ Random generation of seeds based on cultivar
 _ Additional traits
 _ Pixel graphics linked with traits
 _ Environmental effects from fields
