@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as PIXI from 'pixi.js';
 
 import { ageAllSeeds, harvestSeed, plantSeed } from '../actions/field';
 import FieldCard from './field_card';
 import HomeCard from './home_card';
-
-const pixiApp = new PIXI.Application({
-  width: window.innerWidth, height: window.innerHeight
-});
+import {pixiHandler} from '../instances/pixi/handler';
 
 const TIME_STEP = (0.25 * 1000);
 
@@ -25,43 +21,7 @@ class App extends Component {
       this.props.ageAllSeeds(this.props.fieldsState.fields);
     }, TIME_STEP);
 
-    document.getElementById('root').appendChild(pixiApp.view);
-    PIXI.loader.add('soil', './dist/images/soil.png')
-    .load((loader, resources) => {
-      const bgSprite = new PIXI.Graphics();
-      bgSprite.beginFill(0x277249);
-      bgSprite.drawRect(0, 0, window.innerWidth, window.innerHeight);
-      bgSprite.endFill();
-      bgSprite.x = 0;
-      bgSprite.y = 0;
-
-      pixiApp.stage.addChild(bgSprite);
-
-      const containerCards = new PIXI.Container();
-
-      const cardMask = new PIXI.Graphics();
-      cardMask.beginFill(0x000000);
-      cardMask.drawRoundedRect(27, 43, 267, 424, 10);
-      cardMask.endFill();
-      cardMask.x = 27;
-      cardMask.y = 43;
-
-      const soil0 = new PIXI.extras.TilingSprite(
-        resources.soil.texture, window.innerWidth, window.innerHeight
-      );
-      soil0.x = 27; soil0.y = 0; soil0.anchor.x = 0; soil0.anchor.y = 0;
-      soil0.mask = cardMask;
-      containerCards.addChild(soil0);
-      const soil1 = new PIXI.extras.TilingSprite(
-        resources.soil.texture, window.innerWidth, window.innerHeight
-      );
-      soil1.x = -window.innerWidth; soil1.y = 0;
-      soil1.anchor.x = 0; soil1.anchor.y = 0;
-      soil1.mask = cardMask;
-      containerCards.addChild(soil1);
-
-      pixiApp.stage.addChild(containerCards);
-    });
+    pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
 
     this.navLeftClick = this.navLeftClick.bind(this);
     this.navRightClick = this.navRightClick.bind(this);
@@ -91,8 +51,9 @@ class App extends Component {
 
   getCardStyle(thisIndex) {
     let position = (this.state.spotCurrent - thisIndex) * -1;
+
     let cardStyle = {
-      transform: ('translateX(' + (100 * position) + 'vw)')
+      transform: ('translateX(calc(' + (110 * position) + '%)')
     };
     return cardStyle;
   }

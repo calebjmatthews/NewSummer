@@ -171,7 +171,12 @@ Poaceae:
 
 Pixi.js drawing
 ~~~~~~~~~~~~~~~
-
+- Class that stores the pixi app and container objects and performs baseline operations on them
+- In stage, we have a sprite for the background, and a sprite container that holds each field card
+- Function to scroll from card to card
+- Function to plant a seed, and therefore draw the seed texture
+- Function to age up a seed into the next texture in its array
+- Function to remove a sprite once the plant has been harvested
 
 Brainstorming
 ~~~~~~~~~~~~~
@@ -196,7 +201,7 @@ X Seed genome and stat calculation
 X Plant harvesting
 X Seed planting
 X Separate field cards/seed choices into separate containers
-X Scroll between pages in react app
+X Scroll between pages in react a
 X Purchase additional fields
 X Plant breeding in experimental garden
 X Classification of seeds into cultivars
