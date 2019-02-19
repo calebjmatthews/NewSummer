@@ -1,7 +1,5 @@
 import * as PIXI from 'pixi.js';
 
-import
-
 export default class PixiHandler {
   constructor() {
     this.pixiApp = null;
