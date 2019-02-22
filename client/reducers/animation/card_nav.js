@@ -1,4 +1,5 @@
 import {
+  INIT_NAV_CARDS,
   CARD_NAV_START_RIGHT,
   CARD_NAV_START_LEFT,
   CARD_NAV_STEP,
@@ -10,6 +11,8 @@ export default function
     animating: false,
     direction: 'right',
     progress: 0,
+    spotCurrent: 1,
+    cardAnchor: 0,
     cardStartingPositions: [],
     cardEndingPositions: [],
     cardCurrentPositions: [],
@@ -17,20 +20,21 @@ export default function
   },
     action = null) {
 	switch(action.type) {
+    case INIT_NAV_CARDS:
+      return Object.assign(
+        {}, state, { cardAnchor: action.cardAnchor });
     case CARD_NAV_START_RIGHT:
       return Object.assign(
         {}, state, { animating: true, direction: 'right', progress: 0,
           cardStartingPositions: action.cardStartingPositions,
           cardCurrentPositions: action.cardStartingPositions,
-          cardEndingPositions: action.cardEndingPositions,
-          cardAnchor: action.cardAnchor });
+          cardEndingPositions: action.cardEndingPositions });
     case CARD_NAV_START_LEFT:
       return Object.assign(
         {}, state, { animating: true, direction: 'left', progress: 0,
           cardStartingPositions: action.cardStartingPositions,
           cardCurrentPositions: action.cardStartingPositions,
-          cardEndingPositions: action.cardEndingPositions,
-          cardAnchor: action.cardAnchor });
+          cardEndingPositions: action.cardEndingPositions });
     case CARD_NAV_STEP:
       return Object.assign(
         {}, state, { progress: action.progress,
@@ -38,7 +42,7 @@ export default function
           cardCurrentOffsets: action.cardCurrentOffsets });
     case CARD_NAV_FINISHED:
       return Object.assign(
-        {}, state, { animating: false });
+        {}, state, { animating: false, spotCurrent: action.spotCurrent });
 		default:
 			return state;
 	}
