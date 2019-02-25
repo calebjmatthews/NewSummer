@@ -27,7 +27,8 @@ class App extends Component {
       let pos = eles[index].getBoundingClientRect();
       poss.push(pos);
     });
-    this.props.initNavCards(poss[this.props.cardNavState.spotCurrent].x);
+    this.props.initNavCards(poss[this.props.cardNavState.spotCurrent].x,
+      this.props.cardNavState.spotCurrent);
 
     pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
 
@@ -75,11 +76,12 @@ class App extends Component {
             onClick={() => this.navRightClick()}>
             <div>{'>'}</div>
           </div>
-          <HomeCard transStyle={this.getCardStyle(0)} />
+          <HomeCard transStyle={this.props.cardNavState.cardStyles[0]} />
           {this.props.fieldsState.fields.getAll().map((field) => {
             return (
               <FieldCard key={field.id} field={field}
-                transStyle={this.getCardStyle(field.index+1)} />
+                transStyle={this.props.cardNavState.cardStyles[field.index+1]}
+                />
             );
           })}
         </div>

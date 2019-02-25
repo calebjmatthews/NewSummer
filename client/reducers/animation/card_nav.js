@@ -16,13 +16,14 @@ export default function
     cardStartingPositions: [],
     cardEndingPositions: [],
     cardCurrentPositions: [],
-    cardCurrentOffsets: []
+    cardStyles: []
   },
     action = null) {
 	switch(action.type) {
     case INIT_NAV_CARDS:
       return Object.assign(
-        {}, state, { cardAnchor: action.cardAnchor });
+        {}, state, { cardAnchor: action.cardAnchor,
+          cardStyles: action.cardStyles });
     case CARD_NAV_START_RIGHT:
       return Object.assign(
         {}, state, { animating: true, direction: 'right', progress: 0,
@@ -39,10 +40,11 @@ export default function
       return Object.assign(
         {}, state, { progress: action.progress,
           cardCurrentPositions: action.cardCurrentPositions,
-          cardCurrentOffsets: action.cardCurrentOffsets });
+          cardStyles: action.cardStyles });
     case CARD_NAV_FINISHED:
       return Object.assign(
-        {}, state, { animating: false, spotCurrent: action.spotCurrent });
+        {}, state, { animating: false, spotCurrent: action.spotCurrent,
+          cardStyles: action.cardStyles });
 		default:
 			return state;
 	}

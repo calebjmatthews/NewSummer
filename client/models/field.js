@@ -33,7 +33,6 @@ export default class Field {
       / this.seedPlanted.stats[GROWING_TIME].value) >= 1);
   }
   getSeedsName() {
-    console.log('getSeedsName called.');
     if (this.seedPlanted) {
       return 'Name: ' + this.seedPlanted.name;
     }

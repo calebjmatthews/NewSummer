@@ -2,10 +2,25 @@ import {FRAMES_PER_SECOND, CARD_NAV_DURATION} from '../../constants';
 import {pixiHandler} from '../../instances/pixi/handler';
 
 export const INIT_NAV_CARDS = 'INIT_NAV_CARDS';
-export function initNavCards(cardAnchor) {
+export function initNavCards(cardAnchor, spotCurrent) {
+  let numCards = 0;
+  let eles = document.getElementsByClassName('game-card');
+  Object.keys(eles).map(() => {
+    numCards++;
+  })
+
+  let cardStyles = [];
+  for (let index = 0; index < numCards; index++) {
+    let position = (spotCurrent - index) * -1;
+    cardStyles[index] = {
+      transform: ('translateX(' + (110 * position) + '%)')
+    };
+  }
+
   return {
     type: INIT_NAV_CARDS,
-    cardAnchor: cardAnchor
+    cardAnchor: cardAnchor,
+    cardStyles: cardStyles
   }
 }
 
@@ -76,26 +91,29 @@ export function cardNavStep(s) {
   if (progress > 1) { progress = 1; }
   if (s.progress < 1) {
     let cardCurrentPositions = [];
-    let cardCurrentOffsets = [];
+    let cardStyles = [];
     let cVel = Math.round(((
       (s.cardStartingPositions[0] - s.cardEndingPositions[0])
       / timeSteps) / 0.6353102368) * Math.sin(Math.PI*progress));
     for (let index = 0; index < s.cardStartingPositions.length; index++) {
       cardCurrentPositions[index] = s.cardCurrentPositions[index] - cVel;
-      cardCurrentOffsets[index] =
-        -(s.cardAnchor - cardCurrentPositions[index]);
+      cardStyles[index] = {
+        transform: ('translateX('
+          + (-(s.cardAnchor - cardCurrentPositions[index])) + 'px)')
+      };
     }
-    pixiHandler.setContainerOffset(cardCurrentOffsets[1]);
+    pixiHandler.setContainerOffset(-(s.cardAnchor - cardCurrentPositions[1]));
     return {
       type: CARD_NAV_STEP,
       progress: progress,
       cardCurrentPositions: cardCurrentPositions,
-      cardCurrentOffsets: cardCurrentOffsets
+      cardStyles: cardStyles
     };
   }
 
   else {
     let newSpot = 0;
+
     if (s.direction == 'right') {
       if (s.spotCurrent <= (s.cardStartingPositions.length-2)) {
         newSpot = s.spotCurrent + 1;
@@ -109,9 +127,19 @@ export function cardNavStep(s) {
         newSpot = s.cardStartingPositions.length-1;
       }
     }
+
+    let cardStyles = [];
+    for (let index = 0; index < s.cardStartingPositions.length; index++) {
+      let position = (newSpot - index) * -1;
+      cardStyles[index] = {
+        transform: ('translateX(' + (110 * position) + '%)')
+      };
+    }
+
     return {
       type: CARD_NAV_FINISHED,
-      spotCurrent: newSpot
+      spotCurrent: newSpot,
+      cardStyles: cardStyles
     };
   }
 }
