@@ -6,24 +6,34 @@ export default class Field {
     this.index = index;
     this.name = name;
     this.seedPlanted = null;
-    this.seedAge = 0;
+    this.seedsAge = 0;
+    this.seedsName = 'Nothing planted';
+    this.seedsAgeLabel = '';
+    this.seedsState = '';
   }
   plantSeed(aSeed) {
     this.seedPlanted = aSeed;
+    this.seedsName = this.getSeedsName();
+    this.seedsAgeLabel = this.getSeedsAgeLabel();
+    this.seedsState = this.getSeedsState();
   }
   ageSeed() {
-    if (this.seedPlanted != null) {
-      this.seedAge += 0.25;
-      if (this.seedAge >= this.seedPlanted.stats[GROWING_TIME].value) {
-        this.seedAge = this.seedPlanted.stats[GROWING_TIME].value;
+    if (this.seedPlanted != null
+      && this.seedsAge < this.seedPlanted.stats[GROWING_TIME].value) {
+      this.seedsAge += 0.25;
+      this.seedsAgeLabel = this.getSeedsAgeLabel();
+      this.seedsState = this.getSeedsState();
+      if (this.seedsAge >= this.seedPlanted.stats[GROWING_TIME].value) {
+        this.seedsAge = this.seedPlanted.stats[GROWING_TIME].value;
       }
     }
   }
   seedIsMature() {
-    return ((this.seedAge
+    return ((this.seedsAge
       / this.seedPlanted.stats[GROWING_TIME].value) >= 1);
   }
-  getSeedName() {
+  getSeedsName() {
+    console.log('getSeedsName called.');
     if (this.seedPlanted) {
       return 'Name: ' + this.seedPlanted.name;
     }
@@ -31,9 +41,9 @@ export default class Field {
       return 'Nothing planted';
     }
   }
-  getSeedsAge() {
+  getSeedsAgeLabel() {
     if (this.seedPlanted) {
-      let age = parseFloat((this.seedAge
+      let age = parseFloat((this.seedsAge
         / this.seedPlanted.stats[GROWING_TIME].value) * 100).toFixed(2);
       return ('(' + age + '%)');
     }
@@ -44,7 +54,7 @@ export default class Field {
   getSeedsState() {
     if (this.seedPlanted) {
       let seedsState = '';
-      let growthNumber = Math.floor((this.seedAge
+      let growthNumber = Math.floor((this.seedsAge
         / this.seedPlanted.stats[GROWING_TIME].value)*5);
       switch (growthNumber) {
         case 0:
@@ -76,7 +86,9 @@ export default class Field {
   harvestSeed() {
     let seedQuality = this.seedPlanted.stats[SEED_QUALITY].value;
     this.seedPlanted = null;
-    this.seedAge = 0;
+    this.seedsAge = 0;
+    this.seedsName = this.getSeedsName();
+    this.seedsState = this.getSeedsState();
     return seedQuality;
   }
 }

@@ -59,11 +59,11 @@ class FieldCard extends Component {
         <div className="game-card" style={this.props.transStyle}
           onClick={() => this.fieldCardClick()}>
           <div>
-            {this.props.field.getSeedName()}
+            {this.props.field.seedsName}
           </div>
           <div>
-            {this.props.field.getSeedsState() + ' '}
-            {this.props.field.getSeedsAge()}
+            {this.props.field.seedsState + ' '}
+            {this.props.field.seedsAgeLabel}
           </div>
         </div>
       )

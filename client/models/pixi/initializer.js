@@ -12,6 +12,7 @@ export default class PixiInitializer {
 
     document.getElementById('root').appendChild(s.pixiApp.view);
     PIXI.loader.add('soil', './dist/images/soil.png')
+    .add('Corn_Stage_7', './dist/images/Corn_Stage_7.png')
     .load((loader, resources) => {
       s.resources = resources;
       s.cardContainer = new PIXI.Container();
@@ -38,8 +39,6 @@ export default class PixiInitializer {
     soil.y = cSize.y;
     soil.anchor.x = 0; soil.anchor.y = 0;
     let mask = genCardMask(offset);
-    console.log('mask');
-    console.log(mask);
     soil.mask = mask;
     soil.addChild(mask);
     return soil;
@@ -54,5 +53,16 @@ export default class PixiInitializer {
       cardMask.endFill();
       return cardMask;
     }
+  }
+
+  drawPlant() {
+    let s = pixiStore;
+    let card = s.cardContainer.children[0];
+    const plant = new PIXI.Sprite(s.resources.Corn_Stage_7.texture);
+    plant.x = (card.width/2) - (plant.width/2);
+    plant.y = (card.height/2) - (plant.height/2);
+    card.addChild(plant);
+    console.log('s.cardContainer');
+    console.log(s.cardContainer);
   }
 }
