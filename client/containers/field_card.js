@@ -62,7 +62,6 @@ class FieldCard extends Component {
             {this.props.field.seedsName}
           </div>
           <div>
-            {this.props.field.seedsState + ' '}
             {this.props.field.seedsAgeLabel}
           </div>
         </div>
