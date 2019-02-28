@@ -28,8 +28,7 @@ export default class Seed {
     let cultivar = family.cultivars.getByProperty('name', cultivarName);
     let genome = [];
     family.traits.getAll().map((trait) => {
-      let minAndMax = {min: 0, max: 3};
-      // let minAndMax = getTraitMinAndMax(cultivar, trait);
+      let minAndMax = getTraitMinAndMax(cultivar, trait);
       let alleleIndexes = [];
       for (let alleleIndex = 0; alleleIndex < (trait.loci*2); alleleIndex++) {
         alleleIndexes.push(alleleIndex);
@@ -40,10 +39,10 @@ export default class Seed {
         alleles[alleleIndexes[index]] = true;
       }
       for (let index = minAndMax.min;
-        index < (minAndMax.min + minAndMax.max); index++) {
+        index < (minAndMax.min + (trait.loci*2 - minAndMax.max)); index++) {
         alleles[alleleIndexes[index]] = false;
       }
-      for (let index = (minAndMax.min + minAndMax.max);
+      for (let index = (minAndMax.min + (trait.loci*2 - minAndMax.max));
         index < (trait.loci*2); index++) {
         if (Math.random() > 0.5) { alleles[alleleIndexes[index]] = true; }
         else { alleles[alleleIndexes[index]] = false; }
@@ -55,16 +54,39 @@ export default class Seed {
       }
     });
     this.genome = genome;
-  }
 
-  getGeneByNameAndLocus(traitName, locusIndex) {
-    let matchingGene = null;
-    this.genome.map((gene) => {
-      if (gene.traitName == traitName && gene.locusIndex == locusIndex) {
-        matchingGene = gene;
+    function getTraitMinAndMax(cultivar, trait) {
+      let matchingTrait = null;
+      if (cultivar.traitsDefinitional != null) {
+        for (let index = 0; index < cultivar.traitsDefinitional.length;
+          index++) {
+          let traitDef = cultivar.traitsDefinitional[index];
+          if (traitDef.trait == trait.name) {
+            matchingTrait = traitDef;
+          }
+        }
       }
-    })
-    return matchingGene;
+
+      let min = 0;
+      let max = (trait.loci*2);
+      if (matchingTrait != null) {
+        if (matchingTrait.comparitor == 'equals') {
+          min = matchingTrait.values[0];
+          max = matchingTrait.values[0];
+        }
+        else if (matchingTrait.comparitor == 'less than') {
+          max = matchingTrait.values[0];
+        }
+        else if (matchingTrait.comparitor == 'greater than') {
+          min = matchingTrait.values[0];
+        }
+        else if (matchingTrait.comparitor == 'between') {
+          min = matchingTrait.values[0];
+          max = matchingTrait.values[1];
+        }
+      }
+      return {min: min, max: max};
+    }
   }
 
   determineTraitsFromGenome(genome) {
@@ -96,5 +118,14 @@ export default class Seed {
     })
     const newSeed = new Seed(this.familyName, null, newGenome);
     return newSeed;
+  }
+  getGeneByNameAndLocus(traitName, locusIndex) {
+    let matchingGene = null;
+    this.genome.map((gene) => {
+      if (gene.traitName == traitName && gene.locusIndex == locusIndex) {
+        matchingGene = gene;
+      }
+    })
+    return matchingGene;
   }
 }

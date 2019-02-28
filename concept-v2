@@ -215,7 +215,7 @@ X Pixi.js setup
 X Direct translation animation of card navigation
 X Optimization
 X Rudimentary pixi.js pixel graphics
-_ Random generation of seeds based on cultivar
+X Random generation of seeds based on cultivar
 _ Additional traits
 _ Bonus trait based on cultivar identity
 _ Pixel graphics linked with traits
