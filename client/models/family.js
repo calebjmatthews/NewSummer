@@ -1,4 +1,5 @@
 import TraitTotal from '../models/trait_total';
+import Gene from './gene';
 
 export default class Family {
   constructor(nameScientific, nameCommon, traits, stats, cultivars,
@@ -59,8 +60,9 @@ export default class Family {
   // The first cultivar in the list is the default, check all others for a
   //  match, with later matches overwriting those earlier
   determineCultivarNameFromTraits(traits) {
-    let cultivarName = this.cultivars[0].name;
-    this.cultivars.slice(1, this.cultivars.length).map((cultivar) => {
+    let cultivars = this.cultivars.getAll();
+    let cultivarName = cultivars[0].name;
+    cultivars.slice(1, cultivars.length).map((cultivar) => {
       if (cultivar.areTraitsMatch(traits)) {
         cultivarName = cultivar.name;
       }

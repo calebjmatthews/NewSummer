@@ -1,6 +1,7 @@
 import Cache from '../models/cache';
 import Family from '../models/family';
 import Stat from '../models/stat';
+import Seed from '../models/seed';
 
 import {seedSize, sweetness, chemicalDefense} from './traits';
 import {SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE, DISEASE_RESISTANCE}
@@ -24,7 +25,7 @@ const statCache = new Cache([
   ]),
   new Stat(PEST_RESISTANCE, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Vulnerable', bonus: 0},
-    {comparitor: 'greater than', values: [350], adjective: 'Tough', bonus: 0}
+    {comparitor: 'greater than', values: [350], adjective: 'Hearty', bonus: 0}
   ]),
   new Stat(DISEASE_RESISTANCE, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Susceptible',
@@ -42,7 +43,7 @@ class Poaceae extends Family {
       'Grasses',
       traitCache,
       statCache,
-      [grain, wildGrass]
+      new Cache([grain, wildGrass])
     );
   }
 }

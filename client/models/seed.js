@@ -1,11 +1,18 @@
+import {shuffle} from '../utils';
 import {families} from '../instances/families';
 import Gene from '../models/gene';
 
 export default class Seed {
-  constructor(id, familyName, genome) {
+  constructor(familyName, givenCultivarName, genome = null) {
+    let id = Math.floor(Math.random() * 10000);
     this.id = id;
     this.familyName = familyName;
-    this.genome = genome;
+    if (genome == null) {
+      this.genomeFromCultivar(familyName, givenCultivarName);
+    }
+    else {
+      this.genome = genome;
+    }
 
     this.traitTotalDict = this.determineTraitsFromGenome(this.genome);
     this.stats = this.determineStatsFromTraits(this.traitTotalDict);
@@ -14,6 +21,40 @@ export default class Seed {
     this.adjectives =
       this.determineAdjectivesFromStats(this.stats, this.cultivarName);
     this.name = this.adjectives[0].word + ' ' + this.cultivarName;
+  }
+
+  genomeFromCultivar(familyName, cultivarName) {
+    let family = families.getByProperty('nameScientific', familyName);
+    let cultivar = family.cultivars.getByProperty('name', cultivarName);
+    let genome = [];
+    family.traits.getAll().map((trait) => {
+      let minAndMax = {min: 0, max: 3};
+      // let minAndMax = getTraitMinAndMax(cultivar, trait);
+      let alleleIndexes = [];
+      for (let alleleIndex = 0; alleleIndex < (trait.loci*2); alleleIndex++) {
+        alleleIndexes.push(alleleIndex);
+      }
+      alleleIndexes = shuffle(alleleIndexes);
+      let alleles = [];
+      for (let index = 0; index < minAndMax.min; index++) {
+        alleles[alleleIndexes[index]] = true;
+      }
+      for (let index = minAndMax.min;
+        index < (minAndMax.min + minAndMax.max); index++) {
+        alleles[alleleIndexes[index]] = false;
+      }
+      for (let index = (minAndMax.min + minAndMax.max);
+        index < (trait.loci*2); index++) {
+        if (Math.random() > 0.5) { alleles[alleleIndexes[index]] = true; }
+        else { alleles[alleleIndexes[index]] = false; }
+      }
+
+      for (let index = 0; index < trait.loci; index++) {
+        genome.push(new Gene(trait.name, index,
+          [alleles[index], alleles[index+1]]));
+      }
+    });
+    this.genome = genome;
   }
 
   getGeneByNameAndLocus(traitName, locusIndex) {
@@ -53,11 +94,7 @@ export default class Seed {
           otherGene.genotype[Math.floor(Math.random()*2)]]);
       newGenome.push(newGene);
     })
-    const newSeed = new Seed(
-      Math.floor(Math.random() * 10000),
-      this.familyName,
-      newGenome
-    );
+    const newSeed = new Seed(this.familyName, null, newGenome);
     return newSeed;
   }
 }
