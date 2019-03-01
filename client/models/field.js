@@ -64,7 +64,6 @@ export default class Field {
       }
     }
     else {
-      console.log('checkSeedsState, before setPlantAppearance')
       pixiHandler.setPlantAppearance(this.index, null);
     }
   }
@@ -76,7 +75,6 @@ export default class Field {
     this.seedsName = this.getSeedsName();
     this.seedsAgeLabel = '';
     this.seedsGrowthStage = null;
-    console.log('harvestSeed, before checkSeedsState')
     this.checkSeedsState();
     return seedQuality;
   }

@@ -15,6 +15,5 @@ export default class PixiPlants {
       plant.y = (card.height/2) - (plant.height/2);
       card.addChild(plant);
     }
-    console.log('inside setPlantAppearance')
   }
 }
