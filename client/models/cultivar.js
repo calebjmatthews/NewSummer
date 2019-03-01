@@ -18,6 +18,16 @@ export default class Cultivar {
           isMatch = false;
         }
       }
+      else if (defTrait.comparitor == 'greater than') {
+        if (traits[defTrait.trait].numerator <= defTrait.values[0]) {
+          isMatch = false;
+        }
+      }
+      else if (defTrait.comparitor == 'equal to') {
+        if (traits[defTrait.trait].numerator != defTrait.values[0]) {
+          isMatch = false;
+        }
+      }
     })
     return isMatch;
   }

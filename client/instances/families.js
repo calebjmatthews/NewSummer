@@ -7,7 +7,7 @@ import {seedCovering, branching, stemFocus, seedSize, sweetness,
   chemicalDefense} from './traits';
 import {SEED_QUANTITY, SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE,
   DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS} from './stats';
-import {wildGrass, grain} from './cultivars';
+import {grain, cane, wildCane, wildGrass} from './cultivars';
 
 const traitCache = new Cache([
   seedCovering, branching, stemFocus, seedSize, sweetness, chemicalDefense
@@ -60,7 +60,7 @@ class Poaceae extends Family {
       'Grasses',
       traitCache,
       statCache,
-      new Cache([grain, wildGrass])
+      new Cache([grain, cane, wildCane, wildGrass])
     );
   }
 }

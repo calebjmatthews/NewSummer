@@ -70,7 +70,7 @@ export default class Seed {
       let min = 0;
       let max = (trait.loci*2);
       if (matchingTrait != null) {
-        if (matchingTrait.comparitor == 'equals') {
+        if (matchingTrait.comparitor == 'equal to') {
           min = matchingTrait.values[0];
           max = matchingTrait.values[0];
         }
