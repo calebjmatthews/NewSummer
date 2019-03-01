@@ -3,6 +3,8 @@ export default class Stat {
     this.name = name;
     this.defaultValue = defaultValue;
     this.value = defaultValue;
+    console.log('adjectiveDefinitions');
+    console.log(adjectiveDefinitions);
     this.adjectiveDefinitions = adjectiveDefinitions.slice();
   }
 }

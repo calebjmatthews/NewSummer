@@ -166,8 +166,19 @@ Poaceae:
 	- Sugar Cane: Cane investment
 	- Bamboo: Cane investment
 
-- Corn = no floret, no spikes, leafy outer husks, many seeds in single bunch
-- Wheat-types = no floret, yes spikes, no outer husks, few seeds in bunch
+- Definitional morphology features: covering (husk, floret, or hull), branching, seed size, seeds throughout, final plant size stat
+					Crn	Wht	Oat	Ric	Mlt	Srg	Rye	Bmb	Sug
+Husk			1		0		0		0		0		0		0		0		0
+Floret		0		0		1		1		0		0		0		1		0
+Hull			0		1		0		0		1		1		1		0		1
+Branching	0		0		0		2		0		2		0		0		2
+Seed qty	4		1		0		1		2		1		0		0		0
+Stem foc	0		0		0		0		0		0		0		1		1
+Final sz	4		1		0		3		2		3		1		1		2
+
+- Other morphology features: height, thickness, seeds throughout, density
+- Seed capacity calculated from height and thickness; if a plant is not big enough, it can't support a high quantity of seeds
+- Plant size is calculated from branching, seed quantity, stem focus, and stem thickness. Visual/functional density of plants comes from the density trait relative to this size stat
 
 Pixi.js drawing
 ~~~~~~~~~~~~~~~

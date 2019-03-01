@@ -3,13 +3,23 @@ import Family from '../models/family';
 import Stat from '../models/stat';
 import Seed from '../models/seed';
 
-import {seedSize, sweetness, chemicalDefense} from './traits';
-import {SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE, DISEASE_RESISTANCE}
-  from './stats';
+import {seedCovering, branching, stemFocus, seedSize, sweetness,
+  chemicalDefense} from './traits';
+import {SEED_QUANTITY, SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE,
+  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS} from './stats';
 import {wildGrass, grain} from './cultivars';
 
-const traitCache = new Cache([seedSize, sweetness, chemicalDefense]);
+const traitCache = new Cache([
+  seedCovering, branching, stemFocus, seedSize, sweetness, chemicalDefense
+]);
 const statCache = new Cache([
+  new Stat(SEED_QUANTITY, 100, [
+    {comparitor: 'less than', values: [90], adjective: 'Thin', bonus: 0},
+    {comparitor: 'greater than', values: [180], adjective: 'Plentiful',
+      bonus: 0},
+    {comparitor: 'greater than', values: [220], adjective: 'Abundant',
+      bonus: 0.5}
+  ]),
   new Stat(SEED_QUALITY, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Shabby', bonus: 0},
     {comparitor: 'greater than', values: [180], adjective: 'Appetizing',
@@ -25,14 +35,21 @@ const statCache = new Cache([
   ]),
   new Stat(PEST_RESISTANCE, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Vulnerable', bonus: 0},
-    {comparitor: 'greater than', values: [350], adjective: 'Hearty', bonus: 0}
+    {comparitor: 'greater than', values: [120], adjective: 'Hearty', bonus: 0}
   ]),
   new Stat(DISEASE_RESISTANCE, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Susceptible',
       bonus: 0},
-    {comparitor: 'greater than', values: [350], adjective: 'Resistant',
+    {comparitor: 'greater than', values: [120], adjective: 'Resistant',
       bonus: 0}
-  ])
+  ]),
+  new Stat(NITROGEN_REQUIREMENT, 100, [
+    {comparitor: 'less than', values: [90], adjective: 'Feisty',
+      bonus: 0},
+    {comparitor: 'greater than', values: [120], adjective: 'Difficult',
+      bonus: 0}
+  ]),
+  new Stat(STEM_THICKNESS, 100, [])
 ])
 
 export const POACEAE = 'Poaceae';
