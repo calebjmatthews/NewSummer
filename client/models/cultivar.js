@@ -1,5 +1,5 @@
 export default class Cultivar {
-  constructor(name, traitsDefinitional, bonus) {
+  constructor(name, traitsDefinitional, variation, bonus) {
     this.name = name;
     if (Array.isArray(traitsDefinitional)) {
       this.traitsDefinitional = traitsDefinitional.slice();
@@ -7,6 +7,7 @@ export default class Cultivar {
     else {
       this.traitsDefinitional = traitsDefinitional;
     }
+    this.variation = variation;
     this.bonus = bonus;
   }
 

@@ -53,6 +53,7 @@ export default class Seed {
           [alleles[index], alleles[index+1]]));
       }
     });
+    genome = variateGenome(genome, cultivar);
     this.genome = genome;
 
     function getTraitMinAndMax(cultivar, trait) {
@@ -86,6 +87,15 @@ export default class Seed {
         }
       }
       return {min: min, max: max};
+    }
+
+    function variateGenome(genome, cultivar) {
+      for (let loop = 0; loop < cultivar.variation; loop++) {
+        let index = Math.floor(Math.random() * genome.length);
+        let alleles = [(Math.random() > 0.5), (Math.random() > 0.5)];
+        genome[index].genotype = alleles;
+      }
+      return genome;
     }
   }
 

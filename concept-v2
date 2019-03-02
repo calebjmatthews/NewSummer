@@ -172,13 +172,13 @@ Husk			1		0		0		0		0		0		0		0		0
 Floret		0		0		1		1		0		0		0		1		0
 Hull			0		1		0		0		1		1		1		0		1
 Branching	0		0		0		2		0		2		0		0		2
-Seed qty	4		1		0		1		2		1		0		0		0
+Seed siz	4		1		0		1		2		1		0		0		0
 Stem foc	0		0		0		0		0		0		0		1		1
 Final sz	4		1		0		3		2		3		1		1		2
 
 - Other morphology features: height, thickness, seeds throughout, density
 - Seed capacity calculated from height and thickness; if a plant is not big enough, it can't support a high quantity of seeds
-- Plant size is calculated from branching, seed quantity, stem focus, and stem thickness. Visual/functional density of plants comes from the density trait relative to this size stat
+- Plant size is calculated from branching, seed size, stem focus, and stem thickness. Visual/functional density of plants comes from the density trait relative to this size stat
 
 Pixi.js drawing
 ~~~~~~~~~~~~~~~
@@ -227,8 +227,10 @@ X Direct translation animation of card navigation
 X Optimization
 X Rudimentary pixi.js pixel graphics
 X Random generation of seeds based on cultivar
-_ Additional traits
+X Additional traits
+_ Mutation property in cultivars
 _ Bonus trait based on cultivar identity
+_ Clean up and balance traits/cultivars
 _ Pixel graphics linked with traits
 _ Environmental effects from fields
 _ Seeds from trader
