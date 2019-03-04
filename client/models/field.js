@@ -22,7 +22,7 @@ export default class Field {
   ageSeed() {
     if (this.seedPlanted != null
       && this.seedsAge < this.seedPlanted.stats[GROWING_TIME].value) {
-      this.seedsAge += 10.25;
+      this.seedsAge += 0.25;
       this.seedsAgeLabel = this.getSeedsAgeLabel();
       this.checkSeedsState();
       if (this.seedsAge >= this.seedPlanted.stats[GROWING_TIME].value) {

@@ -6,7 +6,8 @@ import Seed from '../models/seed';
 import {seedCovering, branching, stemFocus, seedSize, sweetness,
   chemicalDefense} from './traits';
 import {SEED_QUANTITY, SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE,
-  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS} from './stats';
+  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_QUALITY}
+  from './stats';
 import {grain, cane, wildCane, wildGrass} from './cultivars';
 
 const traitCache = new Cache([

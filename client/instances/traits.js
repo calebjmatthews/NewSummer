@@ -1,6 +1,6 @@
 import Trait from '../models/trait';
 import {SEED_QUANTITY, SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE,
-  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS}
+  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_QUALITY}
   from './stats';
 
 // 2 = hull, 1 = floret, 0 = husk; husk requires 'aaaa' genotype

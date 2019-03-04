@@ -37,7 +37,19 @@ export default class Family {
     })
     return traitTotalDict;
   }
-  determineStatsFromTraits(traitTotalDict) {
+  // The first cultivar in the list is the default, check all others for a
+  //  match, with later matches overwriting those earlier
+  determineCultivarNameFromTraits(traits) {
+    let cultivars = this.cultivars.getAll();
+    let cultivarName = cultivars[0].name;
+    cultivars.slice(1, cultivars.length).map((cultivar) => {
+      if (cultivar.areTraitsMatch(traits)) {
+        cultivarName = cultivar.name;
+      }
+    })
+    return cultivarName;
+  }
+  determineStatsFromTraitsAndCultivar(traitTotalDict, cultivarName) {
     let statDict = {};
     const stats = this.stats.getAll();
     stats.map((stat) => {
@@ -54,20 +66,20 @@ export default class Family {
             (1+matchingTrait.statModifiers[index]);
         }
       }
-    })
-    return statDict;
-  }
-  // The first cultivar in the list is the default, check all others for a
-  //  match, with later matches overwriting those earlier
-  determineCultivarNameFromTraits(traits) {
-    let cultivars = this.cultivars.getAll();
-    let cultivarName = cultivars[0].name;
-    cultivars.slice(1, cultivars.length).map((cultivar) => {
-      if (cultivar.areTraitsMatch(traits)) {
-        cultivarName = cultivar.name;
+    });
+    const cultivar = this.cultivars.getByProperty('name', cultivarName);
+    if (cultivar.bonus != null) {
+      for (let index = 0; index < cultivar.bonus.statNames.length; index++) {
+        // Because bonuses are always treated as a dominant trait, express
+        //  effect twice by default
+        statDict[cultivar.bonus.statNames[index]].value *=
+          (1+cultivar.bonus.statModifiers[index]);
+        statDict[cultivar.bonus.statNames[index]].value *=
+          (1+cultivar.bonus.statModifiers[index]);
       }
-    })
-    return cultivarName;
+    }
+
+    return statDict;
   }
   determineAdjectivesFromStats(stats, cultivarName) {
     let adjectives = [{word: 'Common', extent: 0}];
