@@ -5,8 +5,8 @@ import Seed from '../models/seed';
 
 import {seedCovering, branching, stemFocus, seedSize, sweetness,
   chemicalDefense} from './traits';
-import {SEED_QUANTITY, SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE,
-  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_QUALITY}
+import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
+  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS}
   from './stats';
 import {grain, cane, wildCane, wildGrass} from './cultivars';
 
@@ -21,7 +21,7 @@ const statCache = new Cache([
     {comparitor: 'greater than', values: [220], adjective: 'Abundant',
       bonus: 0.5}
   ]),
-  new Stat(SEED_QUALITY, 100, [
+  new Stat(PLANT_QUALITY, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Shabby', bonus: 0},
     {comparitor: 'greater than', values: [180], adjective: 'Appetizing',
       bonus: 0},

@@ -1,6 +1,6 @@
 import Trait from '../models/trait';
-import {SEED_QUANTITY, SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE,
-  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_QUALITY}
+import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
+  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS}
   from './stats';
 
 // 2 = hull, 1 = floret, 0 = husk; husk requires 'aaaa' genotype
@@ -9,7 +9,7 @@ export const seedCovering = new Trait(
   SEED_COVERING,
   2,
   true,
-  [SEED_QUALITY, NITROGEN_REQUIREMENT],
+  [PLANT_QUALITY, NITROGEN_REQUIREMENT],
   [-0.1, -0.1]
 );
 
@@ -27,7 +27,7 @@ export const stemFocus = new Trait(
   STEM_FOCUS,
   1,
   true,
-  [SEED_QUALITY, SEED_QUANTITY, STEM_THICKNESS, PEST_RESISTANCE],
+  [PLANT_QUALITY, SEED_QUANTITY, STEM_THICKNESS, PEST_RESISTANCE],
   [-1, -1, 2, 0.4]
 )
 
@@ -45,7 +45,7 @@ export const sweetness = new Trait(
   SWEETNESS,
   2,
   false,
-  [SEED_QUALITY, GROWING_TIME, PEST_RESISTANCE],
+  [PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE],
   [0.1, 0.01, -0.025]
 )
 
@@ -54,6 +54,6 @@ export const chemicalDefense = new Trait(
   CHEMICAL_DEFENSE,
   2,
   false,
-  [PEST_RESISTANCE, DISEASE_RESISTANCE, SEED_QUALITY, GROWING_TIME],
+  [PEST_RESISTANCE, DISEASE_RESISTANCE, PLANT_QUALITY, GROWING_TIME],
   [0.2, 0.1, -0.01, 0.01]
 )

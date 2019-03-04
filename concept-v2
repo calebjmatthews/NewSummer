@@ -229,9 +229,11 @@ X Rudimentary pixi.js pixel graphics
 X Random generation of seeds based on cultivar
 X Additional traits
 X Variation property in cultivars
-_ Bonus trait based on cultivar identity
+X Bonus trait based on cultivar identity
 _ Clean up and balance traits/cultivars
+_ Descriptive UI
+_ Data saving in cookies
 _ Pixel graphics linked with traits
+_ Pixel graphics for different cultivars
 _ Environmental effects from fields
 _ Seeds from trader
-_ Pixel graphics for different cultivars

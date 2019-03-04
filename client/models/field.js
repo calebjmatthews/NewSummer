@@ -1,4 +1,4 @@
-import {SEED_QUALITY, GROWING_TIME} from '../instances/stats';
+import {PLANT_QUALITY, GROWING_TIME} from '../instances/stats';
 import {pixiHandler} from '../instances/pixi/handler';
 
 export default class Field {
@@ -69,7 +69,7 @@ export default class Field {
   }
 
   harvestSeed() {
-    let seedQuality = this.seedPlanted.stats[SEED_QUALITY].value;
+    let seedQuality = this.seedPlanted.stats[PLANT_QUALITY].value;
     this.seedPlanted = null;
     this.seedsAge = 0;
     this.seedsName = this.getSeedsName();
