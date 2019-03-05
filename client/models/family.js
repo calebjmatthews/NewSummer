@@ -17,12 +17,19 @@ export default class Family {
     let traitTotalDict = {}
     genome.map((gene) => {
       let genotypeCount = 0;
-      if (gene.genotype[0] == true && gene.genotype[1] == false
-       || gene.genotype[1] == true && gene.genotype[0] == false) {
-        genotypeCount = 1;
+      if (gene.completeDominance == true) {
+        if (gene.genotype[0] == true || gene.genotype[1] == true) {
+          genotypeCount = 2;
+        }
       }
-      else if (gene.genotype[0] == true && gene.genotype[1] == true) {
-        genotypeCount = 2;
+      else {
+        if (gene.genotype[0] == true && gene.genotype[1] == false
+         || gene.genotype[1] == true && gene.genotype[0] == false) {
+          genotypeCount = 1;
+        }
+        else if (gene.genotype[0] == true && gene.genotype[1] == true) {
+          genotypeCount = 2;
+        }
       }
 
       const matchingTrait =

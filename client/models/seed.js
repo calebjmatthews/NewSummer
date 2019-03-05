@@ -51,7 +51,7 @@ export default class Seed {
       }
 
       for (let index = 0; index < trait.loci; index++) {
-        genome.push(new Gene(trait.name, index,
+        genome.push(new Gene(trait.name, trait.completeDominance, index,
           [alleles[index], alleles[index+1]]));
       }
     });
@@ -111,7 +111,7 @@ export default class Seed {
   }
   determineStatsFromTraitsAndCultivar(traitTotalDict) {
     const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineStatsFromTraitsAndCultivar(traitTotalDict, 
+    return family.determineStatsFromTraitsAndCultivar(traitTotalDict,
       this.cultivarName);
   }
   determineAdjectivesFromStats(stats, cultivarName) {
