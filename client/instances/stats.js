@@ -5,3 +5,6 @@ export const PEST_RESISTANCE = 'Pest Resistance';
 export const DISEASE_RESISTANCE = 'Disease Resistance';
 export const NITROGEN_REQUIREMENT = 'Nitrogen Requirement';
 export const STEM_THICKNESS = 'Stem Thickness';
+export const STEM_HEIGHT = 'Stem Height';
+export const TEMP_TOLERANCE = 'Temperature Tolerance';
+export const MOIS_TOLERANCE = 'Moisture Tolerance';

@@ -4,14 +4,14 @@ import Stat from '../models/stat';
 import Seed from '../models/seed';
 
 import {seedCovering, branching, stemFocus, seedSize, sweetness,
-  chemicalDefense} from './traits';
+  bitterness} from './traits';
 import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
   DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS}
   from './stats';
 import {grain, cane, wildCane, wildGrass} from './cultivars';
 
 const traitCache = new Cache([
-  seedCovering, branching, stemFocus, seedSize, sweetness, chemicalDefense
+  seedCovering, branching, stemFocus, seedSize, sweetness, bitterness
 ]);
 const statCache = new Cache([
   new Stat(SEED_QUANTITY, 100, [
