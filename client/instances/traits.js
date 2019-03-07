@@ -1,6 +1,6 @@
 import Trait from '../models/trait';
 import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
-  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_HEIGHT,
+  DISEASE_RESISTANCE, STEM_THICKNESS, STEM_HEIGHT, NITROGEN_REQUIREMENT,
   TEMP_TOLERANCE, MOIS_TOLERANCE} from './stats';
 
 // 2 = hull, 1 = floret, 0 = husk; husk requires 'aaaa' genotype
@@ -40,7 +40,6 @@ export const seedSize = new Trait(
   [0.175, 0.1]
 );
 
-export const TEMP_TOLERANCE = 'Temperature Tolerance';
 export const tempTolerance = new Trait(
   TEMP_TOLERANCE,
   2,
@@ -49,7 +48,6 @@ export const tempTolerance = new Trait(
   [0.5]
 );
 
-export const MOIS_TOLERANCE = 'Moisture Tolerance';
 export const moisTolerance = new Trait(
   MOIS_TOLERANCE,
   2,
@@ -58,16 +56,15 @@ export const moisTolerance = new Trait(
   [0.5]
 );
 
-export const GROWING_TIME = 'Growing Time';
-export const growingTime = new Trait(
-  GROWING_TIME,
-  3
+export const GROWTH_SPEED = 'Growth Speed';
+export const growthSpeed = new Trait(
+  GROWTH_SPEED,
+  3,
   false,
   [GROWING_TIME, SEED_QUANTITY, NITROGEN_REQUIREMENT],
   [-0.2, -0.075, 0.125]
 )
 
-export const NITROGEN_REQUIREMENT = 'Nitrogen Requirement';
 export const nitrogenRequirement = new Trait(
   NITROGEN_REQUIREMENT,
   3,
@@ -85,7 +82,6 @@ export const toughness = new Trait(
   [0.2, 0.175, 0.1, 0.05]
 );
 
-export const STEM_HEIGHT = 'Stem Height';
 export const stemHeight = new Trait(
   STEM_HEIGHT,
   3,
@@ -94,9 +90,9 @@ export const stemHeight = new Trait(
   [0.3, 0.075]
 );
 
-export const SEEDS_THROUGHOUT = 'Seeds Throughout';
-export const seedsThroughout = new Trait(
-  SEEDS_THROUGHOUT,
+export const SEEDS_ON_TOP = 'Seeds On Top';
+export const seedsOnTop = new Trait(
+  SEEDS_ON_TOP,
   1,
   true,
   [SEED_QUANTITY, GROWING_TIME, NITROGEN_REQUIREMENT],

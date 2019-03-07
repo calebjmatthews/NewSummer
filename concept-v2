@@ -58,7 +58,7 @@ Cultivars:
 Traits:
 	- Seed morphology: Exact shape that seed toughness takes, plants with low to no seed toughness will ignore this trait; results are: seed heads, florets, fox tails, ears
 	- Carbon fixation 4: Alternate photosynthesis strategy, rewards high light and high fertility conditions
-	- Chemical defense: Can change flavor of friut or crop, between bitter, spicy, or sour; if too intense the crop will be inedible
+	- Chemical defense: Can change flavor of fruit or crop, between bitter, spicy, or sour; if too intense the crop will be inedible
 	- Stem investment: Leads to the crop being cane-like, seeds no longer are focus of harvesting
 	- Plant toughness: Requires small investment, protects against pests, decreases yield
 	- Plant size: Requires moderate investment, can support higher yields

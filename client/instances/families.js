@@ -3,15 +3,20 @@ import Family from '../models/family';
 import Stat from '../models/stat';
 import Seed from '../models/seed';
 
-import {seedCovering, branching, stemFocus, seedSize, sweetness,
-  bitterness} from './traits';
+import {seedCovering, branching, stemFocus, seedSize, tempTolerance,
+  moisTolerance, growthSpeed, nitrogenRequirement, toughness, stemHeight,
+  seedsOnTop, sweetness, starch, protein, bitterness, sourness, spiciness,
+  toxicity} from './traits';
 import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
-  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS}
-  from './stats';
+  DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_HEIGHT,
+  TEMP_TOLERANCE, MOIS_TOLERANCE} from './stats';
 import {grain, cane, wildCane, wildGrass} from './cultivars';
 
 const traitCache = new Cache([
-  seedCovering, branching, stemFocus, seedSize, sweetness, bitterness
+  seedCovering, branching, stemFocus, seedSize, tempTolerance,
+  moisTolerance, growthSpeed, nitrogenRequirement, toughness, stemHeight,
+  seedsOnTop, sweetness, starch, protein, bitterness, sourness, spiciness,
+  toxicity
 ]);
 const statCache = new Cache([
   new Stat(SEED_QUANTITY, 100, [
@@ -50,7 +55,10 @@ const statCache = new Cache([
     {comparitor: 'greater than', values: [120], adjective: 'Difficult',
       bonus: 0}
   ]),
-  new Stat(STEM_THICKNESS, 100, [])
+  new Stat(STEM_THICKNESS, 100, []),
+  new Stat(STEM_HEIGHT, 100, []),
+  new Stat(TEMP_TOLERANCE, 100, []),
+  new Stat(MOIS_TOLERANCE, 100, [])
 ])
 
 export const POACEAE = 'Poaceae';
