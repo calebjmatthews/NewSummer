@@ -1,8 +1,8 @@
 export default class Stat {
-  constructor(name, defaultValue, adjectiveDefinitions) {
+  constructor(name, defaultValue, definitions) {
     this.name = name;
     this.defaultValue = defaultValue;
     this.value = defaultValue;
-    this.adjectiveDefinitions = adjectiveDefinitions.slice();
+    this.definitions = definitions.slice();
   }
 }

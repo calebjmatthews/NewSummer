@@ -23,6 +23,10 @@ export default class Seed {
     this.adjectives =
       this.determineAdjectivesFromStats(this.stats, this.cultivarName);
     this.name = this.adjectives[0].word + ' ' + this.cultivarName;
+
+    this.idealValue = this.determineIdealValueFromStats(this.stats);
+    this.descriptions =
+      this.describeFromTraitsAndStats(this.traitTotalDict, this.stats);
   }
 
   genomeFromCultivar(familyName, cultivarName) {
@@ -117,6 +121,13 @@ export default class Seed {
   determineAdjectivesFromStats(stats, cultivarName) {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineAdjectivesFromStats(stats, cultivarName);
+  }
+  determineIdealValueFromStats(stats) {
+    return 100;
+  }
+  describeFromTraitsAndStats(traitTotalDict, stats) {
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.describeFromTraitsAndStats(traitTotalDict, stats);
   }
 
   breedWith(otherParent) {

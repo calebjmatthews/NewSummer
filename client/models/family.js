@@ -1,5 +1,8 @@
-import TraitTotal from '../models/trait_total';
+import TraitTotal from './trait_total';
 import Gene from './gene';
+
+import {SWEETNESS, STARCH, PROTEIN, BITTERNESS, SOURNESS, SPICINESS, TOXICITY}
+  from '../instances/traits';
 
 export default class Family {
   constructor(nameScientific, nameCommon, traits, stats, cultivars,
@@ -94,20 +97,20 @@ export default class Family {
     Object.keys(stats).map((statKey) => {
       const stat = stats[statKey];
       let newStat = null;
-      stat.adjectiveDefinitions.map((adjectiveDefinition) => {
-        if (adjectiveDefinition.comparitor == 'less than') {
-          if (stat.value < adjectiveDefinition.values[0]) {
-            const extent = calcExtent(stat, adjectiveDefinition);
+      stat.definitions.map((definition) => {
+        if (definition.comparitor == 'less than') {
+          if (stat.value < definition.values[0]) {
+            const extent = calcExtent(stat, definition);
             newStat = {
-              word: adjectiveDefinition.adjective, extent: extent
+              word: definition.adjective, extent: extent
             }
           }
         }
-        if (adjectiveDefinition.comparitor == 'greater than') {
-          if (stat.value > adjectiveDefinition.values[0]) {
-            const extent = calcExtent(stat, adjectiveDefinition);
+        if (definition.comparitor == 'greater than') {
+          if (stat.value > definition.values[0]) {
+            const extent = calcExtent(stat, definition);
             newStat = {
-              word: adjectiveDefinition.adjective, extent: extent
+              word: definition.adjective, extent: extent
             }
           }
         }
@@ -126,11 +129,77 @@ export default class Family {
     });
 
     return adjectives;
-
-    function calcExtent(stat, adjectiveDefinition) {
-      const defValue = adjectiveDefinition.values[0];
-      return ((Math.abs(stat.value - defValue)) / defValue)
-        + adjectiveDefinition.bonus;
-    }
   }
+  describeFromTraitsAndStats(traitTotalDict, stats) {
+    let descriptions = [];
+
+    Object.keys(stats).map((statKey) => {
+      const stat = stats[statKey];
+      let newDesc = null;
+      stat.definitions.map((definition) => {
+        if (definition.comparitor == 'less than') {
+          if (stat.value < definition.values[0]) {
+            const extent = calcExtent(stat, definition);
+            newDesc = {
+              title: stat.name,
+              description: definition.description,
+              iconType: definition.iconType, icon: definition.icon,
+              iconStyle: definition.iconStyle, extent: extent
+            }
+          }
+        }
+        if (definition.comparitor == 'greater than') {
+          if (stat.value > definition.values[0]) {
+            const extent = calcExtent(stat, definition);
+            newDesc = {
+              title: stat.name,
+              description: definition.description,
+              iconType: definition.iconType, icon: definition.icon,
+              iconStyle: definition.iconStyle, extent: extent
+            }
+          }
+        }
+      });
+      if (newDesc != null) {
+        descriptions.push(newDesc);
+      }
+    });
+
+    descriptions.sort((a, b) => {
+      return b.extent - a.extent;
+    });
+
+    let flavorTraits = [SWEETNESS, STARCH, PROTEIN, BITTERNESS, SOURNESS,
+      SPICINESS, TOXICITY];
+    let highFlavor = [];
+    let mediumFlavor = [];
+    let lowFlavor = [];
+    // 0 1,2 3,4 5,6
+    flavorTraits.map((traitName) => {
+      let frac = (traitTotalDict[traitName].numerator /
+        traitTotalDict[traitName].denominator)
+      switch (Math.round(frac * 3)) {
+        case 3:
+          highFlavor.push(traitName);
+        case 2:
+          mediumFlavor.push(traitName);
+        case 1:
+          lowFlavor.push(traitName);
+      }
+    });
+    console.log('highFlavor');
+    console.log(highFlavor);
+    console.log('mediumFlavor');
+    console.log(mediumFlavor);
+    console.log('lowFlavor');
+    console.log(lowFlavor);
+
+    return descriptions;
+  }
+}
+
+function calcExtent(stat, definition) {
+  const defValue = definition.values[0];
+  return ((Math.abs(stat.value - defValue)) / defValue)
+    + definition.bonus;
 }
