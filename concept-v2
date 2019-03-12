@@ -207,6 +207,25 @@ Randomly generated seeds come from family-specific lists of trait numerators wit
 Equation for sinusoidal movement is:
 Velocity = ((((endingPosition - startingPosition) / numberOfTimeSteps) / 0.6353102368) * sin(pi*percentCompletion)
 
+Descriptions:
+- Growth time stat in hours/minutes/seconds
+- Value in ideal conditions super-stat
+- Temperature tolerance/moisture tolerance traits when moderate or high
+- Flavor super-stat if anything other than none
+- Too much seed quantity for stem height/thickness super-stat
+- Pest resistance stat if moderate or high
+- Disease resistance stat if moderate or high
+- Nitrogen requirement stat if low or high
+
+Visual appearance:
+- Seed covering trait (unique pixel art for each phenotype)
+- Branching trait
+- Stem focus trait (bamboo-like stem)
+- Seed size stat (unique pixel art for 4? different size buckets)
+- Temperature tolerance/moisture tolerance traits to change red/blue balance and saturation of stem and foliage
+- Stem height trait
+- Seeds throughout trait
+
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
 X React boilerplate
@@ -215,7 +234,7 @@ X Seed genome and stat calculation
 X Plant harvesting
 X Seed planting
 X Separate field cards/seed choices into separate containers
-X Scroll between pages in react a
+X Scroll between pages in react
 X Purchase additional fields
 X Plant breeding in experimental garden
 X Classification of seeds into cultivars
@@ -230,7 +249,7 @@ X Random generation of seeds based on cultivar
 X Additional traits
 X Variation property in cultivars
 X Bonus trait based on cultivar identity
-_ Add more traits
+_ Even more traits
 _ Clean up and balance traits/cultivars
 _ Descriptive UI
 _ Data saving in cookies

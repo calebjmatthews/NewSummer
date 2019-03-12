@@ -33,11 +33,12 @@ export const wildCane = new Cultivar(WILD_CANE, [
   {trait: BITTERNESS, comparitor: 'less than', values: [3]},
   {trait: SOURNESS, comparitor: 'less than', values: [3]},
   {trait: SPICINESS, comparitor: 'less than', values: [3]},
-  {trait: STARCH, comparitor: 'less than', values: [3]}
+  {trait: STARCH, comparitor: 'less than', values: [3]},
+  {trait: TOXICITY, comparitor: 'equal to', values: [0]}
 ], 2, new Trait(
   (WILD_CANE + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME],
-  [-0.95, -0.9]
+  [-0.5, -0.4]
 ));
 
 export const WILD_GRASS = 'Wild Grass';
@@ -60,10 +61,11 @@ export const wildGrass = new Cultivar(WILD_GRASS, [
   {trait: SOURNESS, comparitor: 'less than', values: [3]},
   {trait: SPICINESS, comparitor: 'less than', values: [3]},
   {trait: STARCH, comparitor: 'less than', values: [3]},
+  {trait: TOXICITY, comparitor: 'equal to', values: [0]}
 ], 2, new Trait(
   (WILD_GRASS + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME],
-  [-0.95, -0.9]
+  [-0.5, -0.4]
 ));
 
 export const CORN = 'Corn';

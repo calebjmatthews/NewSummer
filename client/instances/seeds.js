@@ -5,5 +5,7 @@ import {POACEAE} from './families';
 import {WILD_GRASS} from './cultivars';
 
 export const seedDemo1 = new Seed(POACEAE, WILD_GRASS);
+console.log('seedDemo1');
+console.log(seedDemo1);
 
 export const seedDemo2 = new Seed(POACEAE, WILD_GRASS);

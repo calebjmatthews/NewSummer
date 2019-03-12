@@ -89,7 +89,7 @@ export default class Family {
     return statDict;
   }
   determineAdjectivesFromStats(stats, cultivarName) {
-    let adjectives = [{word: 'Common', extent: 0}];
+    let adjectives = [{word: 'Balanced', extent: 0}];
 
     Object.keys(stats).map((statKey) => {
       const stat = stats[statKey];
