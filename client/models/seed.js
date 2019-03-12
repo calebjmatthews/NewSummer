@@ -3,7 +3,7 @@ import {families} from '../instances/families';
 import Gene from '../models/gene';
 
 export default class Seed {
-  constructor(familyName, givenCultivarName, genome = null) {
+  constructor(familyName, givenCultivarName, genome = null, variation = 0) {
     let id = Math.floor(Math.random() * 10000);
     this.id = id;
     this.familyName = familyName;
@@ -29,7 +29,7 @@ export default class Seed {
       this.describeFromTraitsAndStats(this.traitTotalDict, this.stats);
   }
 
-  genomeFromCultivar(familyName, cultivarName) {
+  genomeFromCultivar(familyName, cultivarName, variation) {
     let family = families.getByProperty('nameScientific', familyName);
     let cultivar = family.cultivars.getByProperty('name', cultivarName);
     let genome = [];
@@ -59,7 +59,7 @@ export default class Seed {
           [alleles[index], alleles[index+1]]));
       }
     });
-    genome = variateGenome(genome, cultivar);
+    genome = variateGenome(genome, cultivar, variation);
     this.genome = genome;
 
     function getTraitMinAndMax(cultivar, trait) {
@@ -95,8 +95,8 @@ export default class Seed {
       return {min: min, max: max};
     }
 
-    function variateGenome(genome, cultivar) {
-      for (let loop = 0; loop < cultivar.variation; loop++) {
+    function variateGenome(genome, cultivar, variation) {
+      for (let loop = 0; loop < variation; loop++) {
         let index = Math.floor(Math.random() * genome.length);
         let alleles = [(Math.random() > 0.5), (Math.random() > 0.5)];
         genome[index].genotype = alleles;

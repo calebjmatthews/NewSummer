@@ -7,12 +7,12 @@ import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
   DISEASE_RESISTANCE, STEM_THICKNESS, STEM_HEIGHT, NITROGEN_REQUIREMENT, TEMP_TOLERANCE, MOIS_TOLERANCE} from './stats';
 
 export const GRAIN = 'Grain';
-export const grain = new Cultivar(GRAIN, null, 0, null);
+export const grain = new Cultivar(GRAIN, null, null);
 
 export const CANE = 'Cane';
 export const cane = new Cultivar(CANE, [
   {trait: STEM_FOCUS, comparitor: 'equal to', values: [0]}
-], 0, null)
+], null)
 
 export const WILD_CANE = 'Wild Cane';
 export const wildCane = new Cultivar(WILD_CANE, [
@@ -27,15 +27,15 @@ export const wildCane = new Cultivar(WILD_CANE, [
   {trait: TOUGHNESS, comparitor: 'between', values: [2, 4]},
   {trait: STEM_HEIGHT, comparitor: 'between', values: [2, 4]},
   {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
-  {trait: SWEETNESS, comparitor: 'less than', values: [3]},
-  {trait: STARCH, comparitor: 'less than', values: [3]},
-  {trait: PROTEIN, comparitor: 'less than', values: [3]},
+  {trait: SWEETNESS, comparitor: 'less than', values: [1]},
+  {trait: STARCH, comparitor: 'less than', values: [1]},
+  {trait: PROTEIN, comparitor: 'equal to', values: [0]},
   {trait: BITTERNESS, comparitor: 'less than', values: [3]},
-  {trait: SOURNESS, comparitor: 'less than', values: [3]},
-  {trait: SPICINESS, comparitor: 'less than', values: [3]},
-  {trait: STARCH, comparitor: 'less than', values: [3]},
+  {trait: SOURNESS, comparitor: 'equal to', values: [0]},
+  {trait: SPICINESS, comparitor: 'equal to', values: [0]},
+  {trait: STARCH, comparitor: 'equal to', values: [0]},
   {trait: TOXICITY, comparitor: 'equal to', values: [0]}
-], 2, new Trait(
+], new Trait(
   (WILD_CANE + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME],
   [-0.5, -0.4]
@@ -54,15 +54,15 @@ export const wildGrass = new Cultivar(WILD_GRASS, [
   {trait: TOUGHNESS, comparitor: 'between', values: [2, 4]},
   {trait: STEM_HEIGHT, comparitor: 'between', values: [2, 4]},
   {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
-  {trait: SWEETNESS, comparitor: 'less than', values: [3]},
-  {trait: STARCH, comparitor: 'less than', values: [3]},
-  {trait: PROTEIN, comparitor: 'less than', values: [3]},
+  {trait: SWEETNESS, comparitor: 'less than', values: [1]},
+  {trait: STARCH, comparitor: 'less than', values: [1]},
+  {trait: PROTEIN, comparitor: 'equal to', values: [0]},
   {trait: BITTERNESS, comparitor: 'less than', values: [3]},
-  {trait: SOURNESS, comparitor: 'less than', values: [3]},
-  {trait: SPICINESS, comparitor: 'less than', values: [3]},
-  {trait: STARCH, comparitor: 'less than', values: [3]},
+  {trait: SOURNESS, comparitor: 'equal to', values: [0]},
+  {trait: SPICINESS, comparitor: 'equal to', values: [0]},
+  {trait: STARCH, comparitor: 'equal to', values: [0]},
   {trait: TOXICITY, comparitor: 'equal to', values: [0]}
-], 2, new Trait(
+], new Trait(
   (WILD_GRASS + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME],
   [-0.5, -0.4]
@@ -73,7 +73,7 @@ export const corn = new Cultivar(CORN, [
   {trait: SEED_COVERING, comparitor: 'equal to', values: [0]},
   {trait: STEM_FOCUS, comparitor: 'equal to', values: [1]},
   {trait: SEED_SIZE, comparitor: 'greater than', values: [4]}
-], 1, new Trait(
+], new Trait(
   (CORN + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME, NITROGEN_REQUIREMENT],
   [0.5, -0.1, 0.5]
