@@ -228,6 +228,12 @@ Randomly generated seeds come from family-specific lists of trait numerators wit
 Equation for sinusoidal movement is:
 Velocity = ((((endingPosition - startingPosition) / numberOfTimeSteps) / 0.6353102368) * sin(pi*percentCompletion)
 
+Sample flavor descriptions could be: Slightly sweet, An intense and unpleasant blend of many flavors, A delicious blend of intensely spicy and slightly bitter flavors, A curious blend of moderately spicy and slightly sour flavors, An unpleasant blend of moderately sweet and slightly complex flavors
+Parts of this are...
+An intensity descriptor: intensely, moderately, slightly
+A positivity descriptor: delicious, curious, unpleasant
+Flavor words: blend of many flavors, blend of flavor1/flavor2, flavor1
+
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
 X React boilerplate

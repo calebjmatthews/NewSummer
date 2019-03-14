@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { ageAllSeeds } from '../actions/field';
 import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
   from '../actions/animation/card_nav';
-import FieldCard from './field_card';
+import FieldCard from './field_card/main';
 import HomeCard from './home_card';
 import { pixiHandler } from '../instances/pixi/handler';
 import { SEED_AGE_INTERVAL, FRAMES_PER_SECOND } from '../constants';
