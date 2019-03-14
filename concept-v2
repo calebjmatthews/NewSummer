@@ -189,6 +189,27 @@ Pixi.js drawing
 - Function to age up a seed into the next texture in its array
 - Function to remove a sprite once the plant has been harvested
 
+Descriptions
+~~~~~~~~~~~~
+- Growth time stat in hours/minutes/seconds
+- Value in ideal conditions super-stat
+- Temperature tolerance/moisture tolerance traits when moderate or high
+- Flavor super-stat if anything other than none
+- Too much seed quantity for stem height/thickness super-stat
+- Pest resistance stat if moderate or high
+- Disease resistance stat if moderate or high
+- Nitrogen requirement stat if low or high
+
+Visual appearance
+~~~~~~~~~~~~~~~~~
+- Seed covering trait (unique pixel art for each phenotype)
+- Branching trait
+- Stem focus trait (bamboo-like stem)
+- Seed size stat (unique pixel art for 4? different size buckets)
+- Temperature tolerance/moisture tolerance traits to change red/blue balance and saturation of stem and foliage
+- Stem height trait
+- Seeds throughout trait
+
 Brainstorming
 ~~~~~~~~~~~~~
 A family:
@@ -206,25 +227,6 @@ Randomly generated seeds come from family-specific lists of trait numerators wit
 
 Equation for sinusoidal movement is:
 Velocity = ((((endingPosition - startingPosition) / numberOfTimeSteps) / 0.6353102368) * sin(pi*percentCompletion)
-
-Descriptions:
-- Growth time stat in hours/minutes/seconds
-- Value in ideal conditions super-stat
-- Temperature tolerance/moisture tolerance traits when moderate or high
-- Flavor super-stat if anything other than none
-- Too much seed quantity for stem height/thickness super-stat
-- Pest resistance stat if moderate or high
-- Disease resistance stat if moderate or high
-- Nitrogen requirement stat if low or high
-
-Visual appearance:
-- Seed covering trait (unique pixel art for each phenotype)
-- Branching trait
-- Stem focus trait (bamboo-like stem)
-- Seed size stat (unique pixel art for 4? different size buckets)
-- Temperature tolerance/moisture tolerance traits to change red/blue balance and saturation of stem and foliage
-- Stem height trait
-- Seeds throughout trait
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~

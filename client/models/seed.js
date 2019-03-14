@@ -82,10 +82,10 @@ export default class Seed {
           max = matchingTrait.values[0];
         }
         else if (matchingTrait.comparitor == 'less than') {
-          max = matchingTrait.values[0];
+          max = (matchingTrait.values[0] - 1);
         }
         else if (matchingTrait.comparitor == 'greater than') {
-          min = matchingTrait.values[0];
+          min = (matchingTrait.values[0] + 1);
         }
         else if (matchingTrait.comparitor == 'between') {
           min = matchingTrait.values[0];

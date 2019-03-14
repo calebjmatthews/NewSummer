@@ -9,3 +9,5 @@ console.log('seedDemo1');
 console.log(seedDemo1);
 
 export const seedDemo2 = new Seed(POACEAE, WILD_GRASS);
+console.log('seedDemo2');
+console.log(seedDemo2);

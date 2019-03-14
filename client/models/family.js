@@ -161,7 +161,9 @@ export default class Family {
         }
       });
       if (newDesc != null) {
-        descriptions.push(newDesc);
+        if (newDesc.description != undefined) {
+          descriptions.push(newDesc);
+        }
       }
     });
 
@@ -169,32 +171,250 @@ export default class Family {
       return b.extent - a.extent;
     });
 
-    let flavorTraits = [SWEETNESS, STARCH, PROTEIN, BITTERNESS, SOURNESS,
-      SPICINESS, TOXICITY];
-    let highFlavor = [];
-    let mediumFlavor = [];
-    let lowFlavor = [];
-    // 0 1,2 3,4 5,6
-    flavorTraits.map((traitName) => {
-      let frac = (traitTotalDict[traitName].numerator /
-        traitTotalDict[traitName].denominator)
-      switch (Math.round(frac * 3)) {
-        case 3:
-          highFlavor.push(traitName);
-        case 2:
-          mediumFlavor.push(traitName);
-        case 1:
-          lowFlavor.push(traitName);
-      }
-    });
-    console.log('highFlavor');
-    console.log(highFlavor);
-    console.log('mediumFlavor');
-    console.log(mediumFlavor);
-    console.log('lowFlavor');
-    console.log(lowFlavor);
+    let flavorDescription = getFlavorDescription(traitTotalDict);
+    descriptions.push(flavorDescription);
 
     return descriptions;
+  }
+}
+
+function getFlavorDescription(traitTotalDict) {
+  if (traitTotalDict[TOXICITY].numerator > 0) {
+    flavorDescription.icon = 'skull-crossbones';
+    flavorDescription.iconStyle = 'negative';
+    let frac = (traitTotalDict[traitName].numerator /
+      traitTotalDict[traitName].denominator)
+    switch (Math.round(frac * 3)) {
+      case 3:
+        flavorDescription.description = 'Tastes like concentrated death';
+        break;
+      case 2:
+        flavorDescription.description = 'Tastes dangerously poisonous';
+        break;
+      case 1:
+        flavorDescription.description = 'Tastes acrid and foul';
+        break;
+    }
+    return flavorDescription;
+  }
+
+  let flavorTraits = [
+    {name: SWEETNESS, adjective: 'sweet', icon: 'ice-cream',
+      iconType: 'fontawesome', iconStyle: 'positive',},
+    {name: STARCH, adjective: 'starchy', icon: 'bread-slice',
+      iconType: 'fontawesome', iconStyle: 'positive'},
+    {name: PROTEIN, adjective: 'savory', icon: 'carrot',
+      iconType: 'fontawesome', iconStyle: 'positive'},
+    {name: BITTERNESS, adjective: 'bitter', icon: 'holly-berry',
+      iconType: 'fontawesome', iconStyle: 'negative'},
+    {name: SOURNESS, adjective: 'sour', icon: 'lemon',
+      iconType: 'fontawesome', iconStyle: 'neutral'},
+    {name: SPICINESS, adjective: 'spicy', icon: 'fire-alt',
+      iconType: 'fontawesome', iconStyle: 'neutral'}];
+  let highFlavors = [];
+  let mediumFlavors = [];
+  let lowFlavors = [];
+  let allFlavors = [];
+  flavorTraits.map((trait) => {
+    if (traitTotalDict[trait.name].numerator > 0) {
+      allFlavors.push({
+        trait: trait, extent:traitTotalDict[trait.name].numerator
+      });
+    }
+    let frac = (traitTotalDict[trait.name].numerator /
+      traitTotalDict[trait.name].denominator);
+    switch (Math.round(frac * 3)) {
+      case 3:
+        highFlavors.push({
+          trait: trait, extent:traitTotalDict[trait.name].numerator
+        });
+        break;
+      case 2:
+        mediumFlavors.push({
+          trait: trait, extent:traitTotalDict[trait.name].numerator
+        });
+        break;
+      case 1:
+        lowFlavors.push({
+          trait: trait, extent:traitTotalDict[trait.name].numerator
+        });
+        break;
+    }
+  });
+
+  function flavorSort(a,b) {
+    return b.extent - a.extent;
+  }
+  highFlavors.sort(flavorSort);
+  mediumFlavors.sort(flavorSort);
+  lowFlavors.sort(flavorSort);
+  let dominantFlavors = calcDominantFlavors(highFlavors, mediumFlavors,
+    lowFlavors);
+  let positivity = calcPositivity(allFlavors);
+  return calcFlavorDescription(dominantFlavors, positivity);
+
+  function calcDominantFlavors(highFlavors, mediumFlavors, lowFlavors) {
+    let dominantFlavors = {};
+    if (highFlavors.length > 2) {
+      return { count: 'many', flavors: highFlavors,
+        intensities: ['high'] };
+    }
+    else if (highFlavors.length == 2) {
+      return { count: 'two', flavors: highFlavors,
+        intensities: ['high', 'high'] };
+    }
+    else if (highFlavors.length == 1) {
+      dominantFlavors =
+        addFlavorIfNotFull(dominantFlavors, highFlavors[0], 'high');
+    }
+    if (mediumFlavors.length > 2 && dominantFlavors.count == undefined) {
+      return { count: 'many', flavors: mediumFlavors,
+        intensities: ['medium'] };
+    }
+    else if (mediumFlavors.length == 2 && dominantFlavors.count == undefined) {
+      return { count: 'two', flavors: mediumFlavors,
+        intensities: ['medium', 'medium'] };
+    }
+    else if (mediumFlavors.length > 0) {
+      dominantFlavors =
+        addFlavorIfNotFull(dominantFlavors, mediumFlavors[0], 'medium');
+    }
+    if (lowFlavors.length > 2 && dominantFlavors.count == undefined) {
+      return { count: 'many', flavors: lowFlavors,
+        intensities: ['low'] };
+    }
+    else if (lowFlavors.length == 2 && dominantFlavors.count == undefined) {
+      return { count: 'two', flavors: lowFlavors,
+        intensities: ['low', 'low'] };
+    }
+    else if (lowFlavors.length > 0) {
+      dominantFlavors =
+        addFlavorIfNotFull(dominantFlavors, lowFlavors[0], 'low');
+    }
+
+    return dominantFlavors;
+
+    function addFlavorIfNotFull(dominantFlavors, newFlavor, intensity) {
+      if (dominantFlavors.count == undefined) {
+        dominantFlavors = { count: 'one', flavors: [newFlavor],
+          intensities: [intensity] }
+      }
+      else if (dominantFlavors.count == 'one') {
+        dominantFlavors.count = 'two';
+        dominantFlavors.flavors.push(newFlavor);
+        dominantFlavors.intensities.push(intensity);
+      }
+      return dominantFlavors;
+    }
+  }
+
+  function calcPositivity(intensities) {
+    let positivityScore = 0;
+    if (intensities.length == 0) { return 0; }
+    intensities.map((intensity) => {
+      if (intensity.trait.iconStyle == 'positive') {
+        positivityScore += intensity.extent;
+      }
+      if (intensity.trait.iconStyle == 'negative') {
+        positivityScore -= intensity.extent;
+      }
+    });
+    return  Math.round(positivityScore / intensities.length);
+  }
+
+  function calcFlavorDescription(dominantFlavors, positivity) {
+    let flavorDescription = {
+      title: 'Flavor', description: 'Tastes bland', iconType: 'fontawesome',
+      icon: 'square', iconStyle: 'neutral'
+    }
+    if (dominantFlavors.count == 'one') {
+      if (positivity > 0) {
+        flavorDescription.iconStyle = 'positive';
+      }
+      else if (positivity < 0) {
+        flavorDescription.iconStyle = 'negative';
+      }
+      else {
+        flavorDescription.iconStyle = 'neutral';
+      }
+      let description = '';
+      if (dominantFlavors.intensities[0] == 'high') {
+        description += 'Intensely ';
+      }
+      else if (dominantFlavors.intensities[0] == 'medium') {
+        description += 'Moderately ';
+      }
+      else if (dominantFlavors.intensities[0] == 'low') {
+        description += 'Slightly ';
+      }
+      description += dominantFlavors.flavors[0].trait.adjective;
+      flavorDescription.description = description;
+      flavorDescription.iconType = dominantFlavors.flavors[0].trait.iconType;
+      flavorDescription.icon = dominantFlavors.flavors[0].trait.icon;
+    }
+    else if (dominantFlavors.count == 'two') {
+      let description = '';
+      if (positivity > 0) {
+        flavorDescription.iconStyle = 'positive';
+        description += 'A delicious ';
+      }
+      else if (positivity < 0) {
+        flavorDescription.iconStyle = 'negative';
+        description += 'An unpleasant ';
+      }
+      else {
+        flavorDescription.iconStyle = 'neutral';
+        description += 'A curioius ';
+      }
+      description += 'blend of ';
+      for (let index = 0; index < dominantFlavors.flavors.length; index++) {
+        let flavor = dominantFlavors.flavors[index];
+        if (dominantFlavors.intensities[index] == 'high') {
+          description += 'intensely ';
+        }
+        else if (dominantFlavors.intensities[index] == 'medium') {
+          description += 'moderately ';
+        }
+        if (dominantFlavors.intensities[index] == 'low') {
+          description += 'slightly ';
+        }
+        description += (flavor.trait.adjective + ' and ');
+      }
+      description = description.slice(0, -4);
+      description += 'flavors';
+      flavorDescription.description = description;
+      flavorDescription.iconType = 'fontawesome';
+      flavorDescription.icon = 'mortar-pestle';
+    }
+    else if (dominantFlavors.count == 'many') {
+      let description = '';
+      if (dominantFlavors.intensities[0] == 'high') {
+        description += 'An intense ';
+      }
+      else if (dominantFlavors.intensities[1] == 'medium') {
+        dsecription += 'A mild ';
+      }
+      else if (dominantFlavors.intensities[1] == 'low') {
+        dsecription += 'A delicate ';
+      }
+      if (positivity > 0) {
+        flavorDescription.iconStyle = 'positive';
+        description += 'and delicious ';
+      }
+      else if (positivity < 0) {
+        flavorDescription.iconStyle = 'negative';
+        description += 'and unpleasant ';
+      }
+      else {
+        flavorDescription.iconStyle = 'neutral';
+        description += 'and curioius ';
+      }
+      description += 'blend of many flavors';
+      flavorDescription.description = description;
+      flavorDescription.iconType = 'fontawesome';
+      flavorDescription.icon = 'compress';
+    }
+    return flavorDescription;
   }
 }
 
