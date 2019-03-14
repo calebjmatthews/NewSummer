@@ -12,6 +12,9 @@
   "author": "Caleb J. Matthews",
   "license": "UNLICENSED",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.15",
+    "@fortawesome/free-solid-svg-icons": "^5.7.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "pixi.js": "^4.8.5",
