@@ -1,5 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
+  faDotCircle, faSeedling, faBug, faCertificate, faGlobeEurope, faSnowflake,
+  faSun, faWind, faTint,
   faSkullCrossbones, faIceCream, faBreadSlice, faCarrot, faHollyBerry, faLemon,
   faFireAlt, faSquare, faMortarPestle, faCompress
 } from '@fortawesome/free-solid-svg-icons';
@@ -15,4 +17,13 @@ export default function() {
   library.add(faSquare);
   library.add(faMortarPestle);
   library.add(faCompress);
+  library.add(faDotCircle);
+  library.add(faSeedling);
+  library.add(faBug);
+  library.add(faCertificate);
+  library.add(faGlobeEurope);
+  library.add(faSnowflake);
+  library.add(faSun);
+  library.add(faWind);
+  library.add(faTint);
 }

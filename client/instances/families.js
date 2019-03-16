@@ -90,7 +90,7 @@ const statCache = new Cache([
       bonus: 0, description: 'Grows well in dry conditions',
       iconType: 'fontawesome', icon: 'wind', iconStyle: 'neutral'},
     {comparitor: 'greater than', values: [300], adjective: 'Wetland',
-      bonus: 0, description: 'Grows well in dry conditions',
+      bonus: 0, description: 'Grows well in wet conditions',
       iconType: 'fontawesome', icon: 'tint', iconStyle: 'neutral'}
   ]),
   new Stat(STEM_THICKNESS, 100, [])
