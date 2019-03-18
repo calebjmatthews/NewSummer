@@ -33,13 +33,6 @@ button {
   opacity: 0.6;
 }
 
-.game-card-wrapper {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .nav-button {
   z-index: 2;
   position: fixed;
@@ -67,6 +60,12 @@ button {
   right: 1px;
 }
 
+.game-card-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .game-card {
   position: absolute;
   display: flex;
@@ -108,7 +107,26 @@ button {
   align-items: center;
   justify-content: center;
   min-width: 25px;
+  max-width: 25px;
   min-height: 25px;
+  max-height: 25px;
   background: #000;
   border-radius: 50%;
+}
+
+.seed-detail-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.seed-detail-line {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.seed-detail-description {
+  margin-left: 5px;
+}
+.seed-detail-title {
+  font-style: italic;
 }

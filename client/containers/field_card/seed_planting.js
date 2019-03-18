@@ -10,6 +10,7 @@ class SeedPlantingFieldCard extends Component {
   componentDidMount() {
     this.seedConfirmClick = this.seedConfirmClick.bind(this);
     this.onClickConfirmToParent = this.onClickConfirmToParent.bind(this);
+    this.onClickDetailToParent = this.onClickDetailToParent.bind(this);
   }
 
   seedConfirmClick(seed) {
@@ -18,14 +19,12 @@ class SeedPlantingFieldCard extends Component {
     this.props.updateSeedPlanting(false);
   }
 
-  seedPlant
-
   onClickConfirmToParent(seed) {
     return this.seedConfirmClick(seed);
   }
 
   onClickDetailToParent(seed) {
-    return this.seed
+    return this.props.updateSeedDetail(seed);
   }
 
   render() {
@@ -37,7 +36,8 @@ class SeedPlantingFieldCard extends Component {
             .seeds.getAll().map((seed) => {
             return (
               <SeedDescription key={seed.id} seed={seed}
-                onClickConfirmToParent={this.onClickConfirmToParent} />
+                onClickConfirmToParent={this.onClickConfirmToParent}
+                onClickDetailToParent={this.onClickDetailToParent} />
             );
           })}
         </div>

@@ -30,7 +30,7 @@ class SeedDescription extends Component {
           </div>
         </div>
         <div>
-          <button>
+          <button onClick={() => this.seedDetailClick(seed)}>
             Detail
           </button>
           <button onClick={() => this.seedConfirmClick(seed)}>
