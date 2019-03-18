@@ -3,7 +3,7 @@ import Field from '../models/field';
 import {gainDollars} from './storehouse';
 
 export const SET_FIELDS = 'SET_FIELDS';
-function setFields(fields) {
+export function setFields(fields) {
   return {
     type: SET_FIELDS,
     fields: fields

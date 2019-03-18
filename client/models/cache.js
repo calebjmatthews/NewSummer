@@ -57,4 +57,11 @@ export default class Cache {
     }
     return membersClone;
   }
+
+  fromCache(aCache) {
+    this.members = [];
+    aCache.members.map((member) => {
+      this.add(member);
+    })
+  }
 }

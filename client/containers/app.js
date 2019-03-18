@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { ageAllSeeds } from '../actions/field';
+import { ageAllSeeds, setFields } from '../actions/field';
 import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
   from '../actions/animation/card_nav';
+import { setStorehouse } from '../actions/storehouse';
 import FieldCard from './field_card/main';
 import HomeCard from './home_card';
 import { pixiHandler } from '../instances/pixi/handler';
-import { SEED_AGE_INTERVAL, FRAMES_PER_SECOND } from '../constants';
+import { getLocalStorages, setLocalStorages }
+  from '../functions/local_storage';
+import { SEED_AGE_INTERVAL, FRAMES_PER_SECOND, COOKIE_SET_INTERVAL }
+  from '../constants';
+import Cache from '../models/cache';
+import Field from '../models/field';
+import Storehouse from '../models/storehouse';
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +27,27 @@ class App extends Component {
         this.props.cardNavStep(this.props.cardNavState);
       }
     }, (1000 / FRAMES_PER_SECOND));
+    setInterval(() => {
+      setLocalStorages(this.props.fieldsState.fields,
+        this.props.storehouseState.storehouse)
+    }, COOKIE_SET_INTERVAL);
+
+    let localStorages = getLocalStorages();
+    console.log('localStorages');
+    console.log(localStorages);
+    if (localStorages != false) {
+      let fields = new Cache([]);
+      localStorages.fields.members.map((field) => {
+        let newField = new Field(field.id, field.index, field.name);
+        Object.keys(field).map((key) => {
+          newField[key] = field[key];
+        })
+        fields.add(newField);
+      });
+      this.props.setFields(fields);
+      let storehouse = new Storehouse(localStorages.storehouse);
+      this.props.setStorehouse(storehouse);
+    }
 
     let eles = document.getElementsByClassName('game-card');
     let poss = [];
@@ -97,7 +125,7 @@ function mapStateToProps({ fieldsState, storehouseState, cardNavState }) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
-    cardNavStartRight
+    cardNavStartRight, setFields, setStorehouse
   }, dispatch)
 }
 
