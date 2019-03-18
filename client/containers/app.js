@@ -33,8 +33,7 @@ class App extends Component {
     }, COOKIE_SET_INTERVAL);
 
     let localStorages = getLocalStorages();
-    console.log('localStorages');
-    console.log(localStorages);
+    let localStoragePromises = [];
     if (localStorages != false) {
       let fields = new Cache([]);
       localStorages.fields.members.map((field) => {
@@ -44,21 +43,23 @@ class App extends Component {
         })
         fields.add(newField);
       });
-      this.props.setFields(fields);
+      localStoragePromises.push(this.props.setFields(fields));
       let storehouse = new Storehouse(localStorages.storehouse);
-      this.props.setStorehouse(storehouse);
+      localStoragePromises.push(this.props.setStorehouse(storehouse));
     }
+    Promise.all(localStoragePromises)
+    .then((res) => {
+      let eles = document.getElementsByClassName('game-card');
+      let poss = [];
+      Object.keys(eles).map((index) => {
+        let pos = eles[index].getBoundingClientRect();
+        poss.push(pos);
+      });
+      this.props.initNavCards(poss[this.props.cardNavState.spotCurrent].x,
+        this.props.cardNavState.spotCurrent);
 
-    let eles = document.getElementsByClassName('game-card');
-    let poss = [];
-    Object.keys(eles).map((index) => {
-      let pos = eles[index].getBoundingClientRect();
-      poss.push(pos);
+      pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
     });
-    this.props.initNavCards(poss[this.props.cardNavState.spotCurrent].x,
-      this.props.cardNavState.spotCurrent);
-
-    pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
 
     this.navLeftClick = this.navLeftClick.bind(this);
     this.navRightClick = this.navRightClick.bind(this);
