@@ -1,4 +1,4 @@
-import {shuffle} from '../utils';
+import {shuffle} from '../functions/utils';
 import {families} from '../instances/families';
 import Gene from '../models/gene';
 

@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store';
 const store = configureStore();
-import configureFontawesome from './fontawesome';
+import configureFontawesome from './functions/fontawesome';
 configureFontawesome();
 
 import App from './containers/app';
