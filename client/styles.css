@@ -85,13 +85,15 @@ button {
 .seed-option-container {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
 }
 .seed-option {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 108px;
+  min-width: 108px;
+  max-width: 108px;
   padding: 5px;
   border: 1px solid #fff;
 }

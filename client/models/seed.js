@@ -135,9 +135,10 @@ export default class Seed {
     this.genome.map((gene) => {
       const otherGene =
         otherParent.getGeneByNameAndLocus(gene.traitName, gene.locusIndex);
-      const newGene = new Gene(gene.traitName, gene.locusIndex,
-        [gene.genotype[Math.floor(Math.random()*2)],
-          otherGene.genotype[Math.floor(Math.random()*2)]]);
+      const newGenotype = [gene.genotype[Math.floor(Math.random()*2)],
+        otherGene.genotype[Math.floor(Math.random()*2)]];
+      const newGene = new Gene(gene.traitName, gene.completeDominance,
+        gene.locusIndex, newGenotype);
       newGenome.push(newGene);
     })
     const newSeed = new Seed(this.familyName, null, newGenome);
