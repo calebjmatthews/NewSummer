@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyFieldAttempt } from '../actions/economy';
+import { buyFieldAttempt, BUY_SUCCESS } from '../actions/economy';
 import { breedSeeds } from '../actions/storehouse';
+import { initNavCards } from '../actions/animation/card_nav';
+import {pixiHandler} from '../instances/pixi/handler';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -21,11 +23,18 @@ class HomeCard extends Component {
 
   buyClick(toBuy) {
     if (toBuy == 'field') {
-      this.props.buyFieldAttempt(
+      let res = this.props.buyFieldAttempt(
         this.props.economyState.economy,
         this.props.storehouseState.storehouse,
         this.props.fieldsState.fields
       );
+      if (res.type == BUY_SUCCESS) {
+        this.props.initNavCards(this.props.cardNavState.cardAnchor,
+          this.props.cardNavState.spotCurrent,
+          (this.props.fieldsState.fields.members.length+1));
+        pixiHandler.addCard(this.props.fieldsState.fields.members.length
+          - this.props.cardNavState.spotCurrent);
+      }
     }
   }
   breedingToggleClick() {
@@ -105,13 +114,14 @@ class HomeCard extends Component {
   }
 }
 
-function mapStateToProps({ storehouseState, economyState, fieldsState }) {
-  return { storehouseState, economyState, fieldsState }
+function mapStateToProps({ storehouseState, economyState, fieldsState,
+  cardNavState }) {
+  return { storehouseState, economyState, fieldsState, cardNavState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    buyFieldAttempt, breedSeeds
+    buyFieldAttempt, breedSeeds, initNavCards
   }, dispatch)
 }
 

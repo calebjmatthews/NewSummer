@@ -56,7 +56,7 @@ class App extends Component {
         poss.push(pos);
       });
       this.props.initNavCards(poss[this.props.cardNavState.spotCurrent].x,
-        this.props.cardNavState.spotCurrent);
+        this.props.cardNavState.spotCurrent, eles.length);
 
       pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
     });

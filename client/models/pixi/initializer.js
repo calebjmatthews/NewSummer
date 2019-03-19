@@ -3,6 +3,10 @@ import * as PIXI from 'pixi.js';
 import {pixiStore} from '../../instances/pixi/store';
 
 export default class PixiInitializer {
+  constructor() {
+    this.cSize = [];
+  }
+
   initPixi(numCards) {
     let s = pixiStore;
     s.pixiApp = new PIXI.Application({
@@ -23,11 +27,11 @@ export default class PixiInitializer {
       s.resources = resources;
       s.cardContainer = new PIXI.Container();
 
-      let cSize = document.getElementsByClassName('game-card')[1]
+      this.cSize = document.getElementsByClassName('game-card')[1]
       .getBoundingClientRect();
 
       for (let index = 0; index < numCards; index++) {
-        const card = this.initCard(index -1, cSize);
+        const card = this.initCard(index - 1);
         s.cardContainer.addChild(card);
       }
 
@@ -35,21 +39,27 @@ export default class PixiInitializer {
     });
   }
 
-  initCard(offset, cSize) {
+  addCard(offset) {
+    let s = pixiStore;
+    const card = this.initCard(offset);
+    s.cardContainer.addChild(card);
+  }
+
+  initCard(offset) {
     let s = pixiStore;
 
     const soil = new PIXI.extras.TilingSprite(
-      s.resources.soil.texture, cSize.width, cSize.height
+      s.resources.soil.texture, this.cSize.width, this.cSize.height
     );
-    soil.x = (cSize.x + (cSize.width * 1.1 * offset));
-    soil.y = cSize.y;
+    soil.x = (this.cSize.x + (this.cSize.width * 1.1 * offset));
+    soil.y = this.cSize.y;
     soil.anchor.x = 0; soil.anchor.y = 0;
-    let mask = genCardMask(offset);
+    let mask = genCardMask(offset, this.cSize);
     soil.mask = mask;
     soil.addChild(mask);
     return soil;
 
-    function genCardMask(offset) {
+    function genCardMask(offset, cSize) {
       const cardMask = new PIXI.Graphics();
       cardMask.beginFill(0x000000);
       cardMask.drawRoundedRect(
