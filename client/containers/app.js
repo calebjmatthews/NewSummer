@@ -59,6 +59,10 @@ class App extends Component {
         this.props.cardNavState.spotCurrent, eles.length);
 
       pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
+
+      this.props.fieldsState.fields.getAll().map((field) => {
+        field.restoreSeedState();
+      })
     });
 
     this.navLeftClick = this.navLeftClick.bind(this);

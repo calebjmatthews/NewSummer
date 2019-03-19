@@ -1,5 +1,6 @@
 import {PLANT_QUALITY, GROWING_TIME} from '../instances/stats';
 import {pixiHandler} from '../instances/pixi/handler';
+import {pixiStore} from '../instances/pixi/store';
 
 export default class Field {
   constructor(id, index, name) {
@@ -50,6 +51,22 @@ export default class Field {
     }
     else {
       return '';
+    }
+  }
+  restoreSeedState() {
+    if (this.seedPlanted != null) {
+      if (pixiStore.cardContainer != null) {
+        let growthStage = Math.floor((this.seedsAge
+          / this.seedPlanted.stats[GROWING_TIME].value)*5);
+        const textureName = 'Corn_Stage_';
+        pixiHandler.setPlantAppearance(this.index, (textureName
+          + (growthStage+1)));
+        this.seedsGrowthStage = growthStage;
+        return true;
+      }
+      else {
+        return setTimeout(() => this.restoreSeedState(), 50);
+      }
     }
   }
   checkSeedsState() {
