@@ -10,21 +10,31 @@ export default class Cultivar {
     this.bonus = bonus;
   }
 
-  areTraitsMatch(traits) {
+  isGenomeMatch(genome) {
     let isMatch = true;
+
+    let genomeTotalDict = {}
+    genome.map((gene) => {
+      if (genomeTotalDict[gene.traitName] == undefined) {
+        genomeTotalDict[gene.traitName] = 0;
+      }
+      if (gene.genotype[0] == true) { genomeTotalDict[gene.traitName]++; }
+      if (gene.genotype[1] == true) { genomeTotalDict[gene.traitName]++; }
+    });
+
     this.traitsDefinitional.map((defTrait) => {
       if (defTrait.comparitor == 'less than') {
-        if (traits[defTrait.trait].numerator >= defTrait.values[0]) {
+        if (genomeTotalDict[defTrait.trait] >= defTrait.values[0]) {
           isMatch = false;
         }
       }
       else if (defTrait.comparitor == 'greater than') {
-        if (traits[defTrait.trait].numerator <= defTrait.values[0]) {
+        if (genomeTotalDict[defTrait.trait] <= defTrait.values[0]) {
           isMatch = false;
         }
       }
       else if (defTrait.comparitor == 'equal to') {
-        if (traits[defTrait.trait].numerator != defTrait.values[0]) {
+        if (genomeTotalDict[defTrait.trait] != defTrait.values[0]) {
           isMatch = false;
         }
       }

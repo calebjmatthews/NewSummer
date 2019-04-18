@@ -16,7 +16,7 @@ export default class Seed {
 
     this.traitTotalDict = this.determineTraitsFromGenome(this.genome);
     this.cultivarName =
-      this.determineCultivarNameFromTraits(this.traitTotalDict);
+      this.determineCultivarNameFromGenome(this.genome);
     this.stats =
       this.determineStatsFromTraitsAndCultivar(this.traitTotalDict);
 
@@ -53,8 +53,7 @@ export default class Seed {
         if (Math.random() > 0.5) { alleles[alleleIndexes[index]] = true; }
         else { alleles[alleleIndexes[index]] = false; }
       }
-
-      for (let index = 0; index < trait.loci; index++) {
+      for (let index = 0; index < (trait.loci*2); index+=2) {
         genome.push(new Gene(trait.name, trait.completeDominance, index,
           [alleles[index], alleles[index+1]]));
       }
@@ -109,9 +108,9 @@ export default class Seed {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineTraitsFromGenome(genome);
   }
-  determineCultivarNameFromTraits(traits) {
+  determineCultivarNameFromGenome(genome) {
     const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineCultivarNameFromTraits(traits);
+    return family.determineCultivarNameFromGenome(genome);
   }
   determineStatsFromTraitsAndCultivar(traitTotalDict) {
     const family = families.getByProperty('nameScientific', this.familyName);
@@ -152,5 +151,18 @@ export default class Seed {
       }
     })
     return matchingGene;
+  }
+  debugGenome(genome) {
+    let genomeTotalDict = {};
+    genome.map((gene) => {
+      if (genomeTotalDict[gene.traitName] == undefined) {
+        genomeTotalDict[gene.traitName] = 0;
+      }
+      if (gene.genotype[0] == true) { genomeTotalDict[gene.traitName]++; }
+      if (gene.genotype[1] == true) { genomeTotalDict[gene.traitName]++; }
+    });
+    Object.keys(genomeTotalDict).map((traitName) => {
+      console.log(traitName + ': ' + genomeTotalDict[traitName]);
+    });
   }
 }

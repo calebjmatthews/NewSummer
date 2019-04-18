@@ -30,17 +30,7 @@ const statCache = new Cache([
       bonus: 0.5, description: 'Seeds are abundant',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'}
   ]),
-  new Stat(PLANT_QUALITY, 100, [
-    {comparitor: 'less than', values: [80], adjective: 'Rough', bonus: 0,
-      description: 'It looks pretty rough',
-      iconType: 'fontawesome', icon: 'seedling', iconStyle: 'negative'},
-    {comparitor: 'greater than', values: [180], adjective: 'Remarkable',
-      bonus: 0, description: 'It\'s remarkably good quality',
-      iconType: 'fontawesome', icon: 'seedling', iconStyle: 'positive'},
-    {comparitor: 'greater than', values: [220], adjective: 'Exceptional',
-      bonus: 0.5, description: 'That\'s a good looking plant',
-      iconType: 'fontawesome', icon: 'seedling', iconStyle: 'positive'}
-  ]),
+  new Stat(PLANT_QUALITY, 100, []),
   new Stat(GROWING_TIME, 300, [
     {comparitor: 'less than', values: [250], adjective: 'Fast-Growing',
       bonus: 0},
