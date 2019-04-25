@@ -16,6 +16,11 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/'));
 })
 
+gulp.task('fonts', () => {
+  return gulp.src('client/**/*.ttf')
+    .pipe(gulp.dest('dist/'));
+})
+
 gulp.task('scripts', () => {
   return gulp.src('client/index.js')
     .pipe(webpack( require('./webpack.config.js') ))
@@ -30,7 +35,8 @@ function watchFiles() {
 }
 
 // build task
-gulp.task('build', gulp.parallel('html', 'styles', 'images', 'scripts'));
+gulp.task('build', gulp.parallel('html', 'styles', 'images', 'fonts',
+  'scripts'));
 
 // server that rebuilds on file change
 gulp.task('watch', watchFiles);

@@ -3,10 +3,19 @@ html {
 }
 
 body {
+  font-family: 'px10', Arial, Helvetica, sans-serif;
   margin: unset;
+}
+@font-face {
+    font-family: 'px10';
+    src: url('fonts/px10.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 button {
+  font-family: 'px10', Arial, Helvetica, sans-serif;
+  font-size: 1em;
   background: none;
   border: 1px solid #fff;
   color: #fff;
