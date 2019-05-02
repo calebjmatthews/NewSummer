@@ -3,8 +3,6 @@ import {pixiHandler} from '../../instances/pixi/handler';
 
 export const INIT_NAV_CARDS = 'INIT_NAV_CARDS';
 export function initNavCards(cardAnchor, spotCurrent, numCards) {
-  console.log('numCards');
-  console.log(numCards);
 
   let cardStyles = [];
   for (let index = 0; index < numCards; index++) {
@@ -13,8 +11,6 @@ export function initNavCards(cardAnchor, spotCurrent, numCards) {
       transform: ('translateX(' + (110 * position) + '%)')
     };
   }
-  console.log('cardStyles');
-  console.log(cardStyles);
 
   return {
     type: INIT_NAV_CARDS,
