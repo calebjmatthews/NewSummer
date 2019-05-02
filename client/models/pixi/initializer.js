@@ -14,8 +14,10 @@ export default class PixiInitializer {
       backgroundColor: 0x277249
     });
 
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
     document.getElementById('root').appendChild(s.pixiApp.view);
-    PIXI.loader.add('soil', './dist/images/soil.png')
+    PIXI.loader.add('background', './dist/images/background.png')
     .add('Corn_Stage_1', './dist/images/Corn_Stage_1.png')
     .add('Corn_Stage_2', './dist/images/Corn_Stage_2.png')
     .add('Corn_Stage_3', './dist/images/Corn_Stage_3.png')
@@ -48,23 +50,23 @@ export default class PixiInitializer {
   initCard(offset) {
     let s = pixiStore;
 
-    const soil = new PIXI.extras.TilingSprite(
-      s.resources.soil.texture, this.cSize.width, this.cSize.height
-    );
-    soil.x = (this.cSize.x + (this.cSize.width * 1.1 * offset));
-    soil.y = this.cSize.y;
-    soil.anchor.x = 0; soil.anchor.y = 0;
+    const card =  new PIXI.Container();
+    const background = new PIXI.Sprite(s.resources.background.texture);
+    card.x = (this.cSize.x + (this.cSize.width * 1.1 * offset));
+    card.y = this.cSize.y;
+    background.anchor.x = 0; background.anchor.y = 0;
+    background.scale = new PIXI.Point(3.0, 3.0);
+    card.addChild(background);
     let mask = genCardMask(offset, this.cSize);
-    soil.mask = mask;
-    soil.addChild(mask);
-    return soil;
+    card.mask = mask;
+    card.addChild(mask);
+    return card;
 
     function genCardMask(offset, cSize) {
       const cardMask = new PIXI.Graphics();
       cardMask.beginFill(0x000000);
-      cardMask.drawRoundedRect(
-        1, 0,
-        cSize.width, cSize.height, 10
+      cardMask.drawRect(
+        1, 0, cSize.width, cSize.height
       );
       cardMask.endFill();
       return cardMask;

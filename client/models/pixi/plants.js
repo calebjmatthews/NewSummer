@@ -6,8 +6,8 @@ export default class PixiPlants {
   setPlantAppearance(fieldIndex, textureName) {
     let s = pixiStore;
     let card = s.cardContainer.children[fieldIndex + 1];
-    if (card.children.length > 1) {
-      card.removeChildAt(1);
+    if (card.children.length > 2) {
+      card.removeChildAt(2);
     }
     if (textureName != null) {
       const plant = new PIXI.Sprite(s.resources[textureName].texture);
