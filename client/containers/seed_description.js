@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { GROWING_TIME } from '../instances/stats';
 
 class SeedDescription extends Component {
 
@@ -30,6 +31,10 @@ class SeedDescription extends Component {
           </div>
         </div>
         <div>
+          <div class="seed-value-container">
+            <div>{Math.round(seed.stats[GROWING_TIME].value) + 's'}</div>
+            <div>{'$' + seed.determineIdealValueFromStats(seed.stats)}</div>
+          </div>
           <button onClick={() => this.seedDetailClick(seed)}>
             Detail
           </button>

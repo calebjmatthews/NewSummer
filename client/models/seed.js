@@ -117,12 +117,13 @@ export default class Seed {
     return family.determineStatsFromTraitsAndCultivar(traitTotalDict,
       this.cultivarName);
   }
-  determineAdjectivesFromStats(stats, cultivarName) {
+  determineAdjectivesFromStats(stats, cultivarName = this.cultivarName) {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineAdjectivesFromStats(stats, cultivarName);
   }
-  determineIdealValueFromStats(stats) {
-    return 100;
+  determineIdealValueFromStats(stats, cultivarName = this.cultivarName) {
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.determineIdealValueFromStats(stats, cultivarName);
   }
   describeFromTraitsAndStats(traitTotalDict, stats) {
     const family = families.getByProperty('nameScientific', this.familyName);

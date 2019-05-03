@@ -1,4 +1,4 @@
-import {PLANT_QUALITY, GROWING_TIME} from '../instances/stats';
+import {GROWING_TIME} from '../instances/stats';
 import {pixiHandler} from '../instances/pixi/handler';
 import {pixiStore} from '../instances/pixi/store';
 
@@ -86,13 +86,14 @@ export default class Field {
   }
 
   harvestSeed() {
-    let seedQuality = this.seedPlanted.stats[PLANT_QUALITY].value;
+    let value =
+      this.seedPlanted.determineIdealValueFromStats(this.seedPlanted.stats);
     this.seedPlanted = null;
     this.seedsAge = 0;
     this.seedsName = this.getSeedsName();
     this.seedsAgeLabel = '';
     this.seedsGrowthStage = null;
     this.checkSeedsState();
-    return seedQuality;
+    return value;
   }
 }

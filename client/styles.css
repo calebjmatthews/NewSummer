@@ -124,6 +124,10 @@ button {
   background: #000;
   border-radius: 50%;
 }
+.seed-value-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 .seed-detail-name {
   font-weight: bold;

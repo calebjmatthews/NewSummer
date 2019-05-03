@@ -3,6 +3,7 @@ import Gene from './gene';
 
 import {SWEETNESS, STARCH, PROTEIN, BITTERNESS, SOURNESS, SPICINESS, TOXICITY}
   from '../instances/traits';
+import {PLANT_QUALITY, SEED_QUANTITY} from '../instances/stats';
 
 export default class Family {
   constructor(nameScientific, nameCommon, traits, stats, cultivars,
@@ -129,6 +130,10 @@ export default class Family {
     });
 
     return adjectives;
+  }
+  determineIdealValueFromStats(stats) {
+    let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
+    return value.toFixed(2);
   }
   describeFromTraitsAndStats(traitTotalDict, stats) {
     let descriptions = [];
