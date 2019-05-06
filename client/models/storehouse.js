@@ -25,6 +25,10 @@ export default class Storehouse {
     }
   }
   gainDollars(dollarsGained) {
+    console.log(dollars);
+    console.log(typeof(dollars));
+    console.log(dollarsGained);
+    console.log(typeof(dollarsGained));
     this.dollars = parseFloat((this.dollars + dollarsGained).toFixed(2));
   }
   spendDollars(dollarsSpent) {

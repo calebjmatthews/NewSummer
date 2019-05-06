@@ -1,6 +1,7 @@
 import {GROWING_TIME} from '../instances/stats';
 import {pixiHandler} from '../instances/pixi/handler';
 import {pixiStore} from '../instances/pixi/store';
+import {formatDuration} from '../functions/utils';
 
 export default class Field {
   constructor(id, index, name) {
@@ -45,28 +46,26 @@ export default class Field {
   }
   getSeedsAgeLabel() {
     if (this.seedPlanted) {
-      let age = parseFloat((this.seedsAge
-        / this.seedPlanted.stats[GROWING_TIME].value) * 100).toFixed(2);
-      return (age + '%');
+      let remainingTime = (this.seedPlanted.stats[GROWING_TIME].value
+        - this.seedsAge) * 1000;
+      return (formatDuration(remainingTime));
     }
     else {
       return '';
     }
   }
   restoreSeedState() {
-    if (this.seedPlanted != null) {
-      if (pixiStore.cardContainer != null) {
-        let growthStage = Math.floor((this.seedsAge
-          / this.seedPlanted.stats[GROWING_TIME].value)*5);
-        const textureName = 'Corn_Stage_';
-        pixiHandler.setPlantAppearance(this.index, (textureName
-          + (growthStage+1)));
-        this.seedsGrowthStage = growthStage;
-        return true;
-      }
-      else {
-        return setTimeout(() => this.restoreSeedState(), 50);
-      }
+    if (pixiStore.cardContainer != null) {
+      let growthStage = Math.floor((this.seedsAge
+        / this.seedPlanted.stats[GROWING_TIME].value)*5);
+      const textureName = 'Corn_Stage_';
+      pixiHandler.setPlantAppearance(this.index, (textureName
+        + (growthStage+1)));
+      this.seedsGrowthStage = growthStage;
+      return true;
+    }
+    else {
+      return setTimeout(() => this.restoreSeedState(), 50);
     }
   }
   checkSeedsState() {
@@ -86,6 +85,8 @@ export default class Field {
   }
 
   harvestSeed() {
+    console.log('this');
+    console.log(this);
     let value =
       this.seedPlanted.determineIdealValueFromStats(this.seedPlanted.stats);
     this.seedPlanted = null;

@@ -15,6 +15,7 @@ import { SEED_AGE_INTERVAL, FRAMES_PER_SECOND, COOKIE_SET_INTERVAL }
   from '../constants';
 import Cache from '../models/cache';
 import Field from '../models/field';
+import Seed from '../models/seed';
 import Storehouse from '../models/storehouse';
 
 class App extends Component {
@@ -61,7 +62,12 @@ class App extends Component {
       pixiHandler.initPixi(1 + this.props.fieldsState.fields.getLength());
 
       this.props.fieldsState.fields.getAll().map((field) => {
-        field.restoreSeedState();
+        if (field.seedPlanted != null) {
+          let seed = field.seedPlanted;
+          field.seedPlanted = new Seed(seed.familyName,
+            seed.givenCultivarName, seed.genome);
+          field.restoreSeedState();
+        }
       })
     });
 

@@ -17,4 +17,36 @@ function shuffle(array) {
   return array;
 }
 
-module.exports = {shuffle};
+// Returns a maximum of two units of time, e.g. '1d 4h ' or '3m 45s ', with
+//  seconds being the smallest unit
+function formatDuration(milliseconds, units=0) {
+  if (units < 2) {
+    if (milliseconds > (1000 * 60 * 60 * 24)) {
+      let days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+      units++;
+      return ((days + 'd ' +
+        formatDuration(milliseconds % (1000 * 60 * 60 * 24), units)));
+    }
+    if (milliseconds > (1000 * 60 * 60)) {
+      let days = Math.floor(milliseconds / (1000 * 60 * 60));
+      units++;
+      return ((days + 'h ' +
+        formatDuration(milliseconds % (1000 * 60 * 60), units)));
+    }
+    if (milliseconds > (1000 * 60)) {
+      let days = Math.floor(milliseconds / (1000 * 60));
+      units++;
+      return ((days + 'm ' +
+        formatDuration(milliseconds % (1000 * 60), units)));
+    }
+    if (milliseconds > (1000)) {
+      let days = Math.floor(milliseconds / (1000));
+      units++;
+      return ((days + 's ' +
+        formatDuration(milliseconds % (1000), units)));
+    }
+  }
+  return '';
+}
+
+module.exports = {shuffle, formatDuration};

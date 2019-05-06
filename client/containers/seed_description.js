@@ -31,7 +31,7 @@ class SeedDescription extends Component {
           </div>
         </div>
         <div>
-          <div class="seed-value-container">
+          <div className="seed-value-container">
             <div>{Math.round(seed.stats[GROWING_TIME].value) + 's'}</div>
             <div>{'$' + seed.determineIdealValueFromStats(seed.stats)}</div>
           </div>
