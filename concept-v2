@@ -223,7 +223,7 @@ Name, description, cultivar, genome, method of breeding with another seed
 A field:
 Cold vs hot, wet vs dry, pest vs none, disease vs none, nitrogen level, increased pollination
 
-Randomly generated seeds come from family-specific lists of trait numerators with a count of traits to be truly randomly generated. They are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
+Randomly generated seeds come from family-specific lists of trait numerators with a count of traits to be truly randomly generated.
 
 Equation for sinusoidal movement is:
 Velocity = ((((endingPosition - startingPosition) / numberOfTimeSteps) / 0.6353102368) * sin(pi*percentCompletion)
@@ -242,6 +242,28 @@ Bug fixing / balance needs:
 - Fix seed gen based on cultivar
 - Mild rebalancing of traits
 - Flesh out mature seed selling
+
+Wanderers:
+~~~~~~~~~~
+properties: name, frequency, affection, offers, dialogues, gifts
+
+Seed trader: Overall clad lady, friendly; offers seeds with default 1 variation of currently discovered cultivars, occasionally offers 3 variation, then offers
+Explorer: Indiana Jones type; offers initial quests, then telegram pole, then expeditions
+Craftsman: Bulky, goggles; offers experimental garden improvements, storage improvements, aesthetic farmhouse improvements
+Tailor: Gentleman in suit; Offers aesthetic clothing options made from various crops
+
+Seed trader, steps to create current offerings:
+	1. Number of options = 3 + Math.floor(log(# unlocked cultivars) * 3)
+	2. For each option, select an unlocked cultivar and make a seed with variation of 1 (90%) of time or 3 (10%) of time
+	3. If resulting seed's name already exists in the seed options, retry
+	4. Seeds are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
+
+Seed add/discard dialogue
+	1. Show seed to be added on top, possibly with label "NEW"
+	2. Show all cultivar's seeds below, can be clicked to highlight
+	3. "Trash" and "Cancel" buttons below this, "Trash" becomes enabled when something has been highlighted
+	4. If cancelled, the function returns false and no data is changed
+	5. If something is trashed, it is removed from the storehouse and the function returns true
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
