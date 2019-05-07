@@ -1,6 +1,7 @@
 import {shuffle} from '../functions/utils';
-import {families} from '../instances/families';
 import Gene from '../models/gene';
+import {families} from '../instances/families';
+import {recordBook} from '../instances/record_book';
 
 export default class Seed {
   constructor(familyName, givenCultivarName, methodObtained, dateObtained =
@@ -147,9 +148,10 @@ export default class Seed {
         gene.locusIndex, newGenotype);
       newGenome.push(newGene);
     })
-    
+
     const newSeed = new Seed(this.familyName, null, 'Bred',
       new Date(Date.now()), null, [this.id, otherParent.id], newGenome);
+    recordBook.recordSeed(newSeed);
     return newSeed;
   }
   getGeneByNameAndLocus(traitName, locusIndex) {

@@ -303,7 +303,8 @@ X Data saving in HTML5 localStorage
 X Bug fixing, balancing
 X Basic visual polish
 X Display plant value and speed
-_ Track discovered cultivars
+X Additional seed props
+X Track discovered cultivars
 _ Seeds from trader
 _ Seed inventory navigation/limits
 _ Experimental garden on delay
