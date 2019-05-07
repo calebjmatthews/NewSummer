@@ -85,8 +85,6 @@ export default class Field {
   }
 
   harvestSeed() {
-    console.log('this');
-    console.log(this);
     let value =
       this.seedPlanted.determineIdealValueFromStats(this.seedPlanted.stats);
     this.seedPlanted = null;

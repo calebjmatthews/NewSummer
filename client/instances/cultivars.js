@@ -38,7 +38,7 @@ export const wildCane = new Cultivar(WILD_CANE, [
 ], new Trait(
   (WILD_CANE + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME],
-  [-0.5, -0.4]
+  [-0.8, -0.7]
 ));
 
 export const WILD_GRASS = 'Wild Grass';
@@ -65,7 +65,7 @@ export const wildGrass = new Cultivar(WILD_GRASS, [
 ], new Trait(
   (WILD_GRASS + ' Bonus'), 0, null,
   [PLANT_QUALITY, GROWING_TIME],
-  [-0.5, -0.4]
+  [-0.8, -0.7]
 ));
 
 export const CORN = 'Corn';
