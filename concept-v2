@@ -268,7 +268,7 @@ Seed add/discard dialogue
 
 Record Book:
 ~~~~~~~~~~~~
-- Records each seed bred, bought, or otherwise obtained, with all its information including traits, value, speed, name, method obtained, and parents (if any)
+- Records each seed bred, bought, or otherwise obtained, with all its information including genome, name, method obtained, and parents (if any)
 - Each seed is stored in a three layer dictionary, where family is the outermost, cultivar is the middle, and individual id is the innermost
 - When being displayed, the record book shows each discovered cultivar with individuals listed beneath in player selected order (default is value high, other options are value low, growth time high, growth time low, newest, oldest)
 - Also records each trait discovered (many are shared between families). Many traits are only marked as discovered when expression is high (Stem focus, Sourness, etc), but others are distinctly discoverable at either end (Tolerance: heat vs. Tolerance: cold)

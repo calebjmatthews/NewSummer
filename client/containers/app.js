@@ -64,8 +64,9 @@ class App extends Component {
       this.props.fieldsState.fields.getAll().map((field) => {
         if (field.seedPlanted != null) {
           let seed = field.seedPlanted;
+          
           field.seedPlanted = new Seed(seed.familyName,
-            seed.givenCultivarName, seed.genome);
+            seed.givenCultivarName, seed.methodObtained, seed.dateObtained, null, seed.parents, seed.genome);
           field.restoreSeedState();
         }
       })

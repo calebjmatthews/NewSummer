@@ -3,10 +3,16 @@ import {families} from '../instances/families';
 import Gene from '../models/gene';
 
 export default class Seed {
-  constructor(familyName, givenCultivarName, genome = null, variation = 0) {
+  constructor(familyName, givenCultivarName, methodObtained, dateObtained =
+    new Date(Date.now()), variation = 0, parentsIds = [null, null],
+    genome = null) {
     let id = Math.floor(Math.random() * 10000);
     this.id = id;
     this.familyName = familyName;
+    this.methodObtained = methodObtained;
+    this.dateObtained = dateObtained;
+    this.parentsIds = parentsIds.slice();
+
     if (genome == null) {
       this.genomeFromCultivar(familyName, givenCultivarName);
     }
@@ -141,7 +147,9 @@ export default class Seed {
         gene.locusIndex, newGenotype);
       newGenome.push(newGene);
     })
-    const newSeed = new Seed(this.familyName, null, newGenome);
+    
+    const newSeed = new Seed(this.familyName, null, 'Bred',
+      new Date(Date.now()), null, [this.id, otherParent.id], newGenome);
     return newSeed;
   }
   getGeneByNameAndLocus(traitName, locusIndex) {
