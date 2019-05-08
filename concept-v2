@@ -305,6 +305,8 @@ X Basic visual polish
 X Display plant value and speed
 X Additional seed props
 X Track discovered cultivars
+_ ID incrementing utility class
+_ Record book localStorage and reducer
 _ Seeds from trader
 _ Seed inventory navigation/limits
 _ Experimental garden on delay

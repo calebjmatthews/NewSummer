@@ -7,6 +7,7 @@ import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
   from '../actions/animation/card_nav';
 import { setStorehouse } from '../actions/storehouse';
 import FieldCard from './field_card/main';
+import { setRecordBook } from '../actions/record_book';
 import HomeCard from './home_card';
 import { pixiHandler } from '../instances/pixi/handler';
 import { getLocalStorages, setLocalStorages }
@@ -17,6 +18,7 @@ import Cache from '../models/cache';
 import Field from '../models/field';
 import Seed from '../models/seed';
 import Storehouse from '../models/storehouse';
+import RecordBook from '../models/record_book';
 
 class App extends Component {
   componentDidMount() {
@@ -29,8 +31,11 @@ class App extends Component {
       }
     }, (1000 / FRAMES_PER_SECOND));
     setInterval(() => {
-      setLocalStorages(this.props.fieldsState.fields,
-        this.props.storehouseState.storehouse)
+      setLocalStorages({
+        fields: this.props.fieldsState.fields,
+        storehouse: this.props.storehouseState.storehouse,
+        recordBook: this.props.recordBookState.recordBook
+      })
     }, COOKIE_SET_INTERVAL);
 
     let localStorages = getLocalStorages();
@@ -47,6 +52,9 @@ class App extends Component {
       localStoragePromises.push(this.props.setFields(fields));
       let storehouse = new Storehouse(localStorages.storehouse);
       localStoragePromises.push(this.props.setStorehouse(storehouse));
+      let familyDict = JSON.parse(localStorage.recordBook).familyDict;
+      let recordBook = new RecordBook(familyDict);
+      localStoragePromises.push(this.props.setRecordBook(recordBook));
     }
     Promise.all(localStoragePromises)
     .then((res) => {
@@ -64,7 +72,7 @@ class App extends Component {
       this.props.fieldsState.fields.getAll().map((field) => {
         if (field.seedPlanted != null) {
           let seed = field.seedPlanted;
-          
+
           field.seedPlanted = new Seed(seed.familyName,
             seed.givenCultivarName, seed.methodObtained, seed.dateObtained, null, seed.parents, seed.genome);
           field.restoreSeedState();
@@ -130,14 +138,15 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ fieldsState, storehouseState, cardNavState }) {
-  return { fieldsState, storehouseState, cardNavState }
+function mapStateToProps({ fieldsState, storehouseState, recordBookState,
+  cardNavState }) {
+  return { fieldsState, storehouseState, recordBookState, cardNavState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
-    cardNavStartRight, setFields, setStorehouse
+    cardNavStartRight, setFields, setStorehouse, setRecordBook
   }, dispatch)
 }
 
