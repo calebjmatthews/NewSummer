@@ -19,6 +19,8 @@ import Field from '../models/field';
 import Seed from '../models/seed';
 import Storehouse from '../models/storehouse';
 import RecordBook from '../models/record_book';
+import AutoIncrement from '../models/auto_increment';
+import {autoIncrement} from '../instances/auto_increment';
 
 class App extends Component {
   componentDidMount() {
@@ -34,13 +36,15 @@ class App extends Component {
       setLocalStorages({
         fields: this.props.fieldsState.fields,
         storehouse: this.props.storehouseState.storehouse,
-        recordBook: this.props.recordBookState.recordBook
+        recordBook: this.props.recordBookState.recordBook,
+        autoIncrement: autoIncrement
       })
     }, COOKIE_SET_INTERVAL);
 
     let localStorages = getLocalStorages();
     let localStoragePromises = [];
     if (localStorages != false) {
+
       let fields = new Cache([]);
       localStorages.fields.members.map((field) => {
         let newField = new Field(field.id, field.index, field.name);
@@ -50,11 +54,16 @@ class App extends Component {
         fields.add(newField);
       });
       localStoragePromises.push(this.props.setFields(fields));
+
       let storehouse = new Storehouse(localStorages.storehouse);
       localStoragePromises.push(this.props.setStorehouse(storehouse));
+
       let familyDict = JSON.parse(localStorage.recordBook).familyDict;
       let recordBook = new RecordBook(familyDict);
       localStoragePromises.push(this.props.setRecordBook(recordBook));
+
+      let lsAutoIncrement = new AutoIncrement(localStorage.autoIncrement);
+      autoIncrement = lsAutoIncrement;
     }
     Promise.all(localStoragePromises)
     .then((res) => {
@@ -74,7 +83,7 @@ class App extends Component {
           let seed = field.seedPlanted;
 
           field.seedPlanted = new Seed(seed.familyName,
-            seed.givenCultivarName, seed.methodObtained, seed.dateObtained, null, seed.parents, seed.genome);
+            seed.givenCultivarName, seed.methodObtained, seed.dateObtained, null, seed.parents, seed.id, seed.genome);
           field.restoreSeedState();
         }
       })

@@ -1,4 +1,4 @@
-const storageNames = ['fields', 'storehouse', 'recordBook'];
+const storageNames = ['fields', 'storehouse', 'recordBook', 'autoIncrement'];
 
 export function setLocalStorages(storages) {
   storageNames.map((storageName) => {
@@ -8,7 +8,6 @@ export function setLocalStorages(storages) {
 
 export function getLocalStorages() {
   let localStoragesObj = {};
-  const storageNames = ['fields', 'storehouse', 'recordBook'];
   let atLeastOnePresent = false;
   storageNames.map((cName) => {
     let oneLocalStorage = localStorage.getItem(cName);

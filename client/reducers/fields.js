@@ -3,12 +3,11 @@ import {
 } from '../actions/field';
 import Field from '../models/field';
 import Cache from '../models/cache';
+import {autoIncrement} from '../instances/auto_increment';
 
-const FIELD_DEMO_ID1 = Math.floor(Math.random() * 10000);
-const FIELD_DEMO_ID2 = Math.floor(Math.random() * 10000);
 let fields = new Cache([
-  new Field(FIELD_DEMO_ID1, 0, 'Stone Row'),
-  new Field(FIELD_DEMO_ID2, 1, 'Dusty Corner')
+  new Field(autoIncrement.genId('field'), 0, 'Stone Row'),
+  new Field(autoIncrement.genId('field'), 1, 'Dusty Corner')
 ])
 
 export default function

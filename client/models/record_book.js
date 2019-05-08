@@ -13,7 +13,7 @@ export default class RecordBook {
           let seed = seedDict[seedId];
           seedDict[seedId] = new Seed(seed.familyName, seed.cultivarName,
             seed.methodObtained, seed.dateObtained, null, seed.parentIds,
-            seed.genome);
+            seed.id, seed.genome);
         });
       });
     });

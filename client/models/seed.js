@@ -2,13 +2,13 @@ import {shuffle} from '../functions/utils';
 import Gene from '../models/gene';
 import {families} from '../instances/families';
 import {recordBook} from '../instances/record_book';
+import {autoIncrement} from '../instances/auto_increment';
 
 export default class Seed {
   constructor(familyName, givenCultivarName, methodObtained, dateObtained =
     new Date(Date.now()), variation = 0, parentsIds = [null, null],
-    genome = null) {
-    let id = Math.floor(Math.random() * 10000);
-    this.id = id;
+    id = null, genome = null) {
+    this.id = autoIncrement.genId('seed');
     this.familyName = familyName;
     this.methodObtained = methodObtained;
     this.dateObtained = dateObtained;
@@ -150,7 +150,8 @@ export default class Seed {
     })
 
     const newSeed = new Seed(this.familyName, null, 'Bred',
-      new Date(Date.now()), null, [this.id, otherParent.id], newGenome);
+      new Date(Date.now()), null, [this.id, otherParent.id], null,
+      newGenome);
     recordBook.recordSeed(newSeed);
     return newSeed;
   }
