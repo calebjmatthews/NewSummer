@@ -186,6 +186,7 @@ export default class Family {
 function getFlavorDescription(traitTotalDict) {
   let flavorDescription = {};
   if (traitTotalDict[TOXICITY].numerator > 0) {
+    flavorDescription.title = 'Flavor';
     flavorDescription.icon = 'skull-crossbones';
     flavorDescription.iconStyle = 'negative';
     let frac = (traitTotalDict[TOXICITY].numerator /
