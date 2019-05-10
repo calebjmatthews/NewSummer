@@ -9,17 +9,11 @@ let seedTrader = new Traveler('Susanna Pol', .2, 0, [],
 );
 
 seedTrader.createOffers = function(cultivarsUnlocked) {
-  console.log('cultivarsUnlocked');
-  console.log(cultivarsUnlocked);
   let variation = 1;
   if (Math.random() > 0.9) {
     variation = 3;
   }
-  console.log('Math.log(cultivarsUnlocked.length)');
-  console.log(Math.log(cultivarsUnlocked.length));
   let numToOffer = 3 + Math.floor(Math.log(cultivarsUnlocked.length));
-  console.log('numToOffer');
-  console.log(numToOffer);
   let offers = [];
   for (let loop = 0; loop < 100; loop++) {
     let newOffer = genOffer(offers, cultivarsUnlocked, variation);

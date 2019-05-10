@@ -8,6 +8,7 @@ import { pixiHandler } from '../../instances/pixi/handler';
 import { cast } from '../../instances/cast';
 import { POACEAE } from '../../instances/families';
 import SeedTraderCard from './seed_trader';
+import SeedDetailCard from '../seed_detail';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class HomeCard extends Component {
       seedBreeding: false,
       seedA: null,
       seedB: null,
-      seedBuying: false
+      seedBuying: false,
+      seedDetail: false
     }
   }
   componentDidMount() {
@@ -96,6 +98,13 @@ class HomeCard extends Component {
           <div onClick={() => this.breedClick()}>Go!</div>
           <div onClick={() => this.breedingToggleClick()}>Cancel</div>
         </div>
+      );
+    }
+    else if (this.state.seedDetail != false) {
+      return (
+        <SeedDetailCard transStyle={this.props.transStyle}
+          seed={this.state.seedDetail}
+          updateSeedDetail={this.updateSeedDetail.bind(this)} />
       );
     }
     else if (this.state.seedBuying == true) {

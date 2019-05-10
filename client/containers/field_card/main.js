@@ -29,8 +29,6 @@ class FieldCard extends Component {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
           seed={this.state.seedDetail}
-          field={this.props.field}
-          updateSeedPlanting={this.updateSeedPlanting.bind(this)}
           updateSeedDetail={this.updateSeedDetail.bind(this)} />
       )
     }

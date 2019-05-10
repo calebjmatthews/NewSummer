@@ -15,7 +15,7 @@ class SeedDescription extends Component {
   render() {
     let seed = this.props.seed;
     return (
-      <div className="seed-option" key={seed.id}>
+      <div className="seed-option">
         <div>
           {seed.name}
           <div className="seed-icon-container">

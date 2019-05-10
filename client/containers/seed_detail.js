@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { plantSeed } from '../actions/field';
-
 class SeedDetailCard extends Component {
-  componentDidMount() {
-    this.seedConfirmClick = this.seedConfirmClick.bind(this);
-  }
-
-  seedConfirmClick(seed) {
-    this.props.plantSeed(this.props.fieldsState.fields,
-      this.props.field.id, seed);
-    this.props.updateSeedPlanting(false);
-    this.props.updateSeedDetail(false);
-  }
-
   render() {
     let seed = this.props.seed;
     return (
@@ -45,11 +30,8 @@ class SeedDetailCard extends Component {
           </div>
         </div>
         <div>
-          <button onClick={() => this.seedConfirmClick(seed)}>
-            Confirm
-          </button>
           <button onClick={() => this.props.updateSeedDetail(false)}>
-            Cancel
+            Back
           </button>
         </div>
       </div>
@@ -69,14 +51,4 @@ function calcTransStyle(iconStyle) {
   }
 }
 
-function mapStateToProps({ fieldsState }) {
-  return { fieldsState }
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    plantSeed
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SeedDetailCard);
+export default SeedDetailCard;
