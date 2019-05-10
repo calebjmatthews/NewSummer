@@ -31,4 +31,8 @@ export function buyFieldAttempt(economy, storehouse, fields) {
   }
 };
 
+export function buySeedAttempt(economy, storehouse) {
+
+}
+
 export const ECONOMY_MESSAGE_CLEAR = 'ECONOMY_MESSAGE_CLEAR';

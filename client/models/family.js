@@ -184,11 +184,12 @@ export default class Family {
 }
 
 function getFlavorDescription(traitTotalDict) {
+  let flavorDescription = {};
   if (traitTotalDict[TOXICITY].numerator > 0) {
     flavorDescription.icon = 'skull-crossbones';
     flavorDescription.iconStyle = 'negative';
-    let frac = (traitTotalDict[traitName].numerator /
-      traitTotalDict[traitName].denominator)
+    let frac = (traitTotalDict[TOXICITY].numerator /
+      traitTotalDict[TOXICITY].denominator)
     switch (Math.round(frac * 3)) {
       case 3:
         flavorDescription.description = 'Tastes like concentrated death';

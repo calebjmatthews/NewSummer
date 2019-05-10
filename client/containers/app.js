@@ -8,7 +8,7 @@ import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
 import { setStorehouse } from '../actions/storehouse';
 import FieldCard from './field_card/main';
 import { setRecordBook } from '../actions/record_book';
-import HomeCard from './home_card';
+import HomeCard from './home_card/main';
 import { pixiHandler } from '../instances/pixi/handler';
 import { getLocalStorages, setLocalStorages }
   from '../functions/local_storage';

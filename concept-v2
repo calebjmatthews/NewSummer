@@ -268,11 +268,13 @@ Seed trader, steps to create current offerings:
 	4. Seeds are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
 
 Seed add/discard dialogue
-	1. Show seed to be added on top, possibly with label "NEW"
-	2. Show all cultivar's seeds below, can be clicked to highlight
-	3. "Trash" and "Cancel" buttons below this, "Trash" becomes enabled when something has been highlighted
-	4. If cancelled, the function returns false and no data is changed
-	5. If something is trashed, it is removed from the storehouse and the function returns true
+	1. Click "buy" on displayed seed
+	2. If not enough money, show explanatory note and cancel
+	3. Otherwise, deduct the money, show seed to be added on top, possibly with label "NEW"
+	4. Show all cultivar's seeds below, can be clicked to highlight
+	5. "Trash" and "Cancel" buttons below this, "Trash" becomes enabled when something has been highlighted
+	6. If cancelled, the function returns false and deducted money is returned
+	7. If something is trashed, it is removed from the storehouse, the new seed is added to the storehouse, and the function returns true
 
 Record Book:
 ~~~~~~~~~~~~

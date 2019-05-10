@@ -3,20 +3,26 @@ import Offer from '../../models/offer';
 import Seed from '../../models/seed';
 import { POACEAE } from '../families';
 
-let seedTrader = new Traveler('Susanna Pol', .2, null, 0, [],
+let seedTrader = new Traveler('Susanna Pol', .2, 0, [],
   ['Ah... Just let me rest my legs, it\'s been a long, dusty road.'],
   []
 );
 
 seedTrader.createOffers = function(cultivarsUnlocked) {
+  console.log('cultivarsUnlocked');
+  console.log(cultivarsUnlocked);
   let variation = 1;
   if (Math.random() > 0.9) {
     variation = 3;
   }
+  console.log('Math.log(cultivarsUnlocked.length)');
+  console.log(Math.log(cultivarsUnlocked.length));
   let numToOffer = 3 + Math.floor(Math.log(cultivarsUnlocked.length));
+  console.log('numToOffer');
+  console.log(numToOffer);
   let offers = [];
   for (let loop = 0; loop < 100; loop++) {
-    let newOffer = genOffer(offers, cultivarsUnlocked);
+    let newOffer = genOffer(offers, cultivarsUnlocked, variation);
     if (newOffer != null) {
       offers.push(newOffer);
     }
@@ -27,9 +33,10 @@ seedTrader.createOffers = function(cultivarsUnlocked) {
   return offers;
 }
 
-function genOffer(offers, cultivarsUnlocked) {
+function genOffer(offers, cultivarsUnlocked, variation) {
   let index = Math.floor(Math.random() * cultivarsUnlocked.length);
-  let newSeed = new Seed(POACEAE, cultivarsUnlocked[index], 'Bought');
+  let newSeed = new Seed(POACEAE, cultivarsUnlocked[index], 'Bought',
+    new Date(Date.now()), variation);
   let nameAlreadyExists = false;
   offers.map((offer) => {
     if (offer.item.name == newSeed.name) {

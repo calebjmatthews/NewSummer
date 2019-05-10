@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyFieldAttempt, BUY_SUCCESS } from '../actions/economy';
-import { breedSeeds } from '../actions/storehouse';
-import { initNavCards } from '../actions/animation/card_nav';
-import { pixiHandler } from '../instances/pixi/handler';
-import { cast } from '../instances/cast';
-import { POACEAE } from '../instances/families';
+import { buyFieldAttempt, BUY_SUCCESS } from '../../actions/economy';
+import { breedSeeds } from '../../actions/storehouse';
+import { initNavCards } from '../../actions/animation/card_nav';
+import { pixiHandler } from '../../instances/pixi/handler';
+import { cast } from '../../instances/cast';
+import { POACEAE } from '../../instances/families';
+import SeedTraderCard from './seed_trader';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -14,25 +15,30 @@ class HomeCard extends Component {
     this.state = {
       seedBreeding: false,
       seedA: null,
-      seedB: null
+      seedB: null,
+      seedBuying: false
     }
   }
   componentDidMount() {
     this.traderClick = this.traderClick.bind(this);
     this.breedingToggleClick = this.breedingToggleClick.bind(this);
     this.breedClick = this.breedClick.bind(this);
+    this.updateSeedBuying = this.updateSeedBuying.bind(this);
+    this.updateSeedDetail = this.updateSeedDetail.bind(this);
+  }
+  updateSeedBuying(seedBuying) {
+    this.setState({ seedBuying: seedBuying });
+  }
+  updateSeedDetail(seedDetail) {
+    this.setState({ seedDetail: seedDetail });
   }
 
   traderClick(toBuy) {
     let cultivarsUnlocked =
       this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
     let offers = cast.currentlyVisiting.createOffers(cultivarsUnlocked);
-    console.log('offers');
-    console.log(offers);
     cast.currentlyVisiting.currentOffers = offers;
-
-    console.log('cast');
-    console.log(cast);
+    this.setState({ seedBuying: true });
   }
   breedingToggleClick() {
     const switchedBreeding = !this.state.seedBreeding;
@@ -90,6 +96,13 @@ class HomeCard extends Component {
           <div onClick={() => this.breedClick()}>Go!</div>
           <div onClick={() => this.breedingToggleClick()}>Cancel</div>
         </div>
+      );
+    }
+    else if (this.state.seedBuying == true) {
+      return (
+        <SeedTraderCard transStyle={this.props.transStyle}
+          updateSeedBuying={this.updateSeedBuying.bind(this)}
+          updateSeedDetail={this.updateSeedDetail.bind(this)} />
       );
     }
     else {
