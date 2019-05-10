@@ -21,6 +21,7 @@ import Storehouse from '../models/storehouse';
 import RecordBook from '../models/record_book';
 import AutoIncrement from '../models/auto_increment';
 import {autoIncrement} from '../instances/auto_increment';
+import {cast} from '../instances/cast';
 
 class App extends Component {
   componentDidMount() {
@@ -62,8 +63,9 @@ class App extends Component {
       let recordBook = new RecordBook(familyDict);
       localStoragePromises.push(this.props.setRecordBook(recordBook));
 
-      let lsAutoIncrement = new AutoIncrement(localStorage.autoIncrement);
-      autoIncrement = lsAutoIncrement;
+      if (autoIncrement != undefined) {
+        autoIncrement.set(localStorage.autoIncrement);
+      }
     }
     Promise.all(localStoragePromises)
     .then((res) => {

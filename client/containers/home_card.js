@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { buyFieldAttempt, BUY_SUCCESS } from '../actions/economy';
 import { breedSeeds } from '../actions/storehouse';
 import { initNavCards } from '../actions/animation/card_nav';
-import {pixiHandler} from '../instances/pixi/handler';
+import { pixiHandler } from '../instances/pixi/handler';
+import { cast } from '../instances/cast';
+import { POACEAE } from '../instances/families';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -16,26 +18,21 @@ class HomeCard extends Component {
     }
   }
   componentDidMount() {
-    this.buyClick = this.buyClick.bind(this);
+    this.traderClick = this.traderClick.bind(this);
     this.breedingToggleClick = this.breedingToggleClick.bind(this);
     this.breedClick = this.breedClick.bind(this);
   }
 
-  buyClick(toBuy) {
-    if (toBuy == 'field') {
-      let res = this.props.buyFieldAttempt(
-        this.props.economyState.economy,
-        this.props.storehouseState.storehouse,
-        this.props.fieldsState.fields
-      );
-      if (res.type == BUY_SUCCESS) {
-        this.props.initNavCards(this.props.cardNavState.cardAnchor,
-          this.props.cardNavState.spotCurrent,
-          (this.props.fieldsState.fields.members.length+1));
-        pixiHandler.addCard(this.props.fieldsState.fields.members.length
-          - this.props.cardNavState.spotCurrent);
-      }
-    }
+  traderClick(toBuy) {
+    let cultivarsUnlocked =
+      this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
+    let offers = cast.currentlyVisiting.createOffers(cultivarsUnlocked);
+    console.log('offers');
+    console.log(offers);
+    cast.currentlyVisiting.currentOffers = offers;
+
+    console.log('cast');
+    console.log(cast);
   }
   breedingToggleClick() {
     const switchedBreeding = !this.state.seedBreeding;
@@ -77,7 +74,7 @@ class HomeCard extends Component {
           </div>
           <div>
             <div>
-              {'Seed 2:' +
+              {'Seed 2: ' +
                 (this.state.seedB != null ? this.state.seedB.name : 'none')}
               {this.props.storehouseState.storehouse
                 .seeds.getAll().map((seed) => {
@@ -98,10 +95,9 @@ class HomeCard extends Component {
     else {
       return (
         <div className="game-card" style={this.props.transStyle}>
-          <div onClick={() => this.buyClick('field')}>
+          <div onClick={() => this.traderClick('field')}>
             <div>{'A trader is visiting:'}</div>
-            <div>{'Purchase a new field for $'
-              + this.props.economyState.economy.getFieldPrice()}</div>
+            <div>{'Say hello!'}</div>
           </div>
 
           <div onClick={() => this.breedingToggleClick()}>
@@ -115,8 +111,9 @@ class HomeCard extends Component {
 }
 
 function mapStateToProps({ storehouseState, economyState, fieldsState,
-  cardNavState }) {
-  return { storehouseState, economyState, fieldsState, cardNavState }
+  cardNavState, recordBookState }) {
+  return { storehouseState, economyState, fieldsState, cardNavState,
+    recordBookState }
 }
 
 function mapDispatchToProps(dispatch) {

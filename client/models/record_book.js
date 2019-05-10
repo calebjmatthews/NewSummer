@@ -31,4 +31,12 @@ export default class RecordBook {
     let cultivarDict = familyDict[aSeed.cultivarName];
     cultivarDict[aSeed.id] = aSeed;
   }
+
+  getCultivarsUnlocked(familyName) {
+    let cultivarsUnlocked = [];
+    Object.keys(this.familyDict[familyName]).map((cultivarName) => {
+      cultivarsUnlocked.push(cultivarName);
+    });
+    return cultivarsUnlocked;
+  }
 }

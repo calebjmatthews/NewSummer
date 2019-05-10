@@ -246,15 +246,23 @@ X Flesh out mature seed selling
 
 Wanderers:
 ~~~~~~~~~~
-properties: name, frequency, affection, offers, dialogues, gifts
+properties: name, frequency, visitRemaining, affection, offers, dialogues, gifts
 
 Seed trader: Overall clad lady, friendly; offers seeds with default 1 variation of currently discovered cultivars, occasionally offers 3 variation, then offers
 Explorer: Indiana Jones type; offers initial quests, then telegram pole, then expeditions
 Craftsman: Bulky, goggles; offers experimental garden improvements, storage improvements, aesthetic farmhouse improvements
 Tailor: Gentleman in suit; Offers aesthetic clothing options made from various crops
 
+Frequency/duration mechanics:
+	- Default duration of a traveler visit is 5 minutes
+	- Frequency describes the likelihood of a traveler being in a visiting state in any given moment
+	- Therefore with a duration of 300 seconds and a frequency of .2, a visit event would occur once in 1500 seconds (25 minutes), and the probability of
+	- A check is made every second to see if a traveler arrives
+	- The probability of a traveler arriving is 1/(300/.2) = .00067 or 0.067%
+	- Mandatory cooldown period equal to duration (300 seconds)
+
 Seed trader, steps to create current offerings:
-	1. Number of options = 3 + Math.floor(log(# unlocked cultivars) * 3)
+	1. Number of options = 3 + Math.floor(ln(# unlocked cultivars))
 	2. For each option, select an unlocked cultivar and make a seed with variation of 1 (90%) of time or 3 (10%) of time
 	3. If resulting seed's name already exists in the seed options, retry
 	4. Seeds are priced according to (((the theoretical price of the plant - the base price of the plant) / the base price of the plant) + 1) ^ 2
@@ -305,8 +313,8 @@ X Basic visual polish
 X Display plant value and speed
 X Additional seed props
 X Track discovered cultivars
-_ ID incrementing utility class
-_ Record book localStorage and reducer
+X ID incrementing utility class
+X Record book localStorage and reducer
 _ Seeds from trader
 _ Seed inventory navigation/limits
 _ Experimental garden on delay
