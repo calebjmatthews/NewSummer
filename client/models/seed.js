@@ -7,7 +7,12 @@ export default class Seed {
   constructor(familyName, givenCultivarName, methodObtained, dateObtained =
     new Date(Date.now()), variation = 0, parentsIds = [null, null],
     id = null, genome = null) {
-    this.id = autoIncrement.genId('seed');
+    if (id == null) {
+      this.id = autoIncrement.genId('seed');
+    }
+    else {
+      this.id = id;
+    }
     this.familyName = familyName;
     this.methodObtained = methodObtained;
     this.dateObtained = dateObtained;
