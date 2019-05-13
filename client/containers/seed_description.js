@@ -14,6 +14,10 @@ class SeedDescription extends Component {
 
   render() {
     let seed = this.props.seed;
+    let confirmText = 'Confirm';
+    if (this.props.confirmText != undefined) {
+      confirmText = this.props.confirmText;
+    }
     return (
       <div className="seed-option">
         <div>
@@ -40,7 +44,7 @@ class SeedDescription extends Component {
           </button>
           <button onClick={() => this.seedConfirmClick(seed)}
             disabled={this.props.confirmDisabled}>
-            Confirm
+            {confirmText}
           </button>
         </div>
       </div>

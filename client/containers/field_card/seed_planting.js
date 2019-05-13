@@ -37,7 +37,8 @@ class SeedPlantingFieldCard extends Component {
             return (
               <SeedDescription key={seed.id} seed={seed}
                 onClickConfirmToParent={this.onClickConfirmToParent}
-                onClickDetailToParent={this.onClickDetailToParent} />
+                onClickDetailToParent={this.onClickDetailToParent}
+                confirmText={'Plant'} />
             );
           })}
         </div>

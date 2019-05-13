@@ -39,10 +39,15 @@ class SeedTraderCard extends Component {
         <div className="seed-option-container">
           {this.props.castState.cast.currentlyVisiting.currentOffers.map((offer) => {
             let seed = offer.item;
+            let confirmText = 'Sold';
+            if (offer.sold == false) {
+              confirmText = ('Buy for $' + offer.price)
+            }
             return (
               <SeedDescription key={seed.name} seed={seed}
                 onClickConfirmToParent={this.onClickConfirmToParent}
                 onClickDetailToParent={this.onClickDetailToParent}
+                confirmText={confirmText}
                 confirmDisabled={offer.sold} />
             );
           })}
