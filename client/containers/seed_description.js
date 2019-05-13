@@ -38,7 +38,8 @@ class SeedDescription extends Component {
           <button onClick={() => this.seedDetailClick(seed)}>
             Detail
           </button>
-          <button onClick={() => this.seedConfirmClick(seed)}>
+          <button onClick={() => this.seedConfirmClick(seed)}
+            disabled={this.props.confirmDisabled}>
             Confirm
           </button>
         </div>

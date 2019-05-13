@@ -42,7 +42,8 @@ class SeedTraderCard extends Component {
             return (
               <SeedDescription key={seed.name} seed={seed}
                 onClickConfirmToParent={this.onClickConfirmToParent}
-                onClickDetailToParent={this.onClickDetailToParent} />
+                onClickDetailToParent={this.onClickDetailToParent}
+                confirmDisabled={offer.sold} />
             );
           })}
         </div>

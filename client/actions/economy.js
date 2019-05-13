@@ -4,6 +4,7 @@ import {autoIncrement} from '../instances/auto_increment';
 
 import {spendDollars, addSeed} from './storehouse';
 import {addField} from './field';
+import {setCast} from './cast';
 
 export const SET_ECONOMY = 'SET_ECONOMY';
 export const BUY_INSUFFICIENT_FUNDS = 'BUY_INSUFFICIENT_FUNDS';
@@ -34,6 +35,18 @@ export function buyFieldAttempt(economy, storehouse, fields) {
 export function buySeedAttempt(economy, storehouse, cast, offer) {
   if (storehouse.dollars >= offer.price) {
     return function(dispatch) {
+      let matchingTraveler = null;
+      cast.members.map((traveler) => {
+        if (traveler.name == offer.travelerName) {
+          matchingTraveler = traveler;
+        }
+      });
+      matchingTraveler.currentOffers.map((cOffer) => {
+        if (cOffer.id == offer.id) {
+          cOffer.sold = true;
+        }
+      });
+      dispatch(setCast(cast));
       dispatch(spendDollars(storehouse, offer.price));
       dispatch(addSeed(storehouse, offer.item));
       economy.intermediateSpend = offer.price;

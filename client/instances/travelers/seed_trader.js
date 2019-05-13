@@ -3,7 +3,8 @@ import Offer from '../../models/offer';
 import Seed from '../../models/seed';
 import { POACEAE } from '../families';
 
-let seedTrader = new Traveler('Susanna Pol', .2, 0, [],
+const SUSANNA_POL = 'Susanna Pol';
+let seedTrader = new Traveler(SUSANNA_POL, .2, 0, [],
   ['Ah... Just let me rest my legs, it\'s been a long, dusty road.'],
   []
 );
@@ -41,7 +42,7 @@ function genOffer(offers, cultivarsUnlocked, variation) {
     return null;
   }
   return new Offer(newSeed.name, (parseFloat(newSeed.idealValue) * 2),
-    false, 'seed', newSeed);
+    false, 'seed', newSeed, SUSANNA_POL);
 }
 
-export {seedTrader};
+export {seedTrader, SUSANNA_POL};
