@@ -27,8 +27,15 @@ export function spendDollars(storehouse, dollarsSpent) {
 
 export function breedSeeds(storehouse, seedA, seedB) {
   const newSeed = storehouse.breedSeeds(seedA, seedB);
-  recordBook.recordSeed(newSeed);
-  storehouse.addSeed(newSeed);
+  if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
+    recordBook.recordSeed(newSeed);
+    storehouse.addSeed(newSeed);
+  }
+  else {
+    console.log('Cultivar storage full.');
+    storehouse.intermediateSeed = newSeed;
+  }
+
   return {
     type: SET_STOREHOUSE,
     storehouse: storehouse

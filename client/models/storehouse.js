@@ -5,7 +5,7 @@ export default class Storehouse {
   constructor(aStorehouse = null) {
     if (aStorehouse != null) {
       this.dollars = aStorehouse.dollars;
-      this.timeBells = aStorehouse.timeBells;
+      this.maxSeeds = aStorehouse.maxSeeds;
 
       let newSeeds = [];
       aStorehouse.seeds.members.map((seed) => {
@@ -18,11 +18,34 @@ export default class Storehouse {
         newSeeds.push(newSeed);
       });
       this.seeds = new Cache(newSeeds);
+
+      if (aStorehouse.intermediateSeed != null) {
+        this.intermediateSeed = new Seed(seed.familyName,
+          seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
+          null, seed.parents, seed.id, seed.genome);
+      }
     }
     else {
       this.dollars = 1000;
-      this.timeBells = 0;
+      this.maxSeeds = 4;
       this.seeds = new Cache([]);
+      this.intermediateSeed = null;
+    }
+  }
+  isCultivarFull(cultivarName) {
+    let count = 0;
+    this.seeds.members.map((seed) => {
+      if (seed.cultivarName == cultivarName)  {
+        count++;
+      }
+    });
+    console.log('count');
+    console.log(count);
+    if (count >= this.maxSeeds) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
   gainDollars(dollarsGained) {

@@ -2,7 +2,7 @@ import Economy from '../models/economy';
 import Field from '../models/field';
 import {autoIncrement} from '../instances/auto_increment';
 
-import {spendDollars, addSeed} from './storehouse';
+import {spendDollars, addSeed, setStorehouse} from './storehouse';
 import {addField} from './field';
 import {setCast} from './cast';
 
@@ -46,10 +46,18 @@ export function buySeedAttempt(economy, storehouse, cast, offer) {
           cOffer.sold = true;
         }
       });
-      dispatch(setCast(cast));
       dispatch(spendDollars(storehouse, offer.price));
-      dispatch(addSeed(storehouse, offer.item));
-      economy.intermediateSpend = offer.price;
+      if (storehouse.isCultivarFull(offer.item.cultivarName) == false) {
+        dispatch(setCast(cast));
+        dispatch(addSeed(storehouse, offer.item));
+      }
+      else {
+        console.log('Cultivar storage full.');
+        storehouse.dollars -= offer.price;
+        storehouse.intermediateSeed = offer.item;
+        dispatch(setStorehouse(storehouse));
+        economy.intermediateSpend = offer.price;
+      }
       return {
         type: SET_ECONOMY,
         economy: economy
