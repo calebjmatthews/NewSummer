@@ -3,6 +3,8 @@ export default class Economy {
     this.fieldsBought = 0;
     this.baseFieldPrice = 100;
     this.currentFieldPrice = this.genFieldPrice();
+
+    this.intermediateSpend = null;
   }
   getFieldPrice() {
     return this.currentFieldPrice;

@@ -6,19 +6,26 @@ import SeedDescription from '../seed_description';
 
 class SeedTraderCard extends Component {
   componentDidMount() {
-    this.seedBuyClick = this.seedBuyClick.bind(this);
+    this.buyOffer = this.buyOffer.bind(this);
     this.onClickConfirmToParent = this.onClickConfirmToParent.bind(this);
     this.onClickDetailToParent = this.onClickDetailToParent.bind(this);
   }
 
-  seedBuyClick(seed) {
-    // this.props.plantSeed(this.props.fieldsState.fields,
-    //   this.props.field.id, seed);
-    // this.props.updateSeedPlanting(false);
+  buyOffer(offer) {
+    return this.props.buySeedAttempt(this.props.economyState.economy,
+      this.props.storehouseState.storehouse,
+      this.props.castState.cast,  offer);
   }
 
   onClickConfirmToParent(seed) {
-    return this.seedConfirmClick(seed);
+    let matchingOffer = null;
+    this.props.castState.cast.currentlyVisiting.currentOffers.map((offer) => {
+      if (offer.item.name == seed.name) {
+        matchingOffer = offer;
+      }
+    });
+
+    return this.buyOffer(matchingOffer);
   }
 
   onClickDetailToParent(seed) {
@@ -45,8 +52,9 @@ class SeedTraderCard extends Component {
 }
 
 
-function mapStateToProps({ fieldsState, castState }) {
-  return { fieldsState, castState }
+function mapStateToProps({ fieldsState, castState, storehouseState,
+  economyState }) {
+  return { fieldsState, castState, storehouseState, economyState }
 }
 
 function mapDispatchToProps(dispatch) {

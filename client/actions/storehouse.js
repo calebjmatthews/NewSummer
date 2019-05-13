@@ -32,3 +32,11 @@ export function breedSeeds(storehouse, seedA, seedB) {
     storehouse: storehouse
   }
 }
+
+export function gainSeed(storehouse, seed) {
+  storehouse.addSeed(seed);
+  return {
+    type: SET_STOREHOUSE,
+    storehouse: storehouse
+  }
+}

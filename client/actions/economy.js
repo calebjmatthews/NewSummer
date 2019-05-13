@@ -5,7 +5,7 @@ import {autoIncrement} from '../instances/auto_increment';
 import {spendDollars} from './storehouse';
 import {addField} from './field';
 
-export const BUY_SUCCESS = 'BUY_SUCCESS';
+export const SET_ECONOMY = 'SET_ECONOMY';
 export const BUY_INSUFFICIENT_FUNDS = 'BUY_INSUFFICIENT_FUNDS';
 export function buyFieldAttempt(economy, storehouse, fields) {
   const fieldCost = economy.getFieldPrice();
@@ -18,7 +18,7 @@ export function buyFieldAttempt(economy, storehouse, fields) {
       dispatch(spendDollars(storehouse, fieldCost));
       dispatch(addField(fields, newField));
       return {
-        type: BUY_SUCCESS,
+        type: SET_ECONOMY,
         economy: economy
       };
     }
@@ -31,8 +31,23 @@ export function buyFieldAttempt(economy, storehouse, fields) {
   }
 };
 
-export function buySeedAttempt(economy, storehouse) {
-
+export function buySeedAttempt(economy, storehouse, cast, offer) {
+  if (storehouse.dollars >= offer.price) {
+    return function(dispatch) {
+      dispatch(spendDollars(storehouse, offer.price));
+      economy.intermediateSpend = offer.price;
+      return {
+        type: SET_ECONOMY,
+        economy: economy
+      };
+    }
+  }
+  else {
+    return {
+      type: BUY_INSUFFICIENT_FUNDS,
+      message: 'You don\'t have enough money to afford the seed right now.'
+    };
+  }
 }
 
 export const ECONOMY_MESSAGE_CLEAR = 'ECONOMY_MESSAGE_CLEAR';

@@ -1,5 +1,5 @@
 import {
-  BUY_SUCCESS,
+  SET_ECONOMY,
   BUY_INSUFFICIENT_FUNDS,
   ECONOMY_MESSAGE_CLEAR
 } from '../actions/economy';
@@ -14,7 +14,7 @@ export default function
   },
     action = null) {
 	switch(action.type) {
-    case BUY_SUCCESS:
+    case SET_ECONOMY:
       return Object.assign(
         {}, state, { economy: action.economy });
     case BUY_INSUFFICIENT_FUNDS:
@@ -22,7 +22,7 @@ export default function
         {}, state, { message: action.message });
     case ECONOMY_MESSAGE_CLEAR:
       return Object.assign(
-        {}, state, { message: null });                
+        {}, state, { message: null });
 		default:
 			return state;
 	}

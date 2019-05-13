@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { buyFieldAttempt, BUY_SUCCESS } from '../../actions/economy';
+import { buyFieldAttempt, SET_ECONOMY } from '../../actions/economy';
 import { breedSeeds } from '../../actions/storehouse';
 import { initNavCards } from '../../actions/animation/card_nav';
 import { pixiHandler } from '../../instances/pixi/handler';
