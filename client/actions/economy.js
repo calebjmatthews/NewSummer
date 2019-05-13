@@ -2,7 +2,7 @@ import Economy from '../models/economy';
 import Field from '../models/field';
 import {autoIncrement} from '../instances/auto_increment';
 
-import {spendDollars} from './storehouse';
+import {spendDollars, addSeed} from './storehouse';
 import {addField} from './field';
 
 export const SET_ECONOMY = 'SET_ECONOMY';
@@ -35,6 +35,7 @@ export function buySeedAttempt(economy, storehouse, cast, offer) {
   if (storehouse.dollars >= offer.price) {
     return function(dispatch) {
       dispatch(spendDollars(storehouse, offer.price));
+      dispatch(addSeed(storehouse, offer.item));
       economy.intermediateSpend = offer.price;
       return {
         type: SET_ECONOMY,

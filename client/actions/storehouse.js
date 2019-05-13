@@ -1,4 +1,5 @@
 import Storehouse from '../models/storehouse';
+import {recordBook} from '../instances/record_book';
 
 export const SET_STOREHOUSE = 'SET_STOREHOUSE';
 export function setStorehouse(storehouse) {
@@ -26,6 +27,7 @@ export function spendDollars(storehouse, dollarsSpent) {
 
 export function breedSeeds(storehouse, seedA, seedB) {
   const newSeed = storehouse.breedSeeds(seedA, seedB);
+  recordBook.recordSeed(newSeed);
   storehouse.addSeed(newSeed);
   return {
     type: SET_STOREHOUSE,
@@ -33,8 +35,9 @@ export function breedSeeds(storehouse, seedA, seedB) {
   }
 }
 
-export function gainSeed(storehouse, seed) {
-  storehouse.addSeed(seed);
+export function addSeed(storehouse, newSeed) {
+  recordBook.recordSeed(newSeed);
+  storehouse.addSeed(newSeed);
   return {
     type: SET_STOREHOUSE,
     storehouse: storehouse

@@ -1,7 +1,6 @@
 import {shuffle} from '../functions/utils';
 import Gene from '../models/gene';
 import {families} from '../instances/families';
-import {recordBook} from '../instances/record_book';
 import {autoIncrement} from '../instances/auto_increment';
 
 export default class Seed {
@@ -152,7 +151,6 @@ export default class Seed {
     const newSeed = new Seed(this.familyName, null, 'Bred',
       new Date(Date.now()), null, [this.id, otherParent.id], null,
       newGenome);
-    recordBook.recordSeed(newSeed);
     return newSeed;
   }
   getGeneByNameAndLocus(traitName, locusIndex) {
