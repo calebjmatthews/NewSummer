@@ -20,6 +20,7 @@ export default class Storehouse {
       this.seeds = new Cache(newSeeds);
 
       if (aStorehouse.intermediateSeed != null) {
+        let seed = aStorehouse.intermediateSeed;
         this.intermediateSeed = new Seed(seed.familyName,
           seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
           null, seed.parents, seed.id, seed.genome);

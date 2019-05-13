@@ -53,7 +53,6 @@ export function buySeedAttempt(economy, storehouse, cast, offer) {
       }
       else {
         console.log('Cultivar storage full.');
-        storehouse.dollars -= offer.price;
         storehouse.intermediateSeed = offer.item;
         dispatch(setStorehouse(storehouse));
         economy.intermediateSpend = offer.price;
