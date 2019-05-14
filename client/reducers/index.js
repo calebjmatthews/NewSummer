@@ -5,6 +5,7 @@ import storehouseReducer from './storehouse';
 import economyReducer from './economy';
 import recordBookReducer from './record_book';
 import castReducer from './cast';
+import cardReducer from './card';
 import cardNavReducer from './animation/card_nav';
 
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   economyState: economyReducer,
   recordBookState: recordBookReducer,
   castState: castReducer,
+  cardState: cardReducer,
   cardNavState: cardNavReducer
 })
 
