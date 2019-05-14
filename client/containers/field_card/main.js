@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import SeedPlantingFieldCard from './seed_planting';
 import SeedDisplayFieldCard from './seed_display';
 import SeedDetailCard from '../seed_detail';
@@ -6,48 +8,35 @@ import SeedDetailCard from '../seed_detail';
 class FieldCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      seedPlanting: false,
-      seedDetail: false
-    }
-  }
-  componentDidMount() {
-    this.updateSeedPlanting = this.updateSeedPlanting.bind(this);
-    this.updateSeedDetail = this.updateSeedDetail.bind(this);
-  }
-
-  updateSeedPlanting(seedPlanting) {
-    this.setState({ seedPlanting: seedPlanting });
-  }
-
-  updateSeedDetail(seedDetail) {
-    this.setState({ seedDetail: seedDetail });
   }
 
   render() {
-    if (this.state.seedDetail != false) {
+    let card = this.props.cardState.cards[this.props.spot];
+    if (card == undefined || card == null) { card = {}; }
+    if (card.type == 'seedDetail') {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
-          seed={this.state.seedDetail}
-          updateSeedDetail={this.updateSeedDetail.bind(this)} />
+          spot={this.props.spot}
+          seed={card.value} />
       )
     }
-    if (this.state.seedPlanting == true) {
+    else if (card.type == 'seedPlanting') {
       return (
         <SeedPlantingFieldCard transStyle={this.props.transStyle}
-          field={this.props.field}
-          updateSeedPlanting={this.updateSeedPlanting.bind(this)}
-          updateSeedDetail={this.updateSeedDetail.bind(this)} />
+          spot={this.props.spot} field={this.props.field} />
       );
     }
     else {
       return (
         <SeedDisplayFieldCard transStyle={this.props.transStyle}
-          field={this.props.field}
-          updateSeedPlanting={this.updateSeedPlanting.bind(this)} />
+          spot={this.props.spot} field={this.props.field} />
       );
     }
   }
 }
 
-export default FieldCard;
+function mapStateToProps({ cardState }) {
+  return { cardState }
+}
+
+export default connect(mapStateToProps)(FieldCard);

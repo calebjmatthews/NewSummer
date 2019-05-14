@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { harvestSeed } from '../../actions/field';
+import { setCard } from '../../actions/card';
 
 class SeedDisplayFieldCard extends Component {
   componentDidMount() {
@@ -10,7 +11,7 @@ class SeedDisplayFieldCard extends Component {
 
   fieldCardClick() {
     if (this.props.field.seedPlanted == null) {
-      this.props.updateSeedPlanting(true);
+      this.props.setCard({type: "seedPlanting"}, this.props.spot);
     }
     else {
       if (this.props.field.seedIsMature() == true) {
@@ -44,7 +45,7 @@ function mapStateToProps({ fieldsState, storehouseState }) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    harvestSeed
+    harvestSeed, setCard
   }, dispatch)
 }
 

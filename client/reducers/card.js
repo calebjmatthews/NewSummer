@@ -1,4 +1,5 @@
-import {SET_CARD} from '../actions/card';
+import { SET_ALL_CARDS, SET_CARD, ADD_CARD, REMOVE_CARD }
+  from '../actions/card';
 
 export default function
   (state = {
@@ -10,11 +11,21 @@ export default function
       return Object.assign({}, state, { cards: action.cards });
       break;
     case SET_CARD:
-      return state.map((item, index) => {
-        if(index == action.index) {
-          return action.card;
-        }
-        return item;
+      let newState = Object.assign({}, state, {
+        cards: state.cards.map((item, index) => {
+          if(index == action.index) {
+            return action.card;
+          }
+          return item;
+        })
+      });
+      return Object.assign({}, state, {
+        cards: state.cards.map((item, index) => {
+          if(index == action.index) {
+            return action.card;
+          }
+          return item;
+        })
       });
       break;
     case ADD_CARD:

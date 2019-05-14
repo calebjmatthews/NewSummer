@@ -1,7 +1,7 @@
 export const SET_ALL_CARDS = 'SET_ALL_CARDS';
 export function setAllCards(cards) {
   return {
-    type: SET_ALL_CARDS.
+    type: SET_ALL_CARDS,
     cards: cards
   }
 }

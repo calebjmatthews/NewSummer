@@ -4,27 +4,23 @@ import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { plantSeed } from '../../actions/field';
+import { setCard } from '../../actions/card';
 import SeedDescription from '../seed_description';
 
 class SeedPlantingFieldCard extends Component {
   componentDidMount() {
-    this.seedConfirmClick = this.seedConfirmClick.bind(this);
-    this.onClickConfirmToParent = this.onClickConfirmToParent.bind(this);
-    this.onClickDetailToParent = this.onClickDetailToParent.bind(this);
+    this.seedConfirmPlanting = this.seedConfirmPlanting.bind(this);
+    this.openSeedDetail = this.openSeedDetail.bind(this);
   }
 
-  seedConfirmClick(seed) {
+  seedConfirmPlanting(seed) {
     this.props.plantSeed(this.props.fieldsState.fields,
       this.props.field.id, seed);
-    this.props.updateSeedPlanting(false);
+    this.props.setCard(null, this.props.spot);
   }
 
-  onClickConfirmToParent(seed) {
-    return this.seedConfirmClick(seed);
-  }
-
-  onClickDetailToParent(seed) {
-    return this.props.updateSeedDetail(seed);
+  openSeedDetail(seed) {
+    this.props.setCard({ type: 'seedDetail', value: seed }, this.props.spot);
   }
 
   render() {
@@ -36,8 +32,8 @@ class SeedPlantingFieldCard extends Component {
             .seeds.getAll().map((seed) => {
             return (
               <SeedDescription key={seed.id} seed={seed}
-                onClickConfirmToParent={this.onClickConfirmToParent}
-                onClickDetailToParent={this.onClickDetailToParent}
+                onClickConfirmToParent={this.seedConfirmPlanting}
+                onClickDetailToParent={this.openSeedDetail}
                 confirmText={'Plant'} />
             );
           })}
@@ -47,13 +43,13 @@ class SeedPlantingFieldCard extends Component {
   }
 }
 
-function mapStateToProps({ fieldsState, storehouseState }) {
-  return { fieldsState, storehouseState }
+function mapStateToProps({ fieldsState, storehouseState, cardState }) {
+  return { fieldsState, storehouseState, cardState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    plantSeed
+    plantSeed, setCard
   }, dispatch)
 }
 

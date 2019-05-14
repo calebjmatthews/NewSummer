@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { setCard } from '../actions/card';
 
 class SeedDetailCard extends Component {
   render() {
@@ -30,7 +33,7 @@ class SeedDetailCard extends Component {
           </div>
         </div>
         <div>
-          <button onClick={() => this.props.updateSeedDetail(false)}>
+          <button onClick={() => this.props.setCard(null, this.props.spot)}>
             Back
           </button>
         </div>
@@ -51,4 +54,10 @@ function calcTransStyle(iconStyle) {
   }
 }
 
-export default SeedDetailCard;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    setCard
+  }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(SeedDetailCard);

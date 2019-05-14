@@ -317,7 +317,8 @@ X Additional seed props
 X Track discovered cultivars
 X ID incrementing utility class
 X Record book localStorage and reducer
-_ Seeds from trader
+X Seeds from trader
+_ Card state in reducer
 _ Seed inventory navigation/limits
 _ Experimental garden on delay
 _ Experimental garden gives two choices

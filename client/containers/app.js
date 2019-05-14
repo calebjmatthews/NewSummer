@@ -20,8 +20,9 @@ import Seed from '../models/seed';
 import Storehouse from '../models/storehouse';
 import RecordBook from '../models/record_book';
 import AutoIncrement from '../models/auto_increment';
-import {autoIncrement} from '../instances/auto_increment';
-import {cast} from '../instances/cast';
+import { autoIncrement } from '../instances/auto_increment';
+import { cast } from '../instances/cast';
+import { setAllCards } from '../actions/card';
 
 class App extends Component {
   componentDidMount() {
@@ -41,6 +42,9 @@ class App extends Component {
         autoIncrement: autoIncrement
       })
     }, COOKIE_SET_INTERVAL);
+
+    let cards = [{type: null}, {type: null}, {type: null}];
+    this.props.setAllCards(cards);
 
     let localStorages = getLocalStorages();
     let localStoragePromises = [];
@@ -135,10 +139,12 @@ class App extends Component {
             onClick={() => this.navRightClick()}>
             <div>{'>'}</div>
           </div>
-          <HomeCard transStyle={this.props.cardNavState.cardStyles[0]} />
+          <HomeCard transStyle={this.props.cardNavState.cardStyles[0]}
+            spot={0} />
           {this.props.fieldsState.fields.getAll().map((field) => {
             return (
               <FieldCard key={field.id} field={field}
+                spot={field.index+1}
                 transStyle={this.props.cardNavState.cardStyles[field.index+1]}
                 />
             );
@@ -157,7 +163,7 @@ function mapStateToProps({ fieldsState, storehouseState, recordBookState,
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
-    cardNavStartRight, setFields, setStorehouse, setRecordBook
+    cardNavStartRight, setFields, setStorehouse, setRecordBook, setAllCards
   }, dispatch)
 }
 
