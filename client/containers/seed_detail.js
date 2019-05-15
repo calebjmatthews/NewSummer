@@ -5,8 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setCard } from '../actions/card';
 
 class SeedDetailCard extends Component {
+  componentDidMount() {
+    this.cancelClick = this.cancelClick.bind(this);
+  }
+
+  cancelClick() {
+    this.props.onClickCancelToParent();
+  }
+
   render() {
-    let seed = this.props.seed;
+    let seed = this.props.cardState.cards[this.props.spot].value;
     return (
       <div className="game-card" style={this.props.transStyle}
         key={seed.id}>
@@ -33,7 +41,7 @@ class SeedDetailCard extends Component {
           </div>
         </div>
         <div>
-          <button onClick={() => this.props.setCard(null, this.props.spot)}>
+          <button onClick={ () => this.cancelClick() }>
             Back
           </button>
         </div>
@@ -54,10 +62,14 @@ function calcTransStyle(iconStyle) {
   }
 }
 
+function mapStateToProps({ cardState }) {
+  return { cardState }
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     setCard
   }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(SeedDetailCard);
+export default connect(mapStateToProps, mapDispatchToProps)(SeedDetailCard);

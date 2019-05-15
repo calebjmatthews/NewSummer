@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { buyFieldAttempt, SET_ECONOMY } from '../../actions/economy';
 import { breedSeeds } from '../../actions/storehouse';
 import { initNavCards } from '../../actions/animation/card_nav';
+import { setCard } from '../../actions/card';
 import { pixiHandler } from '../../instances/pixi/handler';
 import { cast } from '../../instances/cast';
 import { POACEAE } from '../../instances/families';
@@ -16,23 +17,14 @@ class HomeCard extends Component {
     this.state = {
       seedBreeding: false,
       seedA: null,
-      seedB: null,
-      seedBuying: false,
-      seedDetail: false
+      seedB: null
     }
   }
   componentDidMount() {
     this.traderClick = this.traderClick.bind(this);
     this.breedingToggleClick = this.breedingToggleClick.bind(this);
     this.breedClick = this.breedClick.bind(this);
-    this.updateSeedBuying = this.updateSeedBuying.bind(this);
-    this.updateSeedDetail = this.updateSeedDetail.bind(this);
-  }
-  updateSeedBuying(seedBuying) {
-    this.setState({ seedBuying: seedBuying });
-  }
-  updateSeedDetail(seedDetail) {
-    this.setState({ seedDetail: seedDetail });
+    this.returnToBuying = this.returnToBuying.bind(this);
   }
 
   traderClick(toBuy) {
@@ -40,8 +32,12 @@ class HomeCard extends Component {
       this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
     let offers = cast.currentlyVisiting.createOffers(cultivarsUnlocked);
     cast.currentlyVisiting.currentOffers = offers;
-    this.setState({ seedBuying: true });
+    this.props.setCard({type: 'seedBuying'}, this.props.spot);
   }
+  returnToBuying() {
+    this.props.setCard({type: 'seedBuying'}, this.props.spot);
+  }
+
   breedingToggleClick() {
     const switchedBreeding = !this.state.seedBreeding;
     this.setState({ seedBreeding: switchedBreeding,
@@ -61,6 +57,8 @@ class HomeCard extends Component {
   }
 
   render() {
+    let card = this.props.cardState.cards[this.props.spot];
+    if (card == undefined || card == null) { card = {}; }
     if (this.state.seedBreeding == true) {
       return (
         <div className="game-card" style={this.props.transStyle}>
@@ -100,18 +98,17 @@ class HomeCard extends Component {
         </div>
       );
     }
-    else if (this.state.seedDetail != false) {
+    else if (card.type == 'seedDetail') {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
-          seed={this.state.seedDetail}
-          updateSeedDetail={this.updateSeedDetail.bind(this)} />
+          spot={this.props.spot} seed={this.state.seedDetail}
+          onClickCancelToParent = { () => this.returnToBuying() } />
       );
     }
-    else if (this.state.seedBuying == true) {
+    else if (card.type == 'seedBuying') {
       return (
         <SeedTraderCard transStyle={this.props.transStyle}
-          updateSeedBuying={this.updateSeedBuying.bind(this)}
-          updateSeedDetail={this.updateSeedDetail.bind(this)} />
+          spot={this.props.spot} />
       );
     }
     else {
@@ -133,14 +130,14 @@ class HomeCard extends Component {
 }
 
 function mapStateToProps({ storehouseState, economyState, fieldsState,
-  cardNavState, recordBookState }) {
+  cardNavState, recordBookState, cardState }) {
   return { storehouseState, economyState, fieldsState, cardNavState,
-    recordBookState }
+    recordBookState, cardState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    buyFieldAttempt, breedSeeds, initNavCards
+    buyFieldAttempt, breedSeeds, initNavCards, setCard
   }, dispatch)
 }
 

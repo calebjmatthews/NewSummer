@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import SeedPlantingFieldCard from './seed_planting';
 import SeedDisplayFieldCard from './seed_display';
 import SeedDetailCard from '../seed_detail';
+import { setCard } from '../../actions/card';
 
 class FieldCard extends Component {
   constructor(props) {
     super(props);
+  }
+
+  resetCardToPlanting() {
+    this.props.setCard({type: 'seedPlanting'}, this.props.spot);
   }
 
   render() {
@@ -16,6 +22,7 @@ class FieldCard extends Component {
     if (card.type == 'seedDetail') {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
+          onClickCancelToParent={ () => this.resetCardToPlanting() }
           spot={this.props.spot}
           seed={card.value} />
       )
@@ -39,4 +46,8 @@ function mapStateToProps({ cardState }) {
   return { cardState }
 }
 
-export default connect(mapStateToProps)(FieldCard);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setCard }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FieldCard);

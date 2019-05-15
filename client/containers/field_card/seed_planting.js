@@ -10,17 +10,12 @@ import SeedDescription from '../seed_description';
 class SeedPlantingFieldCard extends Component {
   componentDidMount() {
     this.seedConfirmPlanting = this.seedConfirmPlanting.bind(this);
-    this.openSeedDetail = this.openSeedDetail.bind(this);
   }
 
   seedConfirmPlanting(seed) {
     this.props.plantSeed(this.props.fieldsState.fields,
       this.props.field.id, seed);
     this.props.setCard(null, this.props.spot);
-  }
-
-  openSeedDetail(seed) {
-    this.props.setCard({ type: 'seedDetail', value: seed }, this.props.spot);
   }
 
   render() {
@@ -32,8 +27,8 @@ class SeedPlantingFieldCard extends Component {
             .seeds.getAll().map((seed) => {
             return (
               <SeedDescription key={seed.id} seed={seed}
+                spot={this.props.spot}
                 onClickConfirmToParent={this.seedConfirmPlanting}
-                onClickDetailToParent={this.openSeedDetail}
                 confirmText={'Plant'} />
             );
           })}

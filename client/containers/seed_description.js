@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GROWING_TIME } from '../instances/stats';
+import { setCard } from '../actions/card';
 
 class SeedDescription extends Component {
+  componentDidMount() {
+    this.seedConfirmClick = this.seedConfirmClick.bind(this);
+    this.seedDetailClick = this.seedDetailClick.bind(this);
+  }
 
   seedConfirmClick(seed) {
     this.props.onClickConfirmToParent(seed);
   }
 
   seedDetailClick(seed) {
-    this.props.onClickDetailToParent(seed);
+    console.log('this.props.spot');
+    console.log(this.props.spot);
+    this.props.setCard({type: "seedDetail", value: seed}, this.props.spot);
   }
 
   render() {
@@ -64,4 +73,8 @@ function calcTransStyle(iconStyle) {
   }
 }
 
-export default SeedDescription;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setCard }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps) (SeedDescription);
