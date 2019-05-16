@@ -94,7 +94,7 @@ button:disabled {
   color: #fff;
 }
 
-.seed-option-container {
+.option-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -113,6 +113,16 @@ button:disabled {
 }
 .seed-option.selected {
   background-color: rgba(0, 0, 0, 0.4);
+}
+.cultivar-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 108px;
+  max-width: 108px;
+  padding: 5px;
+  border: 1px solid #fff;
 }
 
 .seed-icon-container {

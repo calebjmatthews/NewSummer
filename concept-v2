@@ -321,7 +321,8 @@ X ID incrementing utility class
 X Record book localStorage and reducer
 X Seeds from trader
 X Card state in reducer
-_ Seed inventory navigation/limits
+X Seed inventory navigation/limits
+_ Improved navigation between card types(states)
 _ Experimental garden on delay
 _ Experimental garden gives two choices
 _ Pixel graphics linked with traits

@@ -19,12 +19,21 @@ class SeedPlantingFieldCard extends Component {
   }
 
   render() {
+    let card = this.props.cardState.cards[this.props.spot];
+    let cultivarSeeds = [];
+    if (card.value != undefined && card.value != null) {
+      cultivarSeeds = this.props.storehouseState.storehouse.seeds
+        .getAllMatching('cultivarName', card.value);
+    }
+    else {
+      cultivarSeeds = this.props.storehouseState.storehouse.seeds.getAll();
+    }
+
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
         {'Choose a seed:'}
-        <div className="seed-option-container">
-          {this.props.storehouseState.storehouse
-            .seeds.getAll().map((seed) => {
+        <div className="option-container">
+          {cultivarSeeds.map((seed) => {
             return (
               <SeedDescription key={seed.id} seed={seed}
                 spot={this.props.spot}

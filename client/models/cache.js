@@ -27,6 +27,16 @@ export default class Cache {
     return this.members.slice();
   }
 
+  getAllMatching(propName, propValue) {
+    let matches = [];
+    this.members.map((member) => {
+      if (member[propName] == propValue) {
+        matches.push(member);
+      }
+    });
+    return matches;
+  }
+
   getLength() {
     return this.members.length;
   }

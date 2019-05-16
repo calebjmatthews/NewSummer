@@ -11,7 +11,15 @@ class SeedDisplayFieldCard extends Component {
 
   fieldCardClick() {
     if (this.props.field.seedPlanted == null) {
-      this.props.setCard({type: "seedPlanting"}, this.props.spot);
+      let cultivarNames = this.props.storehouseState.storehouse
+        .getCultivarNames();
+      if (cultivarNames.length > 1) {
+        this.props.setCard({type: "cultivarSelect"}, this.props.spot);
+      }
+      else {
+        this.props.setCard({type: "seedPlanting", value: cultivarNames[0]},
+          this.props.spot);
+      }
     }
     else {
       if (this.props.field.seedIsMature() == true) {

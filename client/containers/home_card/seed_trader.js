@@ -28,7 +28,7 @@ class SeedTraderCard extends Component {
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
         {'Buy a seed:'}
-        <div className="seed-option-container">
+        <div className="option-container">
           {this.props.castState.cast.currentlyVisiting.currentOffers.map((offer) => {
             let seed = offer.item;
             let confirmText = 'Sold';

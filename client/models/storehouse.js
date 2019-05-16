@@ -33,13 +33,9 @@ export default class Storehouse {
       this.intermediateSeed = null;
     }
   }
+
   isCultivarFull(cultivarName) {
-    let count = 0;
-    this.seeds.members.map((seed) => {
-      if (seed.cultivarName == cultivarName)  {
-        count++;
-      }
-    });
+    let count = this.getCultivarCount(cultivarName);
     if (count >= this.maxSeeds) {
       return true;
     }
@@ -47,6 +43,28 @@ export default class Storehouse {
       return false;
     }
   }
+  getCultivarCount(cultivarName) {
+    let count = 0;
+    this.seeds.members.map((seed) => {
+      if (seed.cultivarName == cultivarName)  {
+        count++;
+      }
+    });
+    return count;
+  }
+  getCultivarNames() {
+    let cultivarNames = [];
+    let cultivarNameInArray = {};
+    this.seeds.members.map((seed) => {
+      if (cultivarNameInArray[seed.cultivarName] != true) {
+        cultivarNames.push(seed.cultivarName);
+        cultivarNameInArray[seed.cultivarName] = true;
+      }
+    });
+    return cultivarNames;
+  }
+
+
   gainDollars(dollarsGained) {
     this.dollars = parseFloat((this.dollars + parseFloat(dollarsGained)).toFixed(2));
   }
@@ -59,6 +77,7 @@ export default class Storehouse {
       return true;
     }
   }
+
   addSeed(seed) {
     this.seeds.add(seed);
   }

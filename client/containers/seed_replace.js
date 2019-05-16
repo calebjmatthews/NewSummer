@@ -50,13 +50,13 @@ class SeedReplaceCard extends Component {
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
         {'New:'}
-        <div className="seed-option-container">
+        <div className="option-container">
           <SeedDescription key={newSeed.id} seed={newSeed}
             spot={this.props.spot}
             confirmText={null} />
         </div>
         {'Discard an old seed:'}
-        <div className="seed-option-container">
+        <div className="option-container">
           {this.props.storehouseState.storehouse
             .seeds.getAll().map((seed) => {
             let descriptionClassName = "seed-option";
