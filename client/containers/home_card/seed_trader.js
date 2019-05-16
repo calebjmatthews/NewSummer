@@ -20,7 +20,7 @@ class SeedTraderCard extends Component {
 
     return this.props.buySeedAttempt(this.props.economyState.economy,
       this.props.storehouseState.storehouse,
-      this.props.castState.cast,  matchingOffer);
+      this.props.castState.cast,  matchingOffer, this.props.spot);
   }
 
   render() {

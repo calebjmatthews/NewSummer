@@ -320,7 +320,7 @@ X Track discovered cultivars
 X ID incrementing utility class
 X Record book localStorage and reducer
 X Seeds from trader
-_ Card state in reducer
+X Card state in reducer
 _ Seed inventory navigation/limits
 _ Experimental garden on delay
 _ Experimental garden gives two choices

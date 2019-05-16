@@ -16,19 +16,24 @@ class SeedDescription extends Component {
   }
 
   seedDetailClick(seed) {
-    console.log('this.props.spot');
-    console.log(this.props.spot);
     this.props.setCard({type: "seedDetail", value: seed}, this.props.spot);
   }
 
   render() {
     let seed = this.props.seed;
+
     let confirmText = 'Confirm';
     if (this.props.confirmText != undefined) {
       confirmText = this.props.confirmText;
     }
+
+    let descriptionClassName = "seed-option";
+    if (this.props.descriptionClassName != undefined) {
+      descriptionClassName = this.props.descriptionClassName;
+    }
+
     return (
-      <div className="seed-option">
+      <div className={descriptionClassName}>
         <div>
           {seed.name}
           <div className="seed-icon-container">
@@ -52,7 +57,8 @@ class SeedDescription extends Component {
             Detail
           </button>
           <button onClick={() => this.seedConfirmClick(seed)}
-            disabled={this.props.confirmDisabled}>
+            disabled={this.props.confirmDisabled}
+            hidden={this.props.confirmText == null}>
             {confirmText}
           </button>
         </div>

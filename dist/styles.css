@@ -108,13 +108,18 @@ button:disabled {
   max-width: 108px;
   padding: 5px;
   border: 1px solid #fff;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease-in-out;
+}
+.seed-option.selected {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .seed-icon-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%
+  width: 100%;
 }
 .seed-icon {
   display: flex;

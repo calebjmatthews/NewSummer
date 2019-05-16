@@ -27,7 +27,7 @@ export default class Storehouse {
       }
     }
     else {
-      this.dollars = 1000;
+      this.dollars = 10000;
       this.maxSeeds = 4;
       this.seeds = new Cache([]);
       this.intermediateSeed = null;

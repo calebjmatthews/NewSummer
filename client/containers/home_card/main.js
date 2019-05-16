@@ -10,6 +10,7 @@ import { cast } from '../../instances/cast';
 import { POACEAE } from '../../instances/families';
 import SeedTraderCard from './seed_trader';
 import SeedDetailCard from '../seed_detail';
+import SeedReplaceCard from '../seed_replace';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -96,6 +97,13 @@ class HomeCard extends Component {
           <div onClick={() => this.breedClick()}>Go!</div>
           <div onClick={() => this.breedingToggleClick()}>Cancel</div>
         </div>
+      );
+    }
+    else if (card.type == 'seedReplace') {
+      return (
+        <SeedReplaceCard transStyle={this.props.transStyle}
+          spot={this.props.spot}
+          onClickCancelToParent = { () => this.returnToBuying() } />
       );
     }
     else if (card.type == 'seedDetail') {

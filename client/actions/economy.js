@@ -2,9 +2,10 @@ import Economy from '../models/economy';
 import Field from '../models/field';
 import {autoIncrement} from '../instances/auto_increment';
 
-import {spendDollars, addSeed, setStorehouse} from './storehouse';
+import {spendDollars, addSeed, setStorehouse, gainDollars} from './storehouse';
 import {addField} from './field';
 import {setCast} from './cast';
+import {setCard} from './card';
 
 export const SET_ECONOMY = 'SET_ECONOMY';
 export const BUY_INSUFFICIENT_FUNDS = 'BUY_INSUFFICIENT_FUNDS';
@@ -32,7 +33,7 @@ export function buyFieldAttempt(economy, storehouse, fields) {
   }
 };
 
-export function buySeedAttempt(economy, storehouse, cast, offer) {
+export function buySeedAttempt(economy, storehouse, cast, offer, spot) {
   if (storehouse.dollars >= offer.price) {
     return function(dispatch) {
       let matchingTraveler = null;
@@ -54,6 +55,7 @@ export function buySeedAttempt(economy, storehouse, cast, offer) {
       else {
         console.log('Cultivar storage full.');
         storehouse.intermediateSeed = offer.item;
+        dispatch(setCard({type:"seedReplace"}, spot));
         dispatch(setStorehouse(storehouse));
         economy.intermediateSpend = offer.price;
       }
@@ -67,6 +69,21 @@ export function buySeedAttempt(economy, storehouse, cast, offer) {
     return {
       type: BUY_INSUFFICIENT_FUNDS,
       message: 'You don\'t have enough money to afford the seed right now.'
+    };
+  }
+}
+
+export function seedBuyCancel(economy, storehouse, spot) {
+  return function(dispatch) {
+    dispatch(gainDollars(storehouse, economy.intermediateSpend));
+    storehouse.intermediateSeed = null;
+    dispatch(setStorehouse(storehouse));
+    dispatch(setCard({type: null}, spot));
+
+    economy.intermediateSpend = null;
+    return {
+      type: SET_ECONOMY,
+      economy: economy
     };
   }
 }
