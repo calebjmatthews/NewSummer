@@ -47,6 +47,8 @@ class SeedReplaceCard extends Component {
     if (newSeed == undefined || newSeed == null) {
       return <div></div>;
     }
+    let cultivarSeeds = this.props.storehouseState.storehouse.seeds
+      .getAllMatching('cultivarName', newSeed.cultivarName);
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
         {'New:'}
@@ -57,8 +59,7 @@ class SeedReplaceCard extends Component {
         </div>
         {'Discard an old seed:'}
         <div className="option-container">
-          {this.props.storehouseState.storehouse
-            .seeds.getAll().map((seed) => {
+          {cultivarSeeds.map((seed) => {
             let descriptionClassName = "seed-option";
             if (this.state.seedSelected == seed.id) {
               descriptionClassName = "seed-option selected";
