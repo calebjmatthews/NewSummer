@@ -40,8 +40,6 @@ export default class Storehouse {
         count++;
       }
     });
-    console.log('count');
-    console.log(count);
     if (count >= this.maxSeeds) {
       return true;
     }
@@ -63,6 +61,9 @@ export default class Storehouse {
   }
   addSeed(seed) {
     this.seeds.add(seed);
+  }
+  removeSeed(seed) {
+    this.seeds.remove(seed);
   }
   breedSeeds(seedA, seedB) {
     return seedA.breedWith(seedB);

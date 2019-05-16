@@ -20,7 +20,8 @@ class SeedTraderCard extends Component {
 
     return this.props.buySeedAttempt(this.props.economyState.economy,
       this.props.storehouseState.storehouse,
-      this.props.castState.cast,  matchingOffer, this.props.spot);
+      this.props.castState.cast,
+      this.props.recordBookState.recordBook, matchingOffer, this.props.spot);
   }
 
   render() {
@@ -50,8 +51,9 @@ class SeedTraderCard extends Component {
 
 
 function mapStateToProps({ fieldsState, castState, storehouseState,
-  economyState }) {
-  return { fieldsState, castState, storehouseState, economyState }
+  economyState, recordBookState }) {
+  return { fieldsState, castState, storehouseState, economyState,
+    recordBookState }
 }
 
 function mapDispatchToProps(dispatch) {

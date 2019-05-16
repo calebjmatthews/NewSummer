@@ -39,8 +39,8 @@ export default class Cache {
     this.members.push(member);
   }
 
-  remove(id) {
-    this.members.splice(this.getIndex(id), 1);
+  remove(member) {
+    this.members.splice(this.getIndex(member.id), 1);
   }
 
   edit(id, params, values) {

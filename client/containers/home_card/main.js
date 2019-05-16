@@ -52,6 +52,7 @@ class HomeCard extends Component {
   breedClick() {
     this.props.breedSeeds(
       this.props.storehouseState.storehouse,
+      this.props.recordBookState.recordBook,
       this.state.seedA,
       this.state.seedB);
     this.breedingToggleClick();

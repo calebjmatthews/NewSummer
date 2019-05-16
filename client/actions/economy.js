@@ -33,7 +33,8 @@ export function buyFieldAttempt(economy, storehouse, fields) {
   }
 };
 
-export function buySeedAttempt(economy, storehouse, cast, offer, spot) {
+export function buySeedAttempt(economy, storehouse, cast, recordBook, offer,
+  spot) {
   if (storehouse.dollars >= offer.price) {
     return function(dispatch) {
       let matchingTraveler = null;
@@ -50,10 +51,9 @@ export function buySeedAttempt(economy, storehouse, cast, offer, spot) {
       dispatch(spendDollars(storehouse, offer.price));
       if (storehouse.isCultivarFull(offer.item.cultivarName) == false) {
         dispatch(setCast(cast));
-        dispatch(addSeed(storehouse, offer.item));
+        dispatch(addSeed(storehouse, recordBook, offer.item));
       }
       else {
-        console.log('Cultivar storage full.');
         storehouse.intermediateSeed = offer.item;
         dispatch(setCard({type:"seedReplace"}, spot));
         dispatch(setStorehouse(storehouse));

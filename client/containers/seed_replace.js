@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { setCard } from '../actions/card';
 import { seedBuyCancel } from '../actions/economy';
+import { replaceSeed } from '../actions/storehouse';
 import SeedDescription from './seed_description';
 
 class SeedReplaceCard extends Component {
@@ -22,6 +23,14 @@ class SeedReplaceCard extends Component {
   cancelClick() {
     this.props.seedBuyCancel(this.props.economyState.economy,
       this.props.storehouseState.storehouse, this.props.spot);
+  }
+
+  replaceClick() {
+    let oldSeed = this.props.storehouseState.storehouse.seeds
+      .getByProperty('id', this.state.seedSelected);
+    this.props.replaceSeed(this.props.storehouseState.storehouse,
+      oldSeed, this.props.storehouseState.storehouse.intermediateSeed);
+    this.props.setCard({type: null}, this.props.spot);
   }
 
   existingSeedSelect(seed) {
@@ -64,7 +73,7 @@ class SeedReplaceCard extends Component {
           })}
         </div>
         <div>
-          <button onClick={ () => this.cancelClick() }
+          <button onClick={ () => this.replaceClick() }
             disabled={this.state.seedSelected == null}>
             {'Discard seed'}
           </button>
@@ -84,7 +93,7 @@ function mapStateToProps({ fieldsState, storehouseState, cardState,
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setCard, seedBuyCancel
+    setCard, seedBuyCancel, replaceSeed
   }, dispatch)
 }
 
