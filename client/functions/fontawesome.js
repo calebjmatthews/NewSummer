@@ -3,7 +3,7 @@ import {
   faDotCircle, faSeedling, faBug, faCertificate, faGlobeEurope, faSnowflake,
   faSun, faWind, faTint,
   faSkullCrossbones, faIceCream, faBreadSlice, faCarrot, faHollyBerry, faLemon,
-  faFireAlt, faSquare, faMortarPestle, faCompress, faExpandArrowsAlt
+  faFireAlt, faSquare, faMortarPestle, faCompress, faExpandArrowsAlt, faSpa
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function() {
@@ -27,4 +27,5 @@ export default function() {
   library.add(faWind);
   library.add(faTint);
   library.add(faExpandArrowsAlt);
+  library.add(faSpa);
 }

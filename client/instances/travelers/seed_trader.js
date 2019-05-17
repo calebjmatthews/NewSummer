@@ -9,7 +9,7 @@ let seedTrader = new Traveler(SUSANNA_POL, .2, 0, [],
   []
 );
 
-seedTrader.createOffers = function(cultivarsUnlocked) {
+seedTrader.genOffers = function(cultivarsUnlocked) {
   let variation = 1;
   if (Math.random() > 0.9) {
     variation = 3;

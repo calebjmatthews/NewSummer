@@ -110,9 +110,14 @@ button:disabled {
   border: 1px solid #fff;
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.3s ease-in-out;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
 }
 .seed-option.selected {
   background-color: rgba(0, 0, 0, 0.4);
+}
+.seed-option.inactive {
+  opacity: 0.4;
 }
 .cultivar-option {
   display: flex;

@@ -6,6 +6,7 @@ import SeedPlantingFieldCard from './seed_planting';
 import SeedDisplayFieldCard from './seed_display';
 import SeedDetailCard from '../seed_detail';
 import CultivarSelectFieldCard from './cultivar_select';
+import EventFieldCard from './event';
 import { setCard } from '../../actions/card';
 
 class FieldCard extends Component {
@@ -20,7 +21,13 @@ class FieldCard extends Component {
   render() {
     let card = this.props.cardState.cards[this.props.spot];
     if (card == undefined || card == null) { card = {}; }
-    if (card.type == 'seedDetail') {
+    if (this.props.field.currentEvent != null) {
+      return (
+        <EventFieldCard transStyle={this.props.transStyle}
+          field={this.props.field} />
+      )
+    }
+    else if (card.type == 'seedDetail') {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
           onClickCancelToParent={ () => this.resetCardToPlanting() }

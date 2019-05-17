@@ -16,8 +16,8 @@ export default class Traveler {
     }
   }
 
-  createOffers() {
-    console.log('createOffers not defined.');
+  genOffers() {
+    console.log('genOffers not defined.');
     return null;
   }
 }

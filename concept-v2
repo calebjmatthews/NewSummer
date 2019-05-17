@@ -322,6 +322,7 @@ X Record book localStorage and reducer
 X Seeds from trader
 X Card state in reducer
 X Seed inventory navigation/limits
+_ Seed discovery event
 _ Improved navigation between card types(states)
 _ Experimental garden on delay
 _ Experimental garden gives two choices

@@ -31,7 +31,7 @@ class HomeCard extends Component {
   traderClick(toBuy) {
     let cultivarsUnlocked =
       this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
-    let offers = cast.currentlyVisiting.createOffers(cultivarsUnlocked);
+    let offers = cast.currentlyVisiting.genOffers(cultivarsUnlocked);
     cast.currentlyVisiting.currentOffers = offers;
     this.props.setCard({type: 'seedBuying'}, this.props.spot);
   }
