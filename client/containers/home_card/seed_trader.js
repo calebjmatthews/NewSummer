@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { buySeedAttempt } from '../../actions/economy';
 import { setCard } from '../../actions/card';
 import SeedDescription from '../seed_description';
+import BackButton from '../back_button';
 
 class SeedTraderCard extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class SeedTraderCard extends Component {
   render() {
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
+        <BackButton spot={this.props.spot} />
         {'Buy a seed:'}
         <div className="option-container">
           {this.props.castState.cast.currentlyVisiting.currentOffers.map((offer) => {

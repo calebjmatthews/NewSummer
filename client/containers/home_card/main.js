@@ -25,7 +25,6 @@ class HomeCard extends Component {
     this.traderClick = this.traderClick.bind(this);
     this.breedingToggleClick = this.breedingToggleClick.bind(this);
     this.breedClick = this.breedClick.bind(this);
-    this.returnToBuying = this.returnToBuying.bind(this);
   }
 
   traderClick(toBuy) {
@@ -33,9 +32,6 @@ class HomeCard extends Component {
       this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
     let offers = cast.currentlyVisiting.genOffers(cultivarsUnlocked);
     cast.currentlyVisiting.currentOffers = offers;
-    this.props.setCard({type: 'seedBuying'}, this.props.spot);
-  }
-  returnToBuying() {
     this.props.setCard({type: 'seedBuying'}, this.props.spot);
   }
 
@@ -103,15 +99,13 @@ class HomeCard extends Component {
     else if (card.type == 'seedReplace') {
       return (
         <SeedReplaceCard transStyle={this.props.transStyle}
-          spot={this.props.spot}
-          onClickCancelToParent = { () => this.returnToBuying() } />
+          spot={this.props.spot} />
       );
     }
     else if (card.type == 'seedDetail') {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
-          spot={this.props.spot} seed={this.state.seedDetail}
-          onClickCancelToParent = { () => this.returnToBuying() } />
+          spot={this.props.spot} seed={this.state.seedDetail} />
       );
     }
     else if (card.type == 'seedBuying') {

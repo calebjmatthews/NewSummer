@@ -30,3 +30,11 @@ export function removeCard(index) {
     index: index
   }
 }
+
+export const REVERT_CARD = 'REVERT_CARD';
+export function revertCard(index) {
+  return {
+    type: REVERT_CARD,
+    index: index
+  }
+}

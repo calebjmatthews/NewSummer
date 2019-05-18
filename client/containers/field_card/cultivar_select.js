@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { setCard } from '../../actions/card';
+import BackButton from '../back_button';
 
 class CultivarSelectFieldCard extends Component {
   componentDidMount() {
@@ -25,6 +26,8 @@ class CultivarSelectFieldCard extends Component {
     let storehouse = this.props.storehouseState.storehouse;
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
+        <BackButton spot={this.props.spot} />
+        <div>{ 'Cultivars' }</div>
         <div className="option-container">
           <div className="cultivar-option"
             onClick={ () => this.selectCultivar('all') }>

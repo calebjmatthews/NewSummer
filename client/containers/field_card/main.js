@@ -14,10 +14,6 @@ class FieldCard extends Component {
     super(props);
   }
 
-  resetCardToPlanting() {
-    this.props.setCard({type: 'seedPlanting'}, this.props.spot);
-  }
-
   render() {
     let card = this.props.cardState.cards[this.props.spot];
     if (card == undefined || card == null) { card = {}; }
@@ -30,7 +26,6 @@ class FieldCard extends Component {
     else if (card.type == 'seedDetail') {
       return (
         <SeedDetailCard transStyle={this.props.transStyle}
-          onClickCancelToParent={ () => this.resetCardToPlanting() }
           spot={this.props.spot}
           seed={card.value} />
       )

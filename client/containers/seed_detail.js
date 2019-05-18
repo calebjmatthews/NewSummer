@@ -2,22 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { setCard } from '../actions/card';
+import BackButton from './back_button';
 
 class SeedDetailCard extends Component {
-  componentDidMount() {
-    this.cancelClick = this.cancelClick.bind(this);
-  }
-
-  cancelClick() {
-    this.props.onClickCancelToParent();
-  }
-
   render() {
     let seed = this.props.cardState.cards[this.props.spot].value;
     return (
       <div className="game-card" style={this.props.transStyle}
         key={seed.id}>
+        <BackButton spot={this.props.spot} />
         <div>
           <div className="seed-detail-name">{seed.name}</div>
           <div className="seed-detail-container">
@@ -39,11 +34,6 @@ class SeedDetailCard extends Component {
               );
             })}
           </div>
-        </div>
-        <div>
-          <button onClick={ () => this.cancelClick() }>
-            Back
-          </button>
         </div>
       </div>
     );

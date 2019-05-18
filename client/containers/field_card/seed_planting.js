@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { plantSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
 import SeedDescription from '../seed_description';
+import BackButton from '../back_button';
 
 class SeedPlantingFieldCard extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class SeedPlantingFieldCard extends Component {
 
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
+        <BackButton spot={this.props.spot} />
         {'Choose a seed:'}
         <div className="option-container">
           {cultivarSeeds.map((seed) => {

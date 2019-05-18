@@ -249,6 +249,12 @@ Wanderers:
 properties: name, frequency, visitRemaining, affection, offers, dialogues, gifts
 
 Seed trader: Overall clad lady, friendly; offers seeds with default 1 variation of currently discovered cultivars, occasionally offers 3 variation, then offers
+	Dialogue:
+	- Some traits that seem harmful have hidden benefits. For example, plants that require fertile soil are more difficult to raise, but grow fast and taste better.
+	- Today my stock comes from far, far away. No guarantees, but there may be traits here you've never seen before.
+	- Variety is crucial. If you keep breeding the same seeds together, your crops will stop improving.
+	- I am a maid of constant sorrow. I've seen trouble all my days.
+	- I look forward to visiting your little homestead. The air is sweet here.
 Explorer: Indiana Jones type; offers initial quests, then telegram pole, then expeditions
 Craftsman: Bulky, goggles; offers experimental garden improvements, storage improvements, aesthetic farmhouse improvements
 Tailor: Gentleman in suit; Offers aesthetic clothing options made from various crops
@@ -322,10 +328,13 @@ X Record book localStorage and reducer
 X Seeds from trader
 X Card state in reducer
 X Seed inventory navigation/limits
-_ Seed discovery event
-_ Improved navigation between card types(states)
+X Seed discovery event
+X Improved navigation between card types(states)
+_ Auto increment reducer and actions
+_ Alternate seed generation cultivar trait definitions
 _ Experimental garden on delay
 _ Experimental garden gives two choices
+_ More cultivars
 _ Pixel graphics linked with traits
 _ Pixel graphics for different cultivars
 _ Environmental effects from fields
