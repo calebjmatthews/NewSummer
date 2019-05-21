@@ -1,18 +1,12 @@
 import {shuffle} from '../functions/utils';
 import Gene from '../models/gene';
 import {families} from '../instances/families';
-import {autoIncrement} from '../instances/auto_increment';
 
 export default class Seed {
-  constructor(familyName, givenCultivarName, methodObtained, dateObtained =
-    new Date(Date.now()), variation = 0, parentsIds = [null, null],
-    id = null, genome = null) {
-    if (id == null) {
-      this.id = autoIncrement.genId('seed');
-    }
-    else {
-      this.id = id;
-    }
+  constructor(id, familyName, givenCultivarName, methodObtained,
+    dateObtained = new Date(Date.now()), variation = 0,
+    parentsIds = [null, null], genome = null) {
+    this.id = id;
     this.familyName = familyName;
     this.methodObtained = methodObtained;
     this.dateObtained = dateObtained;
@@ -153,9 +147,8 @@ export default class Seed {
       newGenome.push(newGene);
     })
 
-    const newSeed = new Seed(this.familyName, null, 'Bred',
-      new Date(Date.now()), null, [this.id, otherParent.id], null,
-      newGenome);
+    const newSeed = new Seed(null, this.familyName, null, 'Bred',
+      new Date(Date.now()), null, [this.id, otherParent.id], newGenome);
     return newSeed;
   }
   getGeneByNameAndLocus(traitName, locusIndex) {

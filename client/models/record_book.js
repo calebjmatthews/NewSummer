@@ -11,9 +11,8 @@ export default class RecordBook {
         let seedDict = cultivarDict[cultivarName];
         Object.keys(cultivarDict[cultivarName]).map((seedId) => {
           let seed = seedDict[seedId];
-          seedDict[seedId] = new Seed(seed.familyName, seed.cultivarName,
-            seed.methodObtained, seed.dateObtained, null, seed.parentIds,
-            seed.id, seed.genome);
+          seedDict[seedId] = new Seed(seedId, seed.familyName,
+            seed.cultivarName, seed.methodObtained, seed.dateObtained, null, seed.parentIds, seed.genome);
         });
       });
     });

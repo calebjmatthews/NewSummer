@@ -27,7 +27,7 @@ export default class FieldEventFactory{
         ];
       }
 
-      seeds.push(new Seed(POACEAE, cultivarName, 'Discovered'));
+      seeds.push(new Seed(null, POACEAE, cultivarName, 'Discovered'));
     }
 
     let text = this.textOptions[

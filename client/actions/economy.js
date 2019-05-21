@@ -1,6 +1,5 @@
 import Economy from '../models/economy';
 import Field from '../models/field';
-import {autoIncrement} from '../instances/auto_increment';
 
 import {spendDollars, addSeed, setStorehouse, gainDollars} from './storehouse';
 import {addField} from './field';
@@ -14,7 +13,7 @@ export function buyFieldAttempt(economy, storehouse, fields) {
   if (storehouse.dollars >= fieldCost) {
     return function(dispatch) {
       economy.recordBoughtField();
-      let newField = new Field(autoIncrement.genId('field'),
+      let newField = new Field(Math.floor(Math.random() * 10000),
         (fields.getLength()), ('Field #' + (fields.getLength()-1)));
 
       dispatch(spendDollars(storehouse, fieldCost));

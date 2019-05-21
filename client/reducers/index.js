@@ -7,6 +7,7 @@ import recordBookReducer from './record_book';
 import castReducer from './cast';
 import cardReducer from './card';
 import cardNavReducer from './animation/card_nav';
+import autoIncrementReducer from './auto_increment';
 
 const rootReducer = combineReducers({
   fieldsState: fieldsReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   recordBookState: recordBookReducer,
   castState: castReducer,
   cardState: cardReducer,
-  cardNavState: cardNavReducer
+  cardNavState: cardNavReducer,
+  autoIncrementState: autoIncrementReducer
 })
 
 export default rootReducer;

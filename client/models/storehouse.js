@@ -9,9 +9,9 @@ export default class Storehouse {
 
       let newSeeds = [];
       aStorehouse.seeds.members.map((seed) => {
-        let newSeed = new Seed(seed.familyName,
+        let newSeed = new Seed(seed.id, seed.familyName,
           seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
-          null, seed.parents, seed.id, seed.genome);
+          null, seed.parents, seed.genome);
         Object.keys(seed).map((key) => {
           newSeed[key] = seed[key];
         });

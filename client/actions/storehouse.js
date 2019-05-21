@@ -1,5 +1,6 @@
 import Storehouse from '../models/storehouse';
 import { setRecordBook } from './record_book';
+import { genId } from './auto_increment';
 
 export const SET_STOREHOUSE = 'SET_STOREHOUSE';
 export function setStorehouse(storehouse) {
@@ -25,9 +26,12 @@ export function spendDollars(storehouse, dollarsSpent) {
   }
 }
 
-export function breedSeeds(storehouse, recordBook, seedA, seedB) {
+export function breedSeeds(storehouse, autoIncrement, recordBook, seedA,
+  seedB) {
   return function(dispatch) {
+    let newSeedId = genId(autoIncrement, 'seed');
     const newSeed = storehouse.breedSeeds(seedA, seedB);
+    newSeed.id = newSeedId.newId;
     if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
       recordBook.recordSeed(newSeed);
       dispatch(setRecordBook(recordBook));

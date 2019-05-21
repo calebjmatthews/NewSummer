@@ -15,12 +15,14 @@ class FieldCard extends Component {
   }
 
   render() {
+    let field = this.props.fieldsState.fields
+      .getByProperty('id', this.props.fieldId);
     let card = this.props.cardState.cards[this.props.spot];
     if (card == undefined || card == null) { card = {}; }
-    if (this.props.field.currentEvent != null) {
+    if (field.currentEvent != null) {
       return (
         <EventFieldCard transStyle={this.props.transStyle}
-          field={this.props.field} />
+          field={field} />
       )
     }
     else if (card.type == 'seedDetail') {
@@ -39,20 +41,20 @@ class FieldCard extends Component {
     else if (card.type == 'seedPlanting') {
       return (
         <SeedPlantingFieldCard transStyle={this.props.transStyle}
-          spot={this.props.spot} field={this.props.field} />
+          spot={this.props.spot} field={field} />
       );
     }
     else {
       return (
         <SeedDisplayFieldCard transStyle={this.props.transStyle}
-          spot={this.props.spot} field={this.props.field} />
+          spot={this.props.spot} field={field} />
       );
     }
   }
 }
 
-function mapStateToProps({ cardState }) {
-  return { cardState }
+function mapStateToProps({ fieldsState, cardState }) {
+  return { fieldsState, cardState }
 }
 
 function mapDispatchToProps(dispatch) {

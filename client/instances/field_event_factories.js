@@ -7,3 +7,7 @@ export let welcomeSeeds = new FieldEventFactory(
     'What\'s this? A few seeds just asking to be planted...'
   ]
 );
+
+export let eventFactoryDict = {
+  "welcomeSeeds": welcomeSeeds
+}

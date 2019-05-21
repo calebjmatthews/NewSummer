@@ -11,6 +11,7 @@ import { POACEAE } from '../../instances/families';
 import SeedTraderCard from './seed_trader';
 import SeedDetailCard from '../seed_detail';
 import SeedReplaceCard from '../seed_replace';
+import { genIdBatch } from '../../actions/auto_increment';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -31,6 +32,15 @@ class HomeCard extends Component {
     let cultivarsUnlocked =
       this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
     let offers = cast.currentlyVisiting.genOffers(cultivarsUnlocked);
+    let newOfferIds = this.props.genIdBatch
+      (this.props.autoIncrementState, 'offer', offers.length).newIds;
+    let newSeedIds = this.props.genIdBatch
+      (this.props.autoIncrementState, 'seed', offers.length).newIds;
+
+    offers.map((offer, index) => {
+      offer.id = newOfferIds[index];
+      offer.item.id = newSeedIds[index];
+    });
     cast.currentlyVisiting.currentOffers = offers;
     this.props.setCard({type: 'seedBuying'}, this.props.spot);
   }
@@ -48,6 +58,7 @@ class HomeCard extends Component {
   breedClick() {
     this.props.breedSeeds(
       this.props.storehouseState.storehouse,
+      this.props.autoIncrementState,
       this.props.recordBookState.recordBook,
       this.state.seedA,
       this.state.seedB);
@@ -133,14 +144,14 @@ class HomeCard extends Component {
 }
 
 function mapStateToProps({ storehouseState, economyState, fieldsState,
-  cardNavState, recordBookState, cardState }) {
+  cardNavState, recordBookState, cardState, autoIncrementState }) {
   return { storehouseState, economyState, fieldsState, cardNavState,
-    recordBookState, cardState }
+    recordBookState, cardState, autoIncrementState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    buyFieldAttempt, breedSeeds, initNavCards, setCard
+    buyFieldAttempt, breedSeeds, initNavCards, setCard, genIdBatch
   }, dispatch)
 }
 

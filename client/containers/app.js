@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { ageAllSeeds, setFields } from '../actions/field';
+import { ageAllSeeds, setFields, startFieldEvent } from '../actions/field';
 import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
   from '../actions/animation/card_nav';
 import { setStorehouse } from '../actions/storehouse';
@@ -19,10 +19,9 @@ import Field from '../models/field';
 import Seed from '../models/seed';
 import Storehouse from '../models/storehouse';
 import RecordBook from '../models/record_book';
-import AutoIncrement from '../models/auto_increment';
-import { autoIncrement } from '../instances/auto_increment';
 import { cast } from '../instances/cast';
 import { setAllCards } from '../actions/card';
+import { importAutoIncrement, genId } from '../actions/auto_increment';
 
 class App extends Component {
   componentDidMount() {
@@ -39,7 +38,7 @@ class App extends Component {
         fields: this.props.fieldsState.fields,
         storehouse: this.props.storehouseState.storehouse,
         recordBook: this.props.recordBookState.recordBook,
-        autoIncrement: autoIncrement
+        autoIncrement: this.props.autoIncrementState
       })
     }, COOKIE_SET_INTERVAL);
 
@@ -48,7 +47,11 @@ class App extends Component {
 
     let localStorages = getLocalStorages();
     let localStoragePromises = [];
-    if (localStorages != false) {
+    if (localStorages == false) {
+      this.props.startFieldEvent(this.props.fieldsState.fields,
+      this.props.autoIncrementState, 0, 'welcomeSeeds');
+    }
+    else {
 
       let fields = new Cache([]);
       localStorages.fields.members.map((field) => {
@@ -67,9 +70,8 @@ class App extends Component {
       let recordBook = new RecordBook(familyDict);
       localStoragePromises.push(this.props.setRecordBook(recordBook));
 
-      if (autoIncrement != undefined) {
-        autoIncrement.set(localStorage.autoIncrement);
-      }
+      localStoragePromises.push(this.props
+        .importAutoIncrement(localStorages.autoIncrement));
     }
     Promise.all(localStoragePromises)
     .then((res) => {
@@ -88,8 +90,9 @@ class App extends Component {
         if (field.seedPlanted != null) {
           let seed = field.seedPlanted;
 
-          field.seedPlanted = new Seed(seed.familyName,
-            seed.givenCultivarName, seed.methodObtained, seed.dateObtained, null, seed.parents, seed.id, seed.genome);
+          field.seedPlanted = new Seed(seed.id, seed.familyName,
+            seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
+            null, seed.parents, seed.genome);
           field.restoreSeedState();
         }
       })
@@ -143,7 +146,7 @@ class App extends Component {
             spot={0} />
           {this.props.fieldsState.fields.getAll().map((field) => {
             return (
-              <FieldCard key={field.id} field={field}
+              <FieldCard key={field.id} fieldId={field.id}
                 spot={field.index+1}
                 transStyle={this.props.cardNavState.cardStyles[field.index+1]}
                 />
@@ -156,14 +159,16 @@ class App extends Component {
 }
 
 function mapStateToProps({ fieldsState, storehouseState, recordBookState,
-  cardNavState }) {
-  return { fieldsState, storehouseState, recordBookState, cardNavState }
+  cardNavState, autoIncrementState }) {
+  return { fieldsState, storehouseState, recordBookState, cardNavState,
+    autoIncrementState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
-    cardNavStartRight, setFields, setStorehouse, setRecordBook, setAllCards
+    cardNavStartRight, setFields, setStorehouse, setRecordBook, setAllCards,
+    importAutoIncrement, genId, startFieldEvent
   }, dispatch)
 }
 

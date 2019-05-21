@@ -3,7 +3,10 @@ export default class FieldEvent{
     this.seeds = seeds;
     this.text = text;
     this.gatheredDict = {};
-    seeds.map((seed) => {
+  }
+  setSeedIds(idBatch) {
+    this.seeds.map((seed, index) => {
+      seed.id = idBatch[index];
       this.gatheredDict[seed.id] = false;
     });
   }

@@ -1,6 +1,8 @@
 import Field from '../models/field';
 
-import {gainDollars} from './storehouse';
+import { gainDollars } from './storehouse';
+import { genIdBatch } from './auto_increment';
+import { eventFactoryDict } from '../instances/field_event_factories';
 
 export const SET_FIELDS = 'SET_FIELDS';
 export function setFields(fields) {
@@ -35,13 +37,23 @@ export function addField(fields, field) {
   return setFields(fields);
 }
 
+export function startFieldEvent(fields, autoIncrement, fieldId,
+  fieldEventName) {
+  return function(dispatch) {
+    let newEvent = eventFactoryDict[fieldEventName].genFieldEvent();
+    let newSeedIds = dispatch(genIdBatch(autoIncrement, 'seed',
+      newEvent.seeds.length));
+    newEvent.setSeedIds(newSeedIds.newIds);
+    fields.getByProperty('id', fieldId).currentEvent = newEvent;
+    return setFields(fields);
+  }
+}
+
 export function gatherSeedFromEvent(fields, fieldId, seed) {
   let field = fields.getByProperty('id', fieldId);
   field.currentEvent.gatheredDict[seed.id] = true;
   if (field.currentEvent.eventCompleted()) {
     field.currentEvent = null;
   }
-  console.log('field.currentEvent');
-  console.log(field.currentEvent);
   return setFields(fields);
 }
