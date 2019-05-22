@@ -49,6 +49,14 @@ export function breedSeeds(storehouse, autoIncrement, recordBook, seedA,
   }
 }
 
+export function ageBreeding(storehouse) {
+  storehouse.ageBreeding();
+  return {
+    type: SET_STOREHOUSE,
+    storehouse: storehouse
+  }
+};
+
 export function addSeed(storehouse, recordBook, newSeed) {
   return function(dispatch) {
     recordBook.recordSeed(newSeed);

@@ -12,6 +12,7 @@ import SeedTraderCard from './seed_trader';
 import SeedDetailCard from '../seed_detail';
 import SeedReplaceCard from '../seed_replace';
 import { genIdBatch } from '../../actions/auto_increment';
+import ExperimentalGarden from './experimental_garden'
 
 class HomeCard extends Component {
   constructor(props) {
@@ -128,15 +129,14 @@ class HomeCard extends Component {
     else {
       return (
         <div className="game-card" style={this.props.transStyle}>
-          <div onClick={() => this.traderClick('field')}>
+          <div className="home-card-option"
+            onClick={() => this.traderClick('field')}>
             <div>{'A trader is visiting:'}</div>
             <div>{'Say hello!'}</div>
           </div>
 
-          <div onClick={() => this.breedingToggleClick()}>
-            <div>{'Experimental Garden:'}</div>
-            <div>{'Breed two seeds together'}</div>
-          </div>
+          <ExperimentalGarden
+            onClickToParent={this.breedingToggleClick}/>
         </div>
       );
     }

@@ -5,14 +5,14 @@ import { bindActionCreators } from 'redux';
 import { ageAllSeeds, setFields, startFieldEvent } from '../actions/field';
 import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
   from '../actions/animation/card_nav';
-import { setStorehouse } from '../actions/storehouse';
+import { setStorehouse, ageBreeding } from '../actions/storehouse';
 import FieldCard from './field_card/main';
 import { setRecordBook } from '../actions/record_book';
 import HomeCard from './home_card/main';
 import { pixiHandler } from '../instances/pixi/handler';
 import { getLocalStorages, setLocalStorages }
   from '../functions/local_storage';
-import { SEED_AGE_INTERVAL, FRAMES_PER_SECOND, COOKIE_SET_INTERVAL }
+import { AGE_INTERVAL, FRAMES_PER_SECOND, COOKIE_SET_INTERVAL }
   from '../constants';
 import Cache from '../models/cache';
 import Field from '../models/field';
@@ -27,7 +27,8 @@ class App extends Component {
   componentDidMount() {
     setInterval(() => {
       this.props.ageAllSeeds(this.props.fieldsState.fields);
-    }, SEED_AGE_INTERVAL);
+      this.props.ageBreeding(this.props.storehouseState.storehouse);
+    }, AGE_INTERVAL);
     setInterval(() => {
       if (this.props.cardNavState.animating == true) {
         this.props.cardNavStep(this.props.cardNavState);
@@ -168,7 +169,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
     cardNavStartRight, setFields, setStorehouse, setRecordBook, setAllCards,
-    importAutoIncrement, genId, startFieldEvent
+    importAutoIncrement, genId, startFieldEvent, ageBreeding
   }, dispatch)
 }
 

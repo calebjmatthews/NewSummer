@@ -181,3 +181,10 @@ button:disabled {
   border-radius: 50%;
   font-size: 0.8em;
 }
+
+.home-card-option {
+  width: 100%;
+  padding: 2px;
+  margin: 2px;
+  border: 1px solid #fff;
+}

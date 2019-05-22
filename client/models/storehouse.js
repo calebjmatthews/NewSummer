@@ -25,12 +25,29 @@ export default class Storehouse {
           seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
           null, seed.parents, seed.id, seed.genome);
       }
+
+      if (aStorehouse.seedsBred.length > 0) {
+        aStorehouse.seedsBred.map((seed) => {
+          this.seedsBred.push(new Seed(seed.familyName,
+            seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
+            null, seed.parents, seed.id, seed.genome));
+        });
+      }
+      else {
+        this.seedsBred = [];
+      }
+      this.breedingTimeRemaining = aStorehouse.breedingTimeRemaining;
+      this.breedingAgeLabel = aStorehouse.breedingAgeLabel;
+
     }
     else {
       this.dollars = 10000;
       this.maxSeeds = 4;
       this.seeds = new Cache([]);
       this.intermediateSeed = null;
+      this.seedsBred = [];
+      this.breedingTimeRemaining = 0;
+      this.breedingAgeLabel = '';
     }
   }
 
@@ -86,5 +103,17 @@ export default class Storehouse {
   }
   breedSeeds(seedA, seedB) {
     return seedA.breedWith(seedB);
+  }
+  ageBreeding() {
+    if (this.seedsBred.length > 0
+      && this.breedingTimeRemaining > 0) {
+      this.breedingTimeRemaining -= 0.25;
+      this.breedingAgeLabel = this.getBreedingAgeLabel();
+      this.checkSeedsState();
+      if (this.breedingTimeRemaining < 0) {
+        this.breedingTimeRemaining -= 0.25;
+        this.breedingAgeLabel = this.getBreedingAgeLabel();
+      }
+    }
   }
 }
