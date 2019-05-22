@@ -289,8 +289,6 @@ Record Book:
 - When being displayed, the record book shows each discovered cultivar with individuals listed beneath in player selected order (default is value high, other options are value low, growth time high, growth time low, newest, oldest)
 - Also records each trait discovered (many are shared between families). Many traits are only marked as discovered when expression is high (Stem focus, Sourness, etc), but others are distinctly discoverable at either end (Tolerance: heat vs. Tolerance: cold)
 
-108.67
-
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
 X React boilerplate
@@ -330,11 +328,12 @@ X Card state in reducer
 X Seed inventory navigation/limits
 X Seed discovery event
 X Improved navigation between card types(states)
-_ Auto increment reducer and actions
-_ Alternate seed generation cultivar trait definitions
+X Auto increment reducer and actions
+X Alternate seed generation cultivar trait definitions
 _ Experimental garden on delay
 _ Experimental garden gives two choices
 _ More cultivars
+_ Environmental effects from fields
+_ Seed trader arrives and leaves
 _ Pixel graphics linked with traits
 _ Pixel graphics for different cultivars
-_ Environmental effects from fields

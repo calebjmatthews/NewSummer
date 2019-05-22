@@ -1,5 +1,5 @@
 export default class Cultivar {
-  constructor(name, traitsDefinitional, bonus) {
+  constructor(name, traitsDefinitional, bonus, traitsForCreation = null) {
     this.name = name;
     if (Array.isArray(traitsDefinitional)) {
       this.traitsDefinitional = traitsDefinitional.slice();
@@ -8,6 +8,12 @@ export default class Cultivar {
       this.traitsDefinitional = traitsDefinitional;
     }
     this.bonus = bonus;
+    if (Array.isArray(traitsForCreation)) {
+      this.traitsForCreation = traitsForCreation.slice();
+    }
+    else {
+      this.traitsForCreation = traitsForCreation;
+    }
   }
 
   isGenomeMatch(genome) {

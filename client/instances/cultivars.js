@@ -7,11 +7,41 @@ import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
   DISEASE_RESISTANCE, STEM_THICKNESS, STEM_HEIGHT, NITROGEN_REQUIREMENT, TEMP_TOLERANCE, MOIS_TOLERANCE} from './stats';
 
 export const GRAIN = 'Grain';
-export const grain = new Cultivar(GRAIN, null, null);
+export const grain = new Cultivar(GRAIN, null, null, [
+  {trait: SEED_COVERING, comparitor: 'greater than', values: [0]},
+  {trait: BRANCHING, comparitor: 'equal to', values: [1]},
+  {trait: STEM_FOCUS, comparitor: 'equal to', values: [1]},
+  {trait: SEED_SIZE, comparitor: 'less than', values: [4]},
+  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: GROWTH_SPEED, comparitor: 'less than', values: [3]},
+  {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
+  {trait: SWEETNESS, comparitor: 'less than', values: [3]},
+  {trait: STARCH, comparitor: 'less than', values: [3]},
+  {trait: PROTEIN, comparitor: 'equal to', values: [0]},
+  {trait: BITTERNESS, comparitor: 'less than', values: [4]},
+  {trait: SOURNESS, comparitor: 'equal to', values: [0]},
+  {trait: SPICINESS, comparitor: 'equal to', values: [0]},
+  {trait: TOXICITY, comparitor: 'equal to', values: [0]}
+]);
 
 export const CANE = 'Cane';
 export const cane = new Cultivar(CANE, [
-  {trait: STEM_FOCUS, comparitor: 'equal to', values: [0]}
+  {trait: SEED_COVERING, comparitor: 'greater than', values: [0]},
+  {trait: BRANCHING, comparitor: 'equal to', values: [1]},
+  {trait: STEM_FOCUS, comparitor: 'equal to', values: [0]},
+  {trait: SEED_SIZE, comparitor: 'less than', values: [4]},
+  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: GROWTH_SPEED, comparitor: 'less than', values: [3]},
+  {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
+  {trait: SWEETNESS, comparitor: 'less than', values: [3]},
+  {trait: STARCH, comparitor: 'less than', values: [3]},
+  {trait: PROTEIN, comparitor: 'equal to', values: [0]},
+  {trait: BITTERNESS, comparitor: 'less than', values: [4]},
+  {trait: SOURNESS, comparitor: 'equal to', values: [0]},
+  {trait: SPICINESS, comparitor: 'equal to', values: [0]},
+  {trait: TOXICITY, comparitor: 'equal to', values: [0]}
 ], null)
 
 export const WILD_CANE = 'Wild Cane';
@@ -27,13 +57,12 @@ export const wildCane = new Cultivar(WILD_CANE, [
   {trait: TOUGHNESS, comparitor: 'between', values: [2, 4]},
   {trait: STEM_HEIGHT, comparitor: 'between', values: [2, 4]},
   {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
-  {trait: SWEETNESS, comparitor: 'less than', values: [1]},
-  {trait: STARCH, comparitor: 'less than', values: [1]},
+  {trait: SWEETNESS, comparitor: 'less than', values: [2]},
+  {trait: STARCH, comparitor: 'less than', values: [2]},
   {trait: PROTEIN, comparitor: 'equal to', values: [0]},
   {trait: BITTERNESS, comparitor: 'less than', values: [3]},
   {trait: SOURNESS, comparitor: 'equal to', values: [0]},
   {trait: SPICINESS, comparitor: 'equal to', values: [0]},
-  {trait: STARCH, comparitor: 'equal to', values: [0]},
   {trait: TOXICITY, comparitor: 'equal to', values: [0]}
 ], new Trait(
   (WILD_CANE + ' Bonus'), 0, null,
@@ -54,13 +83,12 @@ export const wildGrass = new Cultivar(WILD_GRASS, [
   {trait: TOUGHNESS, comparitor: 'between', values: [2, 4]},
   {trait: STEM_HEIGHT, comparitor: 'between', values: [2, 4]},
   {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
-  {trait: SWEETNESS, comparitor: 'less than', values: [1]},
-  {trait: STARCH, comparitor: 'less than', values: [1]},
+  {trait: SWEETNESS, comparitor: 'less than', values: [2]},
+  {trait: STARCH, comparitor: 'less than', values: [2]},
   {trait: PROTEIN, comparitor: 'equal to', values: [0]},
   {trait: BITTERNESS, comparitor: 'less than', values: [3]},
   {trait: SOURNESS, comparitor: 'equal to', values: [0]},
   {trait: SPICINESS, comparitor: 'equal to', values: [0]},
-  {trait: STARCH, comparitor: 'equal to', values: [0]},
   {trait: TOXICITY, comparitor: 'equal to', values: [0]}
 ], new Trait(
   (WILD_GRASS + ' Bonus'), 0, null,

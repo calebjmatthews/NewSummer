@@ -68,13 +68,18 @@ export default class Seed {
 
     function getTraitMinAndMax(cultivar, trait) {
       let matchingTrait = null;
-      if (cultivar.traitsDefinitional != null) {
-        for (let index = 0; index < cultivar.traitsDefinitional.length;
-          index++) {
-          let traitDef = cultivar.traitsDefinitional[index];
-          if (traitDef.trait == trait.name) {
-            matchingTrait = traitDef;
-          }
+      let traitsToUse = [];
+      if (cultivar.traitsForCreation != null) {
+        traitsToUse = cultivar.traitsForCreation;
+      }
+      else if (cultivar.traitsDefinitional != null) {
+        traitsToUse = cultivar.traitsDefinitional;
+      }
+      for (let index = 0; index < traitsToUse.length;
+        index++) {
+        let traitDef = traitsToUse[index];
+        if (traitDef.trait == trait.name) {
+          matchingTrait = traitDef;
         }
       }
 
