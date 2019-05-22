@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import SeedPlantingFieldCard from './seed_planting';
 import SeedDisplayFieldCard from './seed_display';
 import SeedDetailCard from '../seed_detail';
-import CultivarSelectFieldCard from './cultivar_select';
+import CultivarSelectFieldCard from '../cultivar_select';
 import EventFieldCard from './event';
 import { setCard } from '../../actions/card';
 
@@ -35,7 +35,7 @@ class FieldCard extends Component {
     else if (card.type == 'cultivarSelect') {
       return (
         <CultivarSelectFieldCard transStyle={this.props.transStyle}
-          spot={this.props.spot} />
+          spot={this.props.spot} nextType={'seedPlanting'} />
       );
     }
     else if (card.type == 'seedPlanting') {

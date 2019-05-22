@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setCard } from '../../actions/card';
-import BackButton from '../back_button';
+import { setCard } from '../actions/card';
+import BackButton from './back_button';
 
 class CultivarSelectFieldCard extends Component {
   componentDidMount() {
@@ -13,11 +13,11 @@ class CultivarSelectFieldCard extends Component {
 
   selectCultivar(cultivarName) {
     if (cultivarName != 'all') {
-      this.props.setCard({type: 'seedPlanting', value: cultivarName},
-        this.props.spot);
+      this.props.setCard({type: this.props.nextType,
+        value: cultivarName}, this.props.spot);
     }
     else {
-      this.props.setCard({type: 'seedPlanting', value: null},
+      this.props.setCard({type: this.props.nextType, value: null},
         this.props.spot);
     }
   }
