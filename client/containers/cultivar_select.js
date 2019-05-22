@@ -6,20 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setCard } from '../actions/card';
 import BackButton from './back_button';
 
-class CultivarSelectFieldCard extends Component {
+class CultivarSelectCard extends Component {
   componentDidMount() {
     this.selectCultivar = this.selectCultivar.bind(this);
   }
 
   selectCultivar(cultivarName) {
+    let oldCard = this.props.cardState.cards[this.props.spot];
+    let newCard = {"type": this.props.nextType};
     if (cultivarName != 'all') {
-      this.props.setCard({type: this.props.nextType,
-        value: cultivarName}, this.props.spot);
+      newCard.value = cultivarName;
     }
     else {
-      this.props.setCard({type: this.props.nextType, value: null},
-        this.props.spot);
+      newCard.value = null;
     }
+    if (oldCard.type == 'cultivarSelectB') {
+      newCard.parentA = oldCard.parentA;
+    }
+    this.props.setCard(newCard, this.props.spot);
   }
 
   render() {
@@ -52,8 +56,8 @@ class CultivarSelectFieldCard extends Component {
   }
 }
 
-function mapStateToProps({ storehouseState }) {
-  return { storehouseState }
+function mapStateToProps({ storehouseState, cardState }) {
+  return { storehouseState, cardState }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -63,4 +67,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)
-  (CultivarSelectFieldCard);
+  (CultivarSelectCard);

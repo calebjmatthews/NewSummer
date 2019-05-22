@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SeedPlantingFieldCard from './seed_planting';
 import SeedDisplayFieldCard from './seed_display';
 import SeedDetailCard from '../seed_detail';
-import CultivarSelectFieldCard from '../cultivar_select';
+import CultivarSelectCard from '../cultivar_select';
 import EventFieldCard from './event';
 
 class FieldCard extends Component {
@@ -32,7 +32,7 @@ class FieldCard extends Component {
     }
     else if (card.type == 'cultivarSelect') {
       return (
-        <CultivarSelectFieldCard transStyle={this.props.transStyle}
+        <CultivarSelectCard transStyle={this.props.transStyle}
           spot={this.props.spot} nextType={'seedPlanting'} />
       );
     }

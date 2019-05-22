@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { buyFieldAttempt, SET_ECONOMY } from '../../actions/economy';
-import { breedSeeds } from '../../actions/storehouse';
 import { initNavCards } from '../../actions/animation/card_nav';
 import { setCard } from '../../actions/card';
 import { pixiHandler } from '../../instances/pixi/handler';
@@ -13,20 +12,19 @@ import SeedDetailCard from '../seed_detail';
 import SeedReplaceCard from '../seed_replace';
 import { genIdBatch } from '../../actions/auto_increment';
 import ExperimentalGarden from './experimental_garden'
+import SeedBreedingHomeCard from './seed_breeding';
+import CultivarSelectCard from '../cultivar_select';
 
 class HomeCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      seedBreeding: false,
-      seedA: null,
-      seedB: null
+      seedBreeding: false
     }
   }
   componentDidMount() {
     this.traderClick = this.traderClick.bind(this);
     this.breedingToggleClick = this.breedingToggleClick.bind(this);
-    this.breedClick = this.breedClick.bind(this);
   }
 
   traderClick(toBuy) {
@@ -51,61 +49,26 @@ class HomeCard extends Component {
     this.setState({ seedBreeding: switchedBreeding,
       seedA: null, seedB: null });
   }
-  selectSeedClick(spot, seed) {
-    let stateObj = {};
-    stateObj[spot] = seed
-    this.setState(stateObj);
-  }
-  breedClick() {
-    this.props.breedSeeds(
-      this.props.storehouseState.storehouse,
-      this.props.autoIncrementState,
-      this.props.recordBookState.recordBook,
-      this.state.seedA,
-      this.state.seedB);
-    this.breedingToggleClick();
-  }
 
   render() {
     let card = this.props.cardState.cards[this.props.spot];
     if (card == undefined || card == null) { card = {}; }
-    if (this.state.seedBreeding == true) {
+    if (card.type == 'cultivarSelectA') {
       return (
-        <div className="game-card" style={this.props.transStyle}>
-          <div>{'Breed two seeds together:'}</div>
-          <div>
-            <div>
-              {'Seed 1: ' +
-                (this.state.seedA != null ? this.state.seedA.name : 'none')}
-              {this.props.storehouseState.storehouse
-                .seeds.getAll().map((seed) => {
-                return (
-                  <div key={seed.id}
-                    onClick={() => this.selectSeedClick('seedA', seed)}>
-                    {seed.name}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-          <div>
-            <div>
-              {'Seed 2: ' +
-                (this.state.seedB != null ? this.state.seedB.name : 'none')}
-              {this.props.storehouseState.storehouse
-                .seeds.getAll().map((seed) => {
-                return (
-                  <div key={seed.id}
-                    onClick={() => this.selectSeedClick('seedB', seed)}>
-                    {seed.name}
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-          <div onClick={() => this.breedClick()}>Go!</div>
-          <div onClick={() => this.breedingToggleClick()}>Cancel</div>
-        </div>
+        <CultivarSelectCard transStyle={this.props.transStyle}
+          spot={this.props.spot} nextType={'seedBreedingA'} />
+      )
+    }
+    else if (card.type == 'cultivarSelectB') {
+      return (
+        <CultivarSelectCard transStyle={this.props.transStyle}
+          spot={this.props.spot} nextType={'seedBreedingB'} />
+      )
+    }
+    else if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB') {
+      return (
+        <SeedBreedingHomeCard transStyle={this.props.transStyle}
+          spot={this.props.spot} />
       );
     }
     else if (card.type == 'seedReplace') {
@@ -135,8 +98,7 @@ class HomeCard extends Component {
             <div>{'Say hello!'}</div>
           </div>
 
-          <ExperimentalGarden
-            onClickToParent={this.breedingToggleClick}/>
+          <ExperimentalGarden spot={this.props.spot}/>
         </div>
       );
     }
@@ -151,7 +113,7 @@ function mapStateToProps({ storehouseState, economyState, fieldsState,
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    buyFieldAttempt, breedSeeds, initNavCards, setCard, genIdBatch
+    buyFieldAttempt, initNavCards, setCard, genIdBatch
   }, dispatch)
 }
 

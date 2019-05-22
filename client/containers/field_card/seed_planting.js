@@ -32,7 +32,7 @@ class SeedPlantingFieldCard extends Component {
     return (
       <div className="game-card field-card" style={this.props.transStyle}>
         <BackButton spot={this.props.spot} />
-        {'Choose a seed:'}
+        {'Choose a seed to plant:'}
         <div className="option-container">
           {cultivarSeeds.map((seed) => {
             return (
