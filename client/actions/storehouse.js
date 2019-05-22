@@ -29,7 +29,7 @@ export function spendDollars(storehouse, dollarsSpent) {
 export function breedSeeds(storehouse, autoIncrement, recordBook, seedA,
   seedB) {
   return function(dispatch) {
-    let newSeedId = genId(autoIncrement, 'seed');
+    let newSeedId = dispatch(genId(autoIncrement, 'seed'));
     const newSeed = storehouse.breedSeeds(seedA, seedB);
     newSeed.id = newSeedId.newId;
     if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {

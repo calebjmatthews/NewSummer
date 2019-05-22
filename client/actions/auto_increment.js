@@ -16,7 +16,6 @@ export function genIdBatch(autoIncrement, fieldName, count) {
   let newId = 0;
   if (autoIncrement[fieldName] != undefined) {
     newId = autoIncrement[fieldName];
-    newId++;
   }
   let newIds = [];
   for (let loop = 0; loop < count; loop++) {
