@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import SeedPlantingFieldCard from './seed_planting';
 import SeedDisplayFieldCard from './seed_display';
 import SeedDetailCard from '../seed_detail';
 import CultivarSelectFieldCard from '../cultivar_select';
 import EventFieldCard from './event';
-import { setCard } from '../../actions/card';
 
 class FieldCard extends Component {
   constructor(props) {
@@ -57,8 +55,4 @@ function mapStateToProps({ fieldsState, cardState }) {
   return { fieldsState, cardState }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ setCard }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FieldCard);
+export default connect(mapStateToProps)(FieldCard);
