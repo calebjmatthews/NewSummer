@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 
 import { startBreedingSeeds } from '../../actions/storehouse';
 import { setCard } from '../../actions/card';
-import SeedDescription from '../seed_description';
+import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 
-class SeedBreedingHomeCard extends Component {
+class BreedingHomeCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,4 +78,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)
-  (SeedBreedingHomeCard);
+  (BreedingHomeCard);

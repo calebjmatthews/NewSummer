@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { addSeed } from '../../actions/storehouse';
 import { gatherSeedFromEvent } from '../../actions/field';
-import SeedDescription from '../seed_description';
 
 class EventFieldCard extends Component {
   componentDidMount() {

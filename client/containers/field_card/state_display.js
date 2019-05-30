@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { harvestSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
 
-class SeedDisplayFieldCard extends Component {
+class StateDisplayFieldCard extends Component {
   componentDidMount() {
     this.fieldCardClick = this.fieldCardClick.bind(this);
   }
@@ -58,4 +58,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)
-  (SeedDisplayFieldCard);
+  (StateDisplayFieldCard);

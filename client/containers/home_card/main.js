@@ -8,11 +8,11 @@ import { pixiHandler } from '../../instances/pixi/handler';
 import { cast } from '../../instances/cast';
 import { POACEAE } from '../../instances/families';
 import SeedTraderCard from './seed_trader';
-import SeedDetailCard from '../seed_detail';
-import SeedReplaceCard from '../seed_replace';
+import SeedDetailCard from '../seed/seed_detail';
+import SeedReplaceCard from '../seed/seed_replace';
 import { genIdBatch } from '../../actions/auto_increment';
 import ExperimentalGarden from './experimental_garden'
-import SeedBreedingHomeCard from './seed_breeding';
+import BreedingHomeCard from './breeding';
 import CultivarSelectCard from '../cultivar_select';
 
 class HomeCard extends Component {
@@ -67,7 +67,7 @@ class HomeCard extends Component {
     }
     else if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB') {
       return (
-        <SeedBreedingHomeCard transStyle={this.props.transStyle}
+        <BreedingHomeCard transStyle={this.props.transStyle}
           spot={this.props.spot} />
       );
     }

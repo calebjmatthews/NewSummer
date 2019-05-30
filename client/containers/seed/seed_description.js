@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { GROWING_TIME } from '../instances/stats';
-import { setCard } from '../actions/card';
+import { GROWING_TIME } from '../../instances/stats';
+import { setCard } from '../../actions/card';
 
 class SeedDescription extends Component {
   componentDidMount() {

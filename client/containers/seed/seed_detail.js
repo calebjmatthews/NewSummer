@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setCard } from '../actions/card';
-import BackButton from './back_button';
+import { setCard } from '../../actions/card';
+import BackButton from '../back_button';
 
 class SeedDetailCard extends Component {
   render() {

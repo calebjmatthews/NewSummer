@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 
 import { plantSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
-import SeedDescription from '../seed_description';
+import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 
-class SeedPlantingFieldCard extends Component {
+class PlantingFieldCard extends Component {
   componentDidMount() {
     this.seedConfirmPlanting = this.seedConfirmPlanting.bind(this);
   }
@@ -59,4 +59,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)
-  (SeedPlantingFieldCard);
+  (PlantingFieldCard);

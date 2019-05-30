@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { setCard } from '../actions/card';
-import { seedBuyCancel } from '../actions/economy';
-import { replaceSeed } from '../actions/storehouse';
+import { setCard } from '../../actions/card';
+import { seedBuyCancel } from '../../actions/economy';
+import { replaceSeed } from '../../actions/storehouse';
 import SeedDescription from './seed_description';
 
 class SeedReplaceCard extends Component {

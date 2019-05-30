@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SeedPlantingFieldCard from './seed_planting';
-import SeedDisplayFieldCard from './seed_display';
-import SeedDetailCard from '../seed_detail';
+import PlantingFieldCard from './planting';
+import StateDisplayFieldCard from './state_display';
+import SeedDetailCard from '../seed/seed_detail';
 import CultivarSelectCard from '../cultivar_select';
 import EventFieldCard from './event';
 
@@ -38,13 +38,13 @@ class FieldCard extends Component {
     }
     else if (card.type == 'seedPlanting') {
       return (
-        <SeedPlantingFieldCard transStyle={this.props.transStyle}
+        <PlantingFieldCard transStyle={this.props.transStyle}
           spot={this.props.spot} field={field} />
       );
     }
     else {
       return (
-        <SeedDisplayFieldCard transStyle={this.props.transStyle}
+        <StateDisplayFieldCard transStyle={this.props.transStyle}
           spot={this.props.spot} field={field} />
       );
     }

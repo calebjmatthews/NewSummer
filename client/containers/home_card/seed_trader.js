@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { buySeedAttempt } from '../../actions/economy';
 import { setCard } from '../../actions/card';
-import SeedDescription from '../seed_description';
+import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 
 class SeedTraderCard extends Component {

@@ -345,6 +345,7 @@ X Improved navigation between card types(states)
 X Auto increment reducer and actions
 X Alternate seed generation cultivar trait definitions
 X Experimental garden on delay
+_ Compacted cultivar and plant selection container
 _ Experimental garden gives two choices
 _ More cultivars
 _ Environmental effects from fields
