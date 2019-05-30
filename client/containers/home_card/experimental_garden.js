@@ -10,7 +10,7 @@ class ExperimentalGarden extends Component {
   }
 
   emptyGardenClick() {
-    this.props.setCard({type: "cultivarSelectA"}, this.props.spot);
+    this.props.setCard({type: "seedBreedingA"}, this.props.spot);
   }
 
   matureGardenClick() {

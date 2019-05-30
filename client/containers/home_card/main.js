@@ -53,19 +53,7 @@ class HomeCard extends Component {
   render() {
     let card = this.props.cardState.cards[this.props.spot];
     if (card == undefined || card == null) { card = {}; }
-    if (card.type == 'cultivarSelectA') {
-      return (
-        <CultivarSelectCard transStyle={this.props.transStyle}
-          spot={this.props.spot} nextType={'seedBreedingA'} />
-      )
-    }
-    else if (card.type == 'cultivarSelectB') {
-      return (
-        <CultivarSelectCard transStyle={this.props.transStyle}
-          spot={this.props.spot} nextType={'seedBreedingB'} />
-      )
-    }
-    else if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB') {
+    if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB') {
       return (
         <BreedingHomeCard transStyle={this.props.transStyle}
           spot={this.props.spot} />

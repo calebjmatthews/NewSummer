@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { startBreedingSeeds } from '../../actions/storehouse';
 import { setCard } from '../../actions/card';
-import SeedDescription from '../seed/seed_description';
+import SeedSelectCard from '../seed/seed_select';
 import BackButton from '../back_button';
 
 class BreedingHomeCard extends Component {
@@ -22,7 +22,7 @@ class BreedingHomeCard extends Component {
   seedConfirmBreeding(seed) {
     let card = this.props.cardState.cards[this.props.spot];
     if (card.type == 'seedBreedingA') {
-      this.props.setCard({"type": "cultivarSelectB", "parentA": seed},
+      this.props.setCard({"type": "seedBreedingB", "parentA": seed},
         this.props.spot);
     }
     else {
@@ -51,16 +51,9 @@ class BreedingHomeCard extends Component {
       <div className="game-card" style={this.props.transStyle}>
         <BackButton spot={this.props.spot} />
         {'Choose a seed to breed:'}
-        <div className="option-container">
-          {cultivarSeeds.map((seed) => {
-            return (
-              <SeedDescription key={seed.id} seed={seed}
-                spot={this.props.spot}
-                onClickConfirmToParent={this.seedConfirmBreeding}
-                confirmText={'Select'} />
-            );
-          })}
-        </div>
+        <SeedSelectCard spot={this.props.spot}
+          onClickConfirmToParent={this.seedConfirmBreeding}
+          confirmText={'Go'} />
       </div>
     );
   }

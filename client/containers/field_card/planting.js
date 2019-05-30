@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { plantSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
-import SeedDescription from '../seed/seed_description';
+import SeedSelectCard from '../seed/seed_select';
 import BackButton from '../back_button';
 
 class PlantingFieldCard extends Component {
@@ -33,16 +33,9 @@ class PlantingFieldCard extends Component {
       <div className="game-card field-card" style={this.props.transStyle}>
         <BackButton spot={this.props.spot} />
         {'Choose a seed to plant:'}
-        <div className="option-container">
-          {cultivarSeeds.map((seed) => {
-            return (
-              <SeedDescription key={seed.id} seed={seed}
-                spot={this.props.spot}
-                onClickConfirmToParent={this.seedConfirmPlanting}
-                confirmText={'Plant'} />
-            );
-          })}
-        </div>
+        <SeedSelectCard spot={this.props.spot}
+          onClickConfirmToParent={this.seedConfirmPlanting}
+          confirmText={'Plant'} />
       </div>
     );
   }

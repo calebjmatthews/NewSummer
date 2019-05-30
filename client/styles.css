@@ -191,3 +191,11 @@ button:disabled {
   margin: 2px;
   border: 1px solid #fff;
 }
+
+.cultivar-bar {
+  display: flex;
+  margin-top: 5px;
+}
+.cultivar-bar-option {
+  width: unset;
+}
