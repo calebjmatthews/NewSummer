@@ -91,6 +91,7 @@ class App extends Component {
         if (field.seedPlanted != null) {
           let seed = field.seedPlanted;
 
+          console.log('new Seed called in field seedPlanted storage load');
           field.seedPlanted = new Seed(seed.id, seed.familyName,
             seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
             null, seed.parents, seed.genome);

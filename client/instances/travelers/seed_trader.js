@@ -30,6 +30,7 @@ seedTrader.genOffers = function(cultivarsUnlocked) {
 
 function genOffer(offers, cultivarsUnlocked, variation) {
   let index = Math.floor(Math.random() * cultivarsUnlocked.length);
+  console.log('new Seed called in offer generation');
   let newSeed = new Seed(null, POACEAE, cultivarsUnlocked[index], 'Bought',
     new Date(Date.now()), variation);
   let nameAlreadyExists = false;

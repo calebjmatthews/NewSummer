@@ -11,6 +11,7 @@ export default class RecordBook {
         let seedDict = cultivarDict[cultivarName];
         Object.keys(cultivarDict[cultivarName]).map((seedId) => {
           let seed = seedDict[seedId];
+          console.log('new Seed called in record book constructor');
           seedDict[seedId] = new Seed(seedId, seed.familyName,
             seed.cultivarName, seed.methodObtained, seed.dateObtained, null, seed.parentIds, seed.genome);
         });

@@ -1,11 +1,13 @@
 import Cache from './cache';
 import Seed from './seed';
+import { formatDuration } from '../functions/utils';
 
 export default class Storehouse {
   constructor(aStorehouse = null) {
     if (aStorehouse != null) {
       this.dollars = aStorehouse.dollars;
       this.maxSeeds = aStorehouse.maxSeeds;
+      this.experimentalGardenSize = aStorehouse.experimentalGardenSize;
 
       let newSeeds = [];
       aStorehouse.seeds.members.map((seed) => {
@@ -26,6 +28,7 @@ export default class Storehouse {
           null, seed.parents, seed.id, seed.genome);
       }
 
+      this.seedsBred = [];
       if (aStorehouse.seedsBred.length > 0) {
         aStorehouse.seedsBred.map((seed) => {
           this.seedsBred.push(new Seed(seed.familyName,
@@ -43,6 +46,7 @@ export default class Storehouse {
     else {
       this.dollars = 10000;
       this.maxSeeds = 4;
+      this.experimentalGardenSize = 2;
       this.seeds = new Cache([]);
       this.intermediateSeed = null;
       this.seedsBred = [];
@@ -105,15 +109,21 @@ export default class Storehouse {
     return seedA.breedWith(seedB);
   }
   ageBreeding() {
-    if (this.seedsBred.length > 0
-      && this.breedingTimeRemaining > 0) {
+    if (this.seedsBred.length > 0 && this.breedingTimeRemaining > 0) {
       this.breedingTimeRemaining -= 0.25;
       this.breedingAgeLabel = this.getBreedingAgeLabel();
-      this.checkSeedsState();
       if (this.breedingTimeRemaining < 0) {
         this.breedingTimeRemaining -= 0.25;
         this.breedingAgeLabel = this.getBreedingAgeLabel();
       }
+    }
+  }
+  getBreedingAgeLabel() {
+    if (this.seedsBred.length > 0) {
+      return (formatDuration(this.breedingTimeRemaining * 1000));
+    }
+    else {
+      return '';
     }
   }
 }

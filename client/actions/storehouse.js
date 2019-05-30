@@ -25,22 +25,20 @@ export function spendDollars(storehouse, dollarsSpent) {
     storehouse: storehouse
   }
 }
-
-export function breedSeeds(storehouse, autoIncrement, recordBook, seedA,
-  seedB) {
+export function startBreedingSeeds(storehouse, autoIncrement, recordBook,
+  seedA, seedB) {
   return function(dispatch) {
-    let newSeedId = dispatch(genId(autoIncrement, 'seed'));
-    const newSeed = storehouse.breedSeeds(seedA, seedB);
-    newSeed.id = newSeedId.newId;
-    if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
-      recordBook.recordSeed(newSeed);
-      dispatch(setRecordBook(recordBook));
-      storehouse.addSeed(newSeed);
-    }
-    else {
-      console.log('Cultivar storage full.');
-      storehouse.intermediateSeed = newSeed;
-    }
+    let newSeeds = [];
+    [...Array(storehouse.experimentalGardenSize).keys()].map(() => {
+      let newSeedId = dispatch(genId(autoIncrement, 'seed'));
+      const newSeed = storehouse.breedSeeds(seedA, seedB);
+      newSeed.id = newSeedId.newId;
+      newSeeds.push(newSeed);
+    });
+
+    storehouse.seedsBred = newSeeds;
+    storehouse.breedingTimeRemaining = 100;
+    storehouse.breedingAgeLabel = storehouse.getBreedingAgeLabel();
 
     return {
       type: SET_STOREHOUSE,
@@ -56,6 +54,23 @@ export function ageBreeding(storehouse) {
     storehouse: storehouse
   }
 };
+
+export function finishBreedingSeed(storehouse, recordBook, newSeed) {
+  if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
+    recordBook.recordSeed(newSeed);
+    dispatch(setRecordBook(recordBook));
+    storehouse.addSeed(newSeed);
+    storehouse.seedsBred = [];
+  }
+  else {
+    console.log('Cultivar storage full.');
+    storehouse.intermediateSeed = newSeed;
+  }
+  return {
+    type: SET_STOREHOUSE,
+    storehouse: storehouse
+  }
+}
 
 export function addSeed(storehouse, recordBook, newSeed) {
   return function(dispatch) {

@@ -27,6 +27,7 @@ export default class FieldEventFactory{
         ];
       }
 
+      console.log('new Seed called in field event generation');
       seeds.push(new Seed(null, POACEAE, cultivarName, 'Discovered'));
     }
 

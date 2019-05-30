@@ -289,6 +289,20 @@ Record Book:
 - When being displayed, the record book shows each discovered cultivar with individuals listed beneath in player selected order (default is value high, other options are value low, growth time high, growth time low, newest, oldest)
 - Also records each trait discovered (many are shared between families). Many traits are only marked as discovered when expression is high (Stem focus, Sourness, etc), but others are distinctly discoverable at either end (Tolerance: heat vs. Tolerance: cold)
 
+Seed Breeding UI
+~~~~~~~~~~~~~~~~
+Experimental garden:
+	- If not breeding, show "Experimental Garden: Breed two seeds together"
+	- If breeding, show "Experimental plants are growing: 8m 4s"
+
+Breeding selection:
+	- Store "seedBreeding", parentA, and parentB in card state
+	- Flow:
+		- For seed A, show cultivar selection, then seed selection
+		- For seed B, show cultivar selection, then seed selection
+		- Show confirmation screen with seed descriptions for both
+		- Set storehouse seed breeding props
+
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
 X React boilerplate
@@ -330,7 +344,7 @@ X Seed discovery event
 X Improved navigation between card types(states)
 X Auto increment reducer and actions
 X Alternate seed generation cultivar trait definitions
-_ Experimental garden on delay
+X Experimental garden on delay
 _ Experimental garden gives two choices
 _ More cultivars
 _ Environmental effects from fields

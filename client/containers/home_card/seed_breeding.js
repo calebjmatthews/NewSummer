@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { breedSeeds } from '../../actions/storehouse';
+import { startBreedingSeeds } from '../../actions/storehouse';
 import { setCard } from '../../actions/card';
 import SeedDescription from '../seed_description';
 import BackButton from '../back_button';
@@ -17,7 +17,6 @@ class SeedBreedingHomeCard extends Component {
   }
   componentDidMount() {
     this.seedConfirmBreeding = this.seedConfirmBreeding.bind(this);
-    this.breedClick = this.breedClick.bind(this);
   }
 
   seedConfirmBreeding(seed) {
@@ -27,7 +26,7 @@ class SeedBreedingHomeCard extends Component {
         this.props.spot);
     }
     else {
-      this.props.breedSeeds(
+      this.props.startBreedingSeeds(
         this.props.storehouseState.storehouse,
         this.props.autoIncrementState,
         this.props.recordBookState.recordBook,
@@ -35,16 +34,6 @@ class SeedBreedingHomeCard extends Component {
         seed);
       this.props.setCard({type: null}, this.props.spot);
     }
-  }
-
-  breedClick() {
-    this.props.breedSeeds(
-      this.props.storehouseState.storehouse,
-      this.props.autoIncrementState,
-      this.props.recordBookState.recordBook,
-      this.state.seedA,
-      this.state.seedB);
-    this.props.setCard({type: null}, this.props.spot);
   }
 
   render() {
@@ -84,7 +73,7 @@ function mapStateToProps({ storehouseState, autoIncrementState,
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    breedSeeds, setCard
+    startBreedingSeeds, setCard
   }, dispatch)
 }
 

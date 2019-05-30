@@ -6,6 +6,8 @@ export default class Seed {
   constructor(id, familyName, givenCultivarName, methodObtained,
     dateObtained = new Date(Date.now()), variation = 0,
     parentsIds = [null, null], genome = null) {
+    console.log('arguments');
+    console.log(arguments);
     this.id = id;
     this.familyName = familyName;
     this.methodObtained = methodObtained;
