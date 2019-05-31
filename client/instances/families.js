@@ -26,8 +26,8 @@ const statCache = new Cache([
     {comparitor: 'greater than', values: [180], adjective: 'Plentiful',
       bonus: 0, description: 'Seeds are somewhat plentiful',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'},
-    {comparitor: 'greater than', values: [220], adjective: 'Abundant',
-      bonus: 0.5, description: 'Seeds are abundant',
+    {comparitor: 'greater than', values: [360], adjective: 'Abundant',
+      bonus: 4, description: 'Seeds are abundant',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'}
   ]),
   new Stat(PLANT_QUALITY, 100, []),
@@ -62,16 +62,16 @@ const statCache = new Cache([
       iconType: 'fontawesome', icon: 'globe-europe', iconStyle: 'negative'}
   ]),
   new Stat(STEM_HEIGHT, 100, [
-    {comparitor: 'less than', values: [90], adjective: 'Short',
+    {comparitor: 'less than', values: [145], adjective: 'Short',
       bonus: 0},
-    {comparitor: 'greater than', values: [180], adjective: 'Tall',
+    {comparitor: 'greater than', values: [300], adjective: 'Tall',
       bonus: 0}
   ]),
   new Stat(TEMP_TOLERANCE, 100, [
     {comparitor: 'less than', values: [200], adjective: 'Winter',
       bonus: 0, description: 'Grows well in the cold',
       iconType: 'fontawesome', icon: 'snowflake', iconStyle: 'neutral'},
-    {comparitor: 'greater than', values: [300], adjective: 'Summer',
+    {comparitor: 'greater than', values: [250], adjective: 'Summer',
       bonus: 0, description: 'Grows well in the heat',
       iconType: 'fontawesome', icon: 'sun', iconStyle: 'neutral'}
   ]),
@@ -79,7 +79,7 @@ const statCache = new Cache([
     {comparitor: 'less than', values: [200], adjective: 'Desert',
       bonus: 0, description: 'Grows well in dry conditions',
       iconType: 'fontawesome', icon: 'wind', iconStyle: 'neutral'},
-    {comparitor: 'greater than', values: [300], adjective: 'Wetland',
+    {comparitor: 'greater than', values: [250], adjective: 'Wetland',
       bonus: 0, description: 'Grows well in wet conditions',
       iconType: 'fontawesome', icon: 'tint', iconStyle: 'neutral'}
   ]),

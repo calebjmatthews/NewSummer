@@ -22,11 +22,14 @@ export default class Seed {
     this.traitTotalDict = this.determineTraitsFromGenome(this.genome);
     this.cultivarName =
       this.determineCultivarNameFromGenome(this.genome);
-    this.stats =
-      this.determineStatsFromTraitsAndCultivar(this.traitTotalDict);
 
+    this.stats =
+      this.determineStatsFromTraits(this.traitTotalDict);
     this.adjectives =
       this.determineAdjectivesFromStats(this.stats, this.cultivarName);
+    this.stats =
+      this.applyCultivarToStats(this.stats, this.cultivarName);
+
     this.name = this.adjectives[0].word + ' ' + this.cultivarName;
 
     this.idealValue = this.determineIdealValueFromStats(this.stats);
@@ -122,14 +125,17 @@ export default class Seed {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineCultivarNameFromGenome(genome);
   }
-  determineStatsFromTraitsAndCultivar(traitTotalDict) {
+  determineStatsFromTraits(traitTotalDict) {
     const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineStatsFromTraitsAndCultivar(traitTotalDict,
-      this.cultivarName);
+    return family.determineStatsFromTraits(traitTotalDict);
   }
   determineAdjectivesFromStats(stats, cultivarName = this.cultivarName) {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.determineAdjectivesFromStats(stats, cultivarName);
+  }
+  applyCultivarToStats(stats, cultivarName = this.cultivarName) {
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.applyCultivarToStats(stats, cultivarName);
   }
   determineIdealValueFromStats(stats, cultivarName = this.cultivarName) {
     const family = families.getByProperty('nameScientific', this.familyName);

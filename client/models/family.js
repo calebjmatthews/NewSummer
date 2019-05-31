@@ -60,7 +60,7 @@ export default class Family {
     })
     return cultivarName;
   }
-  determineStatsFromTraitsAndCultivar(traitTotalDict, cultivarName) {
+  determineStatsFromTraits(traitTotalDict) {
     let statDict = {};
     const stats = this.stats.getAll();
     stats.map((stat) => {
@@ -78,22 +78,11 @@ export default class Family {
         }
       }
     });
-    const cultivar = this.cultivars.getByProperty('name', cultivarName);
-    if (cultivar.bonus != null) {
-      for (let index = 0; index < cultivar.bonus.statNames.length; index++) {
-        // Because bonuses are always treated as a dominant trait, express
-        //  effect twice by default
-        statDict[cultivar.bonus.statNames[index]].value *=
-          (1+cultivar.bonus.statModifiers[index]);
-        statDict[cultivar.bonus.statNames[index]].value *=
-          (1+cultivar.bonus.statModifiers[index]);
-      }
-    }
 
     return statDict;
   }
   determineAdjectivesFromStats(stats, cultivarName) {
-    let adjectives = [{word: 'Balanced', extent: 0}];
+    let adjectives = [{word: 'Common', extent: 0}];
 
     Object.keys(stats).map((statKey) => {
       const stat = stats[statKey];
@@ -130,6 +119,21 @@ export default class Family {
     });
 
     return adjectives;
+  }
+  applyCultivarToStats(stats, cultivarName) {
+    const cultivar = this.cultivars.getByProperty('name', cultivarName);
+    if (cultivar.bonus != null) {
+      for (let index = 0; index < cultivar.bonus.statNames.length; index++) {
+        // Because bonuses are always treated as a dominant trait, express
+        //  effect twice by default
+        stats[cultivar.bonus.statNames[index]].value *=
+          (1+cultivar.bonus.statModifiers[index]);
+        stats[cultivar.bonus.statNames[index]].value *=
+          (1+cultivar.bonus.statModifiers[index]);
+      }
+    }
+
+    return stats;
   }
   determineIdealValueFromStats(stats) {
     let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
