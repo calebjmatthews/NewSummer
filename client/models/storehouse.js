@@ -12,8 +12,8 @@ export default class Storehouse {
       let newSeeds = [];
       aStorehouse.seeds.members.map((seed) => {
         let newSeed = new Seed(seed.id, seed.familyName,
-          seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
-          null, seed.parents, seed.genome);
+          null, seed.methodObtained, seed.dateObtained,
+          null, seed.parentsIds, seed.genome);
         Object.keys(seed).map((key) => {
           newSeed[key] = seed[key];
         });
@@ -23,17 +23,17 @@ export default class Storehouse {
 
       if (aStorehouse.intermediateSeed != null) {
         let seed = aStorehouse.intermediateSeed;
-        this.intermediateSeed = new Seed(seed.familyName,
-          seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
-          null, seed.parents, seed.id, seed.genome);
+        this.intermediateSeed = new Seed(seed.id, seed.familyName,
+          null, seed.methodObtained, seed.dateObtained,
+          null, seed.parentsIds, seed.genome);
       }
 
       this.seedsBred = [];
       if (aStorehouse.seedsBred.length > 0) {
         aStorehouse.seedsBred.map((seed) => {
-          this.seedsBred.push(new Seed(seed.familyName,
-            seed.givenCultivarName, seed.methodObtained, seed.dateObtained,
-            null, seed.parents, seed.id, seed.genome));
+          this.seedsBred.push(new Seed(seed.id, seed.familyName,
+            null, seed.methodObtained, seed.dateObtained,
+            null, seed.parentsIds, seed.genome));
         });
       }
       else {
