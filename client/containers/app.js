@@ -35,12 +35,7 @@ class App extends Component {
       }
     }, (1000 / FRAMES_PER_SECOND));
     setInterval(() => {
-      setLocalStorages({
-        fields: this.props.fieldsState.fields,
-        storehouse: this.props.storehouseState.storehouse,
-        recordBook: this.props.recordBookState.recordBook,
-        autoIncrement: this.props.autoIncrementState
-      })
+      this.setActiveLocalStorages();
     }, COOKIE_SET_INTERVAL);
 
     let cards = [{type: null}, {type: null}, {type: null}];
@@ -102,6 +97,19 @@ class App extends Component {
 
     this.navLeftClick = this.navLeftClick.bind(this);
     this.navRightClick = this.navRightClick.bind(this);
+  }
+
+  setActiveLocalStorages() {
+    let localStorages = {};
+    let fields = this.props.fieldsState.fields;
+    if (Object.keys(this.props.autoIncrementState).length > 0) {
+      setLocalStorages({
+        fields: this.props.fieldsState.fields,
+        storehouse: this.props.storehouseState.storehouse,
+        recordBook: this.props.recordBookState.recordBook,
+        autoIncrement: this.props.autoIncrementState
+      });
+    }
   }
 
   navLeftClick() {

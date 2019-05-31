@@ -2,7 +2,11 @@ const storageNames = ['fields', 'storehouse', 'recordBook', 'autoIncrement'];
 
 export function setLocalStorages(storages) {
   storageNames.map((storageName) => {
-    localStorage.setItem(storageName, JSON.stringify(storages[storageName]));
+    let sStorage = storages[storageName];
+    if (sStorage != undefined) {
+      localStorage.setItem(storageName,
+        JSON.stringify(storages[storageName]));
+    }
   });
 }
 
