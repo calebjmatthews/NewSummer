@@ -56,19 +56,21 @@ export function ageBreeding(storehouse) {
 };
 
 export function finishBreedingSeed(storehouse, recordBook, newSeed) {
-  if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
-    recordBook.recordSeed(newSeed);
-    dispatch(setRecordBook(recordBook));
-    storehouse.addSeed(newSeed);
-    storehouse.seedsBred = [];
-  }
-  else {
-    console.log('Cultivar storage full.');
-    storehouse.intermediateSeed = newSeed;
-  }
-  return {
-    type: SET_STOREHOUSE,
-    storehouse: storehouse
+  return function(dispatch) {
+    if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
+      recordBook.recordSeed(newSeed);
+      dispatch(setRecordBook(recordBook));
+      storehouse.addSeed(newSeed);
+      storehouse.seedsBred = [];
+    }
+    else {
+      console.log('Cultivar storage full.');
+      storehouse.intermediateSeed = newSeed;
+    }
+    return {
+      type: SET_STOREHOUSE,
+      storehouse: storehouse
+    }  
   }
 }
 

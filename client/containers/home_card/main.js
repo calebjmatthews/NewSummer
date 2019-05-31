@@ -12,8 +12,9 @@ import SeedDetailCard from '../seed/seed_detail';
 import SeedReplaceCard from '../seed/seed_replace';
 import { genIdBatch } from '../../actions/auto_increment';
 import ExperimentalGarden from './experimental_garden'
-import BreedingHomeCard from './breeding';
+import BreedingPairHomeCard from './breeding_pair';
 import CultivarSelectCard from '../cultivar_select';
+import BreedingResultsHomeCard from './breeding_results';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -55,7 +56,13 @@ class HomeCard extends Component {
     if (card == undefined || card == null) { card = {}; }
     if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB') {
       return (
-        <BreedingHomeCard transStyle={this.props.transStyle}
+        <BreedingPairHomeCard transStyle={this.props.transStyle}
+          spot={this.props.spot} />
+      );
+    }
+    else if (card.type == 'breedingResults') {
+      return (
+        <BreedingResultsHomeCard transStyle={this.props.transStyle}
           spot={this.props.spot} />
       );
     }

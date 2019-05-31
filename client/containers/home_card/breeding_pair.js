@@ -7,7 +7,7 @@ import { setCard } from '../../actions/card';
 import SeedSelectCard from '../seed/seed_select';
 import BackButton from '../back_button';
 
-class BreedingHomeCard extends Component {
+class BreedingPairHomeCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,4 +71,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)
-  (BreedingHomeCard);
+  (BreedingPairHomeCard);

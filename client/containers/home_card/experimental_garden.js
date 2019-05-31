@@ -14,8 +14,7 @@ class ExperimentalGarden extends Component {
   }
 
   matureGardenClick() {
-    console.log('this.props.storehouseState.storehouse.seedsBred');
-    console.log(this.props.storehouseState.storehouse.seedsBred);
+    this.props.setCard({type: "breedingResults"}, this.props.spot);
   }
 
   render() {

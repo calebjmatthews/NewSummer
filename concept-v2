@@ -345,10 +345,11 @@ X Improved navigation between card types(states)
 X Auto increment reducer and actions
 X Alternate seed generation cultivar trait definitions
 X Experimental garden on delay
-_ Compacted cultivar and plant selection container
+X Compact cultivar and plant selection container
 _ Experimental garden gives two choices
 _ More cultivars
 _ Environmental effects from fields
 _ Seed trader arrives and leaves
+_ Balancing (Ready for playable pre-alpha!)
 _ Pixel graphics linked with traits
 _ Pixel graphics for different cultivars
