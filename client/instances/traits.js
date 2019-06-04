@@ -42,18 +42,18 @@ export const seedSize = new Trait(
 
 export const tempTolerance = new Trait(
   TEMP_TOLERANCE,
-  2,
+  3,
   false,
   [TEMP_TOLERANCE],
-  [0.5]
+  [0.1]
 );
 
 export const moisTolerance = new Trait(
   MOIS_TOLERANCE,
-  2,
+  3,
   false,
   [MOIS_TOLERANCE],
-  [0.5]
+  [0.1]
 );
 
 export const GROWTH_SPEED = 'Growth Speed';

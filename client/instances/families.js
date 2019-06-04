@@ -27,14 +27,14 @@ const statCache = new Cache([
       bonus: 0, description: 'Seeds are somewhat plentiful',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'},
     {comparitor: 'greater than', values: [360], adjective: 'Abundant',
-      bonus: 4, description: 'Seeds are abundant',
+      bonus: 2, description: 'Seeds are abundant',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'}
   ]),
   new Stat(PLANT_QUALITY, 100, []),
   new Stat(GROWING_TIME, 300, [
     {comparitor: 'less than', values: [250], adjective: 'Fast-Growing',
       bonus: 0},
-    {comparitor: 'greater than', values: [1100], adjective: 'Slow-Growing',
+    {comparitor: 'greater than', values: [1200], adjective: 'Slow-Growing',
       bonus: 0}
   ]),
   new Stat(PEST_RESISTANCE, 100, [
@@ -68,19 +68,19 @@ const statCache = new Cache([
       bonus: 0}
   ]),
   new Stat(TEMP_TOLERANCE, 100, [
-    {comparitor: 'less than', values: [200], adjective: 'Winter',
-      bonus: 0, description: 'Grows well in the cold',
+    {comparitor: 'less than', values: [125], adjective: 'Winter',
+      bonus: 1, description: 'Grows well in the cold',
       iconType: 'fontawesome', icon: 'snowflake', iconStyle: 'neutral'},
-    {comparitor: 'greater than', values: [250], adjective: 'Summer',
-      bonus: 0, description: 'Grows well in the heat',
+    {comparitor: 'greater than', values: [142], adjective: 'Summer',
+      bonus: 1, description: 'Grows well in the heat',
       iconType: 'fontawesome', icon: 'sun', iconStyle: 'neutral'}
   ]),
   new Stat(MOIS_TOLERANCE, 100, [
-    {comparitor: 'less than', values: [200], adjective: 'Desert',
-      bonus: 0, description: 'Grows well in dry conditions',
+    {comparitor: 'less than', values: [125], adjective: 'Desert',
+      bonus: 1, description: 'Grows well in dry conditions',
       iconType: 'fontawesome', icon: 'wind', iconStyle: 'neutral'},
-    {comparitor: 'greater than', values: [250], adjective: 'Wetland',
-      bonus: 0, description: 'Grows well in wet conditions',
+    {comparitor: 'greater than', values: [142], adjective: 'Wetland',
+      bonus: 1, description: 'Grows well in wet conditions',
       iconType: 'fontawesome', icon: 'tint', iconStyle: 'neutral'}
   ]),
   new Stat(STEM_THICKNESS, 100, [])

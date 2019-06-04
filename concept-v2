@@ -43,8 +43,8 @@ Cultivars:
 	- Rye: Grows well in poor soil conditions, seeds in seed heads
 	- Emmer: Seed in seed heads, primitive grain
 	- Rice: Seed in seed heads, can tolerate high moisture / salt
-	- Millet: Seed in fox tails,
-	- Sorghum:
+	- Millet: Seed in fox tails, fast-growing, tolerates high heat and dryness
+	- Sorghum: Drought and heat tolerant
 	- Sugar Cane: Cane investment, high sugar content
 	- Bamboo: Cane investment, high plant toughness
 * Brassicaceae (Crucifers)
@@ -171,7 +171,7 @@ Poaceae:
 Husk			1		0		0		0		0		0		0		0		0
 Floret		0		0		1		1		0		0		0		1		0
 Hull			0		1		0		0		1		1		1		0		1
-Branching	0		0		0		2		0		2		0		0		2
+Branching	0		0		0		1		0		1		0		0		1
 Seed siz	4		1		0		1		2		1		0		0		0
 Stem foc	0		0		0		0		0		0		0		1		1
 Final sz	4		1		0		3		2		3		1		1		2
@@ -243,6 +243,12 @@ X Fix seed gen based on cultivar
 X Mild rebalancing of traits
 X Flesh out mature seed selling
 - More rebalancing of traits
+
+AaAa
+0,1,2 ; 0,1,2
+0,1,2,3,4
+100,150,225,337.5,506.25
+
 
 Wanderers:
 ~~~~~~~~~~
@@ -347,9 +353,10 @@ X Alternate seed generation cultivar trait definitions
 X Experimental garden on delay
 X Compact cultivar and plant selection container
 X Experimental garden gives two choices
-_ Balancing
-_ More cultivars
+X More cultivars
 _ Environmental effects from fields
+_ Minor display changes
 _ Seed trader arrives and leaves (Ready for playable pre-alpha!)
+_ Balancing after play
 _ Pixel graphics linked with traits
 _ Pixel graphics for different cultivars

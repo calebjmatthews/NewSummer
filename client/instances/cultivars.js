@@ -12,8 +12,8 @@ export const grain = new Cultivar(GRAIN, null, null, [
   {trait: BRANCHING, comparitor: 'equal to', values: [1]},
   {trait: STEM_FOCUS, comparitor: 'equal to', values: [1]},
   {trait: SEED_SIZE, comparitor: 'less than', values: [4]},
-  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [1, 3]},
-  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [1, 3]},
+  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [2, 4]},
   {trait: GROWTH_SPEED, comparitor: 'less than', values: [3]},
   {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
   {trait: SWEETNESS, comparitor: 'less than', values: [3]},
@@ -31,8 +31,8 @@ export const cane = new Cultivar(CANE, [
   {trait: BRANCHING, comparitor: 'equal to', values: [1]},
   {trait: STEM_FOCUS, comparitor: 'equal to', values: [0]},
   {trait: SEED_SIZE, comparitor: 'less than', values: [4]},
-  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [1, 3]},
-  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [1, 3]},
+  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [2, 4]},
   {trait: GROWTH_SPEED, comparitor: 'less than', values: [3]},
   {trait: SEEDS_ON_TOP, comparitor: 'equal to', values: [1]},
   {trait: SWEETNESS, comparitor: 'less than', values: [3]},
@@ -50,8 +50,8 @@ export const wildCane = new Cultivar(WILD_CANE, [
   {trait: BRANCHING, comparitor: 'equal to', values: [1]},
   {trait: STEM_FOCUS, comparitor: 'equal to', values: [0]},
   {trait: SEED_SIZE, comparitor: 'less than', values: [4]},
-  {trait: TEMP_TOLERANCE, comparitor: 'equal to', values: [2]},
-  {trait: MOIS_TOLERANCE, comparitor: 'equal to', values: [2]},
+  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [2, 4]},
   {trait: GROWTH_SPEED, comparitor: 'less than', values: [3]},
   {trait: NITROGEN_REQUIREMENT, comparitor: 'less than', values: [3]},
   {trait: TOUGHNESS, comparitor: 'between', values: [2, 4]},
@@ -76,8 +76,8 @@ export const wildGrass = new Cultivar(WILD_GRASS, [
   {trait: BRANCHING, comparitor: 'equal to', values: [1]},
   {trait: STEM_FOCUS, comparitor: 'equal to', values: [1]},
   {trait: SEED_SIZE, comparitor: 'less than', values: [4]},
-  {trait: TEMP_TOLERANCE, comparitor: 'equal to', values: [2]},
-  {trait: MOIS_TOLERANCE, comparitor: 'equal to', values: [2]},
+  {trait: TEMP_TOLERANCE, comparitor: 'between', values: [2, 4]},
+  {trait: MOIS_TOLERANCE, comparitor: 'between', values: [2, 4]},
   {trait: GROWTH_SPEED, comparitor: 'less than', values: [3]},
   {trait: NITROGEN_REQUIREMENT, comparitor: 'less than', values: [3]},
   {trait: TOUGHNESS, comparitor: 'between', values: [2, 4]},
@@ -129,7 +129,7 @@ export const oats = new Cultivar(OATS, [
 ], new Trait(
   (OATS + ' Bonus'), 0, null,
   [MOIS_TOLERANCE, PEST_RESISTANCE, DISEASE_RESISTANCE],
-  [0.5, 0.05, 0.05]
+  [0.1, 0.05, 0.05]
 ));
 
 export const MILLET = 'Millet';
@@ -140,7 +140,7 @@ export const millet = new Cultivar(MILLET, [
 ], new Trait(
   (MILLET + ' Bonus'), 0, null,
   [MOIS_TOLERANCE, TEMP_TOLERANCE],
-  [-0.5, 0.5]
+  [-0.1, 0.1]
 ));
 
 export const SORGHUM = 'Sorghum';
@@ -153,7 +153,7 @@ export const sorghum = new Cultivar(SORGHUM, [
   (SORGHUM + ' Bonus'), 0, null,
   [MOIS_TOLERANCE, TEMP_TOLERANCE, PLANT_QUALITY, GROWING_TIME,
     PEST_RESISTANCE, DISEASE_RESISTANCE],
-  [-0.25, 0.25, 0.125, 0.025, -0.05, -0.05]
+  [-0.05, 0.05, 0.125, 0.025, -0.05, -0.05]
 ));
 
 export const RYE = 'Rye';
@@ -177,7 +177,7 @@ export const rice = new Cultivar(RICE, [
 ], new Trait(
   (RICE + ' Bonus'), 0, null,
   [MOIS_TOLERANCE],
-  [1]
+  [0.2]
 ));
 
 export const WHEAT = 'Wheat';
