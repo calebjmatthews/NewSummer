@@ -93,6 +93,9 @@ button:disabled {
   text-align: center;
   color: #fff;
 }
+.field-card {
+  justify-content: space-between;
+}
 
 .option-container {
   display: flex;
@@ -198,4 +201,65 @@ button:disabled {
 }
 .cultivar-bar-option {
   width: unset;
+}
+
+.climate-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.climate-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20px;
+  margin: 0 2px;
+}
+.climate-bar {
+  width: 7px;
+  height: 36px;
+  margin-bottom: 2px;
+  border: 1px solid #fff;
+}
+.climate-bar-background {
+  position: absolute;
+  width: 7px;
+  height: 36px;
+  background: #fff;
+  opacity: 0.5;
+}
+.climate-tick-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 7px;
+  height: 36px;
+}
+.climate-tick {
+  z-index: 1;
+  width: 7px;
+  height: 4px;
+  margin-bottom: 1px;
+}
+.climate-temp {
+  background: #cc2e2e;
+  background: -webkit-linear-gradient(top, #cc2e2e, #454ec6);
+  background: -moz-linear-gradient(top, #cc2e2e, #454ec6);
+  background: -ms-linear-gradient(top, #cc2e2e, #454ec6);
+  background: -o-linear-gradient(top, #cc2e2e, #454ec6);
+  background: linear-gradient(to bottom, #cc2e2e, #454ec6);
+}
+.climate-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  max-width: 20px;
+  min-height: 20px;
+  max-height: 20px;
+  background: #fff;
+  border-radius: 50%;
+}
+.climate-icon svg {
+  color: #000;
 }

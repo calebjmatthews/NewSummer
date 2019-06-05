@@ -244,11 +244,31 @@ X Mild rebalancing of traits
 X Flesh out mature seed selling
 - More rebalancing of traits
 
-AaAa
-0,1,2 ; 0,1,2
-0,1,2,3,4
-100,150,225,337.5,506.25
+AaAaAa
+0,1,2,3 ; 0,1,2,3
+0,  1,  2,  3,  4,  5,  6
+100,110,121,133,146,161,177
 
+Temperature
+#CC2E2E -> #454EC6
+0,      1,      2,      3,      4,      5,      6
+#cc2e2e #b53347 #9f3961 #883e7a #724393 #5b49ad #454ec6
+background: #cc2e2e;
+background: -webkit-linear-gradient(left, #cc2e2e, #454ec6);
+background: -moz-linear-gradient(left, #cc2e2e, #454ec6);
+background: -ms-linear-gradient(left, #cc2e2e, #454ec6);
+background: -o-linear-gradient(left, #cc2e2e, #454ec6);
+background: linear-gradient(to right, #cc2e2e, #454ec6);
+
+#cc2e2e, #c1313b, #b53347, #aa3654, #9f3961, #943b6d, #883e7a, #7d4187, #724393, #6746a0, #5b49ad, #504bb9, #454ec6
+
+Moistures
+0: Entirely dry, 1: Dry, 2: Slightly dry, 3: Mild, 4: Slightly wet, 5: Wet, 6: Entirely wet
+
+"#abc978", "#a0c27b", "#95bb7f", "#8bb482", "#80ac85", "#75a589", "#6a9e8c", "#5f978f", "#549093", "#4a8896", "#3f8199", "#347a9d", "#2973a0"
+
+Fertility
+"#a69a7b", "#a19372", "#9d8c6a", "#998562", "#957e59", "#917851", "#8c7149", "#886a40", "#846338", "#805c30", "#7b5527", "#774e1f", "#774e1f"
 
 Wanderers:
 ~~~~~~~~~~

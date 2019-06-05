@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { harvestSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
+import ClimateDisplay from './climate_display';
 
 class StateDisplayFieldCard extends Component {
   componentDidMount() {
@@ -24,16 +25,28 @@ class StateDisplayFieldCard extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className="game-card" style={this.props.transStyle}
-        onClick={() => this.fieldCardClick()}>
-        <div>
-          {this.props.field.seedsName}
-        </div>
+  renderAgeLabel() {
+    if (this.props.field.seedsAgeLabel.length > 0) {
+      return (
         <div>
           {this.props.field.seedsAgeLabel}
         </div>
+      );
+    }
+    else {
+      return (null);
+    }
+  }
+
+  render() {
+    return (
+      <div className="game-card field-card" style={this.props.transStyle}
+        onClick={() => this.fieldCardClick()}>
+        <ClimateDisplay field={this.props.field} />
+        <div>
+          {this.props.field.seedsName}
+        </div>
+        {this.renderAgeLabel()}
       </div>
     );
   }

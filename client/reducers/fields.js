@@ -5,8 +5,8 @@ import Field from '../models/field';
 import Cache from '../models/cache';
 
 let fields = new Cache([
-  new Field(0, 0, 'Stone Row'),
-  new Field(1, 1, 'Dusty Corner')
+  new Field(0, 0, 'Stone Row', 2, 3, 6),
+  new Field(1, 1, 'Dusty Corner', 3, 2, 5)
 ]);
 
 export default function
