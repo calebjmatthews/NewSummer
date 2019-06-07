@@ -137,9 +137,16 @@ export default class Seed {
     const family = families.getByProperty('nameScientific', this.familyName);
     return family.applyCultivarToStats(stats, cultivarName);
   }
-  determineIdealValueFromStats(stats, cultivarName = this.cultivarName) {
+  determineIdealValueFromStats(stats) {
     const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineIdealValueFromStats(stats, cultivarName);
+    return family.determineIdealValueFromStats(stats);
+  }
+  determineRealValue(stats, temperature, moisture, fertility, pests,
+    disease) {
+    let cultivarName = this.cultivarName;
+    const family = families.getByProperty('nameScientific', this.familyName);
+    return family.determineRealValue(stats, temperature, moisture, fertility,
+      pests, disease);
   }
   describeFromTraitsAndStats(traitTotalDict, stats) {
     const family = families.getByProperty('nameScientific', this.familyName);

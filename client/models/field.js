@@ -93,8 +93,9 @@ export default class Field {
   }
 
   harvestSeed() {
-    let value =
-      this.seedPlanted.determineIdealValueFromStats(this.seedPlanted.stats);
+    let value = this.seedPlanted.determineRealValue(
+      this.seedPlanted.stats, this.temperature, this.moisture,
+      this.fertility, this.pests, this.disease);
     this.seedPlanted = null;
     this.seedsAge = 0;
     this.seedsName = this.getSeedsName();

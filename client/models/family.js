@@ -3,7 +3,9 @@ import Gene from './gene';
 
 import {SWEETNESS, STARCH, PROTEIN, BITTERNESS, SOURNESS, SPICINESS, TOXICITY}
   from '../instances/traits';
-import {PLANT_QUALITY, SEED_QUANTITY} from '../instances/stats';
+import {PLANT_QUALITY, SEED_QUANTITY, TEMP_TOLERANCE, MOIS_TOLERANCE,
+  NITROGEN_REQUIREMENT, PEST_RESISTANCE, DISEASE_RESISTANCE}
+  from '../instances/stats';
 
 export default class Family {
   constructor(nameScientific, nameCommon, traits, stats, cultivars,
@@ -138,6 +140,81 @@ export default class Family {
   determineIdealValueFromStats(stats) {
     let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
     return value.toFixed(2);
+  }
+  determineRealValue(stats, temperature, moisture, fertility, pests,
+    disease) {
+    // Rows are the climate conditions of the field,
+    //  columns are the plant's stat fit into a category
+    const suitabilityMoisTemp = {
+      0: [ 0.00, 0.10, 0.00,-0.10,-0.25,-0.50,-0.90],
+    	1: [-0.10, 0.00, 0.00, 0.00,-0.10,-0.25,-0.50],
+    	2: [-0.25,-0.10, 0.00, 0.00, 0.00,-0.10,-0.25],
+    	3: [-0.50,-0.25,-0.10, 0.25,-0.10,-0.25,-0.50],
+    	4: [-0.25,-0.10, 0.00, 0.00, 0.00,-0.10,-0.25],
+    	5: [-0.50,-0.25,-0.10, 0.00, 0.00, 0.00 -0.10],
+    	6: [-0.90,-0.50,-0.25,-0.10, 0.00, 0.10, 0.00]
+    }
+    const suitabilityFert = {
+      0: [ 0.10, 0.05, 0.00, 0.00, 0.00,-0.05,-0.10],
+    	1: [ 0.05, 0.00, 0.00, 0.00, 0.00, 0.00,-0.05],
+    	2: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	3: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	4: [-0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	5: [-0.50,-0.25,-0.10, 0.00, 0.00, 0.00, 0.00],
+    	6: [-0.90,-0.75,-0.50,-0.25,-0.10, 0.00, 0.00]
+    }
+    const suitabilityPestDise = {
+      0: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	1: [ 0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	2: [ 0.10, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	3: [ 0.15, 0.10, 0.05, 0.00, 0.00, 0.00, 0.00],
+    	4: [ 0.25, 0.15, 0.10, 0.05, 0.00, 0.00, 0.00],
+    	5: [ 0.75, 0.50, 0.35, 0.20, 0.10, 0.00, 0.00],
+    	6: [ 0.90, 0.75, 0.50, 0.35, 0.20, 0.10, 0.00]
+    }
+    const boundaries = {
+      temperature: [100, 110, 121, 133, 146, 161, 177],
+      moisture:    [100, 110, 121, 133, 146, 161, 177],
+      fertility:   [ 75,  98, 127, 165, 214, 278, 362],
+      pests:       [ 80, 108, 146, 197, 266, 359, 484],
+      disease:     [ 80, 108, 146, 197, 266, 359, 484]
+    }
+    let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
+    // Stat categories
+    let statCats = {};
+    statCats.temperature = setCats(stats[TEMP_TOLERANCE].value,
+      boundaries.temperature);
+    statCats.moisture = setCats(stats[MOIS_TOLERANCE].value,
+      boundaries.moisture);
+    statCats.fertility = setCats(stats[NITROGEN_REQUIREMENT].value,
+      boundaries.fertility);
+    statCats.pests = setCats(stats[PEST_RESISTANCE].value,
+      boundaries.pests);
+    statCats.disease = setCats(stats[DISEASE_RESISTANCE].value,
+      boundaries.disease);
+    let multipliers = {
+      temperature: suitabilityMoisTemp[temperature][statCats.temperature],
+      moisture: suitabilityMoisTemp[moisture][statCats.moisture],
+      fertility: suitabilityFert[fertility][statCats.fertility],
+      pests: suitabilityPestDise[pests][statCats.pests],
+      disease: suitabilityPestDise[disease][statCats.disease]
+    }
+    value *= (1 + multipliers.temperature);
+    value *= (1 + multipliers.moisture);
+    value *= (1 + multipliers.fertility);
+    value *= (1 + multipliers.pests);
+    value *= (1 + multipliers.disease);
+    return value;
+
+    function setCats(value, boundary) {
+      if (value <= boundary[0]) { return 0; }
+      else if (value <= boundary[1]) { return 1; }
+      else if (value <= boundary[2]) { return 2; }
+      else if (value <= boundary[3]) { return 3; }
+      else if (value <= boundary[4]) { return 4; }
+      else if (value <= boundary[5]) { return 5; }
+      return 6;
+    }
   }
   describeFromTraitsAndStats(traitTotalDict, stats) {
     let descriptions = [];
