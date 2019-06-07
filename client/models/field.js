@@ -4,14 +4,16 @@ import {pixiStore} from '../instances/pixi/store';
 import {formatDuration} from '../functions/utils';
 
 export default class Field {
-  constructor(id, index, name, temperature, moisture, fertility,
-    currentEvent = null) {
+  constructor(id, index, name, temperature, moisture, fertility, pests,
+    disease, currentEvent = null) {
     this.id = id;
     this.index = index;
     this.name = name;
     this.temperature = temperature;
     this.moisture = moisture;
     this.fertility = fertility;
+    this.pests = pests;
+    this.disease = disease;
     this.currentEvent = currentEvent;
 
     this.seedPlanted = null;

@@ -48,10 +48,10 @@ const statCache = new Cache([
   new Stat(DISEASE_RESISTANCE, 100, [
     {comparitor: 'less than', values: [120], adjective: 'Susceptible',
       bonus: 0, description: 'Easily sick',
-      iconType: 'fontawesome', icon: 'certificate', iconStyle: 'negative'},
+      iconType: 'fontawesome', icon: 'splotch', iconStyle: 'negative'},
     {comparitor: 'greater than', values: [350], adjective: 'Resistant',
       bonus: 0, description: 'Rarely sick',
-      iconType: 'fontawesome', icon: 'certificate', iconStyle: 'positive'}
+      iconType: 'fontawesome', icon: 'splotch', iconStyle: 'positive'}
   ]),
   new Stat(NITROGEN_REQUIREMENT, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Feisty',

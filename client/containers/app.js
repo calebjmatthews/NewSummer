@@ -53,7 +53,8 @@ class App extends Component {
       let fields = new Cache([]);
       localStorages.fields.members.map((field) => {
         let newField = new Field(field.id, field.index, field.name,
-          field.temperature, field.moisture, field.fertility);
+          field.temperature, field.moisture, field.fertility, field.pests,
+          field.disease);
         Object.keys(field).map((key) => {
           newField[key] = field[key];
         })

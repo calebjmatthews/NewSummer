@@ -253,22 +253,25 @@ Temperature
 #CC2E2E -> #454EC6
 0,      1,      2,      3,      4,      5,      6
 #cc2e2e #b53347 #9f3961 #883e7a #724393 #5b49ad #454ec6
-background: #cc2e2e;
-background: -webkit-linear-gradient(left, #cc2e2e, #454ec6);
-background: -moz-linear-gradient(left, #cc2e2e, #454ec6);
-background: -ms-linear-gradient(left, #cc2e2e, #454ec6);
-background: -o-linear-gradient(left, #cc2e2e, #454ec6);
-background: linear-gradient(to right, #cc2e2e, #454ec6);
-
+Dark red to dark blue
 #cc2e2e, #c1313b, #b53347, #aa3654, #9f3961, #943b6d, #883e7a, #7d4187, #724393, #6746a0, #5b49ad, #504bb9, #454ec6
 
 Moistures
+Dark yellow to turquoise
 0: Entirely dry, 1: Dry, 2: Slightly dry, 3: Mild, 4: Slightly wet, 5: Wet, 6: Entirely wet
-
 "#abc978", "#a0c27b", "#95bb7f", "#8bb482", "#80ac85", "#75a589", "#6a9e8c", "#5f978f", "#549093", "#4a8896", "#3f8199", "#347a9d", "#2973a0"
 
 Fertility
-"#a69a7b", "#a19372", "#9d8c6a", "#998562", "#957e59", "#917851", "#8c7149", "#886a40", "#846338", "#805c30", "#7b5527", "#774e1f", "#774e1f"
+Brown to green
+"#9e6b4d", "#98704d", "#92754d", "#8c7a4e", "#867f4e", "#80844e", "#7a8a4e", "#738f4e", "#6d944e", "#67994e", "#619e4f", "#5ba34f", "#55a84f"
+
+Pests
+Dark grey to dark green
+"#454946", "#424d44", "#3e5042", "#3b5441", "#38583f", "#345b3d", "#315f3b", "#2e6339", "#2a6637", "#276a35", "#246e34", "#207132", "#1d7530"
+
+Disease
+Light grey to purple
+"#b5a6b3", "#ae9aad", "#a78fa7", "#a083a1", "#99779b", "#926c95", "#8b608f", "#845489", "#7d4983", "#763d7d", "#6f3177", "#682671", "#611a6b"
 
 Wanderers:
 ~~~~~~~~~~

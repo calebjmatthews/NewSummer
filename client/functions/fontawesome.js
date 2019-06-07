@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faDotCircle, faSeedling, faBug, faCertificate, faGlobeEurope, faSnowflake,
+  faDotCircle, faSeedling, faBug, faSplotch, faGlobeEurope, faSnowflake,
   faSun, faWind, faTint,
   faSkullCrossbones, faIceCream, faBreadSlice, faCarrot, faHollyBerry, faLemon,
   faFireAlt, faSquare, faMortarPestle, faCompress, faExpandArrowsAlt, faSpa,
@@ -21,7 +21,7 @@ export default function() {
   library.add(faDotCircle);
   library.add(faSeedling);
   library.add(faBug);
-  library.add(faCertificate);
+  library.add(faSplotch);
   library.add(faGlobeEurope);
   library.add(faSnowflake);
   library.add(faSun);

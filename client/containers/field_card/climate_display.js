@@ -10,7 +10,13 @@ let barStyleDict = {
     "#2973a0"],
   fertility: ["#9e6b4d", "#98704d", "#92754d", "#8c7a4e", "#867f4e",
     "#80844e", "#7a8a4e", "#738f4e", "#6d944e", "#67994e", "#619e4f",
-    "#5ba34f", "#55a84f"]
+    "#5ba34f", "#55a84f"],
+  pests: ["#454946", "#424d44", "#3e5042", "#3b5441", "#38583f", "#345b3d",
+    "#315f3b", "#2e6339", "#2a6637", "#276a35", "#246e34", "#207132",
+    "#1d7530"],
+  disease: ["#b5a6b3", "#ae9aad", "#a78fa7", "#a083a1", "#99779b", "#926c95",
+    "#8b608f", "#845489", "#7d4983", "#763d7d", "#6f3177", "#682671",
+    "#611a6b"]
 }
 
 export default class ClimateDisplay extends Component {
@@ -24,6 +30,8 @@ export default class ClimateDisplay extends Component {
     if (measure == 'temperature') { iconName = 'sun'; }
     else if (measure == 'moisture') { iconName = 'tint'; }
     else if (measure == 'fertility') { iconName = 'globe-europe'; }
+    else if (measure == 'pests') { iconName = 'bug'}
+    else if (measure == 'disease') { iconName = 'splotch'}
 
     let aMap = [startingPoint];
     for (let index = 1; index < (count+1); index++) {
@@ -61,6 +69,8 @@ export default class ClimateDisplay extends Component {
         {this.renderBar('temperature')}
         {this.renderBar('moisture')}
         {this.renderBar('fertility')}
+        {this.renderBar('pests')}
+        {this.renderBar('disease')}
       </div>
     );
   }
