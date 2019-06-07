@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { ageAllSeeds, setFields, startFieldEvent } from '../actions/field';
 import { initNavCards, cardNavStep, cardNavStartRight, cardNavStartLeft }
@@ -146,11 +147,11 @@ class App extends Component {
         <div className="game-card-wrapper">
           <div className="nav-button nav-button-left"
             onClick={() => this.navLeftClick()}>
-            <div>{'<'}</div>
+            <FontAwesomeIcon icon="caret-left" />
           </div>
           <div className="nav-button nav-button-right"
             onClick={() => this.navRightClick()}>
-            <div>{'>'}</div>
+            <FontAwesomeIcon icon="caret-right" />
           </div>
           <HomeCard transStyle={this.props.cardNavState.cardStyles[0]}
             spot={0} />
