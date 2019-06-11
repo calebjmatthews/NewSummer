@@ -146,31 +146,31 @@ export default class Family {
     // Rows are the climate conditions of the field,
     //  columns are the plant's stat fit into a category
     const suitabilityMoisTemp = {
-      0: [ 0.00, 0.10, 0.00,-0.10,-0.25,-0.50,-0.90],
-    	1: [-0.10, 0.00, 0.00, 0.00,-0.10,-0.25,-0.50],
-    	2: [-0.25,-0.10, 0.00, 0.00, 0.00,-0.10,-0.25],
-    	3: [-0.50,-0.25,-0.10, 0.25,-0.10,-0.25,-0.50],
-    	4: [-0.25,-0.10, 0.00, 0.00, 0.00,-0.10,-0.25],
-    	5: [-0.50,-0.25,-0.10, 0.00, 0.00, 0.00 -0.10],
-    	6: [-0.90,-0.50,-0.25,-0.10, 0.00, 0.10, 0.00]
+      0: [ 0.00,-0.10,-0.25,-0.50,-0.25,-0.50,-0.90],
+      1: [ 0.10, 0.00,-0.10,-0.25,-0.10,-0.25,-0.50],
+      2: [ 0.00, 0.00, 0.00,-0.10, 0.00,-0.10,-0.25],
+      3: [-0.10, 0.00, 0.00, 0.25, 0.00, 0.00,-0.10],
+      4: [-0.25,-0.10, 0.00,-0.10, 0.00, 0.00, 0.00],
+      5: [-0.50,-0.25,-0.10,-0.25,-0.10, 0.00, 0.10],
+      6: [-0.90,-0.50,-0.25,-0.50,-0.25,-0.10, 0.00]
     }
     const suitabilityFert = {
-      0: [ 0.10, 0.05, 0.00, 0.00, 0.00,-0.05,-0.10],
-    	1: [ 0.05, 0.00, 0.00, 0.00, 0.00, 0.00,-0.05],
-    	2: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
-    	3: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
-    	4: [-0.10, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
-    	5: [-0.50,-0.25,-0.10, 0.00, 0.00, 0.00, 0.00],
-    	6: [-0.90,-0.75,-0.50,-0.25,-0.10, 0.00, 0.00]
+      0: [ 0.00, 0.00,-0.10,-0.25,-0.50,-0.75,-0.90],
+      1: [ 0.00, 0.00, 0.00, 0.00,-0.10,-0.25,-0.50],
+      2: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,-0.10],
+      3: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+      4: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+      5: [-0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.05],
+      6: [-0.10,-0.05, 0.00, 0.00, 0.00, 0.05, 0.10]
     }
     const suitabilityPestDise = {
       0: [ 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
-    	1: [ 0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
-    	2: [ 0.10, 0.05, 0.00, 0.00, 0.00, 0.00, 0.00],
-    	3: [ 0.15, 0.10, 0.05, 0.00, 0.00, 0.00, 0.00],
-    	4: [ 0.25, 0.15, 0.10, 0.05, 0.00, 0.00, 0.00],
-    	5: [ 0.75, 0.50, 0.35, 0.20, 0.10, 0.00, 0.00],
-    	6: [ 0.90, 0.75, 0.50, 0.35, 0.20, 0.10, 0.00]
+    	1: [-0.05, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	2: [-0.10,-0.05, 0.00, 0.00, 0.00, 0.00, 0.00],
+    	3: [-0.15,-0.10,-0.05, 0.00, 0.00, 0.00, 0.00],
+    	4: [-0.25,-0.15,-0.10,-0.05, 0.00, 0.00, 0.00],
+    	5: [-0.75,-0.50,-0.35,-0.20,-0.10, 0.00, 0.00],
+    	6: [-0.90,-0.75,-0.50,-0.35,-0.20,-0.10, 0.00]
     }
     const boundaries = {
       temperature: [100, 110, 121, 133, 146, 161, 177],
@@ -179,7 +179,7 @@ export default class Family {
       pests:       [ 80, 108, 146, 197, 266, 359, 484],
       disease:     [ 80, 108, 146, 197, 266, 359, 484]
     }
-    let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
+    let baseValue = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
     // Stat categories
     let statCats = {};
     statCats.temperature = setCats(stats[TEMP_TOLERANCE].value,
@@ -199,12 +199,20 @@ export default class Family {
       pests: suitabilityPestDise[pests][statCats.pests],
       disease: suitabilityPestDise[disease][statCats.disease]
     }
-    value *= (1 + multipliers.temperature);
+    let value = baseValue * (1 + multipliers.temperature);
     value *= (1 + multipliers.moisture);
     value *= (1 + multipliers.fertility);
     value *= (1 + multipliers.pests);
     value *= (1 + multipliers.disease);
-    return value;
+    let descriptions = describeMultipliers(baseValue, multipliers, statCats,
+      temperature, moisture, fertility);
+    let comment = commentOnDescriptions(descriptions);
+    console.log('comment');
+    console.log(comment);
+    console.log('descriptions');
+    console.log(descriptions);
+    return {baseValue: baseValue, value: value, descriptions: descriptions,
+      comment: comment};
 
     function setCats(value, boundary) {
       if (value <= boundary[0]) { return 0; }
@@ -214,6 +222,97 @@ export default class Family {
       else if (value <= boundary[4]) { return 4; }
       else if (value <= boundary[5]) { return 5; }
       return 6;
+    }
+
+    function describeMultipliers(baseValue, multipliers, statCats, temperature, moisture,
+      fertility) {
+      console.log('multipliers');
+      console.log(multipliers);
+      console.log('statCats');
+      console.log(statCats);
+      console.log("temperature + ', ' + moisture + ', ' + fertility");
+      console.log(temperature + ', ' + moisture + ', ' + fertility);
+      let descriptions = {};
+      let climateProps = ['temperature', 'moisture', 'fertility', 'pests',
+        'disease'];
+      let value = baseValue;
+      climateProps.map((prop) => {
+        if (multipliers[prop] > 0) {
+          descriptions[prop] = {};
+          descriptions[prop].sign = 'positive';
+          descriptions[prop].value = '+' + (multipliers[prop] * 100) + '%';
+          value *= (1 + multipliers[prop]);
+          descriptions[prop].result = value;
+        }
+        else if (multipliers[prop] < 0) {
+          descriptions[prop] = {};
+          descriptions[prop].sign = 'negative';
+          descriptions[prop].value = '' + (multipliers[prop] * 100) + '%';
+          value *= (1 + multipliers[prop]);
+          descriptions[prop].result = value;
+        }
+      });
+
+      if (multipliers.temperature < 0 && (statCats.temperature < 3
+        || (statCats.temperature == 3 && temperature > 3))) {
+        descriptions.temperature.message = 'Too hot';
+      }
+      else if (multipliers.temperature < 0 && (statCats.temperature > 3
+        || (statCats.temperature == 3 && temperature < 3))) {
+        descriptions.temperature.message = 'Too cold';
+      }
+      else if (multipliers.temperature > 0) {
+        descriptions.temperature.message = 'The temperature is perfect';
+      }
+
+      if (multipliers.moisture < 0 && (statCats.moisture < 3
+        || (statCats.moisture == 3 && moisture > 3))) {
+        descriptions.moisture.message = 'Too wet';
+      }
+      else if (multipliers.moisture < 0 && (statCats.moisture > 3
+        || (statCats.moisture == 3 && moisture < 3))) {
+        descriptions.moisture.message = 'Too dry';
+      }
+      else if (multipliers.moisture > 0) {
+        descriptions.moisture.message = 'The moisture is perfect';
+      }
+
+      if (multipliers.fertility < 0 && (statCats.fertility < 3
+        || (statCats.fertility == 3 && fertility > 3))) {
+        descriptions.fertility.message = 'The soil is too rich';
+      }
+      else if (multipliers.fertility < 0 && (statCats.fertility > 3
+        || (statCats.fertility == 3 && fertility < 3))) {
+        descriptions.fertility.message = 'The soil isn\'t fertile enough';
+      }
+      else if (multipliers.fertility > 0) {
+        descriptions.moisture.message = 'The soil fertility is perfect';
+      }
+
+      if (multipliers.pests < 0) {
+        descriptions.pests.message = 'Too many pests';
+      }
+
+      if (multipliers.disease < 0) {
+        descriptions.disease.message = 'Too much disease';
+      }
+
+      return descriptions;
+    }
+    function commentOnDescriptions(descriptions) {
+      if (Object.keys(descriptions).length == 0) {
+        return 'Perfect!';
+      }
+      let allPositive = true;
+      Object.keys(descriptions).map((prop) => {
+        if (descriptions[prop].sign == 'negative') {
+          allPositive = false;
+        }
+      });
+      if (allPositive == true) {
+        return 'Superb!!!';
+      }
+      return null;
     }
   }
   describeFromTraitsAndStats(traitTotalDict, stats) {

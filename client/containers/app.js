@@ -49,12 +49,11 @@ class App extends Component {
       this.props.autoIncrementState, 0, 'welcomeSeeds');
     }
     else {
-
       let fields = new Cache([]);
       localStorages.fields.members.map((field) => {
         let newField = new Field(field.id, field.index, field.name,
           field.temperature, field.moisture, field.fertility, field.pests,
-          field.disease);
+          field.disease, field.currentEvent, field.harvestResult);
         Object.keys(field).map((key) => {
           newField[key] = field[key];
         })

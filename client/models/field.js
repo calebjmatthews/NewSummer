@@ -5,7 +5,7 @@ import {formatDuration} from '../functions/utils';
 
 export default class Field {
   constructor(id, index, name, temperature, moisture, fertility, pests,
-    disease, currentEvent = null) {
+    disease, currentEvent = null, harvestResult = null) {
     this.id = id;
     this.index = index;
     this.name = name;
@@ -15,6 +15,7 @@ export default class Field {
     this.pests = pests;
     this.disease = disease;
     this.currentEvent = currentEvent;
+    this.harvestResult = harvestResult;
 
     this.seedPlanted = null;
     this.seedsAge = 0;
@@ -93,7 +94,7 @@ export default class Field {
   }
 
   harvestSeed() {
-    let value = this.seedPlanted.determineRealValue(
+    this.harvestResult = this.seedPlanted.determineRealValue(
       this.seedPlanted.stats, this.temperature, this.moisture,
       this.fertility, this.pests, this.disease);
     this.seedPlanted = null;
@@ -102,6 +103,5 @@ export default class Field {
     this.seedsAgeLabel = '';
     this.seedsGrowthStage = null;
     this.checkSeedsState();
-    return value;
   }
 }

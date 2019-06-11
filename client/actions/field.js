@@ -20,7 +20,9 @@ export function ageAllSeeds(fields) {
 };
 
 export function harvestSeed(fields, storehouse, fieldId) {
-  const dollars = fields.getByProperty('id', fieldId).harvestSeed();
+  let field = fields.getByProperty('id', fieldId);
+  field.harvestSeed();
+  const dollars = field.harvestResult.value;
   return function(dispatch) {
     dispatch(gainDollars(storehouse, dollars));
     return setFields(fields);
@@ -55,5 +57,11 @@ export function gatherSeedFromEvent(fields, fieldId, seed) {
   if (field.currentEvent.eventCompleted()) {
     field.currentEvent = null;
   }
+  return setFields(fields);
+}
+
+export function clearHarvestResult(fields, fieldId) {
+  let field = fields.getByProperty('id', fieldId);
+  field.harvestResult = null;
   return setFields(fields);
 }

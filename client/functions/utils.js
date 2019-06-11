@@ -49,4 +49,8 @@ function formatDuration(milliseconds, units=0) {
   return '';
 }
 
-module.exports = {shuffle, formatDuration};
+function formatMoneyLong(dollars) {
+  return ('$' + Math.round(dollars).toString());
+}
+
+module.exports = { shuffle, formatDuration, formatMoneyLong };

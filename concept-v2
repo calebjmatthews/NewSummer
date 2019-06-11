@@ -244,6 +244,8 @@ X Mild rebalancing of traits
 X Flesh out mature seed selling
 - More rebalancing of traits
 
+Climate
+~~~~~~~
 AaAaAa
 0,1,2,3 ; 0,1,2,3
 0,  1,  2,  3,  4,  5,  6
@@ -311,6 +313,31 @@ Pests / Disease
 	5: [ 0.75, 0.50, 0.35, 0.20, 0.10, 0.00, 0.00],
 	6: [ 0.90, 0.75, 0.50, 0.35, 0.20, 0.10, 0.00]
 }
+
+Example results:
+
+Perfect!
+[ No descriptions ]
+Final value
+												$86
+
+Superb!!!
+												$113
+Ideal temperature +25%
+												$141
+Final value
+												$141
+
+[No comment]
+												$225
+Too cold -10%
+												$203
+Too dry -25%
+												$152
+Too many pests -5%
+												$144
+Final value
+												$144
 
 Wanderers:
 ~~~~~~~~~~
@@ -416,9 +443,9 @@ X Experimental garden on delay
 X Compact cultivar and plant selection container
 X Experimental garden gives two choices
 X More cultivars
-_ Environmental effects from fields
-_ Minor display changes
-_ Seed trader arrives and leaves (Ready for playable pre-alpha!)
+X Environmental effects from fields
+_ Seed trader arrives and leaves
+_ Minor display and gameplay polish (Ready for playable pre-alpha!)
 _ Balancing after play
 _ Pixel graphics linked with traits
 _ Pixel graphics for different cultivars
