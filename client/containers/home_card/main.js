@@ -15,6 +15,7 @@ import ExperimentalGarden from './experimental_garden'
 import BreedingPairHomeCard from './breeding_pair';
 import CultivarSelectCard from '../cultivar_select';
 import BreedingResultsHomeCard from './breeding_results';
+import TravelerRest from './traveler_rest';
 
 class HomeCard extends Component {
   constructor(props) {
@@ -22,33 +23,6 @@ class HomeCard extends Component {
     this.state = {
       seedBreeding: false
     }
-  }
-  componentDidMount() {
-    this.traderClick = this.traderClick.bind(this);
-    this.breedingToggleClick = this.breedingToggleClick.bind(this);
-  }
-
-  traderClick(toBuy) {
-    let cultivarsUnlocked =
-      this.props.recordBookState.recordBook.getCultivarsUnlocked(POACEAE);
-    let offers = cast.currentlyVisiting.genOffers(cultivarsUnlocked);
-    let newOfferIds = this.props.genIdBatch
-      (this.props.autoIncrementState, 'offer', offers.length).newIds;
-    let newSeedIds = this.props.genIdBatch
-      (this.props.autoIncrementState, 'seed', offers.length).newIds;
-
-    offers.map((offer, index) => {
-      offer.id = newOfferIds[index];
-      offer.item.id = newSeedIds[index];
-    });
-    cast.currentlyVisiting.currentOffers = offers;
-    this.props.setCard({type: 'seedBuying'}, this.props.spot);
-  }
-
-  breedingToggleClick() {
-    const switchedBreeding = !this.state.seedBreeding;
-    this.setState({ seedBreeding: switchedBreeding,
-      seedA: null, seedB: null });
   }
 
   render() {
@@ -87,13 +61,8 @@ class HomeCard extends Component {
     else {
       return (
         <div className="game-card" style={this.props.transStyle}>
-          <div className="home-card-option"
-            onClick={() => this.traderClick('field')}>
-            <div>{'A trader is visiting:'}</div>
-            <div>{'Say hello!'}</div>
-          </div>
-
-          <ExperimentalGarden spot={this.props.spot}/>
+          <TravelerRest spot={this.props.spot} />
+          <ExperimentalGarden spot={this.props.spot} />
         </div>
       );
     }

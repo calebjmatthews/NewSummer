@@ -33,9 +33,12 @@ export default class RecordBook {
 
   getCultivarsUnlocked(familyName) {
     let cultivarsUnlocked = [];
-    Object.keys(this.familyDict[familyName]).map((cultivarName) => {
-      cultivarsUnlocked.push(cultivarName);
-    });
+    let familyArray = this.familyDict[familyName];
+    if (familyArray != undefined) {
+      Object.keys(familyArray).map((cultivarName) => {
+        cultivarsUnlocked.push(cultivarName);
+      });
+    }
     return cultivarsUnlocked;
   }
 }

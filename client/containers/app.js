@@ -13,8 +13,8 @@ import HomeCard from './home_card/main';
 import { pixiHandler } from '../instances/pixi/handler';
 import { getLocalStorages, setLocalStorages }
   from '../functions/local_storage';
-import { AGE_INTERVAL, FRAMES_PER_SECOND, COOKIE_SET_INTERVAL }
-  from '../constants';
+import { AGE_INTERVAL, FRAMES_PER_SECOND, STORAGE_SET_INTERVAL,
+  TRAVELER_CHECK_INTERVAL } from '../constants';
 import Cache from '../models/cache';
 import Field from '../models/field';
 import Seed from '../models/seed';
@@ -23,12 +23,14 @@ import RecordBook from '../models/record_book';
 import { cast } from '../instances/cast';
 import { setAllCards } from '../actions/card';
 import { importAutoIncrement, genId } from '../actions/auto_increment';
+import { checkForVisitStart, ageVisit } from '../actions/cast';
 
 class App extends Component {
   componentDidMount() {
     setInterval(() => {
       this.props.ageAllSeeds(this.props.fieldsState.fields);
       this.props.ageBreeding(this.props.storehouseState.storehouse);
+      this.props.ageVisit(this.props.castState.cast);
     }, AGE_INTERVAL);
     setInterval(() => {
       if (this.props.cardNavState.animating == true) {
@@ -37,7 +39,11 @@ class App extends Component {
     }, (1000 / FRAMES_PER_SECOND));
     setInterval(() => {
       this.setActiveLocalStorages();
-    }, COOKIE_SET_INTERVAL);
+    }, STORAGE_SET_INTERVAL);
+    setInterval(() => {
+      this.props.checkForVisitStart(this.props.castState.cast,
+        this.props.recordBookState.recordBook, this.props.autoIncrementState);
+    }, TRAVELER_CHECK_INTERVAL);
 
     let cards = [{type: null}, {type: null}, {type: null}];
     this.props.setAllCards(cards);
@@ -46,7 +52,7 @@ class App extends Component {
     let localStoragePromises = [];
     if (localStorages == false) {
       this.props.startFieldEvent(this.props.fieldsState.fields,
-      this.props.autoIncrementState, 0, 'welcomeSeeds');
+      this.props.autoIncrementState, 0, 'welcomeSeeds');;
     }
     else {
       let fields = new Cache([]);
@@ -170,16 +176,17 @@ class App extends Component {
 }
 
 function mapStateToProps({ fieldsState, storehouseState, recordBookState,
-  cardNavState, autoIncrementState }) {
+  cardNavState, autoIncrementState, castState }) {
   return { fieldsState, storehouseState, recordBookState, cardNavState,
-    autoIncrementState }
+    autoIncrementState, castState }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
     cardNavStartRight, setFields, setStorehouse, setRecordBook, setAllCards,
-    importAutoIncrement, genId, startFieldEvent, ageBreeding
+    importAutoIncrement, genId, startFieldEvent, ageBreeding, ageVisit,
+    checkForVisitStart
   }, dispatch)
 }
 
