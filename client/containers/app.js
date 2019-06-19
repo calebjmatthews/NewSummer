@@ -23,7 +23,9 @@ import RecordBook from '../models/record_book';
 import { cast } from '../instances/cast';
 import { setAllCards } from '../actions/card';
 import { importAutoIncrement, genId } from '../actions/auto_increment';
-import { checkForVisitStart, ageVisit } from '../actions/cast';
+import { checkForVisitStart, ageVisit, setCast } from '../actions/cast';
+import Cast from '../models/cast';
+import Offer from '../models/offer';
 
 class App extends Component {
   componentDidMount() {
@@ -74,6 +76,21 @@ class App extends Component {
       let recordBook = new RecordBook(familyDict);
       localStoragePromises.push(this.props.setRecordBook(recordBook));
 
+      let cast = new Cast(localStorages.cast);
+      cast.members.map((traveler, index) => {
+        if (traveler.currentOffers.length > 0) {
+          let offers = [];
+          traveler.currentOffers.map((rawOffer) => {
+            let seed = new Seed(rawOffer.item);
+            rawOffer.item = seed;
+            let offer = new Offer(rawOffer);
+            offers.push(offer);
+          });
+          cast.members[index].currentOffers = offers.slice();
+        }
+      });
+      localStoragePromises.push(this.props.setCast(cast));
+
       localStoragePromises.push(this.props
         .importAutoIncrement(localStorages.autoIncrement));
     }
@@ -114,7 +131,8 @@ class App extends Component {
         fields: this.props.fieldsState.fields,
         storehouse: this.props.storehouseState.storehouse,
         recordBook: this.props.recordBookState.recordBook,
-        autoIncrement: this.props.autoIncrementState
+        autoIncrement: this.props.autoIncrementState,
+        cast: this.props.castState.cast
       });
     }
   }
@@ -186,7 +204,7 @@ function mapDispatchToProps(dispatch) {
     ageAllSeeds, initNavCards, cardNavStep, cardNavStartLeft,
     cardNavStartRight, setFields, setStorehouse, setRecordBook, setAllCards,
     importAutoIncrement, genId, startFieldEvent, ageBreeding, ageVisit,
-    checkForVisitStart
+    checkForVisitStart, setCast
   }, dispatch)
 }
 

@@ -13,7 +13,9 @@ class SeedTraderCard extends Component {
 
   buySeed(seed) {
     let matchingOffer = null;
-    this.props.castState.cast.currentlyVisiting.currentOffers.map((offer) => {
+    this.props.castState.cast.getByProperty('name',
+      this.props.castState.cast.currentlyVisiting)
+      .currentOffers.map((offer) => {
       if (offer.item.name == seed.name) {
         matchingOffer = offer;
       }
@@ -31,7 +33,9 @@ class SeedTraderCard extends Component {
         <BackButton spot={this.props.spot} />
         {'Buy a seed:'}
         <div className="option-container">
-          {this.props.castState.cast.currentlyVisiting.currentOffers.map((offer) => {
+          {this.props.castState.cast.getByProperty('name',
+            this.props.castState.cast.currentlyVisiting)
+            .currentOffers.map((offer) => {
             let seed = offer.item;
             let confirmText = 'Sold';
             if (offer.sold == false) {

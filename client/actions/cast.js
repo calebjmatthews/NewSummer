@@ -41,7 +41,8 @@ export function startVisit(travelerName, cast, recordBook, autoIncrement) {
 
     if (travelerName == 'Susanna Pol') {
       let cultivarsUnlocked = recordBook.getCultivarsUnlocked(POACEAE);
-      let offers = cast.currentlyVisiting.genOffers(cultivarsUnlocked);
+      let offers = cast.getByProperty('name', travelerName)
+        .genOffers(cultivarsUnlocked);
       let offerIdRes = dispatch(genIdBatch
         (autoIncrement, 'offer', offers.length));
       let newOfferIds = offerIdRes.newIds;
@@ -53,7 +54,8 @@ export function startVisit(travelerName, cast, recordBook, autoIncrement) {
         offer.id = newOfferIds[index];
         offer.item.id = newSeedIds[index];
       });
-      cast.currentlyVisiting.currentOffers = offers;
+      cast.getByProperty('name', travelerName)
+        .currentOffers = offers;
     }
 
     return setCast(cast);

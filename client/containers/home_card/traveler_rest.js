@@ -17,8 +17,6 @@ class TravelerRest extends Component {
 
   render() {
     let cast = this.props.castState.cast;
-    console.log('cast');
-    console.log(cast);
     if (cast.currentlyVisiting == null) {
       return (
         <div className="home-card-option">

@@ -2,13 +2,22 @@ import Cache from './cache';
 import { TRAVELER_DURATION, AGE_INTERVAL } from '../constants';
 
 export default class Cast extends Cache {
-  constructor(members, currentlyVisiting = null, saidHello = false,
+  constructor(membersOrCast, currentlyVisiting = null, saidHello = false,
     visitRemaining = null, everVisited = false) {
-    super(members);
-    this.currentlyVisiting = currentlyVisiting;
-    this.visitRemaining = visitRemaining;
-    this.saidHello = saidHello;
-    this.everVisited = everVisited;
+    if (Array.isArray(membersOrCast) == false) {
+      super(membersOrCast.members);
+      this.currentlyVisiting = membersOrCast.currentlyVisiting;
+      this.visitRemaining = membersOrCast.visitRemaining;
+      this.saidHello = membersOrCast.saidHello;
+      this.everVisited = membersOrCast.everVisited;
+    }
+    else {
+      super(membersOrCast);
+      this.currentlyVisiting = currentlyVisiting;
+      this.visitRemaining = visitRemaining;
+      this.saidHello = saidHello;
+      this.everVisited = everVisited;
+    }
   }
 
   // By default, this function is run every second
@@ -27,7 +36,7 @@ export default class Cast extends Cache {
 
   startVisit(travelerName, info) {
     this.everVisited = true;
-    this.currentlyVisiting = this.getByProperty('name', travelerName);
+    this.currentlyVisiting = travelerName;
     this.visitRemaining = TRAVELER_DURATION;
   }
 

@@ -1,4 +1,5 @@
-const storageNames = ['fields', 'storehouse', 'recordBook', 'autoIncrement'];
+const storageNames = ['fields', 'storehouse', 'recordBook', 'autoIncrement',
+  'cast'];
 
 export function setLocalStorages(storages) {
   storageNames.map((storageName) => {

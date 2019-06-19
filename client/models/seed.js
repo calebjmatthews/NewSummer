@@ -3,20 +3,31 @@ import Gene from '../models/gene';
 import {families} from '../instances/families';
 
 export default class Seed {
-  constructor(id, familyName, givenCultivarName, methodObtained,
+  constructor(idOrSeed, familyName = null, givenCultivarName = null,
+    methodObtained = null,
     dateObtained = new Date(Date.now()), variation = 0,
     parentsIds = [null, null], genome = null) {
-    this.id = id;
-    this.familyName = familyName;
-    this.methodObtained = methodObtained;
-    this.dateObtained = dateObtained;
-    this.parentsIds = parentsIds;
-
-    if (genome == null) {
-      this.genomeFromCultivar(familyName, givenCultivarName);
+    if (typeof(idOrSeed) == 'object' && idOrSeed != null) {
+      this.id = idOrSeed.id;
+      this.familyName = idOrSeed.familyName;
+      this.methodObtained = idOrSeed.methodObtained;
+      this.dateObtained = idOrSeed.dateObtained;
+      this.parentsIds = idOrSeed.parentsIds;
+      this.genome = idOrSeed.genome;
     }
     else {
-      this.genome = genome;
+      this.id = idOrSeed;
+      this.familyName = familyName;
+      this.methodObtained = methodObtained;
+      this.dateObtained = dateObtained;
+      this.parentsIds = parentsIds;
+
+      if (genome == null) {
+        this.genomeFromCultivar(familyName, givenCultivarName);
+      }
+      else {
+        this.genome = genome;
+      }
     }
 
     this.traitTotalDict = this.determineTraitsFromGenome(this.genome);
