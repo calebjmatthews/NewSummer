@@ -45,11 +45,17 @@ function formatDuration(milliseconds, units=0) {
       return ((days + 's ' +
         formatDuration(milliseconds % (1000), units)));
     }
+    if (units == 0) {
+      return '0s';
+    }
   }
   return '';
 }
 
-function formatMoneyLong(dollars) {
+function formatMoney(dollars) {
+  if (dollars < 100) {
+    return ('$' + dollars.toFixed(2));
+  }
   return ('$' + Math.round(dollars).toString());
 }
 
