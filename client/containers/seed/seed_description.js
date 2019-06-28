@@ -51,7 +51,7 @@ class SeedDescription extends Component {
         <div>
           <div className="seed-value-container">
             <div>{Math.round(seed.stats[GROWING_TIME].value) + 's'}</div>
-            <div>{'$' + seed.determineIdealValueFromStats(seed.stats)}</div>
+            <div>{seed.determineIdealValueFromStats(seed.stats)}</div>
           </div>
           <button onClick={() => this.seedDetailClick(seed)}>
             Detail

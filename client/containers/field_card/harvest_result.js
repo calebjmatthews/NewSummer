@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { clearHarvestResult } from '../../actions/field';
-import { formatMoneyLong } from '../../functions/utils';
+import { formatMoney } from '../../functions/utils';
 
 class HarvestResultFieldCard extends Component {
   componentDidMount() {
@@ -28,7 +28,7 @@ class HarvestResultFieldCard extends Component {
               {'Base value:'}
             </div>
             <div className="harvest-description-value">
-              {formatMoneyLong(harvestResult.baseValue)}
+              {formatMoney(harvestResult.baseValue)}
             </div>
             {Object.keys(harvestResult.descriptions).map((prop) => {
               return (
@@ -40,7 +40,7 @@ class HarvestResultFieldCard extends Component {
                   </div>
                   <div className={"harvest-description-value "
                     + harvestResult.descriptions[prop].sign}>
-                    {formatMoneyLong(harvestResult.descriptions[prop].result)}
+                    {formatMoney(harvestResult.descriptions[prop].result)}
                   </div>
                 </div>
               );
@@ -51,7 +51,7 @@ class HarvestResultFieldCard extends Component {
               {'Final value'}
             </div>
             <div className="harvest-value-final">
-              {formatMoneyLong(harvestResult.value)}
+              {formatMoney(harvestResult.value)}
             </div>
           </div>
         </div>

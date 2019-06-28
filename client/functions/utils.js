@@ -59,4 +59,4 @@ function formatMoney(dollars) {
   return ('$' + Math.round(dollars).toString());
 }
 
-module.exports = { shuffle, formatDuration, formatMoneyLong };
+module.exports = { shuffle, formatDuration, formatMoney };

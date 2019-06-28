@@ -1,3 +1,5 @@
+import { formatMoney } from '../functions/utils';
+
 export default class Economy {
   constructor() {
     this.fieldsBought = 0;
@@ -13,7 +15,7 @@ export default class Economy {
     let newPrice =
       this.baseFieldPrice * (Math.pow(1.6, this.fieldsBought));
     newPrice = newPrice * (1 + (Math.random()*0.4 - 0.2));
-    return parseFloat(newPrice.toFixed(2));
+    return formatMoney(newPrice);
   }
   recordBoughtField() {
     this.fieldsBought++;

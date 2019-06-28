@@ -1,6 +1,6 @@
 import Cache from './cache';
 import Seed from './seed';
-import { formatDuration } from '../functions/utils';
+import { formatDuration, formatMoney } from '../functions/utils';
 
 export default class Storehouse {
   constructor(aStorehouse = null) {
@@ -87,14 +87,14 @@ export default class Storehouse {
 
 
   gainDollars(dollarsGained) {
-    this.dollars = parseFloat((this.dollars + parseFloat(dollarsGained)).toFixed(2));
+    this.dollars = this.dollars + parseFloat(dollarsGained);
   }
   spendDollars(dollarsSpent) {
     if (this.dollars <= dollarsSpent) {
       return false;
     }
     else {
-      this.dollars = parseFloat((this.dollars - dollarsSpent).toFixed(2));
+      this.dollars = this.dollars - parseFloat(dollarsSpent);
       return true;
     }
   }

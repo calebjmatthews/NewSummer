@@ -1,5 +1,6 @@
 import TraitTotal from './trait_total';
 import Gene from './gene';
+import { formatMoney } from '../functions/utils';
 
 import {SWEETNESS, STARCH, PROTEIN, BITTERNESS, SOURNESS, SPICINESS, TOXICITY}
   from '../instances/traits';
@@ -139,7 +140,7 @@ export default class Family {
   }
   determineIdealValueFromStats(stats) {
     let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
-    return value.toFixed(2);
+    return formatMoney(value);
   }
   determineRealValue(stats, temperature, moisture, fertility, pests,
     disease) {

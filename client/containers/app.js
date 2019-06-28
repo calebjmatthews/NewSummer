@@ -13,6 +13,7 @@ import HomeCard from './home_card/main';
 import { pixiHandler } from '../instances/pixi/handler';
 import { getLocalStorages, setLocalStorages }
   from '../functions/local_storage';
+import { formatMoney } from '../functions/utils';
 import { AGE_INTERVAL, FRAMES_PER_SECOND, STORAGE_SET_INTERVAL,
   TRAVELER_CHECK_INTERVAL } from '../constants';
 import Cache from '../models/cache';
@@ -166,7 +167,7 @@ class App extends Component {
     return (
       <div className="container-main">
         <div className="header">
-          {'$' + this.props.storehouseState.storehouse.dollars}
+          { formatMoney(this.props.storehouseState.storehouse.dollars) }
         </div>
         <div className="game-card-wrapper">
           <div className="nav-button nav-button-left"
