@@ -39,7 +39,7 @@ function formatDuration(milliseconds, units=0) {
       return ((days + 'm ' +
         formatDuration(milliseconds % (1000 * 60), units)));
     }
-    else {
+    else if (milliseconds > (1000)) {
       let days = Math.floor(milliseconds / (1000));
       units++;
       return ((days + 's ' +

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GROWING_TIME } from '../../instances/stats';
 import { setCard } from '../../actions/card';
+import { formatDuration } from '../../functions/utils';
 
 class SeedDescription extends Component {
   componentDidMount() {
@@ -50,7 +51,7 @@ class SeedDescription extends Component {
         </div>
         <div>
           <div className="seed-value-container">
-            <div>{Math.round(seed.stats[GROWING_TIME].value) + 's'}</div>
+            <div>{formatDuration(seed.stats[GROWING_TIME].value * 1000)}</div>
             <div>{seed.determineIdealValueFromStats(seed.stats)}</div>
           </div>
           <button onClick={() => this.seedDetailClick(seed)}>
