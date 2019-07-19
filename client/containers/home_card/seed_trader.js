@@ -5,6 +5,7 @@ import { buySeedAttempt } from '../../actions/economy';
 import { setCard } from '../../actions/card';
 import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
+import { formatMoney } from '../../functions/utils';
 
 class SeedTraderCard extends Component {
   componentDidMount() {
@@ -39,7 +40,7 @@ class SeedTraderCard extends Component {
             let seed = offer.item;
             let confirmText = 'Sold';
             if (offer.sold == false) {
-              confirmText = ('Buy for $' + offer.price)
+              confirmText = ('Buy for ' + formatMoney(offer.price))
             }
             return (
               <SeedDescription key={seed.name} seed={seed}

@@ -140,7 +140,7 @@ export default class Family {
   }
   determineIdealValueFromStats(stats) {
     let value = (stats[PLANT_QUALITY].value * stats[SEED_QUANTITY].value);
-    return formatMoney(value);
+    return value;
   }
   determineRealValue(stats, temperature, moisture, fertility, pests,
     disease) {

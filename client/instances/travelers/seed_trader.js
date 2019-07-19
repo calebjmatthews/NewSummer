@@ -41,7 +41,9 @@ function genOffer(offers, cultivarsUnlocked, variation) {
   if (nameAlreadyExists == true) {
     return null;
   }
-  return new Offer(newSeed.name, (parseFloat(newSeed.idealValue) * 2),
+  console.log('newSeed');
+  console.log(newSeed);
+  return new Offer(newSeed.name, (newSeed.idealValue * 2),
     false, 'seed', newSeed, SUSANNA_POL);
 }
 
