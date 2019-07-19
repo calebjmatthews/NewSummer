@@ -31,7 +31,7 @@ const statCache = new Cache([
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'}
   ]),
   new Stat(PLANT_QUALITY, 100, []),
-  new Stat(GROWING_TIME, 300, [
+  new Stat(GROWING_TIME, 60, [
     {comparitor: 'less than', values: [250], adjective: 'Fast-Growing',
       bonus: 0},
     {comparitor: 'greater than', values: [1200], adjective: 'Slow-Growing',

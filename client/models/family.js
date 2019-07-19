@@ -208,10 +208,6 @@ export default class Family {
     let descriptions = describeMultipliers(baseValue, multipliers, statCats,
       temperature, moisture, fertility);
     let comment = commentOnDescriptions(descriptions);
-    console.log('comment');
-    console.log(comment);
-    console.log('descriptions');
-    console.log(descriptions);
     return {baseValue: baseValue, value: value, descriptions: descriptions,
       comment: comment};
 
@@ -227,12 +223,6 @@ export default class Family {
 
     function describeMultipliers(baseValue, multipliers, statCats, temperature, moisture,
       fertility) {
-      console.log('multipliers');
-      console.log(multipliers);
-      console.log('statCats');
-      console.log(statCats);
-      console.log("temperature + ', ' + moisture + ', ' + fertility");
-      console.log(temperature + ', ' + moisture + ', ' + fertility);
       let descriptions = {};
       let climateProps = ['temperature', 'moisture', 'fertility', 'pests',
         'disease'];
@@ -287,7 +277,7 @@ export default class Family {
         descriptions.fertility.message = 'The soil isn\'t fertile enough';
       }
       else if (multipliers.fertility > 0) {
-        descriptions.moisture.message = 'The soil fertility is perfect';
+        descriptions.fertility.message = 'The soil fertility is perfect';
       }
 
       if (multipliers.pests < 0) {

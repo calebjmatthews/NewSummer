@@ -19,7 +19,7 @@ export const branching = new Trait(
   1,
   true,
   [SEED_QUANTITY, GROWING_TIME],
-  [0.4, 0.3]
+  [0.4, 0.45]
 );
 
 export const STEM_FOCUS = 'Stem Focus';
@@ -37,7 +37,7 @@ export const seedSize = new Trait(
   3,
   false,
   [SEED_QUANTITY, GROWING_TIME],
-  [0.175, 0.1]
+  [0.175, 0.15]
 );
 
 export const tempTolerance = new Trait(
@@ -62,7 +62,7 @@ export const growthSpeed = new Trait(
   3,
   false,
   [GROWING_TIME, SEED_QUANTITY, NITROGEN_REQUIREMENT],
-  [-0.2, -0.075, 0.125]
+  [-0.3, -0.075, 0.125]
 )
 
 export const nitrogenRequirement = new Trait(
@@ -79,7 +79,7 @@ export const toughness = new Trait(
   3,
   false,
   [STEM_THICKNESS, PEST_RESISTANCE, DISEASE_RESISTANCE, GROWING_TIME],
-  [0.2, 0.175, 0.1, 0.05]
+  [0.2, 0.175, 0.1, 0.075]
 );
 
 export const stemHeight = new Trait(
@@ -87,7 +87,7 @@ export const stemHeight = new Trait(
   3,
   false,
   [STEM_HEIGHT, GROWING_TIME],
-  [0.3, 0.075]
+  [0.3, 0.125]
 );
 
 export const SEEDS_ON_TOP = 'Seeds On Top';
@@ -96,7 +96,7 @@ export const seedsOnTop = new Trait(
   1,
   true,
   [SEED_QUANTITY, GROWING_TIME, NITROGEN_REQUIREMENT],
-  [0.5, 0.25, 0.4]
+  [0.5, 0.35, 0.4]
 );
 
 export const SWEETNESS = 'Sweetness';
@@ -105,7 +105,7 @@ export const sweetness = new Trait(
   3,
   false,
   [PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE, DISEASE_RESISTANCE],
-  [0.125, 0.025, -0.05, -0.05]
+  [0.125, 0.04, -0.05, -0.05]
 );
 
 export const STARCH = 'Starch';
@@ -114,7 +114,7 @@ export const starch = new Trait(
   3,
   false,
   [PLANT_QUALITY, GROWING_TIME],
-  [0.075, 0.025]
+  [0.075, 0.04]
 );
 
 export const PROTEIN = 'Protein';
@@ -132,7 +132,7 @@ export const bitterness = new Trait(
   3,
   false,
   [PEST_RESISTANCE, DISEASE_RESISTANCE, PLANT_QUALITY, GROWING_TIME],
-  [0.15, 0.2, -0.1, 0.025]
+  [0.15, 0.2, -0.1, 0.04]
 );
 
 export const SOURNESS = 'Sourness';
@@ -141,7 +141,7 @@ export const sourness = new Trait(
   3,
   false,
   [PEST_RESISTANCE, DISEASE_RESISTANCE, PLANT_QUALITY, GROWING_TIME],
-  [0.05, 0.075, -0.025, 0.025]
+  [0.05, 0.075, -0.025, 0.04]
 );
 
 export const SPICINESS = 'Spiciness';
@@ -150,7 +150,7 @@ export const spiciness = new Trait(
   3,
   false,
   [PEST_RESISTANCE, DISEASE_RESISTANCE, PLANT_QUALITY, GROWING_TIME],
-  [0.05, 0.075, -0.025, 0.025]
+  [0.05, 0.075, -0.025, 0.04]
 );
 
 export const TOXICITY = 'Toxicity';
@@ -159,5 +159,5 @@ export const toxicity = new Trait(
   2,
   false,
   [PEST_RESISTANCE, DISEASE_RESISTANCE, PLANT_QUALITY, GROWING_TIME],
-  [0.75, 1, -0.5, 0.1]
+  [0.75, 1, -0.5, 0.15]
 );

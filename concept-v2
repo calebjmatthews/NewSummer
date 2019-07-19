@@ -400,13 +400,13 @@ Breeding selection:
 
 Minor display and gameplay polish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Breeding time dependent on growth time of babies
+X Breeding time dependent on growth time of babies
 X Dollars have truncated decimal places if > two digits
 X Add time formatting to plant descriptions
 X Decrease base seed value amount
 X Fix for selling price of seeds
-X Fix for one purchase causing all options to register as "Sold"
-- Rebalance for greater variety in growth times
+- Fix for one purchase causing all options to register as "Sold"
+X Rebalance for greater variety in growth times
 - Hide field descriptors except when choosing crop to plant
 - Re-examine trader arrival
 - Seed selection for breeding shows first selected seed
