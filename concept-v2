@@ -403,11 +403,11 @@ Minor display and gameplay polish
 - Breeding time dependent on growth time of babies
 X Dollars have truncated decimal places if > two digits
 X Add time formatting to plant descriptions
-- Decrease base value amount
-- Rebalance for lower grain value
+X Decrease base seed value amount
 - Rebalance for greater variety in growth times
 - Hide field descriptors except when choosing crop to plant
 - Re-examine trader arrival
+- Seed selection for breeding shows first selected seed
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~

@@ -19,7 +19,7 @@ const traitCache = new Cache([
   toxicity
 ]);
 const statCache = new Cache([
-  new Stat(SEED_QUANTITY, 100, [
+  new Stat(SEED_QUANTITY, 1, [
     {comparitor: 'less than', values: [90], adjective: 'Thin', bonus: 0,
       description: 'Seeds are scarce', iconType: 'fontawesome',
       icon: 'dot-circle', iconStyle: 'negative'},
