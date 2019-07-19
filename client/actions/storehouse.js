@@ -1,6 +1,7 @@
 import Storehouse from '../models/storehouse';
 import { setRecordBook } from './record_book';
 import { genId } from './auto_increment';
+import { GROWING_TIME } from '../instances/stats';
 
 export const SET_STOREHOUSE = 'SET_STOREHOUSE';
 export function setStorehouse(storehouse) {
@@ -24,20 +25,23 @@ export function spendDollars(storehouse, dollarsSpent) {
     type: SET_STOREHOUSE,
     storehouse: storehouse
   }
-}
+}``
 export function startBreedingSeeds(storehouse, autoIncrement, recordBook,
   seedA, seedB) {
   return function(dispatch) {
     let newSeeds = [];
+    let totalGrowingTime = 0;
     [...Array(storehouse.experimentalGardenSize).keys()].map(() => {
       let newSeedId = dispatch(genId(autoIncrement, 'seed'));
       const newSeed = storehouse.breedSeeds(seedA, seedB);
       newSeed.id = newSeedId.newId;
+      totalGrowingTime += (newSeed.stats[GROWING_TIME].value);
       newSeeds.push(newSeed);
     });
 
     storehouse.seedsBred = newSeeds;
-    storehouse.breedingTimeRemaining = 100;
+    storehouse.breedingTimeRemaining =
+      (totalGrowingTime / newSeeds.length) * 2;
     storehouse.breedingAgeLabel = storehouse.getBreedingAgeLabel();
 
     return {
@@ -70,7 +74,7 @@ export function finishBreedingSeed(storehouse, recordBook, newSeed) {
     return {
       type: SET_STOREHOUSE,
       storehouse: storehouse
-    }  
+    }
   }
 }
 
