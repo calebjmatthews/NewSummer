@@ -40,13 +40,13 @@ class StateDisplayFieldCard extends Component {
 
   render() {
     return (
-      <div className="game-card field-card" style={this.props.transStyle}
-        onClick={() => this.fieldCardClick()}>
+      <div className="game-card field-card" style={this.props.transStyle}>
         <ClimateDisplay field={this.props.field} />
-        <div>
-          {this.props.field.seedsName}
+        <div className="field-card-body"
+          onClick={() => this.fieldCardClick()}>
+          <div>{this.props.field.seedsName}</div>
+          <div>{this.renderAgeLabel()}</div>
         </div>
-        {this.renderAgeLabel()}
       </div>
     );
   }

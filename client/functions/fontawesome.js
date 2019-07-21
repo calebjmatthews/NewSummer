@@ -4,7 +4,7 @@ import {
   faSun, faWind, faTint,
   faSkullCrossbones, faIceCream, faBreadSlice, faCarrot, faHollyBerry, faLemon,
   faFireAlt, faSquare, faMortarPestle, faCompress, faExpandArrowsAlt, faSpa,
-  faArrowLeft, faCaretLeft, faCaretRight
+  faArrowLeft, faCaretLeft, faCaretRight, faCaretUp, faCaretDown, faImage
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function() {
@@ -32,4 +32,7 @@ export default function() {
   library.add(faArrowLeft);
   library.add(faCaretLeft);
   library.add(faCaretRight);
+  library.add(faCaretUp);
+  library.add(faCaretDown);
+  library.add(faImage);
 }

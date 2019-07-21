@@ -109,12 +109,21 @@ button:disabled {
 .field-card {
   justify-content: space-between;
 }
+.field-card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
 
 .option-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  overflow: auto;
 }
 .seed-option {
   display: flex;
@@ -299,4 +308,19 @@ button:disabled {
   width: 100%;
   font-size: 45px;
   text-align: right;
+}
+
+.planting-header {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.planting-header .back-button-wrapper {
+  width: unset;
+  margin-left: 5px;
+}
+.seed-select-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
 }

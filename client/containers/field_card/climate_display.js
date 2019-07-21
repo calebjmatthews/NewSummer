@@ -20,6 +20,24 @@ let barStyleDict = {
 }
 
 export default class ClimateDisplay extends Component {
+  constructor(props) {
+  	super(props);
+  	this.state = {
+  		barsVisible: false
+  	}
+  }
+
+  componentDidMount() {
+    if (this.props.barsVisible == true) {
+      this.setState({barsVisible: true});
+    }
+    this.showClick = this.showClick.bind(this);
+  }
+
+  showClick() {
+    this.setState({barsVisible: !this.state.barsVisible});
+  }
+
   renderBar(measure) {
     let count = this.props.field[measure];
     let startingPoint = (count * 2);
@@ -64,14 +82,30 @@ export default class ClimateDisplay extends Component {
     );
   }
   render() {
-    return (
-      <div className="climate-container">
-        {this.renderBar('temperature')}
-        {this.renderBar('moisture')}
-        {this.renderBar('fertility')}
-        {this.renderBar('pests')}
-        {this.renderBar('disease')}
-      </div>
-    );
+    if (this.state.barsVisible == true) {
+      return (
+        <div className="climate-container">
+          <div className="climate-icon"
+            onClick={ () => this.showClick() }>
+            <FontAwesomeIcon icon="caret-up" />
+          </div>
+          {this.renderBar('temperature')}
+          {this.renderBar('moisture')}
+          {this.renderBar('fertility')}
+          {this.renderBar('pests')}
+          {this.renderBar('disease')}
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="climate-container">
+          <div className="climate-icon"
+            onClick={ () => this.showClick() }>
+            <FontAwesomeIcon icon="image" />
+          </div>
+        </div>
+      );
+    }
   }
 }

@@ -47,7 +47,7 @@ export default class Field {
   }
   getSeedsName() {
     if (this.seedPlanted != null) {
-      return 'Name: ' + this.seedPlanted.name;
+      return this.seedPlanted.name;
     }
     else {
       return 'Nothing planted';

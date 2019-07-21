@@ -410,6 +410,7 @@ X Rebalance for greater variety in growth times
 - Hide field descriptors except when choosing crop to plant
 - Re-examine trader arrival
 - Seed selection for breeding shows first selected seed
+- Result description shows delta, not incomplete total
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~

@@ -42,7 +42,7 @@ class SeedSelectCard extends Component {
     }
 
     return (
-      <div>
+      <div className="seed-select-container">
         <div>{ cultivarLabel }</div>
         <div className="option-container">
           {cultivarSeeds.map((seed) => {
