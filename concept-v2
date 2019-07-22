@@ -407,7 +407,8 @@ X Decrease base seed value amount
 X Fix for selling price of seeds
 - Fix for one purchase causing all options to register as "Sold"
 X Rebalance for greater variety in growth times
-- Hide field descriptors except when choosing crop to plant
+X Hide field descriptors except when choosing crop to plant
+- Fix applied field climate (off by one unit?)
 - Re-examine trader arrival
 - Seed selection for breeding shows first selected seed
 - Result description shows delta, not incomplete total
@@ -461,6 +462,7 @@ X Environmental effects from fields
 X Seed trader arrives and leaves
 _ Minor display and gameplay polish
 _ Calculate time passed while page not loaded
+_ Tap for brief icon descriptions
 _ Simple NS pixel graphics for all plant stages (Ready for playable alpha!)
 _ Balancing after play
 _ Pixel graphics linked with traits

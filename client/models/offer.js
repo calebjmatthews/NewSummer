@@ -3,6 +3,7 @@ export default class Offer{
     item = null, travelerName = null) {
     this.id = null;
     if (typeof(labelOrOffer) == 'object' && labelOrOffer != null) {
+      this.id = labelOrOffer.id;
       this.label = labelOrOffer.label;
       this.price = labelOrOffer.price;
       this.sold = labelOrOffer.sold;
