@@ -1,4 +1,5 @@
 import Cache from './cache';
+import Traveler from './traveler';
 import { TRAVELER_DURATION, AGE_INTERVAL } from '../constants';
 
 export default class Cast extends Cache {
@@ -22,16 +23,17 @@ export default class Cast extends Cache {
 
   // By default, this function is run every second
   checkForVisitStart() {
+    let visitorName = false;
     if (this.currentlyVisiting == null) {
       this.members.map((member) => {
-        let chance = 1 / ((TRAVELER_DURATION / 1000) / member.frequency);
+        let chance = 1 / ((TRAVELER_DURATION / 100000) / member.frequency);
         let roll = Math.random();
         if (roll < chance) {
-          return member.name;
+          visitorName = member.name;
         }
       });
     }
-    return false;
+    return visitorName;
   }
 
   startVisit(travelerName, info) {

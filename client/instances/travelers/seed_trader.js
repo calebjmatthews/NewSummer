@@ -9,7 +9,7 @@ let seedTrader = new Traveler(SUSANNA_POL, .2, 0, [],
   []
 );
 
-seedTrader.genOffers = function(cultivarsUnlocked) {
+function genOffers(cultivarsUnlocked) {
   let variation = 1;
   if (Math.random() > 0.9) {
     variation = 3;
@@ -28,6 +28,8 @@ seedTrader.genOffers = function(cultivarsUnlocked) {
   return offers;
 }
 
+seedTrader.genOffers = genOffers;
+
 function genOffer(offers, cultivarsUnlocked, variation) {
   let index = Math.floor(Math.random() * cultivarsUnlocked.length);
   let newSeed = new Seed(null, POACEAE, cultivarsUnlocked[index], 'Bought',
@@ -45,4 +47,10 @@ function genOffer(offers, cultivarsUnlocked, variation) {
     false, 'seed', newSeed, SUSANNA_POL);
 }
 
-export {seedTrader, SUSANNA_POL};
+function loadSeedTrader(rawTraveler) {
+  let seedTrader = new Traveler(rawTraveler);
+  seedTrader.genOffers = genOffers;
+  return seedTrader;
+}
+
+export {seedTrader, SUSANNA_POL, loadSeedTrader};

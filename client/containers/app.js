@@ -27,6 +27,7 @@ import { importAutoIncrement, genId } from '../actions/auto_increment';
 import { checkForVisitStart, ageVisit, setCast } from '../actions/cast';
 import Cast from '../models/cast';
 import Offer from '../models/offer';
+import { loadSeedTrader } from '../instances/travelers/seed_trader';
 
 class App extends Component {
   componentDidMount() {
@@ -79,6 +80,10 @@ class App extends Component {
 
       let cast = new Cast(localStorages.cast);
       cast.members.map((traveler, index) => {
+        if (traveler.name == 'Susanna Pol') {
+          traveler = loadSeedTrader(traveler);
+        }
+        cast.members[index] = traveler;
         if (traveler.currentOffers.length > 0) {
           let offers = [];
           traveler.currentOffers.map((rawOffer) => {
