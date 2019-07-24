@@ -4,7 +4,8 @@ import {
   faSun, faWind, faTint,
   faSkullCrossbones, faIceCream, faBreadSlice, faCarrot, faHollyBerry, faLemon,
   faFireAlt, faSquare, faMortarPestle, faCompress, faExpandArrowsAlt, faSpa,
-  faArrowLeft, faCaretLeft, faCaretRight, faCaretUp, faCaretDown, faImage
+  faArrowLeft, faCaretLeft, faCaretRight, faCaretUp, faCaretDown, faImage,
+  faCloudSun, faFillDrip
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function() {
@@ -35,4 +36,6 @@ export default function() {
   library.add(faCaretUp);
   library.add(faCaretDown);
   library.add(faImage);
+  library.add(faCloudSun);
+  library.add(faFillDrip);
 }

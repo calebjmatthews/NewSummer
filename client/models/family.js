@@ -107,6 +107,15 @@ export default class Family {
             }
           }
         }
+        if (definition.comparitor == 'between') {
+          if (stat.value > definition.values[0]
+            && stat.value <= definition.values[1]) {
+            const extent = calcBetweenExtent(stat, definition);
+            newStat = {
+              word: definition.adjective, extent: extent
+            }
+          }
+        }
       });
       if (newStat != null) {
         adjectives.push(newStat);
@@ -174,6 +183,7 @@ export default class Family {
     	6: [-0.90,-0.75,-0.50,-0.35,-0.20,-0.10, 0.00]
     }
     const boundaries = {
+      //          0    1    2    3    4    5    6
       temperature: [100, 110, 121, 133, 146, 161, 177],
       moisture:    [100, 110, 121, 133, 146, 161, 177],
       fertility:   [ 75,  98, 127, 165, 214, 278, 362],
@@ -313,6 +323,7 @@ export default class Family {
       const stat = stats[statKey];
       let newDesc = null;
       stat.definitions.map((definition) => {
+        let match = false;
         if (definition.comparitor == 'less than') {
           if (stat.value < definition.values[0]) {
             const extent = calcExtent(stat, definition);
@@ -326,6 +337,18 @@ export default class Family {
         }
         if (definition.comparitor == 'greater than') {
           if (stat.value > definition.values[0]) {
+            const extent = calcExtent(stat, definition);
+            newDesc = {
+              title: stat.name,
+              description: definition.description,
+              iconType: definition.iconType, icon: definition.icon,
+              iconStyle: definition.iconStyle, extent: extent
+            }
+          }
+        }
+        if (definition.comparitor == 'between') {
+          if (stat.value > definition.values[0]
+            && stat.value <= definition.values[1]) {
             const extent = calcExtent(stat, definition);
             newDesc = {
               title: stat.name,
@@ -569,11 +592,11 @@ function getFlavorDescription(traitTotalDict) {
       if (dominantFlavors.intensities[0] == 'high') {
         description += 'An intense ';
       }
-      else if (dominantFlavors.intensities[1] == 'medium') {
-        dsecription += 'A mild ';
+      else if (dominantFlavors.intensities[0] == 'medium') {
+        description += 'A mild ';
       }
-      else if (dominantFlavors.intensities[1] == 'low') {
-        dsecription += 'A delicate ';
+      else if (dominantFlavors.intensities[0] == 'low') {
+        description += 'A delicate ';
       }
       if (positivity > 0) {
         flavorDescription.iconStyle = 'positive';
@@ -600,4 +623,16 @@ function calcExtent(stat, definition) {
   const defValue = definition.values[0];
   return ((Math.abs(stat.value - defValue)) / defValue)
     + definition.bonus;
+}
+
+// 100 - 200, stat value is 120; 120 - 100 / 100 = .2; 120 - 200 / 200 = .8
+// 1 / .2 * 1 / .8 = 5 * 1.25 = 6.25; 1 / 6.25 = .16 * 2 = .32
+// 1 / .5 * 1 / .5 = 2 * 2 = 4; 1 / 4 = .25 * 2 = .5
+// Designed so that in "between" comparitor conditions, stat values that are
+//  in the middle result in a higher resulting extent
+function calcBetweenExtent(stat, definition) {
+  const defValues = definition.values;
+  let basicExtentMin = ((Math.abs(stat.value - defValues[0])) / defValues[0]);
+  let basicExtentMax = ((Math.abs(stat.value - defValues[1])) / defValues[1]);
+  return (1 / ((1 / basicExtentMax) * (1 / basicExtentMin))) * 2;
 }

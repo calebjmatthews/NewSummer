@@ -19,7 +19,7 @@ const traitCache = new Cache([
   toxicity
 ]);
 const statCache = new Cache([
-  new Stat(SEED_QUANTITY, 1, [
+  new Stat(SEED_QUANTITY, 100, [
     {comparitor: 'less than', values: [90], adjective: 'Thin', bonus: 0,
       description: 'Seeds are scarce', iconType: 'fontawesome',
       icon: 'dot-circle', iconStyle: 'negative'},
@@ -30,7 +30,7 @@ const statCache = new Cache([
       bonus: 2, description: 'Seeds are abundant',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'}
   ]),
-  new Stat(PLANT_QUALITY, 100, []),
+  new Stat(PLANT_QUALITY, 1, []),
   new Stat(GROWING_TIME, 60, [
     {comparitor: 'less than', values: [250], adjective: 'Fast-Growing',
       bonus: 0},
@@ -68,18 +68,24 @@ const statCache = new Cache([
       bonus: 0}
   ]),
   new Stat(TEMP_TOLERANCE, 100, [
-    {comparitor: 'less than', values: [125], adjective: 'Winter',
+    {comparitor: 'less than', values: [111], adjective: 'Winter',
       bonus: 1, description: 'Grows well in the cold',
       iconType: 'fontawesome', icon: 'snowflake', iconStyle: 'neutral'},
-    {comparitor: 'greater than', values: [142], adjective: 'Summer',
+    {comparitor: 'between', values: [121, 133], adjective: 'Spring',
+      bonus: 1, description: 'Needs mild temperatures to grow well',
+      iconType: 'fontawesome', icon: 'cloud-sun', iconStyle: 'neutral'},
+    {comparitor: 'greater than', values: [145], adjective: 'Summer',
       bonus: 1, description: 'Grows well in the heat',
       iconType: 'fontawesome', icon: 'sun', iconStyle: 'neutral'}
   ]),
   new Stat(MOIS_TOLERANCE, 100, [
-    {comparitor: 'less than', values: [125], adjective: 'Desert',
+    {comparitor: 'less than', values: [111], adjective: 'Desert',
       bonus: 1, description: 'Grows well in dry conditions',
       iconType: 'fontawesome', icon: 'wind', iconStyle: 'neutral'},
-    {comparitor: 'greater than', values: [142], adjective: 'Wetland',
+    {comparitor: 'between', values: [121, 133], adjective: 'Temperate',
+      bonus: 1, description: 'Needs moderate moisture to grow well',
+      iconType: 'fontawesome', icon: 'fill-drip', iconStyle: 'neutral'},
+    {comparitor: 'greater than', values: [145], adjective: 'Wetland',
       bonus: 1, description: 'Grows well in wet conditions',
       iconType: 'fontawesome', icon: 'tint', iconStyle: 'neutral'}
   ]),
