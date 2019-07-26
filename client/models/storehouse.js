@@ -113,7 +113,7 @@ export default class Storehouse {
       this.breedingTimeRemaining -= 0.25;
       this.breedingAgeLabel = this.getBreedingAgeLabel();
       if (this.breedingTimeRemaining < 0) {
-        this.breedingTimeRemaining -= 0.25;
+        this.breedingTimeRemaining = 0;
         this.breedingAgeLabel = this.getBreedingAgeLabel();
       }
     }
