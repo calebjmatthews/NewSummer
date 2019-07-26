@@ -243,14 +243,15 @@ export default class Family {
           descriptions[prop].sign = 'positive';
           descriptions[prop].value = '+' + (multipliers[prop] * 100) + '%';
           value *= (1 + multipliers[prop]);
-          descriptions[prop].result = value;
+          descriptions[prop].result = '+'
+            + (formatMoney(-(baseValue - value)));
         }
         else if (multipliers[prop] < 0) {
           descriptions[prop] = {};
           descriptions[prop].sign = 'negative';
           descriptions[prop].value = '' + (multipliers[prop] * 100) + '%';
           value *= (1 + multipliers[prop]);
-          descriptions[prop].result = value;
+          descriptions[prop].result = formatMoney(-(baseValue - value));
         }
       });
 

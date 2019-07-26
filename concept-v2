@@ -412,7 +412,7 @@ X Fix applied field climate (off by one unit?)
 X Re-examine trader arrival
 X Fix plant breeding bug
 X Seed selection for breeding shows first selected seed
-- Confirmation before seed breeding
+X Confirmation before seed breeding
 - Result description shows delta, not incomplete total
 - Reset traveler click requirement
 - Fix traveler leaving and react update on unmounted component

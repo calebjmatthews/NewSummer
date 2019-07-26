@@ -40,7 +40,7 @@ class HarvestResultFieldCard extends Component {
                   </div>
                   <div className={"harvest-description-value "
                     + harvestResult.descriptions[prop].sign}>
-                    {formatMoney(harvestResult.descriptions[prop].result)}
+                    {harvestResult.descriptions[prop].result}
                   </div>
                 </div>
               );

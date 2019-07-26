@@ -53,10 +53,12 @@ function formatDuration(milliseconds, units=0) {
 }
 
 function formatMoney(dollars) {
+  let sign = '';
+  if (dollars < 0) { sign = '-'; }
   if (dollars < 100) {
-    return ('$' + dollars.toFixed(2));
+    return (sign + '$' + Math.abs(dollars).toFixed(2));
   }
-  return ('$' + Math.round(dollars).toString());
+  return (sign + '$' + Math.round(Math.abs(dollars)).toString());
 }
 
 module.exports = { shuffle, formatDuration, formatMoney };
