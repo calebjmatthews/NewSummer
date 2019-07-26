@@ -67,9 +67,9 @@ export default class Field {
     if (pixiStore.cardContainer != null) {
       let growthStage = Math.floor((this.seedsAge
         / this.seedPlanted.stats[GROWING_TIME].value)*5);
-      const textureName = 'Corn_Stage_';
+      const textureName = 'wheat';
       pixiHandler.setPlantAppearance(this.index, (textureName
-        + (growthStage+1)));
+        + growthStage));
       this.seedsGrowthStage = growthStage;
       return true;
     }
@@ -82,9 +82,9 @@ export default class Field {
       let growthStage = Math.floor((this.seedsAge
         / this.seedPlanted.stats[GROWING_TIME].value)*5);
       if (growthStage != this.seedsGrowthStage) {
-        const textureName = 'Corn_Stage_';
+        const textureName = 'wheat';
         pixiHandler.setPlantAppearance(this.index, (textureName
-          + (growthStage+1)));
+          + growthStage));
         this.seedsGrowthStage = growthStage;
       }
     }

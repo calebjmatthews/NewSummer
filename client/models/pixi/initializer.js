@@ -18,13 +18,13 @@ export default class PixiInitializer {
 
     document.getElementById('root').appendChild(s.pixiApp.view);
     PIXI.loader.add('background', './dist/images/background.png')
-    .add('Corn_Stage_1', './dist/images/Corn_Stage_1.png')
-    .add('Corn_Stage_2', './dist/images/Corn_Stage_2.png')
-    .add('Corn_Stage_3', './dist/images/Corn_Stage_3.png')
-    .add('Corn_Stage_4', './dist/images/Corn_Stage_4.png')
-    .add('Corn_Stage_5', './dist/images/Corn_Stage_5.png')
-    .add('Corn_Stage_6', './dist/images/Corn_Stage_6.png')
-    .add('Corn_Stage_7', './dist/images/Corn_Stage_7.png')
+    .add('wheat0', './dist/images/wheat0.png')
+    .add('wheat1', './dist/images/wheat1.png')
+    .add('wheat2', './dist/images/wheat2.png')
+    .add('wheat3', './dist/images/wheat3.png')
+    .add('wheat4', './dist/images/wheat4.png')
+    .add('wheat5', './dist/images/wheat5.png')
+    .add('wheat6', './dist/images/wheat6.png')
     .load((loader, resources) => {
       s.resources = resources;
       s.cardContainer = new PIXI.Container();

@@ -11,6 +11,8 @@ export default class PixiPlants {
     }
     if (textureName != null) {
       const plant = new PIXI.Sprite(s.resources[textureName].texture);
+      plant.anchor.set(0.5, 0.5);
+      plant.scale.set(3, 3);
       plant.x = (card.width/2) - (plant.width/2);
       plant.y = (card.height/2) - (plant.height/2);
       card.addChild(plant);
