@@ -413,9 +413,11 @@ X Re-examine trader arrival
 X Fix plant breeding bug
 X Seed selection for breeding shows first selected seed
 X Confirmation before seed breeding
-- Result description shows delta, not incomplete total
+X Result description shows delta, not incomplete total
+X Correct math error in harvest results climate effects
 - Reset traveler click requirement
 - Fix traveler leaving and react update on unmounted component
+- Sprite display listing/timing as array in cultivar
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
@@ -464,7 +466,7 @@ X Experimental garden gives two choices
 X More cultivars
 X Environmental effects from fields
 X Seed trader arrives and leaves
-_ Minor display and gameplay polish
+_ Myriad minor display and gameplay polishes
 _ Calculate time passed while page not loaded
 _ Tap for brief icon descriptions
 _ Simple NS pixel graphics for all plant stages (Ready for playable alpha!)

@@ -210,11 +210,12 @@ export default class Family {
       pests: suitabilityPestDise[pests][statCats.pests],
       disease: suitabilityPestDise[disease][statCats.disease]
     }
-    let value = baseValue * (1 + multipliers.temperature);
-    value *= (1 + multipliers.moisture);
-    value *= (1 + multipliers.fertility);
-    value *= (1 + multipliers.pests);
-    value *= (1 + multipliers.disease);
+    let value = baseValue;
+    value += baseValue * multipliers.temperature;
+    value +=  baseValue * multipliers.moisture;
+    value +=  baseValue * multipliers.fertility;
+    value +=  baseValue * multipliers.pests;
+    value +=  baseValue * multipliers.disease;
     let descriptions = describeMultipliers(baseValue, multipliers, statCats,
       temperature, moisture, fertility);
     let comment = commentOnDescriptions(descriptions);
@@ -236,22 +237,20 @@ export default class Family {
       let descriptions = {};
       let climateProps = ['temperature', 'moisture', 'fertility', 'pests',
         'disease'];
-      let value = baseValue;
       climateProps.map((prop) => {
         if (multipliers[prop] > 0) {
           descriptions[prop] = {};
           descriptions[prop].sign = 'positive';
           descriptions[prop].value = '+' + (multipliers[prop] * 100) + '%';
-          value *= (1 + multipliers[prop]);
           descriptions[prop].result = '+'
-            + (formatMoney(-(baseValue - value)));
+            + formatMoney(baseValue * multipliers[prop]);
         }
         else if (multipliers[prop] < 0) {
           descriptions[prop] = {};
           descriptions[prop].sign = 'negative';
           descriptions[prop].value = '' + (multipliers[prop] * 100) + '%';
-          value *= (1 + multipliers[prop]);
-          descriptions[prop].result = formatMoney(-(baseValue - value));
+          descriptions[prop].result =
+            formatMoney(baseValue * multipliers[prop]);
         }
       });
 
