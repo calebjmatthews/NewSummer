@@ -42,10 +42,6 @@ export function buySeedAttempt(economy, storehouse, cast, recordBook, offer,
           matchingTraveler = traveler;
         }
       });
-      console.log('matchingTraveler.currentOffers');
-      console.log(matchingTraveler.currentOffers);
-      console.log('offer');
-      console.log(offer);
       matchingTraveler.currentOffers.map((cOffer) => {
         if (cOffer.id == offer.id) {
           cOffer.sold = true;

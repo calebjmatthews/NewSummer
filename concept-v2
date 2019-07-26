@@ -410,9 +410,12 @@ X Rebalance for greater variety in growth times
 X Hide field descriptors except when choosing crop to plant
 X Fix applied field climate (off by one unit?)
 X Re-examine trader arrival
-- Fix plant breeding bug
-- Seed selection for breeding shows first selected seed
+X Fix plant breeding bug
+X Seed selection for breeding shows first selected seed
+- Confirmation before seed breeding
 - Result description shows delta, not incomplete total
+- Reset traveler click requirement
+- Fix traveler leaving and react update on unmounted component
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~

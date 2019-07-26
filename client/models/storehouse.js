@@ -44,7 +44,7 @@ export default class Storehouse {
 
     }
     else {
-      this.dollars = 10000;
+      this.dollars = 10;
       this.maxSeeds = 4;
       this.experimentalGardenSize = 2;
       this.seeds = new Cache([]);
