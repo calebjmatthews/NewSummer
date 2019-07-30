@@ -40,6 +40,7 @@ export default class Cast extends Cache {
     this.everVisited = true;
     this.currentlyVisiting = travelerName;
     this.visitRemaining = TRAVELER_DURATION;
+    this.saidHello = false;
   }
 
   endVisit() {
