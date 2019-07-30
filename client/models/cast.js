@@ -26,7 +26,7 @@ export default class Cast extends Cache {
     let visitorName = false;
     if (this.currentlyVisiting == null) {
       this.members.map((member) => {
-        let chance = 1 / ((TRAVELER_DURATION / 100000) / member.frequency);
+        let chance = 1 / ((TRAVELER_DURATION / 1000) / member.frequency);
         let roll = Math.random();
         if (roll < chance) {
           visitorName = member.name;

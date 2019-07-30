@@ -419,7 +419,7 @@ X Reset traveler click requirement
 X Fix traveler leaving and react update on unmounted component
 X Sprite display listing/timing as array in cultivar/family
 X Add seed replacement container to seed breeding completion
-- Fix chance of traveler appearing
+X Fix chance of traveler appearing
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~
