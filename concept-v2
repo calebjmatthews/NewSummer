@@ -415,9 +415,11 @@ X Seed selection for breeding shows first selected seed
 X Confirmation before seed breeding
 X Result description shows delta, not incomplete total
 X Correct math error in harvest results climate effects
-- Reset traveler click requirement
-- Fix traveler leaving and react update on unmounted component
+X Reset traveler click requirement
+X Fix traveler leaving and react update on unmounted component
 - Sprite display listing/timing as array in cultivar
+- Add seed replacement container to seed breeding completion
+- Fix chance of traveler appearing
 
 Development Checklist
 ~~~~~~~~~~~~~~~~~~~~~

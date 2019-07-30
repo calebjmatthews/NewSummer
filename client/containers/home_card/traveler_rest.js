@@ -11,16 +11,20 @@ class TravelerRest extends Component {
     this.state = {
       currentlyVisiting: null
     }
+    this.visitCheck = {};
   }
   componentDidMount() {
     this.travelerRestClick = this.travelerRestClick.bind(this);
     // Fix for the visit start somehow not causing a rerender
-    setInterval(() => {
+    this.visitCheck = setInterval(() => {
       let cast = this.props.castState.cast;
       if (this.state.currentlyVisiting != cast.currentlyVisiting) {
         this.setState({currentlyVisiting: cast.currentlyVisiting});
       }
     }, 250);
+  }
+  componentWillUnmount() {
+    clearInterval(this.visitCheck);
   }
 
   travelerRestClick() {

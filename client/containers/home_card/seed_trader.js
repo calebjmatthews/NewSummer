@@ -29,30 +29,40 @@ class SeedTraderCard extends Component {
   }
 
   render() {
-    return (
-      <div className="game-card field-card" style={this.props.transStyle}>
-        <BackButton spot={this.props.spot} />
-        {'Buy a seed:'}
-        <div className="option-container">
-          {this.props.castState.cast.getByProperty('name',
-            this.props.castState.cast.currentlyVisiting)
-            .currentOffers.map((offer) => {
-            let seed = offer.item;
-            let confirmText = 'Sold';
-            if (offer.sold == false) {
-              confirmText = ('Buy for ' + formatMoney(offer.price))
-            }
-            return (
-              <SeedDescription key={seed.name} seed={seed}
-                spot={this.props.spot}
-                onClickConfirmToParent={this.buySeed}
-                confirmText={confirmText}
-                confirmDisabled={offer.sold} />
-            );
-          })}
+    if (this.props.castState.cast.currentlyVisiting != null) {
+      return (
+        <div className="game-card field-card" style={this.props.transStyle}>
+          <BackButton spot={this.props.spot} />
+          {'Buy a seed:'}
+          <div className="option-container">
+            {this.props.castState.cast.getByProperty('name',
+              this.props.castState.cast.currentlyVisiting)
+              .currentOffers.map((offer) => {
+              let seed = offer.item;
+              let confirmText = 'Sold';
+              if (offer.sold == false) {
+                confirmText = ('Buy for ' + formatMoney(offer.price))
+              }
+              return (
+                <SeedDescription key={seed.name} seed={seed}
+                  spot={this.props.spot}
+                  onClickConfirmToParent={this.buySeed}
+                  confirmText={confirmText}
+                  confirmDisabled={offer.sold} />
+              );
+            })}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else {
+      return (
+        <div className="game-card field-card" style={this.props.transStyle}>
+          <BackButton spot={this.props.spot} />
+          {'Sorry, had to go!'}
+        </div>
+      );
+    }
   }
 }
 
