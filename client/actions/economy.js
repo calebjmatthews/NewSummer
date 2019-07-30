@@ -54,7 +54,7 @@ export function buySeedAttempt(economy, storehouse, cast, recordBook, offer,
       }
       else {
         storehouse.intermediateSeed = offer.item;
-        dispatch(setCard({type:"seedReplace"}, spot));
+        dispatch(setCard({type:"seedReplaceBuy"}, spot));
         dispatch(setStorehouse(storehouse));
         economy.intermediateSpend = offer.price;
       }

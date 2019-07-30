@@ -14,9 +14,7 @@ class BreedingResultsHomeCard extends Component {
   chooseSeed(seed) {
     this.props.finishBreedingSeed(
       this.props.storehouseState.storehouse,
-      this.props.recordBookState.recordBook,
-      seed);
-    this.props.setCard({type: null}, this.props.spot);
+      this.props.recordBookState.recordBook, seed, this.props.spot);
   }
 
   render() {

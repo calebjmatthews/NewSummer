@@ -21,15 +21,21 @@ class SeedReplaceCard extends Component {
   }
 
   cancelClick() {
-    this.props.seedBuyCancel(this.props.economyState.economy,
-      this.props.storehouseState.storehouse, this.props.spot);
+    if (this.props.reason == 'buy') {
+      this.props.seedBuyCancel(this.props.economyState.economy,
+        this.props.storehouseState.storehouse, this.props.spot);
+    }
+    else if (this.props.reason == 'breed') {
+      this.props.setCard({type: null}, this.props.spot);
+    }
   }
 
   replaceClick() {
     let oldSeed = this.props.storehouseState.storehouse.seeds
       .getByProperty('id', this.state.seedSelected);
     this.props.replaceSeed(this.props.storehouseState.storehouse,
-      oldSeed, this.props.storehouseState.storehouse.intermediateSeed);
+      oldSeed, this.props.storehouseState.storehouse.intermediateSeed,
+      this.props.reason);
     this.props.setCard({type: null}, this.props.spot);
   }
 

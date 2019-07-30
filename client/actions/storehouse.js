@@ -2,6 +2,7 @@ import Storehouse from '../models/storehouse';
 import { setRecordBook } from './record_book';
 import { genId } from './auto_increment';
 import { GROWING_TIME } from '../instances/stats';
+import { setCard } from './card';
 
 export const SET_STOREHOUSE = 'SET_STOREHOUSE';
 export function setStorehouse(storehouse) {
@@ -59,17 +60,19 @@ export function ageBreeding(storehouse) {
   }
 };
 
-export function finishBreedingSeed(storehouse, recordBook, newSeed) {
+export function finishBreedingSeed(storehouse, recordBook, newSeed, spot) {
   return function(dispatch) {
     if (storehouse.isCultivarFull(newSeed.cultivarName) == false) {
       recordBook.recordSeed(newSeed);
       dispatch(setRecordBook(recordBook));
       storehouse.addSeed(newSeed);
       storehouse.seedsBred = [];
+      dispatch(setCard({type:null}, spot));
     }
     else {
-      console.log('Cultivar storage full.');
       storehouse.intermediateSeed = newSeed;
+      dispatch(setStorehouse(storehouse));
+      dispatch(setCard({type:"seedReplaceBreed"}, spot));
     }
     return {
       type: SET_STOREHOUSE,
@@ -90,9 +93,14 @@ export function addSeed(storehouse, recordBook, newSeed) {
   }
 }
 
-export function replaceSeed(storehouse, oldSeed, newSeed) {
+export function replaceSeed(storehouse, oldSeed, newSeed, reason = null) {
   storehouse.removeSeed(oldSeed);
   storehouse.addSeed(newSeed);
+
+  if (reason == 'breed') {
+    storehouse.seedsBred = [];
+  }
+
   return {
     type: SET_STOREHOUSE,
     storehouse: storehouse

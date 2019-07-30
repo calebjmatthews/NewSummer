@@ -417,8 +417,8 @@ X Result description shows delta, not incomplete total
 X Correct math error in harvest results climate effects
 X Reset traveler click requirement
 X Fix traveler leaving and react update on unmounted component
-- Sprite display listing/timing as array in cultivar
-- Add seed replacement container to seed breeding completion
+X Sprite display listing/timing as array in cultivar/family
+X Add seed replacement container to seed breeding completion
 - Fix chance of traveler appearing
 
 Development Checklist
@@ -471,6 +471,7 @@ X Seed trader arrives and leaves
 _ Myriad minor display and gameplay polishes
 _ Calculate time passed while page not loaded
 _ Tap for brief icon descriptions
+_ Roman numeral naming system (using record book?)
 _ Simple NS pixel graphics for all plant stages (Ready for playable alpha!)
 _ Balancing after play
 _ Pixel graphics linked with traits

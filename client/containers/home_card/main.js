@@ -41,10 +41,16 @@ class HomeCard extends Component {
           spot={this.props.spot} />
       );
     }
-    else if (card.type == 'seedReplace') {
+    else if (card.type == 'seedReplaceBuy') {
       return (
         <SeedReplaceCard transStyle={this.props.transStyle}
-          spot={this.props.spot} />
+          spot={this.props.spot} reason={"buy"} />
+      );
+    }
+    else if (card.type == 'seedReplaceBreed') {
+      return (
+        <SeedReplaceCard transStyle={this.props.transStyle}
+          spot={this.props.spot} reason={"breed"} />
       );
     }
     else if (card.type == 'seedDetail') {
