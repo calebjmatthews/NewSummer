@@ -10,7 +10,7 @@ import {PLANT_QUALITY, SEED_QUANTITY, TEMP_TOLERANCE, MOIS_TOLERANCE,
 
 export default class Family {
   constructor(nameScientific, nameCommon, traits, stats, cultivars,
-    defaultCultivar) {
+    spriteArray) {
     this.nameScientific = nameScientific;
     this.nameCommon = nameCommon;
     this.traits = traits;
@@ -18,6 +18,7 @@ export default class Family {
     // Cultivars listed in order of most basal to most cultivated, with the
     //  default listed first
     this.cultivars = cultivars;
+    this.spriteArray = spriteArray;
   }
 
   determineTraitsFromGenome(genome) {

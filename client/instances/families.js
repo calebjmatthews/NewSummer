@@ -11,6 +11,7 @@ import {SEED_QUANTITY, PLANT_QUALITY, GROWING_TIME, PEST_RESISTANCE,
   DISEASE_RESISTANCE, NITROGEN_REQUIREMENT, STEM_THICKNESS, STEM_HEIGHT,
   TEMP_TOLERANCE, MOIS_TOLERANCE} from './stats';
 import {grain, cane, wildCane, wildGrass} from './cultivars';
+import {SPRS_WHEAT} from './pixi/sprite_names';
 
 const traitCache = new Cache([
   seedCovering, branching, stemFocus, seedSize, tempTolerance,
@@ -90,7 +91,6 @@ const statCache = new Cache([
       iconType: 'fontawesome', icon: 'tint', iconStyle: 'neutral'}
   ]),
   new Stat(STEM_THICKNESS, 100, [])
-
 ])
 
 export const POACEAE = 'Poaceae';
@@ -101,7 +101,8 @@ class Poaceae extends Family {
       'Grasses',
       traitCache,
       statCache,
-      new Cache([grain, cane, wildCane, wildGrass])
+      new Cache([grain, cane, wildCane, wildGrass]),
+      {'spriteNames': SPRS_WHEAT, 'durations': [0.1, 0.3, 0.5, 0.7, 0.9, 1]}
     );
   }
 }

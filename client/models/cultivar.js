@@ -1,5 +1,6 @@
 export default class Cultivar {
-  constructor(name, traitsDefinitional, bonus, traitsForCreation = null) {
+  constructor(name, traitsDefinitional, bonus, traitsForCreation = null,
+    spriteArray = null) {
     this.name = name;
     if (Array.isArray(traitsDefinitional)) {
       this.traitsDefinitional = traitsDefinitional.slice();
@@ -13,6 +14,12 @@ export default class Cultivar {
     }
     else {
       this.traitsForCreation = traitsForCreation;
+    }
+    if (Array.isArray(spriteArray)) {
+      this.spriteArray = spriteArray.slice();
+    }
+    else {
+      this.spriteArray = spriteArray;
     }
   }
 

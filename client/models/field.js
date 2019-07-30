@@ -2,6 +2,7 @@ import {GROWING_TIME} from '../instances/stats';
 import {pixiHandler} from '../instances/pixi/handler';
 import {pixiStore} from '../instances/pixi/store';
 import {formatDuration} from '../functions/utils';
+import {families} from '../instances/families';
 
 export default class Field {
   constructor(id, index, name, temperature, moisture, fertility, pests,
@@ -65,11 +66,12 @@ export default class Field {
   }
   restoreSeedState() {
     if (pixiStore.cardContainer != null) {
-      let growthStage = Math.floor((this.seedsAge
-        / this.seedPlanted.stats[GROWING_TIME].value)*5);
-      const textureName = 'wheat';
-      pixiHandler.setPlantAppearance(this.index, (textureName
-        + growthStage));
+      let spriteArray = families.getByProperty('nameScientific',
+        this.seedPlanted.familyName).spriteArray;
+      let growthStage = getGrowthStage(this.seedsAge,
+        this.seedPlanted.stats[GROWING_TIME].value, spriteArray.durations);
+      pixiHandler.setPlantAppearance(this.index,
+        spriteArray.spriteNames[growthStage]);
       this.seedsGrowthStage = growthStage;
       return true;
     }
@@ -79,12 +81,13 @@ export default class Field {
   }
   checkSeedsState() {
     if (this.seedPlanted != null) {
-      let growthStage = Math.floor((this.seedsAge
-        / this.seedPlanted.stats[GROWING_TIME].value)*5);
+      let spriteArray = families.getByProperty('nameScientific',
+        this.seedPlanted.familyName).spriteArray;
+      let growthStage = getGrowthStage(this.seedsAge,
+        this.seedPlanted.stats[GROWING_TIME].value, spriteArray.durations);
       if (growthStage != this.seedsGrowthStage) {
-        const textureName = 'wheat';
-        pixiHandler.setPlantAppearance(this.index, (textureName
-          + growthStage));
+        pixiHandler.setPlantAppearance(this.index,
+          spriteArray.spriteNames[growthStage]);
         this.seedsGrowthStage = growthStage;
       }
     }
@@ -104,4 +107,14 @@ export default class Field {
     this.seedsGrowthStage = null;
     this.checkSeedsState();
   }
+}
+
+function getGrowthStage(age, growingTime, durations) {
+  let completion = age/growingTime;
+  for (let index = 0; index < durations.length; index++) {
+    if (completion < durations[index]) {
+      return (index);
+    }
+  }
+  return durations.length;
 }

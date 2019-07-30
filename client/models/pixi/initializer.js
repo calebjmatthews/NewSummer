@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 import {pixiStore} from '../../instances/pixi/store';
+import {SPR_BG, SPRS_WHEAT} from '../../instances/pixi/sprite_names';
 
 export default class PixiInitializer {
   constructor() {

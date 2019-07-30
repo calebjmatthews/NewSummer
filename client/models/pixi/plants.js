@@ -9,7 +9,7 @@ export default class PixiPlants {
     if (card.children.length > 2) {
       card.removeChildAt(2);
     }
-    if (textureName != null) {
+    if (textureName != null && textureName != undefined) {
       const plant = new PIXI.Sprite(s.resources[textureName].texture);
       plant.anchor.set(0.5, 0.5);
       plant.scale.set(3, 3);
