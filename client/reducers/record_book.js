@@ -9,7 +9,8 @@ export default function
   switch(action.type) {
     case SET_RECORD_BOOK:
       return Object.assign({}, state, { recordBook: action.recordBook });
-    case
+    case SET_DATETIME:
+      
     default:
       return state;
   }

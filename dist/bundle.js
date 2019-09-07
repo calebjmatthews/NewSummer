@@ -553,6 +553,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
+/***/ "./client/instances/record_book.js":
+/*!*****************************************!*\
+  !*** ./client/instances/record_book.js ***!
+  \*****************************************/
+/*! exports provided: recordBook */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"recordBook\", function() { return recordBook; });\n/* harmony import */ var _models_record_book__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../models/record_book */ \"./client/models/record_book.js\");\n\nlet recordBook = new _models_record_book__WEBPACK_IMPORTED_MODULE_0__[\"default\"]();\n\n//# sourceURL=webpack:///./client/instances/record_book.js?");
+
+/***/ }),
+
 /***/ "./client/instances/stats.js":
 /*!***********************************!*\
   !*** ./client/instances/stats.js ***!
@@ -942,9 +954,10 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var redu
   !*** ./client/reducers/record_book.js ***!
   \****************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nSyntaxError: C:\\\\Users\\\\caleb\\\\NewSummer\\\\client\\\\reducers\\\\record_book.js: Unexpected token (13:4)\\n\\n\\u001b[0m \\u001b[90m 11 | \\u001b[39m      \\u001b[36mreturn\\u001b[39m \\u001b[33mObject\\u001b[39m\\u001b[33m.\\u001b[39massign({}\\u001b[33m,\\u001b[39m state\\u001b[33m,\\u001b[39m { recordBook\\u001b[33m:\\u001b[39m action\\u001b[33m.\\u001b[39mrecordBook })\\u001b[33m;\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 12 | \\u001b[39m    \\u001b[36mcase\\u001b[39m\\u001b[0m\\n\\u001b[0m\\u001b[31m\\u001b[1m>\\u001b[22m\\u001b[39m\\u001b[90m 13 | \\u001b[39m    \\u001b[36mdefault\\u001b[39m\\u001b[33m:\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m    | \\u001b[39m    \\u001b[31m\\u001b[1m^\\u001b[22m\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 14 | \\u001b[39m      \\u001b[36mreturn\\u001b[39m state\\u001b[33m;\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 15 | \\u001b[39m  }\\u001b[0m\\n\\u001b[0m \\u001b[90m 16 | \\u001b[39m}\\u001b[0m\\n    at Object.raise (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:3834:17)\\n    at Object.unexpected (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5142:16)\\n    at Object.parseExprAtom (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:6279:20)\\n    at Object.parseExprAtom (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:3547:20)\\n    at Object.parseExprSubscripts (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5848:23)\\n    at Object.parseMaybeUnary (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5828:21)\\n    at Object.parseExprOps (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5717:23)\\n    at Object.parseMaybeConditional (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5690:23)\\n    at Object.parseMaybeAssign (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5635:21)\\n    at Object.parseExpression (C:\\\\Users\\\\caleb\\\\NewSummer\\\\node_modules\\\\@babel\\\\parser\\\\lib\\\\index.js:5587:23)\");\n\n//# sourceURL=webpack:///./client/reducers/record_book.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _actions_record_book__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/record_book */ \"./client/actions/record_book.js\");\n/* harmony import */ var _instances_record_book__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../instances/record_book */ \"./client/instances/record_book.js\");\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (state = {\n  recordBook: _instances_record_book__WEBPACK_IMPORTED_MODULE_1__[\"recordBook\"]\n}, action = null) {\n  switch (action.type) {\n    case _actions_record_book__WEBPACK_IMPORTED_MODULE_0__[\"SET_RECORD_BOOK\"]:\n      return Object.assign({}, state, {\n        recordBook: action.recordBook\n      });\n\n    case _actions_record_book__WEBPACK_IMPORTED_MODULE_0__[\"SET_DATETIME\"]:\n    default:\n      return state;\n  }\n});\n\n//# sourceURL=webpack:///./client/reducers/record_book.js?");
 
 /***/ }),
 
