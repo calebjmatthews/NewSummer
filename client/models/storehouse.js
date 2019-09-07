@@ -1,6 +1,7 @@
 import Cache from './cache';
 import Seed from './seed';
 import { formatDuration, formatMoney } from '../functions/utils';
+import {AGE_INTERVAL} from '../constants';
 
 export default class Storehouse {
   constructor(aStorehouse = null) {
@@ -108,9 +109,14 @@ export default class Storehouse {
   breedSeeds(seedA, seedB) {
     return seedA.breedWith(seedB);
   }
-  ageBreeding() {
+  ageBreeding(duration = null) {
     if (this.seedsBred.length > 0 && this.breedingTimeRemaining > 0) {
-      this.breedingTimeRemaining -= 0.25;
+      if (duration != null) {
+        this.breedingTimeRemaining -= duration;
+      }
+      else {
+        this.breedingTimeRemaining -= AGE_INTERVAL;
+      }
       this.breedingAgeLabel = this.getBreedingAgeLabel();
       if (this.breedingTimeRemaining < 0) {
         this.breedingTimeRemaining = 0;

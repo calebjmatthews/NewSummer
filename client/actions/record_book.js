@@ -5,3 +5,11 @@ export function setRecordBook(recordBook) {
     recordBook: recordBook
   }
 }
+
+export const SET_DATETIME = 'SET_DATETIME';
+export function setDateTime(datetime) {
+  return {
+    type: SET_DATETIME,
+    datetime: datetime
+  }
+}

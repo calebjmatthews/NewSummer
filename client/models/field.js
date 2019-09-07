@@ -3,6 +3,7 @@ import {pixiHandler} from '../instances/pixi/handler';
 import {pixiStore} from '../instances/pixi/store';
 import {formatDuration} from '../functions/utils';
 import {families} from '../instances/families';
+import {AGE_INTERVAL} from '../constants';
 
 export default class Field {
   constructor(id, index, name, temperature, moisture, fertility, pests,
@@ -31,10 +32,15 @@ export default class Field {
 
     this.checkSeedsState();
   }
-  ageSeed() {
+  ageSeed(duration = null) {
     if (this.seedPlanted != null
       && this.seedsAge < this.seedPlanted.stats[GROWING_TIME].value) {
-      this.seedsAge += 0.25;
+      if (duration == null) {
+        this.seedsAge += (AGE_INTERVAL / 1000);
+      }
+      else {
+        this.seedsAge += (duration / 1000);
+      }
       this.seedsAgeLabel = this.getSeedsAgeLabel();
       this.checkSeedsState();
       if (this.seedsAge >= this.seedPlanted.stats[GROWING_TIME].value) {

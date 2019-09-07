@@ -9,9 +9,9 @@ export function setCast(cast) {
   }
 }
 
-export function ageVisit(cast) {
+export function ageVisit(cast, duration = null) {
   if (cast.currentlyVisiting != null && cast.saidHello == true) {
-    cast.ageVisit();
+    cast.ageVisit(duration);
     return setCast(cast);
   }
   return {

@@ -12,9 +12,9 @@ export function setFields(fields) {
   };
 }
 
-export function ageAllSeeds(fields) {
+export function ageAllSeeds(fields, duration = null) {
   fields.getAll().map((field) => {
-    field.ageSeed();
+    field.ageSeed(duration);
   })
 	return setFields(fields);
 };

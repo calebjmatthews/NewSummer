@@ -1,4 +1,4 @@
-import {SET_RECORD_BOOK} from '../actions/record_book';
+import {SET_RECORD_BOOK, SET_DATETIME} from '../actions/record_book';
 import {recordBook} from '../instances/record_book';
 
 export default function
@@ -9,6 +9,7 @@ export default function
   switch(action.type) {
     case SET_RECORD_BOOK:
       return Object.assign({}, state, { recordBook: action.recordBook });
+    case
     default:
       return state;
   }

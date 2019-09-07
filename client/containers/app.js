@@ -15,7 +15,7 @@ import { getLocalStorages, setLocalStorages }
   from '../functions/local_storage';
 import { formatMoney } from '../functions/utils';
 import { AGE_INTERVAL, FRAMES_PER_SECOND, STORAGE_SET_INTERVAL,
-  TRAVELER_CHECK_INTERVAL } from '../constants';
+  CHECK_INTERVAL } from '../constants';
 import Cache from '../models/cache';
 import Field from '../models/field';
 import Seed from '../models/seed';
@@ -47,7 +47,7 @@ class App extends Component {
     setInterval(() => {
       this.props.checkForVisitStart(this.props.castState.cast,
         this.props.recordBookState.recordBook, this.props.autoIncrementState);
-    }, TRAVELER_CHECK_INTERVAL);
+    }, CHECK_INTERVAL);
 
     let cards = [{type: null}, {type: null}, {type: null}];
     this.props.setAllCards(cards);
@@ -74,8 +74,7 @@ class App extends Component {
       let storehouse = new Storehouse(localStorages.storehouse);
       localStoragePromises.push(this.props.setStorehouse(storehouse));
 
-      let familyDict = JSON.parse(localStorage.recordBook).familyDict;
-      let recordBook = new RecordBook(familyDict);
+      let recordBook = new RecordBook(JSON.parse(localStorage.recordBook));
       localStoragePromises.push(this.props.setRecordBook(recordBook));
 
       let cast = new Cast(localStorages.cast);
@@ -122,7 +121,7 @@ class App extends Component {
             null, seed.parentsIds, seed.genome);
           field.restoreSeedState();
         }
-      })
+      });
     });
 
     this.navLeftClick = this.navLeftClick.bind(this);
@@ -166,6 +165,20 @@ class App extends Component {
       };
     }
     return cardStyle;
+  }
+
+  checkLastDatetime() {
+    let diff = new Date(Date.now()).valueOf()
+      - this.props.recordBookState.lastDatetime;
+    console.log('diff is: ' + diff);
+    if (diff > (CHECK_INTERVAL * 10)) {
+      this.props.ageAllSeeds(this.props.fieldsState.fields, diff);
+      this.props.ageBreeding(this.props.storehouseState.storehouse, diff);
+      this.props.ageVisit(this.props.castState.cast, diff);
+      this.props.checkForVisitStart(this.props.castState.cast,
+        this.props.recordBookState.recordBook, this.props.autoIncrementState,
+        diff);
+    }
   }
 
   render() {

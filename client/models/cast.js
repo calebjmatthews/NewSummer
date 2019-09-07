@@ -1,6 +1,7 @@
 import Cache from './cache';
 import Traveler from './traveler';
-import { TRAVELER_DURATION, AGE_INTERVAL } from '../constants';
+import { TRAVELER_DURATION, AGE_INTERVAL, CHECK_INTERVAL }
+  from '../constants';
 
 export default class Cast extends Cache {
   constructor(membersOrCast, currentlyVisiting = null, saidHello = false,
@@ -21,12 +22,29 @@ export default class Cast extends Cache {
     }
   }
 
-  // By default, this function is run every second
-  checkForVisitStart() {
+  // Checks whether a given traveler has arrived in the last interval
+  //  (1 second by default). More common travelers are listed first in
+  //  the members array, so if both travelers's rolls are below their
+  //  "chance" probability, the less likely traveler visits. Can accept
+  //  a duration of time the game has been closed, and calculates an
+  //  adjusted (more likely) probability given this duration.
+  checkForVisitStart(duration = null) {
+    let rolls = 1;
+    if (duration != null) {
+      rolls += Math.floor(duration / CHECK_INTERVAL);
+    }
+
     let visitorName = false;
     if (this.currentlyVisiting == null) {
       this.members.map((member) => {
-        let chance = 1 / ((TRAVELER_DURATION / 1000) / member.frequency);
+        let chance = 1 / ((TRAVELER_DURATION / CHECK_INTERVAL)
+          / member.frequency);
+
+        if (rolls > 1) {
+          let iterChance = 1 - chance;
+          chance = 1 - (Math.pow(iterChance, rolls));
+        }
+
         let roll = Math.random();
         if (roll < chance) {
           visitorName = member.name;
@@ -48,9 +66,14 @@ export default class Cast extends Cache {
     this.visitRemaining = null;
   }
 
-  ageVisit() {
+  ageVisit(duration = null) {
     if (this.currentlyVisiting != null && this.saidHello == true) {
-      this.visitRemaining -= AGE_INTERVAL;
+      if (duration != null) {
+        this.visitRemaining -= duration;
+      }
+      else {
+        this.visitRemaining -= AGE_INTERVAL;
+      }
       if (this.visitRemaining <= 0) {
         this.endVisit();
       }

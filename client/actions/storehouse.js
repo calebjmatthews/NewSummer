@@ -52,8 +52,8 @@ export function startBreedingSeeds(storehouse, autoIncrement, recordBook,
   }
 }
 
-export function ageBreeding(storehouse) {
-  storehouse.ageBreeding();
+export function ageBreeding(storehouse, duration = null) {
+  storehouse.ageBreeding(duration);
   return {
     type: SET_STOREHOUSE,
     storehouse: storehouse
