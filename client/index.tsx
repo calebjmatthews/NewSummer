@@ -6,6 +6,9 @@ import configureStore from './store';
 const store = configureStore();
 import App from './components/app';
 
+require('./styles/root.css');
+require('./styles/card.css');
+
 // @ts-ignore
 const createStoreWithMiddleware = applyMiddleware(createStore);
 

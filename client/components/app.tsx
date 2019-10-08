@@ -8,10 +8,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.fieldIds.map((id) => {
-          return <FieldCard fieldId={id} />
-        })}
+      <div className="container-main">
+        <div className="game-card-container">
+          {this.fieldIds.map((id) => {
+            return <FieldCard fieldId={id} key={id} />
+          })}
+        </div>
       </div>
     );
   }
