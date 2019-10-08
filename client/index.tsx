@@ -2,22 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter } from 'react-router-dom';
 import configureStore from './store';
 const store = configureStore();
-import configureFontawesome from './functions/fontawesome';
-configureFontawesome();
+import App from './components/app';
 
-import App from './containers/app';
-import reducers from './reducers';
-
+// @ts-ignore
 const createStoreWithMiddleware = applyMiddleware(createStore);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </Provider>
   , document.getElementById('root')
 );

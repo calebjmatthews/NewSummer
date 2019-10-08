@@ -1,31 +1,45 @@
-const path = require('path');
-
 module.exports = {
   entry: [
-    './client/index.js'
+    './client/index.tsx'
   ],
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: '/',
-    filename: 'bundle.js'
+
+  mode: "development",
+
+  watch: true,
+
+  devtool: "source-map",
+
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"]
   },
-  mode: 'development',
+
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: [
-          path.resolve(__dirname, "node_modules"),
-          path.resolve(__dirname, "server"),
-          path.resolve(__dirname, "ignore")
-        ],
-        use: ['babel-loader']
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {loader: "ts-loader"}
+        ]
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader"
       }
     ]
   },
-  resolve: {
-    modules: [
-      "node_modules"
-    ],
-  }
+
+  // When importing a module whose path matches one of the following, just
+  // assume a corresponding global variable exists and use that instead.
+  // This is important because it allows us to avoid bundling all of our
+  // dependencies, which allows browsers to cache those libraries between builds.
+  // externals: {
+  //   "react": "React",
+  //   "react-dom": "ReactDOM"
+  // }
 };
