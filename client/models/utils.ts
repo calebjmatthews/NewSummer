@@ -60,6 +60,30 @@ class Utils {
     }
     return '';
   }
+
+  // Returns an object with the same properties, as long as none of the properties
+  //  are themselves an object
+  shallowClone(anObj: any): any {
+    let newObj: any = {};
+    Object.keys(anObj).map((prop) => {
+      if (!Array.isArray(anObj[prop])) {
+        newObj[prop] = anObj[prop];
+      }
+      else {
+        newObj[prop] = anObj[prop].slice();
+      }
+    });
+    return newObj;
+  }
+
+  formatMoney(dollars: number): string {
+    let sign = '';
+    if (dollars < 0) { sign = '-'; }
+    if (dollars < 100) {
+      return (sign + '$' + Math.abs(dollars).toFixed(2));
+    }
+    return (sign + '$' + Math.round(Math.abs(dollars)).toString());
+  }
 }
 
 export let utils = new Utils();
