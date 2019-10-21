@@ -8,6 +8,7 @@ import App from './components/app';
 
 require('./styles/root.css');
 require('./styles/card.css');
+require('./styles/modal.css');
 
 // @ts-ignore
 const createStoreWithMiddleware = applyMiddleware(createStore);
