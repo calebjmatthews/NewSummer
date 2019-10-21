@@ -1,20 +1,75 @@
-export default class Seed {
+import Family from './family';
+import Trait from './trait';
+import TraitTotal from './trait_total';
+import DefinitionalTrait from './definitional_trait';
+import Cultivar from './cultivar';
+import Gene from './gene';
+import Stat from './stat';
+import Adjective from './adjective';
+import SeedDescription from './seed_description';
+import { utils } from './utils';
+import { Comparitors } from './enums/comparitors';
+
+export default class Seed implements SeedInterface {
+  id: number;
+  familyName: string;
+  methodObtained: string;
+  dateObtained: Date;
+  parentsIds: number[];
+  genome: Gene[];
+
+  traitTotalMap: Map<string, TraitTotal>;
+  cultivarName: string;
+  statMap: Map<string, Stat>;
+  adjectives: Adjective[];
+  name: string;
+  idealValue: number;
+  descriptions: SeedDescription[];
+
   constructor(seed: SeedInterface) {
     Object.assign(this, seed);
   }
 
-  genomeFromCultivar(familyName, cultivarName, variation) {
-    let family = families.getByProperty('nameScientific', familyName);
-    let cultivar = family.cultivars.getByProperty('name', cultivarName);
+  buildFromCultivar(seed: SeedInterface, families: Map<string, Family>): Seed {
+    if (seed.genome == null) {
+      this.genome = this.genomeFromCultivar(seed.familyName, seed.cultivarName,
+        0, families);
+    }
+
+    this.traitTotalMap = this.determineTraitsFromGenome(this.genome, families);
+    this.cultivarName = this.determineCultivarNameFromGenome(this.genome, families);
+
+    this.statMap = this.determineStatsFromTraits(this.traitTotalMap, families);
+    this.adjectives = this.determineAdjectivesFromStats(this.statMap, this.cultivarName,
+      families);
+    this.statMap = this.applyCultivarToStats(this.statMap, this.cultivarName, families);
+
+    this.name = this.adjectives[0].word + ' ' + this.cultivarName;
+
+    this.idealValue = this.determineIdealValueFromStats(this.statMap, families);
+    this.descriptions = this.describeFromTraitsAndStats(this.traitTotalMap,
+      this.statMap, families);
+    return this;
+  }
+
+  genomeFromCultivar(familyName: string, cultivarName: string, variation: number,
+    families: Map<string, Family>): Gene[] {
+    let family = families.get(familyName);
+    let cultivar: Cultivar = null;
+    family.cultivars.map((aCultivar) => {
+      if (aCultivar.name == cultivarName) {
+        cultivar = aCultivar;
+      }
+    });
     let genome = [];
-    family.traits.getAll().map((trait) => {
+    family.traitsMap.forEach((trait) => {
       let minAndMax = getTraitMinAndMax(cultivar, trait);
-      let alleleIndexes = [];
+      let alleleIndexes: number[] = [];
       for (let alleleIndex = 0; alleleIndex < (trait.loci*2); alleleIndex++) {
         alleleIndexes.push(alleleIndex);
       }
-      alleleIndexes = shuffle(alleleIndexes);
-      let alleles = [];
+      alleleIndexes = utils.shuffle(alleleIndexes);
+      let alleles: boolean[] = [];
       for (let index = 0; index < minAndMax.min; index++) {
         alleles[alleleIndexes[index]] = true;
       }
@@ -28,44 +83,42 @@ export default class Seed {
         else { alleles[alleleIndexes[index]] = false; }
       }
       for (let index = 0; index < (trait.loci*2); index+=2) {
-        genome.push(new Gene(trait.name, trait.completeDominance, index,
-          [alleles[index], alleles[index+1]]));
+        genome.push(new Gene({traitName: trait.name,
+          completeDominance: trait.completeDominance,  locusIndex: index,
+          genotype: [alleles[index], alleles[index+1]]}));
       }
     });
-    genome = variateGenome(genome, cultivar, variation);
-    this.genome = genome;
+    return variateGenome(genome, cultivar, variation);
 
-    function getTraitMinAndMax(cultivar, trait) {
-      let matchingTrait = null;
-      let traitsToUse = [];
+    function getTraitMinAndMax(cultivar: Cultivar, trait: Trait) {
+      let matchingTrait: DefinitionalTrait = null;
+      let traitsToUse: DefinitionalTrait[] = [];
       if (cultivar.traitsForCreation != null) {
         traitsToUse = cultivar.traitsForCreation;
       }
       else if (cultivar.definitionalTraits != null) {
         traitsToUse = cultivar.definitionalTraits;
       }
-      for (let index = 0; index < traitsToUse.length;
-        index++) {
-        let traitDef = traitsToUse[index];
-        if (traitDef.trait == trait.name) {
+      traitsToUse.map((traitDef) => {
+        if (traitDef.traitName == trait.name) {
           matchingTrait = traitDef;
         }
-      }
+      });
 
       let min = 0;
       let max = (trait.loci*2);
       if (matchingTrait != null) {
-        if (matchingTrait.comparitor == 'equal to') {
+        if (matchingTrait.comparitor == Comparitors.EQUAL_TO) {
           min = matchingTrait.values[0];
           max = matchingTrait.values[0];
         }
-        else if (matchingTrait.comparitor == 'less than') {
+        else if (matchingTrait.comparitor == Comparitors.LESS_THAN) {
           max = (matchingTrait.values[0] - 1);
         }
-        else if (matchingTrait.comparitor == 'greater than') {
+        else if (matchingTrait.comparitor == Comparitors.GREATER_THAN) {
           min = (matchingTrait.values[0] + 1);
         }
-        else if (matchingTrait.comparitor == 'between') {
+        else if (matchingTrait.comparitor == Comparitors.BETWEEN) {
           min = matchingTrait.values[0];
           max = matchingTrait.values[1];
         }
@@ -73,7 +126,8 @@ export default class Seed {
       return {min: min, max: max};
     }
 
-    function variateGenome(genome, cultivar, variation) {
+    function variateGenome(genome: Gene[], cultivar: Cultivar, variation: number):
+      Gene[] {
       for (let loop = 0; loop < variation; loop++) {
         let index = Math.floor(Math.random() * genome.length);
         let alleles = [(Math.random() > 0.5), (Math.random() > 0.5)];
@@ -83,59 +137,69 @@ export default class Seed {
     }
   }
 
-  determineTraitsFromGenome(genome) {
-    const family = families.getByProperty('nameScientific', this.familyName);
+  determineTraitsFromGenome(genome: Gene[], families: Map<string, Family>):
+    Map<string, TraitTotal> {
+    const family = families.get(this.familyName);
     return family.determineTraitsFromGenome(genome);
   }
-  determineCultivarNameFromGenome(genome) {
-    const family = families.getByProperty('nameScientific', this.familyName);
+  determineCultivarNameFromGenome(genome: Gene[], families: Map<string, Family>):
+    string {
+    const family = families.get(this.familyName);
     return family.determineCultivarNameFromGenome(genome);
   }
-  determineStatsFromTraits(traitTotalDict) {
-    const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineStatsFromTraits(traitTotalDict);
+  determineStatsFromTraits(traitTotalMap: Map<string, TraitTotal>,
+    families: Map<string, Family>): Map<string, Stat> {
+    const family = families.get(this.familyName);
+    return family.determineStatsFromTraits(traitTotalMap);
   }
-  determineAdjectivesFromStats(stats, cultivarName = this.cultivarName) {
-    const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineAdjectivesFromStats(stats, cultivarName);
+  determineAdjectivesFromStats(statMap: Map<string, Stat>,
+    cultivarName = this.cultivarName, families: Map<string, Family>): Adjective[] {
+    const family = families.get(this.familyName);
+    return family.determineAdjectivesFromStats(statMap, cultivarName);
   }
-  applyCultivarToStats(stats, cultivarName = this.cultivarName) {
-    const family = families.getByProperty('nameScientific', this.familyName);
-    return family.applyCultivarToStats(stats, cultivarName);
+  applyCultivarToStats(statMap: Map<string, Stat>, cultivarName = this.cultivarName,
+    families: Map<string, Family>): Map<string, Stat> {
+    const family = families.get(this.familyName);
+    return family.applyCultivarToStats(statMap, cultivarName);
   }
-  determineIdealValueFromStats(stats) {
-    const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineIdealValueFromStats(stats);
+  determineIdealValueFromStats(statMap: Map<string, Stat>,
+    families: Map<string, Family>): number {
+    const family = families.get(this.familyName);
+    return family.determineIdealValueFromStats(statMap);
   }
-  determineRealValue(stats, temperature, moisture, fertility, pests,
-    disease) {
+  determineRealValue(statMap: Map<string, Stat>, temperature: number, moisture: number,
+    fertility: number, pests: number, disease: number, families: Map<string, Family>) {
     let cultivarName = this.cultivarName;
-    const family = families.getByProperty('nameScientific', this.familyName);
-    return family.determineRealValue(stats, temperature, moisture, fertility,
+    const family = families.get(this.familyName);
+    return family.determineRealValue(statMap, temperature, moisture, fertility,
       pests, disease);
   }
-  describeFromTraitsAndStats(traitTotalDict, stats) {
-    const family = families.getByProperty('nameScientific', this.familyName);
-    return family.describeFromTraitsAndStats(traitTotalDict, stats);
+  describeFromTraitsAndStats(traitTotalMap: Map<string, TraitTotal>,
+    statMap: Map<string, Stat>, families: Map<string, Family>): SeedDescription[] {
+    const family = families.get(this.familyName);
+    return family.describeFromTraitsAndStats(traitTotalMap, statMap);
   }
 
-  breedWith(otherParent) {
+  breedWith(otherParent: Seed): Seed {
     let newGenome = [];
-    this.genome.map((gene) => {
+    this.genome.map((gene: Gene) => {
       const otherGene =
         otherParent.getGeneByNameAndLocus(gene.traitName, gene.locusIndex);
-      const newGenotype = [gene.genotype[Math.floor(Math.random()*2)],
+      const newGenotype: boolean[] = [gene.genotype[Math.floor(Math.random()*2)],
         otherGene.genotype[Math.floor(Math.random()*2)]];
-      const newGene = new Gene(gene.traitName, gene.completeDominance,
-        gene.locusIndex, newGenotype);
+      const newGene = new Gene({traitName: gene.traitName,
+        completeDominance: gene.completeDominance, locusIndex: gene.locusIndex,
+        genotype: newGenotype});
       newGenome.push(newGene);
-    })
+    });
 
-    const newSeed = new Seed(null, this.familyName, null, 'Bred',
-      new Date(Date.now()), null, [this.id, otherParent.id], newGenome);
+    const newSeed = new Seed({id: null, familyName: this.familyName,
+      methodObtained:'Bred', dateObtained: new Date(Date.now()),
+      parentsIds: [this.id, otherParent.id], genome: newGenome});
     return newSeed;
   }
-  getGeneByNameAndLocus(traitName, locusIndex) {
+
+  getGeneByNameAndLocus(traitName: string, locusIndex: number): Gene {
     let matchingGene = null;
     this.genome.map((gene) => {
       if (gene.traitName == traitName && gene.locusIndex == locusIndex) {
@@ -144,9 +208,9 @@ export default class Seed {
     })
     return matchingGene;
   }
-  debugGenome(genome) {
+  debugGenome(genome: Gene[]): void {
     let genomeTotalDict = {};
-    genome.map((gene) => {
+    genome.map((gene: Gene) => {
       if (genomeTotalDict[gene.traitName] == undefined) {
         genomeTotalDict[gene.traitName] = 0;
       }
@@ -165,13 +229,13 @@ interface SeedInterface {
   methodObtained: string;
   dateObtained: Date;
   parentsIds: number[];
-  genome: any;
+  genome: Gene[];
 
-  traitTotalDict: any;
-  cultivarName: string;
-  stats: any;
-  adjectives: any;
-  name: string;
-  idealValue: number;
-  descriptions: string[];
+  traitTotalMap?: Map<string, TraitTotal>;
+  cultivarName?: string;
+  statMap?: Map<string, Stat>;
+  adjectives?: Adjective[];
+  name?: string;
+  idealValue?: number;
+  descriptions?: SeedDescription[];
 }

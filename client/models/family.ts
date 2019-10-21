@@ -15,7 +15,7 @@ import { Comparitors } from './enums/comparitors';
 export default class Family implements FamilyInterface {
   nameScientific: string;
   nameCommon: string;
-  traits: Map<string, Trait>;
+  traitsMap: Map<string, Trait>;
   stats: Stat[];
   cultivars: Cultivar[];
 
@@ -42,7 +42,7 @@ export default class Family implements FamilyInterface {
         }
       }
 
-      const matchingTrait = this.traits.get(gene.traitName);
+      const matchingTrait = this.traitsMap.get(gene.traitName);
       if (traitTotalMap.get(matchingTrait.name) != undefined) {
         traitTotalMap.get(matchingTrait.name).addGenotypeCount(genotypeCount);
       }
@@ -75,7 +75,7 @@ export default class Family implements FamilyInterface {
     })
 
     for (let traitName of traitTotalMap.keys()) {
-      const matchingTrait = this.traits.get(traitName);
+      const matchingTrait = this.traitsMap.get(traitName);
       const traitTotal = traitTotalMap.get(traitName).numerator;
       for (let index = 0; index < matchingTrait.statNames.length; index++) {
         for (let iter = 0; iter < traitTotal; iter++) {
@@ -160,9 +160,9 @@ export default class Family implements FamilyInterface {
     return statMap;
   }
 
-  determineIdealValueFromStats(stats: Stat): number {
-    let value = (stats[StatNames.PLANT_QUALITY].value *
-      stats[StatNames.SEED_QUANTITY].value);
+  determineIdealValueFromStats(statMap: Map<string, Stat>): number {
+    let value = (statMap.get(StatNames.PLANT_QUALITY).value *
+      statMap.get(StatNames.SEED_QUANTITY).value);
     return value;
   }
 
@@ -661,7 +661,7 @@ function calcBetweenExtent(stat: Stat, definition: StatDefinition) {
 interface FamilyInterface {
   nameScientific: string;
   nameCommon: string;
-  traits: Map<string, Trait>;
+  traitsMap: Map<string, Trait>;
   stats: Stat[];
   cultivars: Cultivar[];
 }
