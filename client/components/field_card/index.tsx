@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Field from '../../models/field';
+import CardState from '../../models/card_state';
+import { CardTypes } from '../../models/enums/card_types';
+
+import StateDisplayFieldCard from './state_display';
 
 class FieldCard extends Component {
   props: FieldCardProps;
@@ -12,38 +16,31 @@ class FieldCard extends Component {
 
   render() {
     let field = this.props.fields.get(this.props.fieldId);
+    let card = this.props.cardState.cards[this.props.spot];
 
-    return (
-      <div className="game-card field-card">
-        <div className="field-card-body">
-          <div>{field.seedsNameLabel}</div>
-          <div>{this.renderAgeLabel(field)}</div>
-        </div>
-      </div>
-    );
-  }
+    if (card.type == CardTypes.SEED_DETAIL) {
 
-  renderAgeLabel(field: Field) {
-    if (field.seedsAgeLabel.length > 0) {
-      return (
-        <div>
-          {field.seedsAgeLabel}
-        </div>
-      );
+    }
+    else if (card.type == CardTypes.SEED_PLANTING) {
+
     }
     else {
-      return (null);
+      return (
+        <StateDisplayFieldCard fieldId={this.props.fieldId} spot={this.props.spot} />
+      );
     }
   }
 }
 
 interface FieldCardProps {
   fields: Map<number, Field>;
+  cardState: CardState;
   fieldId: number;
+  spot: number;
 }
 
-function mapStateToProps({ fields }) {
-  return { fields }
+function mapStateToProps({ fields, cardState }) {
+  return { fields, cardState }
 }
 
 export default connect(mapStateToProps)(FieldCard);
