@@ -398,6 +398,12 @@ Breeding selection:
 		- Show confirmation screen with seed descriptions for both
 		- Set storehouse seed breeding props
 
+Modal container
+~~~~~~~~~~~~~~~
+Has a type, which can display different styles of UI
+Exists as an array, therefore other arrays can be pending while one is active
+The active popup can be dismissed, removing it as [0] in the array
+
 Minor display and gameplay polish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 X Breeding time dependent on growth time of babies
