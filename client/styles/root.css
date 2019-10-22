@@ -19,6 +19,11 @@ button:disabled {
   opacity: 0.5;
 }
 
+.button-dark {
+  border-color: #000;
+  color: #000;
+}
+
 .main-container {
   position: fixed;
   display: flex;

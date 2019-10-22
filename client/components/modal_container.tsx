@@ -38,7 +38,10 @@ class ModalContainer extends Component {
                   <p key={index}>{message}</p>
                 );
               })}
-              <button type="button" onClick={() => this.okClick()}>Ok</button>
+              <button type="button" className="button-dark"
+                onClick={() => this.okClick()}>
+                Ok
+              </button>
             </div>
           </div>
           <div className="modal-background" onClick={() => this.backgroundClick()}></div>
