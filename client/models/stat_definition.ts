@@ -3,10 +3,10 @@ export default class StatDefinition implements StatDefinitionInterface {
   values: number[];
   adjective: string;
   bonus: number;
-  description: string;
-  iconType: string;
-  icon: string;
-  iconStyle: string;
+  description?: string;
+  iconType?: string;
+  icon?: string;
+  iconStyle?: string;
 
   constructor(statDefinition: StatDefinitionInterface) {
     Object.assign(this, statDefinition);
@@ -18,8 +18,8 @@ interface StatDefinitionInterface {
   values: number[];
   adjective: string;
   bonus: number;
-  description: string;
-  iconType: string;
-  icon: string;
-  iconStyle: string;
+  description?: string;
+  iconType?: string;
+  icon?: string;
+  iconStyle?: string;
 }

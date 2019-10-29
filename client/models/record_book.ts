@@ -29,6 +29,10 @@ export default class RecordBook implements RecordBookInterface {
     });
     return cultivarNames;
   }
+
+  recordSeed(seed: Seed) {
+    this.seedMap.set(seed.id, seed);
+  }
 }
 
 interface RecordBookInterface {

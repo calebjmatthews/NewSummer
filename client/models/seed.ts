@@ -16,23 +16,23 @@ export default class Seed implements SeedInterface {
   methodObtained: string;
   dateObtained: Date;
   parentsIds: number[];
+  cultivarName: string;
   genome: Gene[];
 
   traitTotalMap: Map<string, TraitTotal>;
-  cultivarName: string;
   statMap: Map<string, Stat>;
   adjectives: Adjective[];
   name: string;
   idealValue: number;
   descriptions: SeedDescription[];
 
-  constructor(seed: SeedInterface) {
+  constructor(seed: SeedInterface = null) {
     Object.assign(this, seed);
   }
 
-  buildFromCultivar(seed: SeedInterface, families: Map<string, Family>): Seed {
-    if (seed.genome == null) {
-      this.genome = this.genomeFromCultivar(seed.familyName, seed.cultivarName,
+  build(families: Map<string, Family>): Seed {
+    if (this.genome == undefined) {
+      this.genome = this.genomeFromCultivar(this.familyName, this.cultivarName,
         0, families);
     }
 
@@ -229,10 +229,10 @@ interface SeedInterface {
   methodObtained: string;
   dateObtained: Date;
   parentsIds: number[];
-  genome: Gene[];
+  cultivarName?: string;
+  genome?: Gene[];
 
   traitTotalMap?: Map<string, TraitTotal>;
-  cultivarName?: string;
   statMap?: Map<string, Stat>;
   adjectives?: Adjective[];
   name?: string;

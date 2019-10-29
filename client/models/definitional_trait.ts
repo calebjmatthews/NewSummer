@@ -1,7 +1,7 @@
 export default class DefinitionalTrait implements DefinitionalTraitInterface {
   traitName: string;
   comparitor: string;
-  values: number;
+  values: number[];
 
   constructor(definitionalTrait: DefinitionalTraitInterface) {
     Object.assign(this, definitionalTrait);
@@ -11,5 +11,5 @@ export default class DefinitionalTrait implements DefinitionalTraitInterface {
 interface DefinitionalTraitInterface {
   traitName: string;
   comparitor: string;
-  values: number;
+  values: number[];
 }

@@ -68,7 +68,7 @@ export default class Family implements FamilyInterface {
   }
 
   determineStatsFromTraits(traitTotalMap: Map<string, TraitTotal>): Map<string, Stat> {
-    let statMap: Map<string, Stat>
+    let statMap: Map<string, Stat> = new Map();
 
     this.stats.map((stat) => {
       statMap.set(stat.name, utils.shallowClone(stat));

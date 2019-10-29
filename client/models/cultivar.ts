@@ -50,5 +50,5 @@ interface CultivarInterface {
   name: string;
   definitionalTraits: DefinitionalTrait[];
   bonus: Trait;
-  traitsForCreation: DefinitionalTrait[];
+  traitsForCreation?: DefinitionalTrait[];
 }
