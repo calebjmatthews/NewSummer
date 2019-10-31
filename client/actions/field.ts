@@ -21,3 +21,11 @@ export function plantSeed(field: Field, seed: Seed, seedMap: Map<number, Seed>) 
   field.plantSeed(seed, seedMap);
   return setField(field);
 }
+
+export function ageAllSeeds(fields: Map<number, Field>, duration = null, 
+  seedMap: Map<number, Seed>) {
+  fields.forEach((field) => {
+    field.ageSeed(duration, seedMap);
+  })
+	return setFields(fields);
+};

@@ -20,8 +20,11 @@ export default function
     action = null) {
 	switch(action.type) {
     case SET_FIELDS:
-      return Object.assign(
-        {}, fields, action.fields);
+      let newFields: Map<number, Field> = new Map();
+      action.fields.forEach((field: Field) => {
+        newFields.set(field.id, field);
+      });
+      return newFields;
 		default:
 			return fields;
 	}
