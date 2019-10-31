@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fontAwesome } from '../../instances/font_awesome';
 
 import Seed from '../../models/seed/seed';
 import { families } from '../../instances/families';
@@ -51,7 +52,7 @@ class SeedDescription extends Component {
               return (
                 <div key={description.title} className="seed-icon"
                   style={transStyle}>
-                  {description.icon}
+                  <FontAwesomeIcon icon={fontAwesome.get(description.icon)} />
                 </div>
               );
             })}
