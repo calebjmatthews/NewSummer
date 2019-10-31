@@ -1,5 +1,5 @@
 import Field from '../models/field';
-import Seed from '../models/seed';
+import Seed from '../models/seed/seed';
 
 export const SET_FIELDS = 'SET_FIELDS';
 export function setFields(fields: Map<number, Field>) {

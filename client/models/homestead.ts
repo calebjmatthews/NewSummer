@@ -1,4 +1,4 @@
-import Seed from './seed';
+import Seed from './seed/seed';
 import RecordBook from './record_book';
 import { utils } from './utils';
 import { AGE_INTERVAL } from '../constants';

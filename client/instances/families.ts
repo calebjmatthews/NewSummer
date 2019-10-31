@@ -1,9 +1,9 @@
-import Family from '../models/family';
-import Stat from '../models/stat';
-import StatDefinition from '../models/stat_definition';
-import Seed from '../models/seed';
-import Trait from '../models/trait';
-import Cultivar from '../models/cultivar';
+import Family from '../models/seed/family';
+import Stat from '../models/seed/stat';
+import StatDefinition from '../models/seed/stat_definition';
+import Seed from '../models/seed/seed';
+import Trait from '../models/seed/trait';
+import Cultivar from '../models/seed/cultivar';
 import { TraitNames } from '../models/enums/trait_names';
 import { StatNames} from '../models/enums/stat_names';
 import { CultivarNames } from '../models/enums/cultivar_names';

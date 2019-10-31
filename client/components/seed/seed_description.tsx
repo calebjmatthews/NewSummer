@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import Seed from '../../models/seed';
+import Seed from '../../models/seed/seed';
 import { families } from '../../instances/families';
 import { utils } from '../../models/utils';
 import { StatNames } from '../../models/enums/stat_names';

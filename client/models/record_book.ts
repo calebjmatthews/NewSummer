@@ -1,4 +1,4 @@
-import Seed from './seed';
+import Seed from './seed/seed';
 
 export default class RecordBook implements RecordBookInterface {
   seedMap: Map<number, Seed>;

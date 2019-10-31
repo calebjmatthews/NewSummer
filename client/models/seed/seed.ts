@@ -7,8 +7,8 @@ import Gene from './gene';
 import Stat from './stat';
 import Adjective from './adjective';
 import SeedDescription from './seed_description';
-import { utils } from './utils';
-import { Comparitors } from './enums/comparitors';
+import { utils } from '../utils';
+import { Comparitors } from '../enums/comparitors';
 
 export default class Seed implements SeedInterface {
   id: number;

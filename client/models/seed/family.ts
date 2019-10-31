@@ -9,11 +9,11 @@ import SeedDescription from './seed_description';
 import RealValueReturn from './real_value_return';
 import MultiplierDescriptionSet from './multiplier_description_set';
 import MultiplierDescription from './multiplier_description';
-import { utils } from './utils';
+import { utils } from '../utils';
 
-import { TraitNames } from './enums/trait_names';
-import { StatNames } from './enums/stat_names';
-import { Comparitors } from './enums/comparitors';
+import { TraitNames } from '../enums/trait_names';
+import { StatNames } from '../enums/stat_names';
+import { Comparitors } from '../enums/comparitors';
 
 export default class Family implements FamilyInterface {
   nameScientific: string;

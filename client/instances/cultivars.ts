@@ -1,6 +1,6 @@
-import Cultivar from '../models/cultivar';
-import Trait from '../models/trait';
-import DefinitionalTrait from '../models/definitional_trait';
+import Cultivar from '../models/seed/cultivar';
+import Trait from '../models/seed/trait';
+import DefinitionalTrait from '../models/seed/definitional_trait';
 import { TraitNames } from '../models/enums/trait_names';
 const TN = TraitNames;
 import { StatNames } from '../models/enums/stat_names';

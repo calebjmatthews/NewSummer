@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Field from '../../models/field';
-import Seed from '../../models/seed';
+import Seed from '../../models/seed/seed';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';

@@ -1,9 +1,9 @@
-import Seed from './seed';
-import Family from './family';
+import Seed from './seed/seed';
+import Family from './seed/family';
+import RealValueReturn from './seed/real_value_return';
 import { StatNames } from './enums/stat_names';
 import { utils } from './utils';
 import { AGE_INTERVAL } from '../constants';
-import RealValueReturn from './real_value_return';
 
 export default class Field implements FieldInterface {
   id: number;

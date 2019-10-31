@@ -1,4 +1,4 @@
-import Trait from '../models/trait';
+import Trait from '../models/seed/trait';
 import { TraitNames } from '../models/enums/trait_names';
 import { StatNames} from '../models/enums/stat_names';
 

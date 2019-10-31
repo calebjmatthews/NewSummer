@@ -1,4 +1,4 @@
-import Seed from '../models/seed';
+import Seed from '../models/seed/seed';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
 import { recordSeed } from './record_book';

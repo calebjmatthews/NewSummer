@@ -1,7 +1,7 @@
 import DefinitionalTrait from './definitional_trait';
 import Gene from './gene';
 import Trait from './trait';
-import { Comparitors } from './enums/comparitors';
+import { Comparitors } from '../enums/comparitors';
 
 export default class Cultivar implements CultivarInterface {
   name: string;

@@ -6,7 +6,7 @@ import { addModal } from '../actions/modal';
 import { addAndRecordSeed } from '../actions/homestead';
 
 import Modal from '../models/modal';
-import Seed from '../models/seed';
+import Seed from '../models/seed/seed';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
 import { families } from '../instances/families';
