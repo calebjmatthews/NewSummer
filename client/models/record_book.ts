@@ -14,10 +14,6 @@ export default class RecordBook implements RecordBookInterface {
     }
   }
 
-  getSeed(seedId: number) {
-    return this.seedMap.get(seedId);
-  }
-
   getCultivarNames() {
     let cultivarNames = [];
     let cultivarNameInArray = {};

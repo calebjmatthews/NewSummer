@@ -32,7 +32,7 @@ export default function
         }),
         cards: cardState.cards.map((cCard, index) => {
           if (index == action.spot) {
-            return new Card({spot: action.spot, type: action.type});
+            return new Card(action.card);
           }
           else {
             return cCard;

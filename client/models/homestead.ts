@@ -29,8 +29,8 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  isCultivarFull(cultivarName: string, recordBook: RecordBook) {
-    let count = this.getCultivarCount(cultivarName, recordBook);
+  isCultivarFull(cultivarName: string, seedMap: Map<number, Seed>): boolean {
+    let count = this.getCultivarCount(cultivarName, seedMap);
     if (count >= this.maxSeeds) {
       return true;
     }
@@ -39,10 +39,10 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  getCultivarCount(cultivarName: string, recordBook: RecordBook) {
+  getCultivarCount(cultivarName: string, seedMap: Map<number, Seed>): number {
     let count = 0;
     this.seedIds.map((seedId) => {
-      let seed = recordBook.getSeed(seedId);
+      let seed = seedMap.get(seedId);
       if (seed.cultivarName == cultivarName)  {
         count++;
       }
@@ -50,10 +50,11 @@ export default class Homestead implements HomesteadInterface {
     return count;
   }
 
-  gainDollars(dollarsGained: number) {
+  gainDollars(dollarsGained: number): void {
     this.dollars = this.dollars + dollarsGained;
   }
-  spendDollarsIfPossible(dollarsSpent: number) {
+
+  spendDollarsIfPossible(dollarsSpent: number): boolean {
     if (this.dollars <= dollarsSpent) {
       return false;
     }
@@ -63,22 +64,22 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  addSeed(seed: Seed) {
+  addSeed(seed: Seed): void {
     this.seedIds.push(seed.id);
   }
 
-  removeSeed(seed: Seed) {
+  removeSeed(seed: Seed): number[] {
     return this.seedIds.filter((seedId) => {
       if (seedId == seed.id) { return false; }
       else { return true; }
     });
   }
 
-  breedSeeds(seedA: Seed, seedB: Seed) {
+  breedSeeds(seedA: Seed, seedB: Seed): Seed {
     return seedA.breedWith(seedB);
   }
 
-  ageBreeding(duration: number = null) {
+  ageBreeding(duration: number = null): void {
     if (this.seedsBred.length > 0 && this.breedingTimeRemaining > 0) {
       if (duration != null) {
         this.breedingTimeRemaining -= duration;
@@ -94,13 +95,32 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  getBreedingAgeLabel() {
+  getBreedingAgeLabel(): string {
     if (this.seedsBred.length > 0) {
       return (utils.formatDuration(this.breedingTimeRemaining * 1000));
     }
     else {
       return '';
     }
+  }
+
+  getAllSeeds(seedMap: Map<number, Seed>): Seed[] {
+    let seeds: Seed[] = []
+    this.seedIds.map((seedId) => {
+      seeds.push(seedMap.get(seedId));
+    });
+    return seeds;
+  }
+
+  getAllMatchingSeeds(cultivarName: string, seedMap: Map<number, Seed>): Seed[] {
+    let matchingSeeds: Seed[] = []
+    this.seedIds.map((seedId) => {
+      let seed = seedMap.get(seedId);
+      if (seed.cultivarName == cultivarName) {
+        matchingSeeds.push(seed);
+      }
+    });
+    return matchingSeeds;
   }
 }
 

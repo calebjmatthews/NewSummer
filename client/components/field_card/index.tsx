@@ -5,6 +5,7 @@ import Field from '../../models/field';
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
 
+import PlantingFieldCard from './planting';
 import StateDisplayFieldCard from './state_display';
 
 class FieldCard extends Component {
@@ -22,7 +23,9 @@ class FieldCard extends Component {
 
     }
     else if (card.type == CardTypes.SEED_PLANTING) {
-
+      return (
+        <PlantingFieldCard fieldId={this.props.fieldId} spot={this.props.spot} />
+      );
     }
     else {
       return (
@@ -35,6 +38,7 @@ class FieldCard extends Component {
 interface FieldCardProps {
   fields: Map<number, Field>;
   cardState: CardState;
+
   fieldId: number;
   spot: number;
 }

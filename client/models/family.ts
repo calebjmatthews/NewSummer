@@ -6,6 +6,9 @@ import Cultivar from './cultivar';
 import Adjective from './adjective';
 import StatDefinition from './stat_definition';
 import SeedDescription from './seed_description';
+import RealValueReturn from './real_value_return';
+import MultiplierDescriptionSet from './multiplier_description_set';
+import MultiplierDescription from './multiplier_description';
 import { utils } from './utils';
 
 import { TraitNames } from './enums/trait_names';
@@ -249,8 +252,8 @@ export default class Family implements FamilyInterface {
     }
 
     function describeMultipliers(baseValue: number, multipliers: StatFactor,
-      statCats: StatFactor): MultiplierDescriptions {
-      let descriptions: MultiplierDescriptions = new MultiplierDescriptions();
+      statCats: StatFactor): MultiplierDescriptionSet {
+      let descriptions: MultiplierDescriptionSet = new MultiplierDescriptionSet();
       let climateProps = ['temperature', 'moisture', 'fertility', 'pests',
         'disease'];
       climateProps.map((prop) => {
@@ -316,7 +319,7 @@ export default class Family implements FamilyInterface {
       return descriptions;
     }
 
-    function commentOnDescriptions(descriptions: MultiplierDescriptions): string {
+    function commentOnDescriptions(descriptions: MultiplierDescriptionSet): string {
       if (Object.keys(descriptions).length == 0) {
         return 'Perfect!';
       }
@@ -666,38 +669,12 @@ interface FamilyInterface {
   cultivars: Cultivar[];
 }
 
-class RealValueReturn {
-  baseValue: number;
-  value: number;
-  descriptions: MultiplierDescriptions;
-  comment: string;
-
-  constructor(realValueReturn: RealValueReturn) {
-    Object.assign(this, realValueReturn);
-  }
-}
-
 class StatFactor {
   temperature: number;
   moisture: number;
   fertility: number;
   pests: number;
   disease: number;
-}
-
-class MultiplierDescriptions {
-  temperature: MultiplierDescription;
-  moisture: MultiplierDescription;
-  fertility: MultiplierDescription;
-  pests: MultiplierDescription;
-  disease: MultiplierDescription;
-}
-
-class MultiplierDescription {
-  sign: string;
-  value: string;
-  result: string;
-  message: string;
 }
 
 class FlavorTrait {

@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Field from '../../models/field';
+import { CardTypes } from '../../models/enums/card_types';
+
+import { setCard } from '../../actions/card';
 
 class StateDisplayFieldCard extends Component {
   props: FieldCardProps;
@@ -16,7 +19,19 @@ class StateDisplayFieldCard extends Component {
   }
 
   fieldCardClick() {
-
+    let field = this.props.fields.get(this.props.fieldId);
+    if (field.seedPlantedId == null) {
+      this.props.setCard({type: CardTypes.SEED_PLANTING}, this.props.spot);
+    }
+    // else {
+    //   if (this.props.field.seedIsMature() == true) {
+    //     this.props.harvestSeed(
+    //       this.props.fieldsState.fields,
+    //       this.props.storehouseState.storehouse,
+    //       this.props.field.id
+    //     );
+    //   }
+    // }
   }
 
   render() {
@@ -36,15 +51,18 @@ class StateDisplayFieldCard extends Component {
 interface FieldCardProps {
   fields: Map<number, Field>;
   fieldId: number;
+  spot: number;
+
+  setCard: Function;
 }
 
 function mapStateToProps({ fields }) {
   return { fields }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-
+    setCard
   }, dispatch)
 }
 

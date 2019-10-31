@@ -1,6 +1,7 @@
 export default class Card implements CardInterface {
   spot: number;
   type: string;
+  selectedCultivar?: string;
 
   constructor(card: CardInterface) {
     Object.assign(this, card);
@@ -10,4 +11,5 @@ export default class Card implements CardInterface {
 interface CardInterface {
   spot: number;
   type: string;
+  selectedCultivar?: string;
 }
