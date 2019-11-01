@@ -41,7 +41,14 @@ export default class Cultivar implements CultivarInterface {
           isMatch = false;
         }
       }
+      else if (defTrait.comparitor == Comparitors.BETWEEN) {
+        if (genomeTotalDict[defTrait.traitName] < defTrait.values[0]
+          || genomeTotalDict[defTrait.traitName] > defTrait.values[0]) {
+          isMatch = false;
+        }
+      }
     })
+
     return isMatch;
   }
 }

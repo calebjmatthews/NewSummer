@@ -11,7 +11,7 @@ import { FamilyNames } from '../models/enums/family_names';
 
 import { grain, cane, wildGrass, wildCane, sugarCane, bamboo, oats, millet, sorghum,
   rye, rice, wheat, corn } from './cultivars';
-import { seedCovering, branching, stemFocus, seedSize, tempTolerance,
+import { seedCovering, seedScattering, branching, stemFocus, seedSize, tempTolerance,
   moisTolerance, growthSpeed, nitrogenRequirement, toughness, stemHeight,
   seedsOnTop, sweetness, starch, protein, bitterness, sourness, spiciness,
   toxicity } from './traits';
@@ -23,6 +23,7 @@ import { seedCovering, branching, stemFocus, seedSize, tempTolerance,
 
 let traitsMap: Map<string, Trait> = new Map();
 traitsMap.set(TraitNames.SEED_COVERING, seedCovering);
+traitsMap.set(TraitNames.SEED_SCATTERING, seedScattering);
 traitsMap.set(TraitNames.BRANCHING, branching);
 traitsMap.set(TraitNames.STEM_FOCUS, stemFocus);
 traitsMap.set(TraitNames.SEED_SIZE, seedSize);

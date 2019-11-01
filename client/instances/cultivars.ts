@@ -93,17 +93,29 @@ export const wildGrass = new Cultivar({
   name: CN.WILD_GRASS,
   definitionalTraits: [
     new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [1]})
+  ], bonus: new Trait({
+    name: (CN.WILD_GRASS + ' Bonus'),
+    loci: 0,
+    completeDominance: null,
+    statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME],
+    statModifiers: [-0.6, -0.7]
+  }),
+  traitsForCreation: [
+    new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [2]}),
+    new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
-      traitName: TN.SEED_SIZE, comparitor: CO.LESS_THAN, values: [4]}),
+      traitName: TN.SEED_SIZE, comparitor: CO.LESS_THAN, values: [2]}),
     new DefinitionalTrait({
-      traitName: TN.TEMP_TOLERANCE, comparitor: CO.BETWEEN, values: [2, 4]}),
+      traitName: TN.TEMP_TOLERANCE, comparitor: CO.EQUAL_TO, values: [3]}),
     new DefinitionalTrait({
-      traitName: TN.MOIS_TOLERANCE, comparitor: CO.BETWEEN, values: [2, 4]}),
+      traitName: TN.MOIS_TOLERANCE, comparitor: CO.EQUAL_TO, values: [3]}),
     new DefinitionalTrait({
       traitName: TN.GROWTH_SPEED, comparitor: CO.LESS_THAN, values: [3]}),
     new DefinitionalTrait({
@@ -128,13 +140,7 @@ export const wildGrass = new Cultivar({
       traitName: TN.SPICINESS, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
       traitName: TN.TOXICITY, comparitor: CO.EQUAL_TO, values: [0]})
-  ], bonus: new Trait({
-    name: (CN.WILD_GRASS + ' Bonus'),
-    loci: 0,
-    completeDominance: null,
-    statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME],
-    statModifiers: [-0.8, -0.7]
-  })
+  ]
 });
 
 export const wildCane = new Cultivar({
@@ -147,11 +153,11 @@ export const wildCane = new Cultivar({
     new DefinitionalTrait({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
-      traitName: TN.SEED_SIZE, comparitor: CO.LESS_THAN, values: [4]}),
+      traitName: TN.SEED_SIZE, comparitor: CO.LESS_THAN, values: [2]}),
     new DefinitionalTrait({
-      traitName: TN.TEMP_TOLERANCE, comparitor: CO.BETWEEN, values: [2, 4]}),
+      traitName: TN.TEMP_TOLERANCE, comparitor: CO.EQUAL_TO, values: [3]}),
     new DefinitionalTrait({
-      traitName: TN.MOIS_TOLERANCE, comparitor: CO.BETWEEN, values: [2, 4]}),
+      traitName: TN.MOIS_TOLERANCE, comparitor: CO.EQUAL_TO, values: [3]}),
     new DefinitionalTrait({
       traitName: TN.GROWTH_SPEED, comparitor: CO.LESS_THAN, values: [3]}),
     new DefinitionalTrait({
@@ -181,7 +187,7 @@ export const wildCane = new Cultivar({
     loci: 0,
     completeDominance: null,
     statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME],
-    statModifiers: [-0.8, -0.7]
+    statModifiers: [-0.6, -0.7]
   })
 });
 
@@ -234,6 +240,8 @@ export const oats = new Cultivar({
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
+    new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [1]}),
@@ -256,6 +264,8 @@ export const millet = new Cultivar({
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [2]}),
     new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
+    new DefinitionalTrait({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
       traitName: TN.SEED_SIZE, comparitor: CO.BETWEEN, values: [1, 2]})
@@ -273,6 +283,8 @@ export const sorghum = new Cultivar({
   definitionalTraits: [
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [2]}),
+    new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
@@ -296,6 +308,8 @@ export const rye = new Cultivar({
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [2]}),
     new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
+    new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [1]}),
@@ -315,6 +329,8 @@ export const rice = new Cultivar({
   definitionalTraits: [
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [1]}),
+    new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
@@ -336,11 +352,13 @@ export const wheat = new Cultivar({
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [2]}),
     new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
+    new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({
-      traitName: TN.SEED_SIZE, comparitor: CO.BETWEEN, values: [1, 2]})
+      traitName: TN.SEED_SIZE, comparitor: CO.BETWEEN, values: [0, 2]})
   ], bonus: new Trait({
     name: (CN.WHEAT + ' Bonus'),
     loci: 0,
@@ -355,6 +373,8 @@ export const corn = new Cultivar({
   definitionalTraits: [
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [0]}),
+    new DefinitionalTrait({
+      traitName: TN.SEED_SCATTERING, comparitor: CO.EQUAL_TO, values: [0]}),
     new DefinitionalTrait({
       traitName: TN.BRANCHING, comparitor: CO.EQUAL_TO, values: [1]}),
     new DefinitionalTrait({

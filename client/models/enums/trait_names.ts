@@ -1,5 +1,6 @@
 export enum TraitNames {
   SEED_COVERING = 'Seed Covering',
+  SEED_SCATTERING = 'Seed Scattering',
   BRANCHING = 'Branching',
   STEM_FOCUS = 'Stem Focus',
   SEED_SIZE = 'Seed Cluster Size',
