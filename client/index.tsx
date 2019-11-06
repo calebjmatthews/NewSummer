@@ -10,6 +10,7 @@ require('./styles/root.css');
 require('./styles/card.css');
 require('./styles/modal.css');
 require('./styles/seed.css');
+require('./styles/header.css');
 
 // @ts-ignore
 const createStoreWithMiddleware = applyMiddleware(createStore);

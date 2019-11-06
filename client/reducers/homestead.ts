@@ -13,8 +13,9 @@ export default function
       action.homestead.addSeed(action.seed);
       return action.homestead;
     case GAIN_DOLLARS:
-      action.homestead.gainDollars(action.dollars);
-      return action.homestead;
+      let newHomestead = new Homestead(action.homestead);
+      newHomestead.gainDollars(action.dollars);
+      return newHomestead;
 		default:
 			return homestead;
 	}
