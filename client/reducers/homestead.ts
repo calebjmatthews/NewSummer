@@ -1,5 +1,5 @@
 import {
-  ADD_SEED
+  ADD_SEED, GAIN_DOLLARS
 } from '../actions/homestead';
 import Homestead from '../models/homestead';
 
@@ -11,6 +11,9 @@ export default function
 	switch(action.type) {
     case ADD_SEED:
       action.homestead.addSeed(action.seed);
+      return action.homestead;
+    case GAIN_DOLLARS:
+      action.homestead.gainDollars(action.dollars);
       return action.homestead;
 		default:
 			return homestead;

@@ -15,3 +15,12 @@ export function addAndRecordSeed(seed: Seed, homestead: Homestead,
     });
   }
 }
+
+export const GAIN_DOLLARS = 'GAIN_DOLLARS';
+export function gainDollars(dollars: number, homestead: Homestead) {
+  return {
+    type: GAIN_DOLLARS,
+    dollars: dollars,
+    homestead: homestead
+  }
+}

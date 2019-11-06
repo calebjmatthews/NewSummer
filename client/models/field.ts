@@ -11,6 +11,7 @@ export default class Field implements FieldInterface {
   seedPlantedId: number;
   seedsNameLabel: string;
   seedsAge: number;
+  seedMature: boolean;
   seedsAgeLabel: string;
   harvestResult: RealValueReturn;
 
@@ -26,6 +27,8 @@ export default class Field implements FieldInterface {
 
   plantSeed(aSeed: Seed, seedMap: Map<number, Seed>) {
     this.seedPlantedId = aSeed.id;
+    this.seedsAge = 0;
+    this.seedMature = false;
     this.seedsNameLabel = this.getSeedsNameLabel(seedMap);
     this.seedsAgeLabel = this.getSeedsAgeLabel(seedMap);
   }
@@ -43,7 +46,11 @@ export default class Field implements FieldInterface {
         this.seedsAgeLabel = this.getSeedsAgeLabel(seedMap);
         if (this.seedsAge >= (seed.statMap.get(StatNames.GROWING_TIME).value * 1000)) {
           this.seedsAge = (seed.statMap.get(StatNames.GROWING_TIME).value * 1000);
+          this.seedMature = true;
         }
+      }
+      else {
+        this.seedMature = true;
       }
     }
   }
@@ -63,7 +70,13 @@ export default class Field implements FieldInterface {
       let seed = seedMap.get(this.seedPlantedId);
       let remainingTime = ((seed.statMap.get(StatNames.GROWING_TIME).value * 1000)
         - this.seedsAge);
-      return (utils.formatDuration(remainingTime));
+      let ageLabel = utils.formatDuration(remainingTime);
+      if (ageLabel != '0s') {
+        return ageLabel;
+      }
+      else {
+        return 'Mature';
+      }
     }
     else {
       return '';
@@ -76,8 +89,11 @@ export default class Field implements FieldInterface {
       this.moisture, this.fertility, this.pests, this.disease, families);
     this.seedPlantedId = null;
     this.seedsAge = 0;
+    this.seedMature = false;
     this.seedsNameLabel = this.getSeedsNameLabel(seedMap);
     this.seedsAgeLabel = '';
+
+    return this.harvestResult;
   }
 }
 
@@ -97,6 +113,7 @@ interface FieldInterface {
   seedPlantedId: number;
   seedsNameLabel: string;
   seedsAge: number;
+  seedMature: boolean;
   seedsAgeLabel: string;
   harvestResult: RealValueReturn;
 

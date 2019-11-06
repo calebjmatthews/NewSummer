@@ -42,7 +42,8 @@ class Initializer extends Component {
     this.props.addModal(new Modal({
       type: ModalTypes.ALERT,
       title: 'What\s this?',
-      messages: ['There are a couple seeds here. Better pick them up!',
+      messages: [('There are a couple seeds here, just asking to be planted. '
+        + 'Better pick them up!'),
         ('Gained ' + newSeed0.name + '.'),
         ('Gained ' + newSeed1.name + '.')]
     }));

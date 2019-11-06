@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Field from '../../models/field';
+import Homestead from '../../models/homestead';
+import RecordBook from '../../models/record_book';
+import { families } from '../../instances/families';
 import { CardTypes } from '../../models/enums/card_types';
 
 import { setCard } from '../../actions/card';
+import { harvestSeed } from '../../actions/field';
 
 class StateDisplayFieldCard extends Component {
   props: FieldCardProps;
@@ -23,46 +27,62 @@ class StateDisplayFieldCard extends Component {
     if (field.seedPlantedId == null) {
       this.props.setCard({type: CardTypes.SEED_PLANTING}, this.props.spot);
     }
-    // else {
-    //   if (this.props.field.seedIsMature() == true) {
-    //     this.props.harvestSeed(
-    //       this.props.fieldsState.fields,
-    //       this.props.storehouseState.storehouse,
-    //       this.props.field.id
-    //     );
-    //   }
-    // }
+    else {
+      if (field.seedMature == true) {
+        this.props.harvestSeed(field, this.props.homestead,
+          this.props.recordBook.seedMap, families);
+      }
+    }
   }
 
   render() {
     let field = this.props.fields.get(this.props.fieldId);
 
-    return (
-      <div className="game-card field-card">
-        <div className="field-card-body" onClick={() => this.fieldCardClick()}>
-          <div>{field.seedsNameLabel}</div>
-          <div>{field.seedsAgeLabel}</div>
+    if (field.seedPlantedId != null && field.seedMature == false) {
+      return (
+        <div className="game-card field-card">
+          <div className="field-card-body">
+            <div>{field.seedsNameLabel}</div>
+            <div>{field.seedsAgeLabel}</div>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    else {
+      return (
+        <div className="game-card field-card">
+          <div className="field-card-body">
+            <button onClick={() => this.fieldCardClick()}>
+              <div>{field.seedsNameLabel}</div>
+              <div>{field.seedsAgeLabel}</div>
+            </button>
+          </div>
+        </div>
+      );
+    }
+
   }
 }
 
 interface FieldCardProps {
   fields: Map<number, Field>;
+  homestead: Homestead;
+  recordBook: RecordBook;
   fieldId: number;
   spot: number;
 
   setCard: Function;
+  harvestSeed: Function;
 }
 
-function mapStateToProps({ fields }) {
-  return { fields }
+function mapStateToProps({ fields, homestead, recordBook }) {
+  return { fields, homestead, recordBook }
 }
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    setCard
+    setCard, harvestSeed
   }, dispatch)
 }
 
