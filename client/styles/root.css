@@ -34,3 +34,19 @@ button:disabled {
   background: #56AB2E;
   background: linear-gradient(to right, #56ab2f, #a8e063);
 }
+
+.back-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.back-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 0.8em;
+}

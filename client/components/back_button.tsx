@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fontAwesome } from '../instances/font_awesome';
 import { revertCard } from '../actions/card';
 
 import CardState from '../models/card_state';
@@ -24,7 +25,7 @@ class BackButton extends Component {
       <div className="back-button-wrapper">
         <button className="back-button"
           onClick={ () => this.backButtonClick() }>
-          <FontAwesomeIcon icon="arrow-left" />
+          <FontAwesomeIcon icon={fontAwesome.get('arrow-left')} />
         </button>
       </div>
     );

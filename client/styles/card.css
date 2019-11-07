@@ -13,8 +13,8 @@
   justify-content: flex-end;
   align-items: center;
   overflow-y: auto;
-  min-height: 478px;
-  min-width: 288px;
+  height: 455px;
+  width: 288px;
   padding: 0.5em;
   margin: 0.5em;
   text-align: center;

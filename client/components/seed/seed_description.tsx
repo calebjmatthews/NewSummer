@@ -8,6 +8,7 @@ import Seed from '../../models/seed/seed';
 import { families } from '../../instances/families';
 import { utils } from '../../models/utils';
 import { StatNames } from '../../models/enums/stat_names';
+import { CardTypes } from '../../models/enums/card_types';
 
 import { setCard } from '../../actions/card';
 
@@ -26,7 +27,8 @@ class SeedDescription extends Component {
   }
 
   seedDetailClick(seed: Seed) {
-    this.props.setCard({type: "seedDetail", value: seed}, this.props.spot);
+    this.props.setCard({type: CardTypes.SEED_DETAIL, selectedSeed: seed},
+      this.props.spot);
   }
 
   render() {

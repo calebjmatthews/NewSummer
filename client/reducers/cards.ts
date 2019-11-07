@@ -6,18 +6,14 @@ import CardState from '../models/card_state';
 export default function
   (cardState: CardState = new CardState({
     cards: [new Card({spot: 0, type: null}), new Card({spot: 1, type: null})],
-    lastCards: []
+    lastCards: [[new Card({spot: 0, type: null})], [new Card({spot: 1, type: null})]]
   }),
     action = null) {
 	switch(action.type) {
     case SET_ALL_CARDS:
-      let lastCards = [];
-      action.cards.map(() => {
-        lastCards.push([]);
-      })
       return new CardState({
         cards: action.cards.slice(),
-        lastCards: lastCards
+        lastCards: action.cards.slice()
       });
       break;
     case SET_CARD:
