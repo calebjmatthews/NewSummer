@@ -1,0 +1,46 @@
+.cultivar-bar {
+  display: flex;
+  margin-top: 5px;
+}
+
+.cultivar-bar-option {
+  width: unset;
+}
+
+.harvest-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+}
+
+.harvest-comment {
+  font-size: 45px;
+}
+
+.harvest-description-label {
+  max-width: 80%;
+  text-align: left;
+}
+
+.harvest-description-value {
+  margin-bottom: 5px;
+  text-align: right;
+}
+
+.positive {
+  font-weight: bold;
+  color: #60ea6c;
+}
+
+.negative {
+  font-weight: bold;
+  color: #ff6250;
+}
+
+.harvest-value-final {
+  width: 100%;
+  font-size: 45px;
+  text-align: right;
+}

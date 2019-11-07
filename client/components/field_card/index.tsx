@@ -7,6 +7,7 @@ import { CardTypes } from '../../models/enums/card_types';
 
 import PlantingFieldCard from './planting';
 import StateDisplayFieldCard from './state_display';
+import HarvestResultFieldCard from './harvest_result';
 
 class FieldCard extends Component {
   props: FieldCardProps;
@@ -19,7 +20,12 @@ class FieldCard extends Component {
     let field = this.props.fields.get(this.props.fieldId);
     let card = this.props.cardState.cards[this.props.spot];
 
-    if (card.type == CardTypes.SEED_DETAIL) {
+    if (field.harvestResult != null) {
+      return (
+        <HarvestResultFieldCard fieldId={this.props.fieldId} spot={this.props.spot} />
+      );
+    }
+    else if (card.type == CardTypes.SEED_DETAIL) {
 
     }
     else if (card.type == CardTypes.SEED_PLANTING) {

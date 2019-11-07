@@ -43,3 +43,8 @@ export function harvestSeed(field: Field, homestead: Homestead,
     dispatch(setField(field));
   }
 }
+
+export function clearHarvestResult(field: Field) {
+  field.harvestResult = null;
+  return setField(field);
+}

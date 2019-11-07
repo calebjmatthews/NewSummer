@@ -55,12 +55,3 @@
   flex-direction: column;
   overflow: auto;
 }
-
-.cultivar-bar {
-  display: flex;
-  margin-top: 5px;
-}
-
-.cultivar-bar-option {
-  width: unset;
-}
