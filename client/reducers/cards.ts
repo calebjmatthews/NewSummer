@@ -5,8 +5,10 @@ import CardState from '../models/card_state';
 
 export default function
   (cardState: CardState = new CardState({
-    cards: [new Card({spot: 0, type: null}), new Card({spot: 1, type: null})],
-    lastCards: [[new Card({spot: 0, type: null})], [new Card({spot: 1, type: null})]]
+    cards: [new Card({spot: 0, type: null}), new Card({spot: 1, type: null}),
+      new Card({spot: 2, type: null})],
+    lastCards: [[new Card({spot: 0, type: null})], [new Card({spot: 1, type: null})],
+      [new Card({spot: 1, type: null})]]
   }),
     action = null) {
 	switch(action.type) {
