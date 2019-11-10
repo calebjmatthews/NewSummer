@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { setCard } from '../../actions/card';
 import SeedDetailCard from '../seed/seed_detail';
+import ExperimentalGarden from './experimental_garden';
 
 import CardState from '../../models/card_state';
 
@@ -40,7 +41,7 @@ class HomeCard extends Component {
       return (
         <div className="game-card">
           <div>Traveler's rest</div>
-          <div>Experimental garden</div>
+          <ExperimentalGarden spot={0}/>
         </div>
       );
     }
