@@ -85,7 +85,7 @@ export default class Homestead implements HomesteadInterface {
         this.breedingTimeRemaining -= duration;
       }
       else {
-        this.breedingTimeRemaining -= AGE_INTERVAL;
+        this.breedingTimeRemaining -= (AGE_INTERVAL / 1000);
       }
       this.breedingAgeLabel = this.getBreedingAgeLabel();
       if (this.breedingTimeRemaining < 0) {
