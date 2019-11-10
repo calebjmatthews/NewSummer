@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { setCard } from '../../actions/card';
 
 import Homestead from '../../models/homestead';
+import { CardTypes } from '../../models/enums/card_types';
 
 class ExperimentalGarden extends Component {
   props: ExperimentalGardenProps;
@@ -17,11 +18,11 @@ class ExperimentalGarden extends Component {
   }
 
   emptyGardenClick() {
-    this.props.setCard({type: "seedBreedingA"}, this.props.spot);
+    this.props.setCard({type: CardTypes.SEED_BREEDING_A}, this.props.spot);
   }
 
   matureGardenClick() {
-    this.props.setCard({type: "breedingResults"}, this.props.spot);
+    this.props.setCard({type: CardTypes.BREEDING_RESULTS}, this.props.spot);
   }
 
   render() {

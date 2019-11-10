@@ -13,6 +13,7 @@ import Seed from '../../models/seed/seed';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
+import { CardTypes } from '../../models/enums/card_types';
 
 class BreedingPairHomeCard extends Component {
   props: BreedingPairHomeCardProps;
@@ -25,12 +26,12 @@ class BreedingPairHomeCard extends Component {
 
   seedSelectBreeding(seed: Seed) {
     let card = this.props.cardState.cards[this.props.spot];
-    if (card.type == 'seedBreedingA') {
-      this.props.setCard({"type": "seedBreedingB", "parentA": seed},
+    if (card.type == CardTypes.SEED_BREEDING_A) {
+      this.props.setCard({"type": CardTypes.SEED_BREEDING_B, "parentA": seed},
         this.props.spot);
     }
-    else if (card.type == 'seedBreedingB') {
-      this.props.setCard({"type": "seedBreedingConfirm",
+    else if (card.type == CardTypes.SEED_BREEDING_B) {
+      this.props.setCard({"type": CardTypes.SEED_BREEDING_CONFIRM,
         "parentA": card.parentA, "parentB": seed},
         this.props.spot);
     }
@@ -43,7 +44,7 @@ class BreedingPairHomeCard extends Component {
   render() {
     let card = this.props.cardState.cards[this.props.spot];
 
-    if (card.type == 'seedBreedingA') {
+    if (card.type == CardTypes.SEED_BREEDING_A) {
       return (
         <div className="game-card">
           <BackButton spot={this.props.spot} />
@@ -54,7 +55,7 @@ class BreedingPairHomeCard extends Component {
         </div>
       );
     }
-    else if (card.type == 'seedBreedingB') {
+    else if (card.type == CardTypes.SEED_BREEDING_B) {
       return (
         <div className="game-card">
           <BackButton spot={this.props.spot} />
@@ -65,7 +66,7 @@ class BreedingPairHomeCard extends Component {
         </div>
       );
     }
-    else if (card.type == 'seedBreedingConfirm') {
+    else if (card.type == CardTypes.SEED_BREEDING_CONFIRM) {
       return (
         <div className="game-card">
           {'Breed these two plants?'}

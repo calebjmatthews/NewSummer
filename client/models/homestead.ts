@@ -8,8 +8,8 @@ export default class Homestead implements HomesteadInterface {
   maxSeeds: number;
   experimentalGardenSize: number;
   seedIds: number[];
-  intermediateSeed: number;
-  seedsBred: number[];
+  intermediateSeed: Seed;
+  seedsBred: Seed[];
   breedingTimeRemaining: number;
   breedingAgeLabel: string;
 
@@ -129,8 +129,8 @@ interface HomesteadInterface {
   maxSeeds: number;
   experimentalGardenSize: number;
   seedIds: number[];
-  intermediateSeed: number;
-  seedsBred: number[];
+  intermediateSeed: Seed;
+  seedsBred: Seed[];
   breedingTimeRemaining: number;
   breedingAgeLabel: string;
 }

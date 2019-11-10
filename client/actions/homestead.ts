@@ -1,8 +1,11 @@
+import { setCard } from './card';
+
 import Seed from '../models/seed/seed';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
 import { recordSeed } from './record_book';
 import { StatNames } from '../models/enums/stat_names';
+import { CardTypes } from '../models/enums/card_types';
 import { families } from '../instances/families';
 
 export const ADD_SEED = 'ADD_SEED';
@@ -30,7 +33,7 @@ export function gainDollars(dollars: number, homestead: Homestead) {
 export const SET_HOMESTEAD = 'SET_HOMESTEAD';
 export function startBreedingSeeds(homestead: Homestead, seedA: Seed, seedB: Seed) {
   return function(dispatch: any) {
-    let newSeeds = [];
+    let newSeeds: Seed[] = [];
     let totalGrowingTime = 0;
     [...Array(homestead.experimentalGardenSize).keys()].map(() => {
       const newSeed = homestead.breedSeeds(seedA, seedB);
@@ -58,3 +61,27 @@ export function ageBreeding(homestead: Homestead, duration = null) {
     homestead: homestead
   }
 };
+
+export function finishBreedingSeed(homestead: Homestead, recordBook: RecordBook,
+  newSeed: Seed, spot: number) {
+  return function(dispatch: any) {
+    if (homestead.isCultivarFull(newSeed.cultivarName, recordBook.seedMap) == false) {
+      dispatch(recordSeed(newSeed, recordBook));
+      homestead.addSeed(newSeed);
+      homestead.seedsBred = [];
+      dispatch({
+        type: SET_HOMESTEAD,
+        homestead: homestead
+      });
+      dispatch(setCard(null, spot));
+    }
+    else {
+      homestead.intermediateSeed = newSeed;
+      dispatch({
+        type: SET_HOMESTEAD,
+        homestead: homestead
+      });
+      dispatch(setCard({type:CardTypes.SEED_REPLACE_BREED, spot: spot}, spot));
+    }
+  }
+}

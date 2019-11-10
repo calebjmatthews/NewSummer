@@ -6,8 +6,10 @@ import { setCard } from '../../actions/card';
 import SeedDetailCard from '../seed/seed_detail';
 import ExperimentalGarden from './experimental_garden';
 import BreedingPairHomeCard from './breeding_pair';
+import BreedingResultsHomeCard from './breeding_results';
 
 import CardState from '../../models/card_state';
+import { CardTypes } from '../../models/enums/card_types';
 
 class HomeCard extends Component {
   props: HomeCardProps;
@@ -19,21 +21,21 @@ class HomeCard extends Component {
   render() {
     let card = this.props.cardState.cards[this.props.spot];
 
-    if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB'
-      || card.type == 'seedBreedingConfirm') {
-      return <BreedingPairHomeCard spot={this.props.spot} />;
+    if (card.type == CardTypes.SEED_BREEDING_A || card.type == CardTypes.SEED_BREEDING_B
+      || card.type == CardTypes.SEED_BREEDING_CONFIRM) {
+      return <BreedingPairHomeCard spot={this.props.spot} />
     }
-    else if (card.type == 'breedingResults') {
+    else if (card.type == CardTypes.BREEDING_RESULTS) {
+      return <BreedingResultsHomeCard spot={this.props.spot} />
+    }
+    else if (card.type == CardTypes.SEED_REPLACE_BUY) {
       return null;
     }
-    else if (card.type == 'seedReplaceBuy') {
+    else if (card.type == CardTypes.SEED_REPLACE_BREED) {
       return null;
     }
-    else if (card.type == 'seedReplaceBreed') {
-      return null;
-    }
-    else if (card.type == 'seedDetail') {
-      return null;
+    else if (card.type == CardTypes.SEED_DETAIL) {
+      return <SeedDetailCard spot={this.props.spot} />
     }
     else if (card.type == 'seedBuying') {
       return null;
@@ -61,7 +63,7 @@ function mapStateToProps({ storehouseState, economyState, fieldsState,
     recordBookState, cardState, autoIncrementState }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
     setCard
   }, dispatch)
