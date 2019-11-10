@@ -2,6 +2,8 @@ import Seed from '../models/seed/seed';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
 import { recordSeed } from './record_book';
+import { StatNames } from '../models/enums/stat_names';
+import { families } from '../instances/families';
 
 export const ADD_SEED = 'ADD_SEED';
 export function addAndRecordSeed(seed: Seed, homestead: Homestead,
@@ -22,5 +24,31 @@ export function gainDollars(dollars: number, homestead: Homestead) {
     type: GAIN_DOLLARS,
     dollars: dollars,
     homestead: homestead
+  }
+}
+
+export const SET_HOMESTEAD = 'SET_HOMESTEAD';
+export function startBreedingSeeds(homestead: Homestead, seedA: Seed, seedB: Seed) {
+  return function(dispatch: any) {
+    let newSeeds = [];
+    let totalGrowingTime = 0;
+    [...Array(homestead.experimentalGardenSize).keys()].map(() => {
+      const newSeed = homestead.breedSeeds(seedA, seedB);
+      newSeed.build(families);
+      newSeed.id = Math.floor(Math.random() * 100000);
+      console.log('newSeed');
+      console.log(newSeed);
+      totalGrowingTime += (newSeed.statMap.get(StatNames.GROWING_TIME).value);
+      newSeeds.push(newSeed);
+    });
+
+    homestead.seedsBred = newSeeds;
+    homestead.breedingTimeRemaining = (totalGrowingTime / newSeeds.length) * 2;
+    homestead.breedingAgeLabel = homestead.getBreedingAgeLabel();
+
+    return {
+      type: SET_HOMESTEAD,
+      homestead: homestead
+    }
   }
 }

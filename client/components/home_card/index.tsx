@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { setCard } from '../../actions/card';
 import SeedDetailCard from '../seed/seed_detail';
 import ExperimentalGarden from './experimental_garden';
+import BreedingPairHomeCard from './breeding_pair';
 
 import CardState from '../../models/card_state';
 
@@ -20,7 +21,7 @@ class HomeCard extends Component {
 
     if (card.type == 'seedBreedingA' || card.type == 'seedBreedingB'
       || card.type == 'seedBreedingConfirm') {
-      return null;
+      return <BreedingPairHomeCard spot={this.props.spot} />;
     }
     else if (card.type == 'breedingResults') {
       return null;

@@ -1,5 +1,5 @@
 import {
-  ADD_SEED, GAIN_DOLLARS
+  ADD_SEED, GAIN_DOLLARS, SET_HOMESTEAD
 } from '../actions/homestead';
 import Homestead from '../models/homestead';
 
@@ -13,8 +13,11 @@ export default function
       action.homestead.addSeed(action.seed);
       return action.homestead;
     case GAIN_DOLLARS:
-      let newHomestead = new Homestead(action.homestead);
+      var newHomestead = new Homestead(action.homestead);
       newHomestead.gainDollars(action.dollars);
+      return newHomestead;
+    case SET_HOMESTEAD:
+      var newHomestead = new Homestead(action.homestead);
       return newHomestead;
 		default:
 			return homestead;
