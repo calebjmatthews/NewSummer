@@ -17,7 +17,7 @@ fontAwesomeMap.set('globe-europe', faGlobeEurope);
 fontAwesomeMap.set('snowflake', faSnowflake);
 fontAwesomeMap.set('sun', faSun);
 fontAwesomeMap.set('wind', faWind);
-fontAwesomeMap.set('ting', faTint);
+fontAwesomeMap.set('tint', faTint);
 fontAwesomeMap.set('skull-crossbones', faSkullCrossbones);
 fontAwesomeMap.set('ice-cream', faIceCream);
 fontAwesomeMap.set('bread-slice', faBreadSlice);

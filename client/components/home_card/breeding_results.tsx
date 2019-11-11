@@ -31,9 +31,9 @@ class BreedingResultsHomeCard extends Component {
         <BackButton spot={this.props.spot} />
         {'Choose which seed to keep:'}
         <div className="option-container">
-          {this.props.homestead.seedsBred.map((seed) => {
+          {this.props.homestead.seedsBred.map((seed, index) => {
             return (
-              <SeedDescription key={seed.name} seed={seed}
+              <SeedDescription key={index} seed={seed}
                 spot={this.props.spot}
                 onConfirmClick={this.chooseSeed}
                 confirmText="Go" />

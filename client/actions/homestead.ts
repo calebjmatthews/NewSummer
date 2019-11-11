@@ -85,3 +85,21 @@ export function finishBreedingSeed(homestead: Homestead, recordBook: RecordBook,
     }
   }
 }
+
+export function replaceSeed(homestead: Homestead, oldSeed: Seed, newSeed: Seed,
+  recordBook: RecordBook, reason = null) {
+  return function(dispatch: any) {
+    dispatch(recordSeed(newSeed, recordBook));
+    homestead.removeSeed(oldSeed);
+    homestead.addSeed(newSeed);
+
+    if (reason == 'breed') {
+      homestead.seedsBred = [];
+    }
+
+    return {
+      type: SET_HOMESTEAD,
+      homestead: homestead
+    }
+  }
+}

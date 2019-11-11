@@ -7,6 +7,7 @@ import SeedDetailCard from '../seed/seed_detail';
 import ExperimentalGarden from './experimental_garden';
 import BreedingPairHomeCard from './breeding_pair';
 import BreedingResultsHomeCard from './breeding_results';
+import SeedReplaceCard from '../seed/seed_replace';
 
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
@@ -32,7 +33,7 @@ class HomeCard extends Component {
       return null;
     }
     else if (card.type == CardTypes.SEED_REPLACE_BREED) {
-      return null;
+      return <SeedReplaceCard spot={this.props.spot} reason={'breed'} />;
     }
     else if (card.type == CardTypes.SEED_DETAIL) {
       return <SeedDetailCard spot={this.props.spot} />
