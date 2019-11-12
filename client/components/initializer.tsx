@@ -5,16 +5,19 @@ import { bindActionCreators } from 'redux';
 import { addModal } from '../actions/modal';
 import { addAndRecordSeed, ageBreeding } from '../actions/homestead';
 import { ageAllSeeds } from '../actions/field';
+import { startVisit } from '../actions/cast';
 
 import Modal from '../models/modal';
 import Seed from '../models/seed/seed';
 import Field from '../models/field';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
+import Cast from '../models/traveler/cast';
 import { families } from '../instances/families';
 import { ModalTypes } from '../models/enums/modal_types';
 import { CultivarNames } from '../models/enums/cultivar_names';
 import { FamilyNames } from '../models/enums/family_names';
+import { TravelerRoles } from '../models/enums/traveler_roles';
 import { AGE_INTERVAL } from '../constants';
 
 class Initializer extends Component {
@@ -24,6 +27,8 @@ class Initializer extends Component {
     super(props);
 
     this.initialSeeds();
+    this.props.startVisit(TravelerRoles.SEED_TRADER, this.props.cast,
+      this.props.recordBook);
     this.initIntervals();
   }
 
@@ -65,20 +70,22 @@ interface InitializerProps {
   homestead: Homestead;
   recordBook: RecordBook;
   fields: Map<number, Field>;
+  cast: Cast;
 
   addModal: Function;
   addAndRecordSeed: Function;
   ageAllSeeds: Function;
   ageBreeding: Function;
+  startVisit: Function;
 }
 
-function mapStateToProps({ homestead, recordBook, fields }) {
-  return { homestead, recordBook, fields }
+function mapStateToProps({ homestead, recordBook, fields, cast }) {
+  return { homestead, recordBook, fields, cast }
 }
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    addModal, addAndRecordSeed, ageAllSeeds, ageBreeding
+    addModal, addAndRecordSeed, ageAllSeeds, ageBreeding, startVisit
   }, dispatch)
 }
 

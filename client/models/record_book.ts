@@ -14,13 +14,15 @@ export default class RecordBook implements RecordBookInterface {
     }
   }
 
-  getCultivarNames() {
+  getCultivarNames(familyName: string = null) {
     let cultivarNames = [];
     let cultivarNameInArray = {};
     this.seedMap.forEach((seed) => {
-      if (cultivarNameInArray[seed.cultivarName] != true) {
-        cultivarNames.push(seed.cultivarName);
-        cultivarNameInArray[seed.cultivarName] = true;
+      if (familyName == null || seed.familyName == familyName) {
+        if (cultivarNameInArray[seed.cultivarName] != true) {
+          cultivarNames.push(seed.cultivarName);
+          cultivarNameInArray[seed.cultivarName] = true;
+        }
       }
     });
     return cultivarNames;

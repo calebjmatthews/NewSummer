@@ -8,6 +8,7 @@ import ExperimentalGarden from './experimental_garden';
 import BreedingPairHomeCard from './breeding_pair';
 import BreedingResultsHomeCard from './breeding_results';
 import SeedReplaceCard from '../seed/seed_replace';
+import TravelerRest from './traveler_rest';
 
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
@@ -44,7 +45,7 @@ class HomeCard extends Component {
     else {
       return (
         <div className="game-card">
-          <div>Traveler's rest</div>
+          <TravelerRest spot={0}/>
           <ExperimentalGarden spot={0}/>
         </div>
       );
