@@ -9,6 +9,7 @@ import BreedingPairHomeCard from './breeding_pair';
 import BreedingResultsHomeCard from './breeding_results';
 import SeedReplaceCard from '../seed/seed_replace';
 import TravelerRest from './traveler_rest';
+import TravelerCard from './traveler';
 
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
@@ -39,8 +40,8 @@ class HomeCard extends Component {
     else if (card.type == CardTypes.SEED_DETAIL) {
       return <SeedDetailCard spot={this.props.spot} />
     }
-    else if (card.type == 'seedBuying') {
-      return null;
+    else if (card.type == CardTypes.SEED_BUYING) {
+      return <TravelerCard spot={this.props.spot} />
     }
     else {
       return (

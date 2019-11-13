@@ -5,6 +5,7 @@ import ModalReducer from './modal';
 import HomesteadReducer from './homestead';
 import RecordBookReducer from './record_book';
 import CastReducer from './cast';
+import EconomyReducer from './economy';
 
 const rootReducer = combineReducers({
   fields: FieldsReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   modals: ModalReducer,
   homestead: HomesteadReducer,
   recordBook: RecordBookReducer,
-  cast: CastReducer
+  cast: CastReducer,
+  economy: EconomyReducer
 });
 
 export default rootReducer;

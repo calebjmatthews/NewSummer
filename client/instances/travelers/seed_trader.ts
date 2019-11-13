@@ -3,6 +3,7 @@ import Offer from '../../models/traveler/offer';
 import Seed from '../../models/seed/seed';
 import { FamilyNames } from '../../models/enums/family_names';
 import { TravelerRoles } from '../../models/enums/traveler_roles';
+import { families } from '../../instances/families';
 
 class SeedTrader extends Traveler {
   constructor(seedTrader: TravelerInterface) {
@@ -42,6 +43,7 @@ class SeedTrader extends Traveler {
       familyName: FamilyNames.POACEAE, methodObtained: 'Bought',
       dateObtained: new Date(Date.now()), parentsIds: [],
       cultivarName: cultivarsUnlocked[index]});
+    newSeed.build(families);
     let nameAlreadyExists: any = false;
     offers.map((offer) => {
       if (offer.item.name == newSeed.name) {
@@ -52,7 +54,8 @@ class SeedTrader extends Traveler {
       return null;
     }
     return new Offer({id: Math.floor(Math.random() * 100000), label:newSeed.name,
-      price: (newSeed.idealValue * 2), sold: false, type: 'seed', item: newSeed});
+      price: (newSeed.idealValue * 2), sold: false, type: 'seed', item: newSeed,
+      travelerRole: TravelerRoles.SEED_TRADER});
   }
 }
 

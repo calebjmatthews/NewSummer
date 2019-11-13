@@ -5,6 +5,7 @@ export default class Offer implements OfferInterface {
   sold: boolean;
   type: string;
   item: any;
+  travelerRole: string;
 
   constructor(offer: OfferInterface) {
     Object.assign(this, offer);
@@ -18,4 +19,5 @@ interface OfferInterface {
   sold: boolean;
   type: string;
   item: any;
+  travelerRole: string;
 }

@@ -30,7 +30,23 @@ export function gainDollars(dollars: number, homestead: Homestead) {
   }
 }
 
+export const SPEND_DOLLARS = 'SPEND_DOLLARS';
+export function spendDollars(dollars: number, homestead: Homestead) {
+  return {
+    type: SPEND_DOLLARS,
+    dollars: dollars,
+    homestead: homestead
+  }
+}
+
 export const SET_HOMESTEAD = 'SET_HOMESTEAD';
+export function setHomestead(homestead: Homestead) {
+  return {
+    type: SET_HOMESTEAD,
+    homestead: homestead
+  }
+}
+
 export function startBreedingSeeds(homestead: Homestead, seedA: Seed, seedB: Seed) {
   return function(dispatch: any) {
     let newSeeds: Seed[] = [];
