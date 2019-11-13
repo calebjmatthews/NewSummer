@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { addModal } from '../actions/modal';
 import { addAndRecordSeed, ageBreeding } from '../actions/homestead';
 import { ageAllSeeds } from '../actions/field';
-import { startVisit } from '../actions/cast';
+import { startVisit, ageVisit } from '../actions/cast';
 
 import Modal from '../models/modal';
 import Seed from '../models/seed/seed';
@@ -57,6 +57,7 @@ class Initializer extends Component {
     setInterval(() => {
       this.props.ageAllSeeds(this.props.fields, null, this.props.recordBook.seedMap);
       this.props.ageBreeding(this.props.homestead);
+      this.props.ageVisit(this.props.cast);
     }, AGE_INTERVAL);
   }
 
@@ -76,6 +77,7 @@ interface InitializerProps {
   ageAllSeeds: Function;
   ageBreeding: Function;
   startVisit: Function;
+  ageVisit: Function;
 }
 
 function mapStateToProps({ homestead, recordBook, fields, cast }) {
@@ -84,7 +86,7 @@ function mapStateToProps({ homestead, recordBook, fields, cast }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    addModal, addAndRecordSeed, ageAllSeeds, ageBreeding, startVisit
+    addModal, addAndRecordSeed, ageAllSeeds, ageBreeding, startVisit, ageVisit
   }, dispatch)
 }
 

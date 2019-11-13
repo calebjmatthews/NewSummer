@@ -12,10 +12,24 @@ export function setCast(cast: Cast) {
   }
 }
 
+export const SET_VISIT_AGE = 'SET_VISIT_AGE';
+export const SET_VISITING = 'SET_VISITING';
 export function ageVisit(cast: Cast, duration = null) {
   if (cast.currentlyVisiting != null && cast.saidHello == true) {
     cast.ageVisit(duration);
-    return setCast(cast);
+    if (cast.currentlyVisiting != null) {
+      return {
+        type: SET_VISIT_AGE,
+        visitRemaining: cast.visitRemaining
+      }
+    }
+    else {
+      return {
+        type: SET_VISITING,
+        visitRemaining: null,
+        currentlyVisiting: null
+      }
+    }
   }
   return {
     type: null
@@ -41,7 +55,7 @@ export function startVisit(travelerRole: string, cast: Cast, recordBook: RecordB
     if (travelerRole == TravelerRoles.SEED_TRADER) {
       let cultivarsUnlocked = recordBook.getCultivarNames(FamilyNames.POACEAE);
       let offers = cast.members.get(travelerRole).genOffers(cultivarsUnlocked);
-      
+
       cast.members.get(travelerRole).currentOffers = offers;
     }
 
@@ -49,10 +63,12 @@ export function startVisit(travelerRole: string, cast: Cast, recordBook: RecordB
   }
 }
 
+export const SAID_HELLO = 'SAID_HELLO';
 export function sayHello(cast: Cast) {
   if (cast.saidHello == false) {
-    cast.saidHello = true;
-    return setCast(cast);
+    return {
+      type: SAID_HELLO
+    }
   }
   return {
     type: null

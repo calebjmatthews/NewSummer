@@ -8,8 +8,10 @@ export default class Cast implements CastInterface {
   visitRemaining: number;
   saidHello: boolean;
 
-  constructor(cast: CastInterface) {
-    Object.assign(this, cast);
+  constructor(cast: CastInterface = null) {
+    if (cast != null) {
+      Object.assign(this, cast);
+    }
   }
 
   // Checks whether a given traveler has arrived in the last interval
