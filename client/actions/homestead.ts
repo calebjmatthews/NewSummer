@@ -32,7 +32,7 @@ export function spendDollars(dollars: number, homestead: Homestead) {
   homestead.spendDollars(dollars);
   return {
     type: SET_DOLLARS,
-    dollars: dollars
+    dollars: homestead.dollars
   }
 }
 
