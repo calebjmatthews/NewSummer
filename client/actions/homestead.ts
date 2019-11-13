@@ -9,33 +9,30 @@ import { CardTypes } from '../models/enums/card_types';
 import { families } from '../instances/families';
 
 export const ADD_SEED = 'ADD_SEED';
-export function addAndRecordSeed(seed: Seed, homestead: Homestead,
-  recordBook: RecordBook) {
+export function addAndRecordSeed(seed: Seed) {
   return function(dispatch: any) {
-    dispatch(recordSeed(seed, recordBook));
+    dispatch(recordSeed(seed));
     dispatch({
       type: ADD_SEED,
-      seed: seed,
-      homestead: homestead
+      seed: seed
     });
   }
 }
 
-export const GAIN_DOLLARS = 'GAIN_DOLLARS';
+export const SET_DOLLARS = 'SET_DOLLARS';
 export function gainDollars(dollars: number, homestead: Homestead) {
+  homestead.gainDollars(dollars);
   return {
-    type: GAIN_DOLLARS,
-    dollars: dollars,
-    homestead: homestead
+    type: SET_DOLLARS,
+    dollars: homestead.dollars
   }
 }
 
-export const SPEND_DOLLARS = 'SPEND_DOLLARS';
 export function spendDollars(dollars: number, homestead: Homestead) {
+  homestead.spendDollars(dollars);
   return {
-    type: SPEND_DOLLARS,
-    dollars: dollars,
-    homestead: homestead
+    type: SET_DOLLARS,
+    dollars: dollars
   }
 }
 
@@ -47,75 +44,77 @@ export function setHomestead(homestead: Homestead) {
   }
 }
 
+export const SET_BREEDING = 'SET_BREEDING';
 export function startBreedingSeeds(homestead: Homestead, seedA: Seed, seedB: Seed) {
-  return function(dispatch: any) {
-    let newSeeds: Seed[] = [];
-    let totalGrowingTime = 0;
-    [...Array(homestead.experimentalGardenSize).keys()].map(() => {
-      const newSeed = homestead.breedSeeds(seedA, seedB);
-      newSeed.build(families);
-      newSeed.id = Math.floor(Math.random() * 100000);
-      totalGrowingTime += (newSeed.statMap.get(StatNames.GROWING_TIME).value);
-      newSeeds.push(newSeed);
-    });
+  let newSeeds: Seed[] = [];
+  let totalGrowingTime = 0;
+  [...Array(homestead.experimentalGardenSize).keys()].map(() => {
+    const newSeed = homestead.breedSeeds(seedA, seedB);
+    newSeed.build(families);
+    newSeed.id = Math.floor(Math.random() * 100000);
+    totalGrowingTime += (newSeed.statMap.get(StatNames.GROWING_TIME).value);
+    newSeeds.push(newSeed);
+  });
 
-    homestead.seedsBred = newSeeds;
-    homestead.breedingTimeRemaining = (totalGrowingTime / newSeeds.length) * 2;
-    homestead.breedingAgeLabel = homestead.getBreedingAgeLabel();
-
-    return {
-      type: SET_HOMESTEAD,
-      homestead: homestead
-    }
+  return {
+    type: SET_BREEDING,
+    seedsBred: newSeeds,
+    breedingTimeRemaining: ((totalGrowingTime / newSeeds.length) * 2),
+    breedingAgeLabel: homestead.getBreedingAgeLabel()
   }
 }
 
+export const SET_BREEDING_AGE = 'SET_BREEDING_AGE';
 export function ageBreeding(homestead: Homestead, duration = null) {
   homestead.ageBreeding(duration);
   return {
-    type: SET_HOMESTEAD,
-    homestead: homestead
+    type: SET_BREEDING_AGE,
+    breedingTimeRemaining: homestead.breedingTimeRemaining,
+    breedingAgeLabel: homestead.breedingAgeLabel
   }
 };
 
+export const SET_INTER_SEED = 'SET_INTER_SEED';
 export function finishBreedingSeed(homestead: Homestead, recordBook: RecordBook,
   newSeed: Seed, spot: number) {
   return function(dispatch: any) {
     if (homestead.isCultivarFull(newSeed.cultivarName, recordBook.seedMap) == false) {
-      dispatch(recordSeed(newSeed, recordBook));
-      homestead.addSeed(newSeed);
-      homestead.seedsBred = [];
+      dispatch(addAndRecordSeed(newSeed));
       dispatch({
-        type: SET_HOMESTEAD,
-        homestead: homestead
+        type: SET_BREEDING,
+        seedsBred: [],
+        breedingTimeRemaining: null,
+        breedingAgeLabel: homestead.getBreedingAgeLabel()
       });
       dispatch(setCard(null, spot));
     }
     else {
-      homestead.intermediateSeed = newSeed;
       dispatch({
-        type: SET_HOMESTEAD,
-        homestead: homestead
+        type: SET_INTER_SEED,
+        intermediateSeed: newSeed
       });
       dispatch(setCard({type:CardTypes.SEED_REPLACE_BREED, spot: spot}, spot));
     }
   }
 }
 
+export const REMOVE_SEED = 'REMOVE_SEED';
 export function replaceSeed(homestead: Homestead, oldSeed: Seed, newSeed: Seed,
   recordBook: RecordBook, reason = null) {
   return function(dispatch: any) {
-    dispatch(recordSeed(newSeed, recordBook));
-    homestead.removeSeed(oldSeed);
-    homestead.addSeed(newSeed);
+    dispatch({
+      type: REMOVE_SEED,
+      seed: oldSeed
+    });
+    dispatch(addAndRecordSeed(newSeed));
 
     if (reason == 'breed') {
-      homestead.seedsBred = [];
-    }
-
-    return {
-      type: SET_HOMESTEAD,
-      homestead: homestead
+      dispatch({
+        type: SET_BREEDING,
+        seedsBred: [],
+        breedingTimeRemaining: null,
+        breedingAgeLabel: homestead.getBreedingAgeLabel()
+      });
     }
   }
 }

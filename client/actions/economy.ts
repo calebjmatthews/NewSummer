@@ -31,7 +31,7 @@ export function buySeedAttempt(economy: Economy, homestead: Homestead, cast: Cas
       if (homestead.isCultivarFull(
         offer.item.cultivarName, recordBook.seedMap) == false) {
         dispatch(setCast(cast));
-        dispatch(addAndRecordSeed(offer.item, homestead, recordBook));
+        dispatch(addAndRecordSeed(offer.item));
       }
       else {
         homestead.intermediateSeed = offer.item;

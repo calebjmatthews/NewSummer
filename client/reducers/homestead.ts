@@ -1,5 +1,6 @@
 import {
-  ADD_SEED, GAIN_DOLLARS, SET_HOMESTEAD, SPEND_DOLLARS
+  ADD_SEED, SET_DOLLARS, SET_BREEDING, SET_HOMESTEAD, SET_BREEDING_AGE, SET_INTER_SEED,
+  REMOVE_SEED
 } from '../actions/homestead';
 import Homestead from '../models/homestead';
 
@@ -10,19 +11,37 @@ export default function
     action = null) {
 	switch(action.type) {
     case ADD_SEED:
-      action.homestead.addSeed(action.seed);
-      return action.homestead;
-    case GAIN_DOLLARS:
-      var newHomestead = new Homestead(action.homestead);
-      newHomestead.gainDollars(action.dollars);
-      return newHomestead;
-    case SPEND_DOLLARS:
-      var newHomestead = new Homestead(action.homestead);
-      newHomestead.spendDollarsIfPossible(action.dollars);
-      return newHomestead;
+      return Object.assign(new Homestead(), homestead, {
+        seedIds: [...homestead.seedIds, action.seed.id]
+      });
+    case REMOVE_SEED:
+      return Object.assign(new Homestead(), homestead, {
+        seedIds: homestead.seedIds.filter((seedId) => {
+          if (seedId == action.seed.id) { return false; }
+          else { return true; }
+        })
+      });
+    case SET_DOLLARS:
+      return Object.assign(new Homestead(), homestead, {
+        dollars: action.dollars
+      });
+    case SET_BREEDING:
+      return Object.assign(new Homestead(), homestead, {
+        seedsBred: action.seedsBred,
+        breedingTimeRemaining: action.breedingTimeRemaining,
+        breedingAgeLabel: action.breedingAgeLabel
+      });
+    case SET_BREEDING_AGE:
+      return Object.assign(new Homestead(), homestead, {
+        breedingTimeRemaining: action.breedingTimeRemaining,
+        breedingAgeLabel: action.breedingAgeLabel
+      });
+    case SET_INTER_SEED:
+      return Object.assign(new Homestead(), homestead, {
+        intermediateSeed: action.intermediateSeed
+      });
     case SET_HOMESTEAD:
-      var newHomestead = new Homestead(action.homestead);
-      return newHomestead;
+      return new Homestead(action.homestead);
 		default:
 			return homestead;
 	}

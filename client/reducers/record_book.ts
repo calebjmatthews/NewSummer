@@ -10,8 +10,10 @@ export default function
     action = null) {
 	switch(action.type) {
     case RECORD_SEED:
-      action.recordBook.recordSeed(action.seed);
-      return action.recordBook;
+      recordBook.recordSeed(action.seed);
+      return Object.assign(new RecordBook(), recordBook, {
+        seedMap: recordBook.seedMap
+      });
 		default:
 			return recordBook;
 	}

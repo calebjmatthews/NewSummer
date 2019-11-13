@@ -37,13 +37,12 @@ class Initializer extends Component {
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
     newSeed0.build(families);
-    this.props.addAndRecordSeed(
-      newSeed0, this.props.homestead, this.props.recordBook)
+    this.props.addAndRecordSeed(newSeed0, this.props.recordBook)
     let newSeed1 = new Seed({id: 1, familyName: FamilyNames.POACEAE,
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
     newSeed1.build(families);
-    this.props.addAndRecordSeed(newSeed1, this.props.homestead, this.props.recordBook);
+    this.props.addAndRecordSeed(newSeed1, this.props.recordBook);
     this.props.addModal(new Modal({
       type: ModalTypes.ALERT,
       title: 'What\s this?',

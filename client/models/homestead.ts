@@ -54,14 +54,8 @@ export default class Homestead implements HomesteadInterface {
     this.dollars = this.dollars + dollarsGained;
   }
 
-  spendDollarsIfPossible(dollarsSpent: number): boolean {
-    if (this.dollars <= dollarsSpent) {
-      return false;
-    }
-    else {
-      this.dollars = this.dollars - dollarsSpent;
-      return true;
-    }
+  spendDollars(dollarsSpent: number): void {
+    this.dollars = this.dollars - dollarsSpent;
   }
 
   addSeed(seed: Seed): void {
