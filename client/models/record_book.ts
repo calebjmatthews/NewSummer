@@ -1,15 +1,19 @@
 import Seed from './seed/seed';
 
 export default class RecordBook implements RecordBookInterface {
-  seedMap: Map<number, Seed>;
+  seedMap: { [id: number] : Seed };
   lastTime: Date;
 
   constructor(recordBook: RecordBookInterface = null) {
     if (recordBook != null) {
-      Object.assign(this, recordBook);
+      this.seedMap = {};
+      Object.keys(recordBook.seedMap).map((seedId) => {
+        this.seedMap[seedId] = new Seed(recordBook.seedMap[seedId]);
+      });
+      this.lastTime = new Date(recordBook.lastTime);
     }
     else {
-      this.seedMap = new Map();
+      this.seedMap = {};
       this.lastTime = new Date(Date.now());
     }
   }
@@ -17,7 +21,8 @@ export default class RecordBook implements RecordBookInterface {
   getCultivarNames(familyName: string = null) {
     let cultivarNames = [];
     let cultivarNameInArray = {};
-    this.seedMap.forEach((seed) => {
+    Object.keys(this.seedMap).map((seedId) => {
+      let seed = this.seedMap[seedId];
       if (familyName == null || seed.familyName == familyName) {
         if (cultivarNameInArray[seed.cultivarName] != true) {
           cultivarNames.push(seed.cultivarName);
@@ -29,11 +34,11 @@ export default class RecordBook implements RecordBookInterface {
   }
 
   recordSeed(seed: Seed) {
-    this.seedMap.set(seed.id, seed);
+    this.seedMap[seed.id] = seed;
   }
 }
 
 interface RecordBookInterface {
-  seedMap: Map<number, Seed>;
+  seedMap: { [id: number] : Seed };
   lastTime: Date;
 }

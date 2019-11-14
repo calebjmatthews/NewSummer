@@ -23,7 +23,7 @@ export function setField(field: Field) {
 }
 
 export const SET_SEED_DATA = 'SET_SEED_DATA';
-export function plantSeed(field: Field, seed: Seed, seedMap: Map<number, Seed>) {
+export function plantSeed(field: Field, seed: Seed, seedMap: { [id: number] : Seed }) {
   let newField = new Field(field);
   newField.plantSeed(seed, seedMap);
   return {
@@ -39,7 +39,7 @@ export function plantSeed(field: Field, seed: Seed, seedMap: Map<number, Seed>) 
 
 export const SET_SEEDS_AGE = 'SET_SEEDS_AGE';
 export function ageAllSeeds(fields: { [id: number] : Field }, duration = null,
-  seedMap: Map<number, Seed>) {
+  seedMap: { [id: number] : Seed }) {
   let seedAges: { [id: number] : number } = {};
   let seedAgeLabels: { [id: number] : string } = {};
   let seedMatures: { [id: number] : string } = {};
@@ -59,7 +59,7 @@ export function ageAllSeeds(fields: { [id: number] : Field }, duration = null,
 }
 
 export function harvestSeed(field: Field, homestead: Homestead,
-  seedMap: Map<number, Seed>, families: Map<string, Family>) {
+  seedMap: { [id: number] : Seed }, families: Map<string, Family>) {
   let newField = new Field(field);
   let harvestResult: RealValueReturn = newField.harvestSeed(seedMap, families);
   return function(dispatch: any) {

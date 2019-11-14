@@ -54,9 +54,9 @@ export function startVisit(travelerRole: string, cast: Cast, recordBook: RecordB
 
     if (travelerRole == TravelerRoles.SEED_TRADER) {
       let cultivarsUnlocked = recordBook.getCultivarNames(FamilyNames.POACEAE);
-      let offers = cast.members.get(travelerRole).genOffers(cultivarsUnlocked);
+      let offers = cast.members[travelerRole].genOffers(cultivarsUnlocked);
 
-      cast.members.get(travelerRole).currentOffers = offers;
+      cast.members[travelerRole].currentOffers = offers;
     }
 
     return setCast(cast);

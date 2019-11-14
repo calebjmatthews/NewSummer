@@ -34,7 +34,7 @@ class SeedReplaceCard extends Component {
   }
 
   replaceClick() {
-    let oldSeed: Seed = this.props.recordBook.seedMap.get(this.state.seedSelected);
+    let oldSeed: Seed = this.props.recordBook.seedMap[this.state.seedSelected];
     this.props.replaceSeed(this.props.homestead, oldSeed,
       this.props.homestead.intermediateSeed, this.props.recordBook, this.props.reason);
     this.props.setCard(null, this.props.spot);

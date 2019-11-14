@@ -70,11 +70,12 @@ export default class Family implements FamilyInterface {
     return cultivarName;
   }
 
-  determineStatsFromTraits(traitTotalMap: Map<string, TraitTotal>): Map<string, Stat> {
-    let statMap: Map<string, Stat> = new Map();
+  determineStatsFromTraits(traitTotalMap: Map<string, TraitTotal>):
+    { [id: string] : Stat } {
+    let statMap: { [id: string] : Stat } = {};
 
     this.stats.map((stat) => {
-      statMap.set(stat.name, utils.shallowClone(stat));
+      statMap[stat.name] = utils.shallowClone(stat);
     })
 
     for (let traitName of traitTotalMap.keys()) {
@@ -82,7 +83,7 @@ export default class Family implements FamilyInterface {
       const traitTotal = traitTotalMap.get(traitName).numerator;
       for (let index = 0; index < matchingTrait.statNames.length; index++) {
         for (let iter = 0; iter < traitTotal; iter++) {
-          statMap.get(matchingTrait.statNames[index]).value *=
+          statMap[matchingTrait.statNames[index]].value *=
             (1+matchingTrait.statModifiers[index]);
         }
       }
@@ -91,12 +92,13 @@ export default class Family implements FamilyInterface {
     return statMap;
   }
 
-  determineAdjectivesFromStats(statMap: Map<string, Stat>, cultivarName: string):
+  determineAdjectivesFromStats(statMap: { [id: string] : Stat }, cultivarName: string):
     Adjective[] {
     let adjectives: Adjective[] = [new Adjective({word: 'Common', extent: 0})];
 
 
-    statMap.forEach((stat) => {
+    Object.keys(statMap).map((statName) => {
+      const stat = statMap[statName];
       let adjective: Adjective = null;
       stat.definitions.map((definition) => {
         if (definition.comparitor == 'less than') {
@@ -141,8 +143,8 @@ export default class Family implements FamilyInterface {
     return adjectives;
   }
 
-  applyCultivarToStats(statMap: Map<string, Stat>, cultivarName: string):
-    Map<string, Stat> {
+  applyCultivarToStats(statMap: { [id: string] : Stat }, cultivarName: string):
+    { [id: string] : Stat } {
     let cultivar: Cultivar = null;
     this.cultivars.map((mCultivar) => {
       if (mCultivar.name == cultivarName) {
@@ -153,9 +155,9 @@ export default class Family implements FamilyInterface {
       for (let index = 0; index < cultivar.bonus.statNames.length; index++) {
         // Because bonuses are always treated as a dominant trait, express
         //  effect twice by default
-        statMap.get(cultivar.bonus.statNames[index]).value *=
+        statMap[cultivar.bonus.statNames[index]].value *=
           (1+cultivar.bonus.statModifiers[index]);
-        statMap.get(cultivar.bonus.statNames[index]).value *=
+        statMap[cultivar.bonus.statNames[index]].value *=
           (1+cultivar.bonus.statModifiers[index]);
       }
     }
@@ -163,13 +165,13 @@ export default class Family implements FamilyInterface {
     return statMap;
   }
 
-  determineIdealValueFromStats(statMap: Map<string, Stat>): number {
-    let value = (statMap.get(StatNames.PLANT_QUALITY).value *
-      statMap.get(StatNames.SEED_QUANTITY).value);
+  determineIdealValueFromStats(statMap: { [id: string] : Stat }): number {
+    let value = (statMap[StatNames.PLANT_QUALITY].value *
+      statMap[StatNames.SEED_QUANTITY].value);
     return value;
   }
 
-  determineRealValue(statMap: Map<string, Stat>, temperature: number,
+  determineRealValue(statMap: { [id: string] : Stat }, temperature: number,
     moisture: number, fertility: number, pests: number, disease: number):
     RealValueReturn {
     // Rows are the climate conditions of the field,
@@ -209,19 +211,19 @@ export default class Family implements FamilyInterface {
       pests:       [ 80, 108, 146, 197, 266, 359, 484],
       disease:     [ 80, 108, 146, 197, 266, 359, 484]
     }
-    let baseValue = (statMap.get(StatNames.PLANT_QUALITY).value
-      * statMap.get(StatNames.SEED_QUANTITY).value);
+    let baseValue = (statMap[StatNames.PLANT_QUALITY].value
+      * statMap[StatNames.SEED_QUANTITY].value);
     // Stat categories
     let statCats: StatFactor = new StatFactor();
-    statCats.temperature = setCats(statMap.get(StatNames.TEMP_TOLERANCE).value,
+    statCats.temperature = setCats(statMap[StatNames.TEMP_TOLERANCE].value,
       boundaries.temperature);
-    statCats.moisture = setCats(statMap.get(StatNames.MOIS_TOLERANCE).value,
+    statCats.moisture = setCats(statMap[StatNames.MOIS_TOLERANCE].value,
       boundaries.moisture);
-    statCats.fertility = setCats(statMap.get(StatNames.NITROGEN_REQUIREMENT).value,
+    statCats.fertility = setCats(statMap[StatNames.NITROGEN_REQUIREMENT].value,
       boundaries.fertility);
-    statCats.pests = setCats(statMap.get(StatNames.PEST_RESISTANCE).value,
+    statCats.pests = setCats(statMap[StatNames.PEST_RESISTANCE].value,
       boundaries.pests);
-    statCats.disease = setCats(statMap.get(StatNames.DISEASE_RESISTANCE).value,
+    statCats.disease = setCats(statMap[StatNames.DISEASE_RESISTANCE].value,
       boundaries.disease);
     let multipliers: StatFactor = {
       temperature: suitabilityMoisTemp[temperature][statCats.temperature],
@@ -337,10 +339,11 @@ export default class Family implements FamilyInterface {
   }
 
   describeFromTraitsAndStats(traitTotalMap: Map<string, TraitTotal>,
-    statMap: Map<string, Stat>): SeedDescription[] {
+    statMap: { [id: string] : Stat }): SeedDescription[] {
     let descriptions = [];
 
-    statMap.forEach((stat) => {
+    Object.keys(statMap).map((statName) => {
+      const stat = statMap[statName];
       let newDesc = null;
       stat.definitions.map((definition) => {
         let match = false;

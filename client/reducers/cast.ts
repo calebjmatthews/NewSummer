@@ -2,11 +2,12 @@ import {
   SET_CAST, SET_VISIT_AGE, SET_VISITING, SAID_HELLO
 } from '../actions/cast';
 import Cast from '../models/traveler/cast';
+import { Traveler } from '../models/traveler/traveler';
 import { startingSeedTrader } from '../instances/travelers/seed_trader';
 import { TravelerRoles } from '../models/enums/traveler_roles';
 
-let startingMembers: Map<string, any> = new Map();
-startingMembers.set(TravelerRoles.SEED_TRADER, startingSeedTrader);
+let startingMembers: { [role: string] : Traveler } = {};
+startingMembers[TravelerRoles.SEED_TRADER] = startingSeedTrader;
 
 let startingCast: Cast = new Cast({
   members: startingMembers,

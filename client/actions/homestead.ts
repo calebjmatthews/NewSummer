@@ -52,7 +52,7 @@ export function startBreedingSeeds(homestead: Homestead, seedA: Seed, seedB: See
     const newSeed = homestead.breedSeeds(seedA, seedB);
     newSeed.build(families);
     newSeed.id = Math.floor(Math.random() * 100000);
-    totalGrowingTime += (newSeed.statMap.get(StatNames.GROWING_TIME).value);
+    totalGrowingTime += (newSeed.statMap[StatNames.GROWING_TIME].value);
     newSeeds.push(newSeed);
   });
 

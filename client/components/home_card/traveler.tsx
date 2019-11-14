@@ -26,7 +26,7 @@ class TravelerCard extends Component {
 
   buySeed(seed: Seed) {
     let matchingOffer: Offer = null;
-    this.props.cast.members.get(this.props.cast.currentlyVisiting)
+    this.props.cast.members[this.props.cast.currentlyVisiting]
       .currentOffers.map((offer) => {
       if (offer.item.name == seed.name) {
         matchingOffer = offer;
@@ -44,7 +44,7 @@ class TravelerCard extends Component {
           <BackButton spot={this.props.spot} />
           {'Buy a seed:'}
           <div className="option-container">
-            {this.props.cast.members.get(this.props.cast.currentlyVisiting)
+            {this.props.cast.members[this.props.cast.currentlyVisiting]
               .currentOffers.map((offer, index) => {
               let seed = offer.item;
               let confirmText = 'Sold';

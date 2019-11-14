@@ -27,7 +27,7 @@ export default class Field implements FieldInterface {
     }
   }
 
-  plantSeed(aSeed: Seed, seedMap: Map<number, Seed>) {
+  plantSeed(aSeed: Seed, seedMap: { [id: number] : Seed }) {
     this.seedPlantedId = aSeed.id;
     this.seedsAge = 0;
     this.seedMature = false;
@@ -35,10 +35,10 @@ export default class Field implements FieldInterface {
     this.seedsAgeLabel = this.getSeedsAgeLabel(seedMap);
   }
 
-  ageSeed(duration: number = null, seedMap: Map<number, Seed>) {
+  ageSeed(duration: number = null, seedMap: { [id: number] : Seed }) {
     if (this.seedPlantedId != null) {
-      let seed = seedMap.get(this.seedPlantedId);
-      if (this.seedsAge < (seed.statMap.get(StatNames.GROWING_TIME).value * 1000)) {
+      let seed = seedMap[this.seedPlantedId];
+      if (this.seedsAge < (seed.statMap[StatNames.GROWING_TIME].value * 1000)) {
         if (duration == null) {
           this.seedsAge += AGE_INTERVAL;
         }
@@ -46,8 +46,8 @@ export default class Field implements FieldInterface {
           this.seedsAge += duration;
         }
         this.seedsAgeLabel = this.getSeedsAgeLabel(seedMap);
-        if (this.seedsAge >= (seed.statMap.get(StatNames.GROWING_TIME).value * 1000)) {
-          this.seedsAge = (seed.statMap.get(StatNames.GROWING_TIME).value * 1000);
+        if (this.seedsAge >= (seed.statMap[StatNames.GROWING_TIME].value * 1000)) {
+          this.seedsAge = (seed.statMap[StatNames.GROWING_TIME].value * 1000);
           this.seedMature = true;
         }
       }
@@ -57,8 +57,8 @@ export default class Field implements FieldInterface {
     }
   }
 
-  getSeedsNameLabel(seedMap: Map<number, Seed>) {
-    let seed = seedMap.get(this.seedPlantedId);
+  getSeedsNameLabel(seedMap: { [id: number] : Seed }) {
+    let seed = seedMap[this.seedPlantedId];
     if (seed != null) {
       return seed.name;
     }
@@ -67,10 +67,10 @@ export default class Field implements FieldInterface {
     }
   }
 
-  getSeedsAgeLabel(seedMap: Map<number, Seed>) {
+  getSeedsAgeLabel(seedMap: { [id: number] : Seed }) {
     if (this.seedPlantedId != null) {
-      let seed = seedMap.get(this.seedPlantedId);
-      let remainingTime = ((seed.statMap.get(StatNames.GROWING_TIME).value * 1000)
+      let seed = seedMap[this.seedPlantedId];
+      let remainingTime = ((seed.statMap[StatNames.GROWING_TIME].value * 1000)
         - this.seedsAge);
       let ageLabel = utils.formatDuration(remainingTime);
       if (ageLabel != '0s') {
@@ -85,8 +85,8 @@ export default class Field implements FieldInterface {
     }
   }
 
-  harvestSeed(seedMap: Map<number, Seed>, families: Map<string, Family>) {
-    let seed = seedMap.get(this.seedPlantedId);
+  harvestSeed(seedMap: { [id: number] : Seed }, families: Map<string, Family>) {
+    let seed = seedMap[this.seedPlantedId];
     this.harvestResult = seed.determineRealValue(seed.statMap, this.temperature,
       this.moisture, this.fertility, this.pests, this.disease, families);
     this.seedPlantedId = null;

@@ -64,7 +64,7 @@ class SeedDescription extends Component {
           <div className="seed-value-container">
             <div>
               {utils.formatDuration(
-                seed.statMap.get(StatNames.GROWING_TIME).value * 1000)}
+                seed.statMap[StatNames.GROWING_TIME].value * 1000)}
             </div>
             <div>
               {utils.formatMoney(

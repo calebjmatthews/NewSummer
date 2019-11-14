@@ -16,6 +16,12 @@ export default class Homestead implements HomesteadInterface {
   constructor(homestead: HomesteadInterface = null) {
     if (homestead != null) {
       Object.assign(this, homestead);
+      if (homestead.intermediateSeed != null) {
+        this.intermediateSeed = new Seed(homestead.intermediateSeed);
+      }
+      homestead.seedsBred.map((seedBred) => {
+        this.seedsBred.push(new Seed(seedBred));
+      });
     }
     else {
       this.dollars = 10;
@@ -29,7 +35,7 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  isCultivarFull(cultivarName: string, seedMap: Map<number, Seed>): boolean {
+  isCultivarFull(cultivarName: string, seedMap: { [id: number] : Seed }): boolean {
     let count = this.getCultivarCount(cultivarName, seedMap);
     if (count >= this.maxSeeds) {
       return true;
@@ -39,10 +45,10 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  getCultivarCount(cultivarName: string, seedMap: Map<number, Seed>): number {
+  getCultivarCount(cultivarName: string, seedMap: { [id: number] : Seed }): number {
     let count = 0;
     this.seedIds.map((seedId) => {
-      let seed = seedMap.get(seedId);
+      let seed = seedMap[seedId];
       if (seed.cultivarName == cultivarName)  {
         count++;
       }
@@ -99,18 +105,18 @@ export default class Homestead implements HomesteadInterface {
     }
   }
 
-  getAllSeeds(seedMap: Map<number, Seed>): Seed[] {
+  getAllSeeds(seedMap: { [id: number] : Seed }): Seed[] {
     let seeds: Seed[] = []
     this.seedIds.map((seedId) => {
-      seeds.push(seedMap.get(seedId));
+      seeds.push(seedMap[seedId]);
     });
     return seeds;
   }
 
-  getAllMatchingSeeds(cultivarName: string, seedMap: Map<number, Seed>): Seed[] {
+  getAllMatchingSeeds(cultivarName: string, seedMap: { [id: number] : Seed }): Seed[] {
     let matchingSeeds: Seed[] = []
     this.seedIds.map((seedId) => {
-      let seed = seedMap.get(seedId);
+      let seed = seedMap[seedId];
       if (seed.cultivarName == cultivarName) {
         matchingSeeds.push(seed);
       }

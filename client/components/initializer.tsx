@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { addModal } from '../actions/modal';
-import { addAndRecordSeed, ageBreeding } from '../actions/homestead';
-import { ageAllSeeds } from '../actions/field';
-import { startVisit, ageVisit } from '../actions/cast';
+import { addAndRecordSeed, ageBreeding, setHomestead } from '../actions/homestead';
+import { ageAllSeeds, setFields } from '../actions/field';
+import { setRecordBook } from '../actions/record_book';
+import { startVisit, ageVisit, setCast } from '../actions/cast';
 
 import Modal from '../models/modal';
 import Seed from '../models/seed/seed';
@@ -13,12 +14,14 @@ import Field from '../models/field';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
 import Cast from '../models/traveler/cast';
+import StorageHandler from '../models/storage_handler';
+const storageHandler = new StorageHandler();
 import { families } from '../instances/families';
 import { ModalTypes } from '../models/enums/modal_types';
 import { CultivarNames } from '../models/enums/cultivar_names';
 import { FamilyNames } from '../models/enums/family_names';
 import { TravelerRoles } from '../models/enums/traveler_roles';
-import { AGE_INTERVAL } from '../constants';
+import { AGE_INTERVAL, STORAGE_SET_INTERVAL } from '../constants';
 
 class Initializer extends Component {
   props: InitializerProps;
@@ -26,9 +29,16 @@ class Initializer extends Component {
   constructor(props: InitializerProps) {
     super(props);
 
-    this.initialSeeds();
-    this.props.startVisit(TravelerRoles.SEED_TRADER, this.props.cast,
-      this.props.recordBook);
+    let localStorages = storageHandler.getLocalStorages();
+    if (localStorages == null) {
+      this.initialSeeds();
+      this.props.startVisit(TravelerRoles.SEED_TRADER, this.props.cast,
+        this.props.recordBook);
+    }
+    else {
+      this.parseLocalStorages(localStorages);
+    }
+
     this.initIntervals();
   }
 
@@ -59,6 +69,21 @@ class Initializer extends Component {
       this.props.ageBreeding(this.props.homestead);
       this.props.ageVisit(this.props.cast);
     }, AGE_INTERVAL);
+    setInterval(() => {
+      storageHandler.setLocalStorages({
+        fields: this.props.fields,
+        homestead: this.props.homestead,
+        recordBook: this.props.recordBook,
+        cast: this.props.cast
+      });
+    }, STORAGE_SET_INTERVAL);
+  }
+
+  parseLocalStorages(localStorages: any) {
+    this.props.setHomestead(new Homestead(localStorages.homestead));
+    this.props.setFields(localStorages.fields);
+    this.props.setRecordBook(new RecordBook(localStorages.recordBook));
+    this.props.setCast(new Cast(localStorages.cast));
   }
 
   render() {
@@ -78,6 +103,10 @@ interface InitializerProps {
   ageBreeding: Function;
   startVisit: Function;
   ageVisit: Function;
+  setHomestead: Function;
+  setFields: Function;
+  setRecordBook: Function;
+  setCast: Function;
 }
 
 function mapStateToProps({ homestead, recordBook, fields, cast }) {
@@ -86,7 +115,8 @@ function mapStateToProps({ homestead, recordBook, fields, cast }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    addModal, addAndRecordSeed, ageAllSeeds, ageBreeding, startVisit, ageVisit
+    addModal, addAndRecordSeed, ageAllSeeds, ageBreeding, startVisit, ageVisit,
+    setHomestead, setFields, setRecordBook, setCast
   }, dispatch)
 }
 

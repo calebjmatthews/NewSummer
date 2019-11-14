@@ -17,7 +17,8 @@ export function buySeedAttempt(economy: Economy, homestead: Homestead, cast: Cas
   if (homestead.dollars >= offer.price) {
     return function(dispatch: any) {
       let matchingTraveler: Traveler = null;
-      cast.members.forEach((traveler) => {
+      Object.keys(cast.members).map((travelerRole) => {
+        let traveler = cast.members[travelerRole];
         if (traveler.role == offer.travelerRole) {
           matchingTraveler = traveler;
         }

@@ -1,9 +1,12 @@
-import { Traveler } from './traveler';
+import Seed from '../seed/seed';
+import Offer from './offer';
+import { SeedTrader } from '../../instances/travelers/seed_trader';
+import { TravelerRoles } from '../enums/traveler_roles';
 import { TRAVELER_DURATION, AGE_INTERVAL, CHECK_INTERVAL }
   from '../../constants';
 
 export default class Cast implements CastInterface {
-  members: Map<string, Traveler>;
+  members: { [role: string] : any };
   currentlyVisiting: string;
   visitRemaining: number;
   saidHello: boolean;
@@ -11,6 +14,19 @@ export default class Cast implements CastInterface {
   constructor(cast: CastInterface = null) {
     if (cast != null) {
       Object.assign(this, cast);
+      this.members = {};
+      Object.keys(cast.members).map((memberRole) => {
+        let rawMember = cast.members[memberRole];
+        let offers: Offer[] = [];
+        if (memberRole == TravelerRoles.SEED_TRADER) {
+          rawMember.currentOffers.map((rawOffer) => {
+            let seed = new Seed(rawOffer.item);
+            offers.push(new Offer({...rawOffer, item: seed}));
+          });
+          this.members[memberRole] =
+            new SeedTrader({...rawMember, currentOffers: offers});
+        }
+      });
     }
   }
 
@@ -28,7 +44,8 @@ export default class Cast implements CastInterface {
 
     let visitorRole: string = null;
     if (this.currentlyVisiting == null) {
-      this.members.forEach((member) => {
+      Object.keys(this.members).map((memberRole) => {
+        let member = this.members[memberRole];
         let chance = 1 / ((TRAVELER_DURATION / CHECK_INTERVAL)
           / member.frequency);
 
@@ -73,7 +90,7 @@ export default class Cast implements CastInterface {
 }
 
 interface CastInterface {
-  members: Map<string, Traveler>;
+  members: { [role: string] : any };
   currentlyVisiting: string;
   visitRemaining: number;
   saidHello: boolean;
