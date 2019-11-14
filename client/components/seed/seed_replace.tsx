@@ -98,7 +98,7 @@ interface SeedReplaceCardProps {
   spot: number;
   reason: string;
 
-  fields: Map<number, Field>;
+  fields: { [id: number] : Field };
   homestead: Homestead;
   cardState: CardState;
   recordBook: RecordBook;

@@ -22,7 +22,7 @@ class PlantingFieldCard extends Component {
   }
 
   seedConfirmPlanting(seed: Seed) {
-    this.props.plantSeed(this.props.fields.get(this.props.fieldId), seed,
+    this.props.plantSeed(this.props.fields[this.props.fieldId], seed,
       this.props.recordBook.seedMap);
     this.props.setCard(null, this.props.spot);
   }
@@ -40,7 +40,7 @@ class PlantingFieldCard extends Component {
 }
 
 class PlantingProps {
-  fields: Map<number, Field>;
+  fields: { [id: number] : Field };
   recordBook: RecordBook;
 
   plantSeed: Function;

@@ -15,11 +15,11 @@ class HarvestResultFieldCard extends Component {
   }
 
   okClick() {
-    this.props.clearHarvestResult(this.props.fields.get(this.props.fieldId));
+    this.props.clearHarvestResult(this.props.fields[this.props.fieldId]);
   }
 
   render() {
-    let harvestResult = this.props.fields.get(this.props.fieldId).harvestResult;
+    let harvestResult = this.props.fields[this.props.fieldId].harvestResult;
     return (
       <div className="game-card field-card">
         <div className="harvest-body">
@@ -67,7 +67,7 @@ class HarvestResultFieldCard extends Component {
 }
 
 interface HarvestResultFieldCardProps {
-  fields: Map<number, Field>;
+  fields: { [id: number] : Field };
   fieldId: number;
 
   clearHarvestResult: Function;

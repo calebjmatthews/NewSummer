@@ -23,7 +23,7 @@ class StateDisplayFieldCard extends Component {
   }
 
   fieldCardClick() {
-    let field = this.props.fields.get(this.props.fieldId);
+    let field = this.props.fields[this.props.fieldId];
     if (field.seedPlantedId == null) {
       this.props.setCard({type: CardTypes.SEED_PLANTING}, this.props.spot);
     }
@@ -36,7 +36,7 @@ class StateDisplayFieldCard extends Component {
   }
 
   render() {
-    let field = this.props.fields.get(this.props.fieldId);
+    let field = this.props.fields[this.props.fieldId];
 
     if (field.seedPlantedId != null && field.seedMature == false) {
       return (
@@ -66,7 +66,7 @@ class StateDisplayFieldCard extends Component {
 }
 
 interface FieldCardProps {
-  fields: Map<number, Field>;
+  fields: { [id: number] : Field };
   homestead: Homestead;
   recordBook: RecordBook;
   fieldId: number;

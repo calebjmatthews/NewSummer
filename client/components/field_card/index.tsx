@@ -18,7 +18,7 @@ class FieldCard extends Component {
   }
 
   render() {
-    let field = this.props.fields.get(this.props.fieldId);
+    let field = this.props.fields[this.props.fieldId];
     let card = this.props.cardState.cards[this.props.spot];
 
     if (field.harvestResult != null) {
@@ -45,7 +45,7 @@ class FieldCard extends Component {
 }
 
 interface FieldCardProps {
-  fields: Map<number, Field>;
+  fields: { [id: number] : Field };
   cardState: CardState;
 
   fieldId: number;

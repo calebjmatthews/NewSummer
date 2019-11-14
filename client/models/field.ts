@@ -21,8 +21,10 @@ export default class Field implements FieldInterface {
   pests: number;
   disease: number;
 
-  constructor(field: FieldInterface) {
-    Object.assign(this, field);
+  constructor(field: FieldInterface = null) {
+    if (field != null) {
+      Object.assign(this, field);
+    }
   }
 
   plantSeed(aSeed: Seed, seedMap: Map<number, Seed>) {

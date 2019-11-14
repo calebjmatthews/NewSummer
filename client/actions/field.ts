@@ -7,7 +7,7 @@ import RealValueReturn from '../models/seed/real_value_return';
 import { gainDollars } from './homestead';
 
 export const SET_FIELDS = 'SET_FIELDS';
-export function setFields(fields: Map<number, Field>) {
+export function setFields(fields: { [id: number] : Field }) {
   return {
     type: SET_FIELDS,
     fields: fields
@@ -22,29 +22,56 @@ export function setField(field: Field) {
   };
 }
 
+export const SET_SEED_DATA = 'SET_SEED_DATA';
 export function plantSeed(field: Field, seed: Seed, seedMap: Map<number, Seed>) {
-  field.plantSeed(seed, seedMap);
-  return setField(field);
+  let newField = new Field(field);
+  newField.plantSeed(seed, seedMap);
+  return {
+    type: SET_SEED_DATA,
+    fieldId: newField.id,
+    seedPlantedId: newField.seedPlantedId,
+    seedsAge: 0,
+    seedMature: false,
+    seedsNameLabel: newField.seedsNameLabel,
+    seedsAgeLabel: newField.seedsAgeLabel
+  }
 }
 
-export function ageAllSeeds(fields: Map<number, Field>, duration = null,
+export const SET_SEEDS_AGE = 'SET_SEEDS_AGE';
+export function ageAllSeeds(fields: { [id: number] : Field }, duration = null,
   seedMap: Map<number, Seed>) {
-  fields.forEach((field) => {
-    field.ageSeed(duration, seedMap);
-  })
-	return setFields(fields);
+  let seedAges: { [id: number] : number } = {};
+  let seedAgeLabels: { [id: number] : string } = {};
+  let seedMatures: { [id: number] : string } = {};
+  Object.keys(fields).map((fieldId) => {
+    let newField = new Field(fields[fieldId]);
+    newField.ageSeed(duration, seedMap);
+    seedAges[fieldId] = newField.seedsAge;
+    seedAgeLabels[fieldId] = newField.seedsAgeLabel;
+    seedMatures[fieldId] = newField.seedMature;
+  });
+	return {
+    type: SET_SEEDS_AGE,
+    seedAges: seedAges,
+    seedAgeLabels: seedAgeLabels,
+    seedMatures: seedMatures
+  };
 }
 
 export function harvestSeed(field: Field, homestead: Homestead,
   seedMap: Map<number, Seed>, families: Map<string, Family>) {
-  let harvestResult: RealValueReturn = field.harvestSeed(seedMap, families);
+  let newField = new Field(field);
+  let harvestResult: RealValueReturn = newField.harvestSeed(seedMap, families);
   return function(dispatch: any) {
     dispatch(gainDollars(harvestResult.value, homestead));
-    dispatch(setField(field));
+    dispatch(setField(newField));
   }
 }
 
+export const CLEAR_HARVEST_RESULT = 'CLEAR_HARVEST_RESULT';
 export function clearHarvestResult(field: Field) {
-  field.harvestResult = null;
-  return setField(field);
+  return {
+    type: CLEAR_HARVEST_RESULT,
+    fieldId: field.id
+  }
 }

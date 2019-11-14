@@ -69,7 +69,7 @@ class Initializer extends Component {
 interface InitializerProps {
   homestead: Homestead;
   recordBook: RecordBook;
-  fields: Map<number, Field>;
+  fields: { [id: number] : Field };
   cast: Cast;
 
   addModal: Function;
