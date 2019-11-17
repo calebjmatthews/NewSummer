@@ -83,7 +83,7 @@ export default class Homestead implements HomesteadInterface {
   ageBreeding(duration: number = null): void {
     if (this.seedsBred.length > 0 && this.breedingTimeRemaining > 0) {
       if (duration != null) {
-        this.breedingTimeRemaining -= duration;
+        this.breedingTimeRemaining -= (duration / 1000);
       }
       else {
         this.breedingTimeRemaining -= (AGE_INTERVAL / 1000);

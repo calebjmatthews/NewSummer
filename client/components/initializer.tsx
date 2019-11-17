@@ -128,6 +128,7 @@ class Initializer extends Component {
 
   applyLostTime(diff: number) {
     let messages: string[] = [];
+
     let fields: { [id: number] : Field } = {};
     let dollars = 0;
     Object.keys(this.props.fields).map((fieldId) => {
@@ -144,6 +145,18 @@ class Initializer extends Component {
       }
       fields[fieldId] = field;
     });
+
+    if (this.props.homestead.breedingTimeRemaining > 0) {
+      this.props.homestead.ageBreeding(diff);
+      this.props.setHomestead(this.props.homestead);
+      if (this.props.homestead.breedingTimeRemaining == 0) {
+        messages.push('Experimental plants finished growing!');
+      }
+      else {
+        messages.push('Experimental plants grew.');
+      }
+    }
+
     return {fields: fields, messages: messages, dollars: dollars};
   }
 
