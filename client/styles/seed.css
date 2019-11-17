@@ -44,6 +44,18 @@
   background: #000;
   border-radius: 50%;
 }
+.seed-icon-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  max-width: 38px;
+  min-height: 38px;
+  max-height: 38px;
+  font-size: 1.5em;
+  background: #000;
+  border-radius: 50%;
+}
 
 .seed-value-container {
   display: flex;

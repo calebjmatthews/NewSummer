@@ -50,3 +50,25 @@ button:disabled {
   border-radius: 50%;
   font-size: 0.8em;
 }
+
+.tooltip {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  min-width: 4em;
+  max-width: 8em;
+  min-height: 3em;
+  background: #253e18;
+  color: #fff;
+  border: 1px solid #fff;
+  transition: opacity 0.4s ease-in-out;
+}
+.tooltip.invisible {
+  display: flex;
+  opacity: 0;
+}
+.tooltip.visible {
+  display: flex;
+  opacity: 0.95;
+}

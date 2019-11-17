@@ -11,6 +11,7 @@ import { utils } from '../../models/utils';
 import { StatNames } from '../../models/enums/stat_names';
 import { CardTypes } from '../../models/enums/card_types';
 
+import Tooltip from '../tooltip';
 import { setCard } from '../../actions/card';
 
 class SeedDescription extends Component {
@@ -51,12 +52,15 @@ class SeedDescription extends Component {
           {seed.name}
           <div className="seed-icon-container">
             {seed.descriptions.map((description) => {
-              let  transStyle = calcTransStyle(description.iconStyle);
-              return (
-                <div key={description.title} className="seed-icon"
-                  style={transStyle}>
+              let iconStyle = calcIconStyle(description.iconStyle);
+              let tooltipParent = (
+                <div className="seed-icon" style={iconStyle}>
                   <FontAwesomeIcon icon={fontAwesome.get(description.icon)} />
                 </div>
+              );
+              return (
+                <Tooltip key={description.title} iconStyle={iconStyle}
+                  description={description} parentElement={tooltipParent} />
               );
             })}
           </div>
@@ -86,7 +90,7 @@ class SeedDescription extends Component {
   }
 }
 
-function calcTransStyle(iconStyle: string) {
+function calcIconStyle(iconStyle: string) {
   if (iconStyle == 'positive') {
     return { background: '#25821b' };
   }
