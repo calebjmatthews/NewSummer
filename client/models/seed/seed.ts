@@ -16,6 +16,7 @@ export default class Seed implements SeedInterface {
   methodObtained: string;
   dateObtained: Date;
   parentsIds: number[];
+  numeral: string;
   cultivarName: string;
   genome: Gene[];
 
@@ -44,7 +45,8 @@ export default class Seed implements SeedInterface {
       families);
     this.statMap = this.applyCultivarToStats(this.statMap, this.cultivarName, families);
 
-    this.name = this.adjectives[0].word + ' ' + this.cultivarName;
+    this.name = this.adjectives[0].word + ' ' + this.cultivarName
+      + (this.numeral != undefined ? this.numeral : '');
 
     this.idealValue = this.determineIdealValueFromStats(this.statMap, families);
     this.descriptions = this.describeFromTraitsAndStats(this.traitTotalMap,
@@ -195,7 +197,7 @@ export default class Seed implements SeedInterface {
 
     const newSeed = new Seed({id: null, familyName: this.familyName,
       methodObtained:'Bred', dateObtained: new Date(Date.now()),
-      parentsIds: [this.id, otherParent.id], genome: newGenome});
+      parentsIds: [this.id, otherParent.id], numeral: '', genome: newGenome});
     return newSeed;
   }
 
@@ -229,6 +231,7 @@ interface SeedInterface {
   methodObtained: string;
   dateObtained: Date;
   parentsIds: number[];
+  numeral?: string;
   cultivarName?: string;
   genome?: Gene[];
 

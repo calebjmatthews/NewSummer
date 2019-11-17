@@ -85,6 +85,66 @@ class Utils {
     }
     return (sign + '$' + Math.round(Math.abs(dollars)).toString());
   }
+
+  numberToRoman(num: number): string {
+    let roman = {
+      M: 1000,
+      CM: 900,
+      D: 500,
+      CD: 400,
+      C: 100,
+      XC: 90,
+      L: 50,
+      XL: 40,
+      X: 10,
+      IX: 9,
+      V: 5,
+      IV: 4,
+      I: 1
+    };
+    let str = '';
+
+    for (var i of Object.keys(roman)) {
+      var q = Math.floor(num / roman[i]);
+      num -= q * roman[i];
+      str += i.repeat(q);
+    }
+
+    return str;
+  }
+
+  romanToNumber (romanNumeral: string): number {
+    var DIGIT_VALUES = {
+      I: 1,
+      V: 5,
+      X: 10,
+      L: 50,
+      C: 100,
+      D: 500,
+      M: 1000
+    };
+
+    let result = 0;
+    let input = romanNumeral.split('');
+
+    for (var i = 0; i < input.length; i++) {
+      var currentLetter = DIGIT_VALUES[input[i]];
+      var nextLetter = DIGIT_VALUES[input[i + 1]];
+      if (currentLetter === undefined) {
+        return null;
+      }
+      else {
+        if (currentLetter < nextLetter) {
+          result += nextLetter - currentLetter;
+          i++;
+        } else {
+          result += currentLetter;
+        }
+      }
+    };
+
+    return result;
+  }
 }
 
 export let utils = new Utils();
