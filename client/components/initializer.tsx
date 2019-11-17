@@ -59,7 +59,7 @@ class Initializer extends Component {
     this.props.addAndRecordSeed(newSeed1, this.props.recordBook);
     this.props.addModal(new Modal({
       type: ModalTypes.ALERT,
-      title: 'What\s this?',
+      title: 'What\'s this?',
       messages: [('There are a couple seeds here, just asking to be planted. '
         + 'Better pick them up!'),
         ('Gained ' + newSeed0.name + '.'),
@@ -154,6 +154,25 @@ class Initializer extends Component {
       }
       else {
         messages.push('Experimental plants grew.');
+      }
+    }
+
+    if (this.props.cast.currentlyVisiting != null) {
+      if (this.props.cast.saidHello == true) {
+        let travelerRole =
+          this.props.cast.members[this.props.cast.currentlyVisiting].role;
+        this.props.cast.ageVisit(diff);
+        this.props.setCast(this.props.cast);
+        if (this.props.cast.currentlyVisiting == null) {
+          messages.push('The ' + travelerRole + ' left.');
+        }
+      }
+    }
+    else {
+      let travelerRes = this.props.cast.checkForVisitStart(diff);
+      if (travelerRes != null) {
+        this.props.startVisit(travelerRes, this.props.cast, this.props.recordBook);
+        messages.push('The ' + travelerRes + ' is visiting!');
       }
     }
 

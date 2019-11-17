@@ -42,7 +42,7 @@ export default class Cast implements CastInterface {
       rolls += Math.floor(duration / CHECK_INTERVAL);
     }
 
-    let visitorRole: string = null;
+    let travelerRole: string = null;
     if (this.currentlyVisiting == null) {
       Object.keys(this.members).map((memberRole) => {
         let member = this.members[memberRole];
@@ -56,15 +56,16 @@ export default class Cast implements CastInterface {
 
         let roll = Math.random();
         if (roll < chance) {
-          visitorRole = member.role;
+          travelerRole = member.role;
         }
       });
     }
-    return visitorRole;
+
+    return travelerRole;
   }
 
-  startVisit(travelerName: string): void {
-    this.currentlyVisiting = travelerName;
+  startVisit(travelerRole: string): void {
+    this.currentlyVisiting = travelerRole;
     this.visitRemaining = TRAVELER_DURATION;
     this.saidHello = false;
   }
@@ -77,7 +78,8 @@ export default class Cast implements CastInterface {
   ageVisit(duration = null): void {
     if (this.currentlyVisiting != null && this.saidHello == true) {
       if (duration != null) {
-        this.visitRemaining -= duration;
+        console.log(this.visitRemaining);
+        this.visitRemaining -= (duration);
       }
       else {
         this.visitRemaining -= AGE_INTERVAL;

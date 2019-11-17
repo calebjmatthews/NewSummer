@@ -10,8 +10,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 108px;
-  max-width: 108px;
+  min-width: 8em;
+  max-width: 8em;
   padding: 5px;
   border: 1px solid #fff;
   background-color: rgba(0, 0, 0, 0);
