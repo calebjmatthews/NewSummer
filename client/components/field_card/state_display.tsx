@@ -5,6 +5,9 @@ import { bindActionCreators } from 'redux';
 import Field from '../../models/field';
 import Homestead from '../../models/homestead';
 import RecordBook from '../../models/record_book';
+import Card from '../../models/card';
+import Seed from '../../models/seed/seed';
+import Family from '../../models/seed/family';
 import { families } from '../../instances/families';
 import { CardTypes } from '../../models/enums/card_types';
 
@@ -25,7 +28,8 @@ class StateDisplayFieldCard extends Component {
   fieldCardClick() {
     let field = this.props.fields[this.props.fieldId];
     if (field.seedPlantedId == null) {
-      this.props.setCard({type: CardTypes.SEED_PLANTING}, this.props.spot);
+      this.props.setCard({type: CardTypes.SEED_PLANTING, spot: this.props.spot},
+        this.props.spot);
     }
     else {
       if (field.seedMature == true) {
@@ -72,8 +76,9 @@ interface FieldCardProps {
   fieldId: number;
   spot: number;
 
-  setCard: Function;
-  harvestSeed: Function;
+  setCard: (card: Card, spot: number) => any;
+  harvestSeed: (field: Field, homestead: Homestead,
+    seedMap: { [id: number] : Seed }, families: Map<string, Family>) => any;
 }
 
 function mapStateToProps({ fields, homestead, recordBook }) {

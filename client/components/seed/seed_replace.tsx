@@ -12,6 +12,7 @@ import Field from '../../models/field';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
+import Card from '../../models/card';
 
 class SeedReplaceCard extends Component {
   props: SeedReplaceCardProps;
@@ -29,7 +30,7 @@ class SeedReplaceCard extends Component {
 
   cancelClick() {
     if (this.props.reason == 'breed') {
-      this.props.setCard({type: null}, this.props.spot);
+      this.props.setCard(null, this.props.spot);
     }
   }
 
@@ -102,8 +103,9 @@ interface SeedReplaceCardProps {
   homestead: Homestead;
   cardState: CardState;
   recordBook: RecordBook;
-  setCard: Function;
-  replaceSeed: Function;
+  setCard: (card: Card, spot: number) => any;
+  replaceSeed: (homestead: Homestead, oldSeed: Seed, newSeed: Seed,
+    recordBook: RecordBook, reason: string) => any;
 }
 
 interface SeedReplaceCardState {

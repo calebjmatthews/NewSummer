@@ -14,6 +14,7 @@ import RecordBook from '../../models/record_book';
 import Seed from '../../models/seed/seed';
 import Offer from '../../models/traveler/offer';
 import Economy from '../../models/economy';
+import Card from '../../models/card';
 
 class TravelerCard extends Component {
   props: TravelerCardProps;
@@ -81,8 +82,9 @@ interface TravelerCardProps {
   homestead: Homestead;
   recordBook: RecordBook;
   economy: Economy;
-  buySeedAttempt: Function;
-  setCard: Function;
+  buySeedAttempt: (economy: Economy, homestead: Homestead, cast: Cast,
+    recordBook: RecordBook, offer: Offer, spot: number) => any;
+  setCard: (cards: Card) => any;
 }
 
 function mapStateToProps({ cast, homestead, economy, recordBook }) {

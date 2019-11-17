@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setCard } from '../../actions/card';
 import SeedDetailCard from '../seed/seed_detail';
 import ExperimentalGarden from './experimental_garden';
 import BreedingPairHomeCard from './breeding_pair';
@@ -66,10 +65,4 @@ function mapStateToProps({ storehouseState, economyState, fieldsState,
     recordBookState, cardState, autoIncrementState }
 }
 
-function mapDispatchToProps(dispatch: any) {
-  return bindActionCreators({
-    setCard
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeCard);
+export default connect(mapStateToProps)(HomeCard);

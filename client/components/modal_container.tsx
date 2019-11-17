@@ -57,7 +57,7 @@ class ModalContainer extends Component {
 interface ModalContainerProps {
   modals: Modal[];
 
-  dismissModal: Function;
+  dismissModal: () => any;
 }
 
 function mapStateToProps({ modals }) {

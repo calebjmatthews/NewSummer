@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fontAwesome } from '../../instances/font_awesome';
 
 import Seed from '../../models/seed/seed';
+import Card from '../../models/card';
 import { families } from '../../instances/families';
 import { utils } from '../../models/utils';
 import { StatNames } from '../../models/enums/stat_names';
@@ -27,8 +28,8 @@ class SeedDescription extends Component {
   }
 
   seedDetailClick(seed: Seed) {
-    this.props.setCard({type: CardTypes.SEED_DETAIL, selectedSeed: seed},
-      this.props.spot);
+    this.props.setCard({type: CardTypes.SEED_DETAIL, selectedSeed: seed,
+      spot: this.props.spot}, this.props.spot);
   }
 
   render() {
@@ -98,7 +99,7 @@ function calcTransStyle(iconStyle: string) {
 }
 
 class SeedDescriptionProps {
-  setCard: Function;
+  setCard: (card: Card, spot: number) => any;
 
   spot: number;
   seed: Seed;

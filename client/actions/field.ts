@@ -38,7 +38,7 @@ export function plantSeed(field: Field, seed: Seed, seedMap: { [id: number] : Se
 }
 
 export const SET_SEEDS_AGE = 'SET_SEEDS_AGE';
-export function ageAllSeeds(fields: { [id: number] : Field }, duration = null,
+export function ageAllSeeds(fields: { [id: number] : Field }, duration: number = null,
   seedMap: { [id: number] : Seed }) {
   let seedAges: { [id: number] : number } = {};
   let seedAgeLabels: { [id: number] : string } = {};

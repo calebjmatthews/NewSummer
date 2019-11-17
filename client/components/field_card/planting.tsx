@@ -7,6 +7,7 @@ import Seed from '../../models/seed/seed';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
+import Card from '../../models/card';
 
 import { plantSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
@@ -43,8 +44,8 @@ class PlantingProps {
   fields: { [id: number] : Field };
   recordBook: RecordBook;
 
-  plantSeed: Function;
-  setCard: Function;
+  plantSeed: (field: Field, seed: Seed, seedMap: { [id: number] : Seed }) => any;
+  setCard: (card: Card, spot: number) => any;
 
   fieldId: number;
   spot: number;

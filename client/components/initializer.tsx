@@ -51,12 +51,12 @@ class Initializer extends Component {
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
     newSeed0.build(families);
-    this.props.addAndRecordSeed(newSeed0, this.props.recordBook)
+    this.props.addAndRecordSeed(newSeed0)
     let newSeed1 = new Seed({id: 1, familyName: FamilyNames.POACEAE,
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
     newSeed1.build(families);
-    this.props.addAndRecordSeed(newSeed1, this.props.recordBook);
+    this.props.addAndRecordSeed(newSeed1);
     this.props.addModal(new Modal({
       type: ModalTypes.ALERT,
       title: 'What\'s this?',
@@ -226,18 +226,19 @@ interface InitializerProps {
   fields: { [id: number] : Field };
   cast: Cast;
 
-  addModal: Function;
-  addAndRecordSeed: Function;
-  ageAllSeeds: Function;
-  ageBreeding: Function;
-  startVisit: Function;
-  ageVisit: Function;
-  setHomestead: Function;
-  setFields: Function;
-  setRecordBook: Function;
-  setCast: Function;
-  setLastTime: Function;
-  gainDollars: Function;
+  addModal: (modal: Modal) => any;
+  addAndRecordSeed: (seed: Seed) => any;
+  ageAllSeeds: (fields: { [id: number] : Field }, duration: number,
+    seedMap: { [id: number] : Seed }) => any;
+  ageBreeding: (homestead: Homestead, duration?: number) => any;
+  startVisit: (travelerRole: string, cast: Cast, recordBook: RecordBook) => any;
+  ageVisit: (cast: Cast, duration?: number) => any;
+  setHomestead: (homestead: Homestead) => any;
+  setFields: (fields: { [id: number] : Field }) => any;
+  setRecordBook: (recordBook: RecordBook) => any;
+  setCast: (cast: Cast) => any;
+  setLastTime: () => any;
+  gainDollars: (dollars: number, homestead: Homestead) => any;
 }
 
 function mapStateToProps({ homestead, recordBook, fields, cast }) {

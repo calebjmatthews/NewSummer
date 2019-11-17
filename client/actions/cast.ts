@@ -14,7 +14,7 @@ export function setCast(cast: Cast) {
 
 export const SET_VISIT_AGE = 'SET_VISIT_AGE';
 export const SET_VISITING = 'SET_VISITING';
-export function ageVisit(cast: Cast, duration = null) {
+export function ageVisit(cast: Cast, duration: number = null) {
   if (cast.currentlyVisiting != null && cast.saidHello == true) {
     cast.ageVisit(duration);
     if (cast.currentlyVisiting != null) {

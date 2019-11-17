@@ -36,7 +36,7 @@ interface BackButtonProps {
   spot: number;
 
   cardState: CardState;
-  revertCard: Function;
+  revertCard: (spot: number) => any;
 }
 
 function mapStateToProps({ cardState }) {

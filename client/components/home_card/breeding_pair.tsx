@@ -13,6 +13,7 @@ import Seed from '../../models/seed/seed';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
+import Card from '../../models/card';
 import { CardTypes } from '../../models/enums/card_types';
 
 class BreedingPairHomeCard extends Component {
@@ -27,17 +28,18 @@ class BreedingPairHomeCard extends Component {
   seedSelectBreeding(seed: Seed) {
     let card = this.props.cardState.cards[this.props.spot];
     if (card.type == CardTypes.SEED_BREEDING_A) {
-      this.props.setCard({"type": CardTypes.SEED_BREEDING_B, "parentA": seed},
+      this.props.setCard({type: CardTypes.SEED_BREEDING_B, parentA: seed,
+        spot: this.props.spot},
         this.props.spot);
     }
     else if (card.type == CardTypes.SEED_BREEDING_B) {
-      this.props.setCard({"type": CardTypes.SEED_BREEDING_CONFIRM,
-        "parentA": card.parentA, "parentB": seed},
+      this.props.setCard({type: CardTypes.SEED_BREEDING_CONFIRM,
+        parentA: card.parentA, parentB: seed, spot: this.props.spot},
         this.props.spot);
     }
     else {
       this.props.startBreedingSeeds(this.props.homestead, card.parentA, card.parentB);
-      this.props.setCard({type: null}, this.props.spot);
+      this.props.setCard(null, this.props.spot);
     }
   }
 
@@ -77,7 +79,7 @@ class BreedingPairHomeCard extends Component {
           <button onClick={() => this.seedSelectBreeding(null)}>
             {'Confirm'}
           </button>
-          <button onClick={() => this.props.revertCard()}>
+          <button onClick={() => this.props.revertCard(this.props.spot)}>
             {'Cancel'}
           </button>
         </div>
@@ -92,9 +94,9 @@ interface BreedingPairHomeCardProps {
   homestead: Homestead;
   recordBook: RecordBook;
   cardState: CardState;
-  startBreedingSeeds: Function;
-  setCard: Function;
-  revertCard: Function;
+  startBreedingSeeds: (homestead: Homestead, seedA: Seed, seedB: Seed) => any;
+  setCard: (card: Card, spot: number) => any;
+  revertCard: (spot: number) => any;
 }
 
 function mapStateToProps({ homestead, recordBook, cardState }) {

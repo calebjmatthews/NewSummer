@@ -70,7 +70,7 @@ interface HarvestResultFieldCardProps {
   fields: { [id: number] : Field };
   fieldId: number;
 
-  clearHarvestResult: Function;
+  clearHarvestResult: (field: Field) => any;
 }
 
 function mapStateToProps({ fields }) {

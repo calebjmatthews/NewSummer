@@ -6,6 +6,7 @@ import { setCast, sayHello } from '../../actions/cast';
 import { setCard } from '../../actions/card';
 
 import Cast from '../../models/traveler/cast';
+import Card from '../../models/card';
 import { utils } from '../../models/utils';
 
 class TravelerRest extends Component {
@@ -24,7 +25,7 @@ class TravelerRest extends Component {
   travelerRestClick() {
     if (this.props.cast.currentlyVisiting != null) {
       this.props.sayHello(this.props.cast);
-      this.props.setCard({type: 'seedBuying'}, this.props.spot);
+      this.props.setCard({type: 'seedBuying', spot: this.props.spot}, this.props.spot);
     }
   }
 
@@ -68,8 +69,8 @@ interface TravelerRestProps {
   spot: number;
 
   cast: Cast;
-  setCard: Function;
-  sayHello: Function;
+  setCard: (card: Card, spot: number) => any;
+  sayHello: (cast: Cast) => any;
 }
 
 function mapStateToProps({ cast }) {

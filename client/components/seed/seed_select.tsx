@@ -7,6 +7,7 @@ import Seed from '../../models/seed/seed';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
+import Card from '../../models/card';
 
 import SeedDescription from './seed_description';
 import { setCard } from '../../actions/card';
@@ -83,7 +84,7 @@ class SeedSelectCardProps {
   cardState: CardState;
   recordBook: RecordBook;
 
-  setCard: Function;
+  setCard: (card: Card, spot: number) => any;
 
   spot: number;
   onConfirmClick: Function;

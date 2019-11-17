@@ -6,7 +6,6 @@ import { fontAwesome } from '../../instances/font_awesome';
 
 import CardState from '../../models/card_state';
 
-import { setCard } from '../../actions/card';
 import BackButton from '../back_button';
 
 class SeedDetailCard extends Component {
@@ -70,10 +69,4 @@ function mapStateToProps({ cardState }) {
   return { cardState }
 }
 
-function mapDispatchToProps(dispatch: any) {
-  return bindActionCreators({
-    setCard
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SeedDetailCard);
+export default connect(mapStateToProps)(SeedDetailCard);

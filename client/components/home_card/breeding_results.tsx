@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { finishBreedingSeed } from '../../actions/homestead';
-import { setCard } from '../../actions/card';
 import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 
@@ -51,7 +50,8 @@ interface BreedingResultsHomeCardProps {
   homestead: Homestead;
   recordBook: RecordBook;
   cardState: CardState;
-  finishBreedingSeed: Function;
+  finishBreedingSeed: (homestead: Homestead, recordBook: RecordBook,
+    newSeed: Seed, spot: number) => any;
 }
 
 function mapStateToProps({ homestead, recordBook, cardState }) {
@@ -60,7 +60,7 @@ function mapStateToProps({ homestead, recordBook, cardState }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    finishBreedingSeed, setCard
+    finishBreedingSeed
   }, dispatch)
 }
 

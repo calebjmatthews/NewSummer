@@ -65,7 +65,7 @@ export function startBreedingSeeds(homestead: Homestead, seedA: Seed, seedB: See
 }
 
 export const SET_BREEDING_AGE = 'SET_BREEDING_AGE';
-export function ageBreeding(homestead: Homestead, duration = null) {
+export function ageBreeding(homestead: Homestead, duration: number = null) {
   homestead.ageBreeding(duration);
   return {
     type: SET_BREEDING_AGE,
@@ -100,7 +100,7 @@ export function finishBreedingSeed(homestead: Homestead, recordBook: RecordBook,
 
 export const REMOVE_SEED = 'REMOVE_SEED';
 export function replaceSeed(homestead: Homestead, oldSeed: Seed, newSeed: Seed,
-  recordBook: RecordBook, reason = null) {
+  recordBook: RecordBook, reason: string = null) {
   return function(dispatch: any) {
     dispatch({
       type: REMOVE_SEED,
