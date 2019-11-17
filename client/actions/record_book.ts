@@ -16,3 +16,10 @@ export function setRecordBook(recordBook: RecordBook) {
     recordBook: recordBook
   }
 }
+
+export const SET_LAST_TIME = 'SET_LAST_TIME';
+export function setLastTime() {
+  return {
+    type: SET_LAST_TIME
+  }
+}

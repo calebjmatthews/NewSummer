@@ -7,13 +7,13 @@ let startingFields: { [id: number] : Field } = {};
 startingFields[0] =
   new Field({id: 0, name: 'Stone Row', seedPlantedId: null,
     seedsNameLabel: 'Nothing planted', seedsAge: 0, seedMature: false, seedsAgeLabel: '',
-    harvestResult: null, temperature: 2, moisture: 3, fertility: 6, pests: 0,
-    disease: 2});
+    harvestResult: null, harvestedSeedId: null, temperature: 2, moisture: 3,
+    fertility: 6, pests: 0, disease: 2});
 startingFields[1] =
   new Field({id: 1, name: 'Dusty Corner', seedPlantedId: null,
     seedsNameLabel: 'Nothing planted', seedsAge: 0, seedMature: false, seedsAgeLabel: '',
-    harvestResult: null, temperature: 3, moisture: 2, fertility: 5, pests: 1,
-    disease: 1});
+    harvestResult: null, harvestedSeedId: null, temperature: 3, moisture: 2,
+    fertility: 5, pests: 1, disease: 1});
 
 export default function
   (fields: { [id: number] : Field } = startingFields,
@@ -48,7 +48,8 @@ export default function
       return {...fields,
         [action.fieldId]: {
           ...field,
-          harvestResult: null
+          harvestResult: null,
+          harvestedSeedId: null
         }
       }
     case SET_FIELDS:

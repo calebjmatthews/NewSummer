@@ -19,6 +19,7 @@ export default class Homestead implements HomesteadInterface {
       if (homestead.intermediateSeed != null) {
         this.intermediateSeed = new Seed(homestead.intermediateSeed);
       }
+      this.seedsBred = [];
       homestead.seedsBred.map((seedBred) => {
         this.seedsBred.push(new Seed(seedBred));
       });
@@ -85,8 +86,7 @@ export default class Homestead implements HomesteadInterface {
         this.breedingTimeRemaining -= duration;
       }
       else {
-        // this.breedingTimeRemaining -= (AGE_INTERVAL / 1000);
-        this.breedingTimeRemaining -= (AGE_INTERVAL / 10);
+        this.breedingTimeRemaining -= (AGE_INTERVAL / 1000);
       }
       this.breedingAgeLabel = this.getBreedingAgeLabel();
       if (this.breedingTimeRemaining < 0) {

@@ -14,6 +14,7 @@ export default class Field implements FieldInterface {
   seedMature: boolean;
   seedsAgeLabel: string;
   harvestResult: RealValueReturn;
+  harvestedSeedId: number;
 
   temperature: number;
   moisture: number;
@@ -73,7 +74,7 @@ export default class Field implements FieldInterface {
       let remainingTime = ((seed.statMap[StatNames.GROWING_TIME].value * 1000)
         - this.seedsAge);
       let ageLabel = utils.formatDuration(remainingTime);
-      if (ageLabel != '0s') {
+      if (ageLabel != '0s ') {
         return ageLabel;
       }
       else {
@@ -89,6 +90,7 @@ export default class Field implements FieldInterface {
     let seed = seedMap[this.seedPlantedId];
     this.harvestResult = seed.determineRealValue(seed.statMap, this.temperature,
       this.moisture, this.fertility, this.pests, this.disease, families);
+    this.harvestedSeedId = this.seedPlantedId;
     this.seedPlantedId = null;
     this.seedsAge = 0;
     this.seedMature = false;
@@ -97,16 +99,6 @@ export default class Field implements FieldInterface {
 
     return this.harvestResult;
   }
-}
-
-function getGrowthStage(age, growingTime, durations) {
-  let completion = age/growingTime;
-  for (let index = 0; index < durations.length; index++) {
-    if (completion < durations[index]) {
-      return (index);
-    }
-  }
-  return durations.length;
 }
 
 interface FieldInterface {
@@ -118,6 +110,7 @@ interface FieldInterface {
   seedMature: boolean;
   seedsAgeLabel: string;
   harvestResult: RealValueReturn;
+  harvestedSeedId: number;
 
   temperature: number;
   moisture: number;
