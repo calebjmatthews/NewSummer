@@ -1,12 +1,14 @@
 import DefinitionalTrait from './definitional_trait';
 import Gene from './gene';
 import Trait from './trait';
+import CultivarStage from './cultivar_stage';
 import { Comparitors } from '../enums/comparitors';
 
 export default class Cultivar implements CultivarInterface {
   name: string;
   definitionalTraits: DefinitionalTrait[];
   bonus: Trait;
+  stages: CultivarStage[];
   traitsForCreation: DefinitionalTrait[];
 
   constructor(cultivar: CultivarInterface) {
@@ -57,5 +59,6 @@ interface CultivarInterface {
   name: string;
   definitionalTraits: DefinitionalTrait[];
   bonus: Trait;
+  stages: CultivarStage[];
   traitsForCreation?: DefinitionalTrait[];
 }

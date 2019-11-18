@@ -1,4 +1,5 @@
 import Cultivar from '../models/seed/cultivar';
+import CultivarStage from '../models/seed/cultivar_stage';
 import Trait from '../models/seed/trait';
 import DefinitionalTrait from '../models/seed/definitional_trait';
 import { TraitNames } from '../models/enums/trait_names';
@@ -10,10 +11,21 @@ const CN = CultivarNames;
 import { Comparitors } from '../models/enums/comparitors';
 const CO = Comparitors;
 
+const wheatStages = [
+  new CultivarStage({sprite: 'wheat0.png', duration: 0.1}),
+  new CultivarStage({sprite: 'wheat1.png', duration: 0.15}),
+  new CultivarStage({sprite: 'wheat2.png', duration: 0.15}),
+  new CultivarStage({sprite: 'wheat3.png', duration: 0.20}),
+  new CultivarStage({sprite: 'wheat4.png', duration: 0.20}),
+  new CultivarStage({sprite: 'wheat5.png', duration: 0.20}),
+  new CultivarStage({sprite: 'wheat6.png', duration: 0}),
+];
+
 export const grain = new Cultivar({
   name: CN.GRAIN,
   definitionalTraits: null,
   bonus: null,
+  stages: wheatStages,
   traitsForCreation: [
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.GREATER_THAN, values: [0]}),
@@ -55,6 +67,7 @@ export const cane = new Cultivar({
       traitName: TN.STEM_FOCUS, comparitor: CO.EQUAL_TO, values: [0]})
   ],
   bonus: null,
+  stages: wheatStages,
   traitsForCreation: [
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.GREATER_THAN, values: [0]}),
@@ -101,6 +114,7 @@ export const wildGrass = new Cultivar({
     statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME],
     statModifiers: [-0.6, -0.7]
   }),
+  stages: wheatStages,
   traitsForCreation: [
     new DefinitionalTrait({
       traitName: TN.SEED_COVERING, comparitor: CO.EQUAL_TO, values: [2]}),
@@ -188,7 +202,8 @@ export const wildCane = new Cultivar({
     completeDominance: null,
     statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME],
     statModifiers: [-0.6, -0.7]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const sugarCane = new Cultivar({
@@ -210,7 +225,8 @@ export const sugarCane = new Cultivar({
     statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME,
       SN.PEST_RESISTANCE, SN.DISEASE_RESISTANCE],
     statModifiers: [0.125, 0.025, -0.05, -0.05]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const bamboo = new Cultivar({
@@ -231,7 +247,8 @@ export const bamboo = new Cultivar({
     completeDominance: null,
     statNames: [SN.STEM_THICKNESS, SN.GROWING_TIME],
     statModifiers: [0.1, -0.15]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const oats = new Cultivar({
@@ -255,7 +272,8 @@ export const oats = new Cultivar({
     statNames: [SN.MOIS_TOLERANCE, SN.PEST_RESISTANCE,
       SN.DISEASE_RESISTANCE],
     statModifiers: [0.1, 0.05, 0.05]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const millet = new Cultivar({
@@ -275,7 +293,8 @@ export const millet = new Cultivar({
     completeDominance: null,
     statNames: [SN.MOIS_TOLERANCE, SN.TEMP_TOLERANCE],
     statModifiers: [-0.1, 0.1]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const sorghum = new Cultivar({
@@ -299,7 +318,8 @@ export const sorghum = new Cultivar({
       SN.PLANT_QUALITY, SN.GROWING_TIME,
       SN.PEST_RESISTANCE, SN.DISEASE_RESISTANCE],
     statModifiers: [-0.05, 0.05, 0.125, 0.025, -0.05, -0.05]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const rye = new Cultivar({
@@ -321,7 +341,8 @@ export const rye = new Cultivar({
     completeDominance: null,
     statNames: [SN.NITROGEN_REQUIREMENT],
     statModifiers: [-0.5]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const rice = new Cultivar({
@@ -343,7 +364,8 @@ export const rice = new Cultivar({
     completeDominance: null,
     statNames: [SN.MOIS_TOLERANCE],
     statModifiers: [0.2]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const wheat = new Cultivar({
@@ -365,7 +387,8 @@ export const wheat = new Cultivar({
     completeDominance: null,
     statNames: [SN.SEED_QUANTITY, SN.PEST_RESISTANCE, SN.DISEASE_RESISTANCE],
     statModifiers: [0.15, -0.1, -0.1]
-  })
+  }),
+  stages: wheatStages
 });
 
 export const corn = new Cultivar({
@@ -387,5 +410,6 @@ export const corn = new Cultivar({
     completeDominance: null,
     statNames: [SN.PLANT_QUALITY, SN.GROWING_TIME, SN.NITROGEN_REQUIREMENT],
     statModifiers: [0.25, -0.1, 0.25]
-  })
+  }),
+  stages: wheatStages
 });
