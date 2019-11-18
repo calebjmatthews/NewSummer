@@ -31,7 +31,7 @@ class HomeCard extends Component {
       return <BreedingResultsHomeCard spot={this.props.spot} />
     }
     else if (card.type == CardTypes.SEED_REPLACE_BUY) {
-      return null;
+      return <SeedReplaceCard spot={this.props.spot} reason={"buy"} />
     }
     else if (card.type == CardTypes.SEED_REPLACE_BREED) {
       return <SeedReplaceCard spot={this.props.spot} reason={'breed'} />;
