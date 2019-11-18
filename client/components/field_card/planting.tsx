@@ -12,6 +12,7 @@ import Card from '../../models/card';
 import { plantSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
 import SeedSelectCard from '../seed/seed_select';
+import BackButton from '../back_button';
 
 class PlantingFieldCard extends Component {
   props: PlantingProps;
@@ -31,6 +32,7 @@ class PlantingFieldCard extends Component {
   render() {
     return (
       <div className="game-card field-card">
+        <BackButton spot={this.props.spot} />
         {'Choose a seed to plant:'}
         <SeedSelectCard spot={this.props.spot}
           onConfirmClick={this.seedConfirmPlanting}
