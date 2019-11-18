@@ -44,14 +44,14 @@ traitsMap.set(TraitNames.TOXICITY, toxicity);
 
 const stats = [
   new Stat({
-    name: StatNames.SEED_QUANTITY, defaultValue: 100, definitions: [
-    {comparitor: 'less than', values: [90], adjective: 'Thin', bonus: 0,
+    name: StatNames.SEED_QUANTITY, defaultValue: 10, definitions: [
+    {comparitor: 'less than', values: [9], adjective: 'Thin', bonus: 0,
       description: 'Seeds are scarce', iconType: 'fontawesome',
       icon: 'dot-circle', iconStyle: 'negative'},
-    {comparitor: 'greater than', values: [180], adjective: 'Plentiful',
+    {comparitor: 'greater than', values: [18], adjective: 'Plentiful',
       bonus: 0, description: 'Seeds are somewhat plentiful',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'},
-    {comparitor: 'greater than', values: [360], adjective: 'Abundant',
+    {comparitor: 'greater than', values: [36], adjective: 'Abundant',
       bonus: 2, description: 'Seeds are abundant',
       iconType: 'fontawesome', icon: 'dot-circle', iconStyle: 'positive'}
   ]}),

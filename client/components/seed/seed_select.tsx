@@ -29,7 +29,7 @@ class SeedSelectCard extends Component {
   }
 
   selectCultivar(cultivarName: string) {
-    this.setState({ cultivar: cultivarName });
+    this.setState({ cultivarName: cultivarName });
   }
 
   render() {
