@@ -50,11 +50,9 @@ class Initializer extends Component {
     let newSeed0 = new Seed({id: 0, familyName: FamilyNames.POACEAE,
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
-    this.props.addAndRecordSeed(newSeed0)
     let newSeed1 = new Seed({id: 1, familyName: FamilyNames.POACEAE,
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
-    this.props.addAndRecordSeed(newSeed1);
     this.props.addModal(new Modal({
       type: ModalTypes.ALERT,
       title: 'What\'s this?',
@@ -63,6 +61,8 @@ class Initializer extends Component {
         ('Gained ' + newSeed0.name + '.'),
         ('Gained ' + newSeed1.name + '.')]
     }));
+    this.props.addAndRecordSeed(newSeed0, this.props.recordBook);
+    this.props.addAndRecordSeed(newSeed1, this.props.recordBook);
   }
 
   initIntervals() {
@@ -225,7 +225,7 @@ interface InitializerProps {
   cast: Cast;
 
   addModal: (modal: Modal) => any;
-  addAndRecordSeed: (seed: Seed) => any;
+  addAndRecordSeed: (seed: Seed, recordBook: RecordBook) => any;
   ageAllSeeds: (fields: { [id: number] : Field }, duration: number,
     seedMap: { [id: number] : Seed }) => any;
   ageBreeding: (homestead: Homestead, duration?: number) => any;

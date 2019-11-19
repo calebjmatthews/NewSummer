@@ -24,12 +24,10 @@ class ModalContainer extends Component {
     this.props.dismissModal();
   }
 
-  render() {
-    let modal = this.props.modals[0];
-
-    if (modal != undefined) {
-      return (
-        <div className="modal-container">
+  renderModal(modal: Modal) {
+    switch(modal.type) {
+      case ModalTypes.ALERT:
+        return (
           <div className="modal">
             <div className="modal-header">{modal.title}</div>
             <div className="modal-body">
@@ -44,6 +42,30 @@ class ModalContainer extends Component {
               </button>
             </div>
           </div>
+        );
+      case ModalTypes.BANNER_LARGE:
+      return (
+        <div className="modal">
+          <div className="modal-header">{modal.title}</div>
+          <div className="modal-body">
+            Message!
+            <button type="button" className="button-dark"
+              onClick={() => this.okClick()}>
+              Great!
+            </button>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    let modal = this.props.modals[0];
+
+    if (modal != undefined) {
+      return (
+        <div className="modal-container">
+          {this.renderModal(modal)}
           <div className="modal-background" onClick={() => this.backgroundClick()}></div>
         </div>
       );

@@ -35,6 +35,8 @@ export default class RecordBook implements RecordBookInterface {
   }
 
   recordSeed(seed: Seed) {
+    let seedNew = this.isSeedNew(seed);
+
     let numeralRes = this.getNumeral(seed);
     seed.numeral = numeralRes.numeral;
     seed.name = seed.adjectives[0].word + ' ' + seed.cultivarName
@@ -47,6 +49,23 @@ export default class RecordBook implements RecordBookInterface {
       alsoChanged.name += ' I';
       this.seedMap[alsoChanged.id] = alsoChanged;
     }
+
+    return seedNew
+  }
+
+  isSeedNew(seed: Seed) {
+    let familyNew: any = true;
+    let cultivarNew: any = true;
+    Object.keys(this.seedMap).map((seedId) => {
+      let mSeed = this.seedMap[seedId];
+      if (seed.familyName == mSeed.familyName) {
+        familyNew = false;
+      }
+      if (seed.cultivarName == mSeed.cultivarName) {
+        cultivarNew = false;
+      }
+    });
+    return {familyNew: familyNew, cultivarNew: cultivarNew};
   }
 
   getNumeral(seed: Seed) {

@@ -1,19 +1,41 @@
+import { addModal } from './modal';
+
 import Seed from '../models/seed/seed';
 import RecordBook from '../models/record_book';
-
-export const RECORD_SEED = 'RECORD_SEED';
-export function recordSeed(seed: Seed) {
-  return {
-    type: RECORD_SEED,
-    seed: seed
-  };
-}
+import Modal from '../models/modal';
+import { ModalTypes } from '../models/enums/modal_types';
 
 export const SET_RECORD_BOOK = 'SET_RECORD_BOOK';
 export function setRecordBook(recordBook: RecordBook) {
   return {
     type: SET_RECORD_BOOK,
     recordBook: recordBook
+  }
+}
+
+export function recordSeed(seed: Seed, recordBook: RecordBook) {
+  return function(dispatch: any) {
+    let isSeedNew = recordBook.recordSeed(seed);
+
+    if(isSeedNew.familyNew) {
+      dispatch(addModal(new Modal({
+        type: ModalTypes.ALERT,
+        title: (seed.familyName + ' Discovered!'),
+        messages: []
+      })));
+    }
+    if (isSeedNew.cultivarNew) {
+      dispatch(addModal(new Modal({
+        type: ModalTypes.ALERT,
+        title: (seed.cultivarName + ' Discovered!'),
+        messages: []
+      })));
+    }
+
+    dispatch({
+      type: SET_RECORD_BOOK,
+      recordBook: recordBook
+    });
   }
 }
 

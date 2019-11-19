@@ -1,3 +1,4 @@
 export enum ModalTypes {
-  ALERT = 'Alert'
+  ALERT = 'Alert',
+  BANNER_LARGE = 'Large banner'
 }

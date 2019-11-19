@@ -1,4 +1,4 @@
-import Modal from '../models/field';
+import Modal from '../models/modal';
 
 export const ADD_MODAL = 'ADD_MODAL';
 export function addModal(modal: Modal) {

@@ -9,9 +9,9 @@ import { CardTypes } from '../models/enums/card_types';
 import { families } from '../instances/families';
 
 export const ADD_SEED = 'ADD_SEED';
-export function addAndRecordSeed(seed: Seed) {
+export function addAndRecordSeed(seed: Seed, recordBook: RecordBook) {
   return function(dispatch: any) {
-    dispatch(recordSeed(seed));
+    dispatch(recordSeed(seed, recordBook));
     dispatch({
       type: ADD_SEED,
       seed: seed
@@ -78,7 +78,7 @@ export function finishBreedingSeed(homestead: Homestead, recordBook: RecordBook,
   newSeed: Seed, spot: number) {
   return function(dispatch: any) {
     if (homestead.isCultivarFull(newSeed.cultivarName, recordBook.seedMap) == false) {
-      dispatch(addAndRecordSeed(newSeed));
+      dispatch(addAndRecordSeed(newSeed, recordBook));
       dispatch({
         type: SET_BREEDING,
         seedsBred: [],
@@ -105,7 +105,7 @@ export function replaceSeed(homestead: Homestead, oldSeed: Seed, newSeed: Seed,
       type: REMOVE_SEED,
       seed: oldSeed
     });
-    dispatch(addAndRecordSeed(newSeed));
+    dispatch(addAndRecordSeed(newSeed, recordBook));
 
     if (reason == 'breed') {
       dispatch({
