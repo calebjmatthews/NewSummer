@@ -3,6 +3,7 @@ import Family from './seed/family';
 import RealValueReturn from './seed/real_value_return';
 import { StatNames } from './enums/stat_names';
 import { utils } from './utils';
+import { families } from '../instances/families';
 import { AGE_INTERVAL } from '../constants';
 
 export default class Field implements FieldInterface {
@@ -86,10 +87,10 @@ export default class Field implements FieldInterface {
     }
   }
 
-  harvestSeed(seedMap: { [id: number] : Seed }, families: Map<string, Family>) {
+  harvestSeed(seedMap: { [id: number] : Seed }) {
     let seed = seedMap[this.seedPlantedId];
     this.harvestResult = seed.determineRealValue(seed.statMap, this.temperature,
-      this.moisture, this.fertility, this.pests, this.disease, families);
+      this.moisture, this.fertility, this.pests, this.disease);
     this.harvestedSeedId = this.seedPlantedId;
     this.seedPlantedId = null;
     this.seedsAge = 0;

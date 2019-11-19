@@ -9,6 +9,7 @@ import Adjective from './adjective';
 import SeedDescription from './seed_description';
 import { utils } from '../utils';
 import { Comparitors } from '../enums/comparitors';
+import { families } from '../../instances/families';
 
 export default class Seed implements SeedInterface {
   id: number;
@@ -29,33 +30,34 @@ export default class Seed implements SeedInterface {
 
   constructor(seed: SeedInterface = null) {
     Object.assign(this, seed);
+
+    this.build();
   }
 
-  build(families: Map<string, Family>): Seed {
+  build(): Seed {
     if (this.genome == undefined) {
-      this.genome = this.genomeFromCultivar(this.familyName, this.cultivarName,
-        0, families);
+      this.genome = this.genomeFromCultivar(this.familyName, this.cultivarName, 0);
     }
 
-    this.traitTotalMap = this.determineTraitsFromGenome(this.genome, families);
-    this.cultivarName = this.determineCultivarNameFromGenome(this.genome, families);
+    this.traitTotalMap = this.determineTraitsFromGenome(this.genome);
+    this.cultivarName = this.determineCultivarNameFromGenome(this.genome);
 
-    this.statMap = this.determineStatsFromTraits(this.traitTotalMap, families);
-    this.adjectives = this.determineAdjectivesFromStats(this.statMap, this.cultivarName,
-      families);
-    this.statMap = this.applyCultivarToStats(this.statMap, this.cultivarName, families);
+    this.statMap = this.determineStatsFromTraits(this.traitTotalMap);
+    this.adjectives = this.determineAdjectivesFromStats(this.statMap,
+      this.cultivarName);
+    this.statMap = this.applyCultivarToStats(this.statMap, this.cultivarName);
 
     this.name = this.adjectives[0].word + ' ' + this.cultivarName
       + (this.numeral != undefined ? this.numeral : '');
 
-    this.idealValue = this.determineIdealValueFromStats(this.statMap, families);
+    this.idealValue = this.determineIdealValueFromStats(this.statMap);
     this.descriptions = this.describeFromTraitsAndStats(this.traitTotalMap,
-      this.statMap, families);
+      this.statMap);
     return this;
   }
 
-  genomeFromCultivar(familyName: string, cultivarName: string, variation: number,
-    families: Map<string, Family>): Gene[] {
+  genomeFromCultivar(familyName: string, cultivarName: string,
+    variation: number): Gene[] {
     let family = families.get(familyName);
     let cultivar: Cultivar = null;
     family.cultivars.map((aCultivar) => {
@@ -139,45 +141,44 @@ export default class Seed implements SeedInterface {
     }
   }
 
-  determineTraitsFromGenome(genome: Gene[], families: Map<string, Family>):
+  determineTraitsFromGenome(genome: Gene[]):
     Map<string, TraitTotal> {
     const family = families.get(this.familyName);
     return family.determineTraitsFromGenome(genome);
   }
-  determineCultivarNameFromGenome(genome: Gene[], families: Map<string, Family>):
+  determineCultivarNameFromGenome(genome: Gene[]):
     string {
     const family = families.get(this.familyName);
     return family.determineCultivarNameFromGenome(genome);
   }
-  determineStatsFromTraits(traitTotalMap: Map<string, TraitTotal>,
-    families: Map<string, Family>): { [id: string] : Stat } {
+  determineStatsFromTraits(traitTotalMap: Map<string, TraitTotal>):
+    { [id: string] : Stat } {
     const family = families.get(this.familyName);
     return family.determineStatsFromTraits(traitTotalMap);
   }
   determineAdjectivesFromStats(statMap: { [id: string] : Stat },
-    cultivarName = this.cultivarName, families: Map<string, Family>): Adjective[] {
+    cultivarName = this.cultivarName): Adjective[] {
     const family = families.get(this.familyName);
     return family.determineAdjectivesFromStats(statMap, cultivarName);
   }
-  applyCultivarToStats(statMap: { [id: string] : Stat }, cultivarName = this.cultivarName,
-    families: Map<string, Family>): { [id: string] : Stat } {
+  applyCultivarToStats(statMap: { [id: string] : Stat },
+    cultivarName = this.cultivarName): { [id: string] : Stat } {
     const family = families.get(this.familyName);
     return family.applyCultivarToStats(statMap, cultivarName);
   }
-  determineIdealValueFromStats(statMap: { [id: string] : Stat },
-    families: Map<string, Family>): number {
+  determineIdealValueFromStats(statMap: { [id: string] : Stat }): number {
     const family = families.get(this.familyName);
     return family.determineIdealValueFromStats(statMap);
   }
-  determineRealValue(statMap: { [id: string] : Stat }, temperature: number, moisture: number,
-    fertility: number, pests: number, disease: number, families: Map<string, Family>) {
+  determineRealValue(statMap: { [id: string] : Stat }, temperature: number,
+    moisture: number, fertility: number, pests: number, disease: number) {
     let cultivarName = this.cultivarName;
     const family = families.get(this.familyName);
     return family.determineRealValue(statMap, temperature, moisture, fertility,
       pests, disease);
   }
   describeFromTraitsAndStats(traitTotalMap: Map<string, TraitTotal>,
-    statMap: { [id: string] : Stat }, families: Map<string, Family>): SeedDescription[] {
+    statMap: { [id: string] : Stat }): SeedDescription[] {
     const family = families.get(this.familyName);
     return family.describeFromTraitsAndStats(traitTotalMap, statMap);
   }

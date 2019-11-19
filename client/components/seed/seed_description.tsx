@@ -73,7 +73,7 @@ class SeedDescription extends Component {
             </div>
             <div>
               {utils.formatMoney(
-                seed.determineIdealValueFromStats(seed.statMap, families))}
+                seed.determineIdealValueFromStats(seed.statMap))}
             </div>
           </div>
           <button onClick={() => this.seedDetailClick(seed)}>

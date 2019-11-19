@@ -59,9 +59,9 @@ export function ageAllSeeds(fields: { [id: number] : Field }, duration: number =
 }
 
 export function harvestSeed(field: Field, homestead: Homestead,
-  seedMap: { [id: number] : Seed }, families: Map<string, Family>) {
+  seedMap: { [id: number] : Seed }) {
   let newField = new Field(field);
-  let harvestResult: RealValueReturn = newField.harvestSeed(seedMap, families);
+  let harvestResult: RealValueReturn = newField.harvestSeed(seedMap);
   return function(dispatch: any) {
     dispatch(gainDollars(harvestResult.value, homestead));
     dispatch(setField(newField));

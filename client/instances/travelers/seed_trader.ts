@@ -43,7 +43,6 @@ class SeedTrader extends Traveler {
       familyName: FamilyNames.POACEAE, methodObtained: 'Bought',
       dateObtained: new Date(Date.now()), parentsIds: [],
       cultivarName: cultivarsUnlocked[index]});
-    newSeed.build(families);
     let nameAlreadyExists: any = false;
     offers.map((offer) => {
       if (offer.item.name == newSeed.name) {

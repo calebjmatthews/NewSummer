@@ -50,12 +50,10 @@ class Initializer extends Component {
     let newSeed0 = new Seed({id: 0, familyName: FamilyNames.POACEAE,
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
-    newSeed0.build(families);
     this.props.addAndRecordSeed(newSeed0)
     let newSeed1 = new Seed({id: 1, familyName: FamilyNames.POACEAE,
       methodObtained: 'Found', dateObtained: new Date(), parentsIds: [],
       cultivarName: CultivarNames.WILD_GRASS});
-    newSeed1.build(families);
     this.props.addAndRecordSeed(newSeed1);
     this.props.addModal(new Modal({
       type: ModalTypes.ALERT,
@@ -207,7 +205,7 @@ class Initializer extends Component {
     else {
       field.ageSeed(diff, this.props.recordBook.seedMap);
       let harvestValue = seed.determineRealValue(seed.statMap, field.temperature,
-        field.moisture, field.fertility, field.pests, field.disease, families).value;
+        field.moisture, field.fertility, field.pests, field.disease).value;
       dollars = harvestValue * harvestCount;
       message = (seed.name + ' had ' + harvestCount + ' harvests for a total of '
         + utils.formatMoney(dollars) + '.');

@@ -34,7 +34,7 @@ class StateDisplayFieldCard extends Component {
     else {
       if (field.seedMature == true) {
         this.props.harvestSeed(field, this.props.homestead,
-          this.props.recordBook.seedMap, families);
+          this.props.recordBook.seedMap);
       }
     }
   }
@@ -78,7 +78,7 @@ interface FieldCardProps {
 
   setCard: (card: Card, spot: number) => any;
   harvestSeed: (field: Field, homestead: Homestead,
-    seedMap: { [id: number] : Seed }, families: Map<string, Family>) => any;
+    seedMap: { [id: number] : Seed }) => any;
 }
 
 function mapStateToProps({ fields, homestead, recordBook }) {
