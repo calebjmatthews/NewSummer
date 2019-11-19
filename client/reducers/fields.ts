@@ -7,13 +7,13 @@ let startingFields: { [id: number] : Field } = {};
 startingFields[0] =
   new Field({id: 0, name: 'Stone Row', seedPlantedId: null,
     seedsNameLabel: 'Nothing planted', seedsAge: 0, seedMature: false, seedsAgeLabel: '',
-    spriteAddress: null, harvestResult: null, harvestedSeedId: null, temperature: 2,
-    moisture: 3, fertility: 6, pests: 0, disease: 2});
+    spriteAddress: null, spriteStyle: null, harvestResult: null, harvestedSeedId: null,
+    temperature: 2, moisture: 3, fertility: 6, pests: 0, disease: 2});
 startingFields[1] =
   new Field({id: 1, name: 'Dusty Corner', seedPlantedId: null,
     seedsNameLabel: 'Nothing planted', seedsAge: 0, seedMature: false, seedsAgeLabel: '',
-    spriteAddress: null, harvestResult: null, harvestedSeedId: null, temperature: 3,
-    moisture: 2, fertility: 5, pests: 1, disease: 1});
+    spriteAddress: null, spriteStyle: null, harvestResult: null, harvestedSeedId: null,
+    temperature: 3, moisture: 2, fertility: 5, pests: 1, disease: 1});
 
 export default function
   (fields: { [id: number] : Field } = startingFields,
@@ -29,7 +29,8 @@ export default function
           seedMature: action.seedMature,
           seedsNameLabel: action.seedsNameLabel,
           seedsAgeLabel: action.seedsAgeLabel,
-          spriteAddress: action.spriteAddress
+          spriteAddress: action.spriteAddress,
+          spriteStyle: action.spriteStyle
         }
       }
     case SET_SEEDS_AGE:
@@ -40,7 +41,8 @@ export default function
             seedsAge: action.seedAges[fieldId],
             seedsAgeLabel: action.seedAgeLabels[fieldId],
             seedMature: action.seedMatures[fieldId],
-            spriteAddress: action.spriteAddresses[fieldId]
+            spriteAddress: action.spriteAddresses[fieldId],
+            spriteStyle: action.spriteStyles[fieldId]
           }
         })
       }

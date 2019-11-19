@@ -15,6 +15,7 @@ import Seed from '../../models/seed/seed';
 import Offer from '../../models/traveler/offer';
 import Economy from '../../models/economy';
 import Card from '../../models/card';
+import { images } from '../../instances/images';
 
 class TravelerCard extends Component {
   props: TravelerCardProps;
@@ -42,33 +43,41 @@ class TravelerCard extends Component {
     if (this.props.cast.currentlyVisiting != null) {
       return (
         <div className="game-card field-card">
-          <BackButton spot={this.props.spot} />
-          {'Buy a seed:'}
-          <div className="option-container">
-            {this.props.cast.members[this.props.cast.currentlyVisiting]
-              .currentOffers.map((offer, index) => {
-              let seed = offer.item;
-              let confirmText = 'Sold';
-              if (offer.sold == false) {
-                confirmText = ('Buy for ' + utils.formatMoney(offer.price))
-              }
-              return (
-                <SeedDescription key={index} seed={seed}
-                  spot={this.props.spot}
-                  onConfirmClick={this.buySeed}
-                  confirmText={confirmText}
-                  confirmDisabled={offer.sold} />
-              );
-            })}
+          <div className="game-card-body">
+            <BackButton spot={this.props.spot} />
+            {'Buy a seed:'}
+            <div className="option-container">
+              {this.props.cast.members[this.props.cast.currentlyVisiting]
+                .currentOffers.map((offer, index) => {
+                let seed = offer.item;
+                let confirmText = 'Sold';
+                if (offer.sold == false) {
+                  confirmText = ('Buy for ' + utils.formatMoney(offer.price))
+                }
+                return (
+                  <SeedDescription key={index} seed={seed}
+                    spot={this.props.spot}
+                    onConfirmClick={this.buySeed}
+                    confirmText={confirmText}
+                    confirmDisabled={offer.sold} />
+                );
+              })}
+            </div>
           </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       );
     }
     else {
       return (
         <div className="game-card field-card">
-          <BackButton spot={this.props.spot} />
-          {'Sorry, had to go!'}
+          <div className="game-card-body">
+            <BackButton spot={this.props.spot} />
+            {'Sorry, had to go!'}
+            <img className="game-card-background"
+              src={images.get('images/background.png')}></img>
+          </div>
         </div>
       );
     }

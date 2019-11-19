@@ -11,14 +11,16 @@ const CN = CultivarNames;
 import { Comparitors } from '../models/enums/comparitors';
 const CO = Comparitors;
 
+const style: any = { top: '84px', width: '30px' };
+
 const wheatStages = [
-  new CultivarStage({sprite: 'wheat0.png', duration: 0.1}),
-  new CultivarStage({sprite: 'wheat1.png', duration: 0.15}),
-  new CultivarStage({sprite: 'wheat2.png', duration: 0.15}),
-  new CultivarStage({sprite: 'wheat3.png', duration: 0.20}),
-  new CultivarStage({sprite: 'wheat4.png', duration: 0.20}),
-  new CultivarStage({sprite: 'wheat5.png', duration: 0.20}),
-  new CultivarStage({sprite: 'wheat6.png', duration: 0}),
+  new CultivarStage({sprite: 'wheat0.png', duration: 0.1, style: style}),
+  new CultivarStage({sprite: 'wheat1.png', duration: 0.15, style: style}),
+  new CultivarStage({sprite: 'wheat2.png', duration: 0.15, style: style}),
+  new CultivarStage({sprite: 'wheat3.png', duration: 0.20, style: style}),
+  new CultivarStage({sprite: 'wheat4.png', duration: 0.20, style: style}),
+  new CultivarStage({sprite: 'wheat5.png', duration: 0.20, style: style}),
+  new CultivarStage({sprite: 'wheat6.png', duration: 0, style: style}),
 ];
 
 export const grain = new Cultivar({

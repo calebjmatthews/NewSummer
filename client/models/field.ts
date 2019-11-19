@@ -19,6 +19,7 @@ export default class Field implements FieldInterface {
   seedMature: boolean;
   seedsAgeLabel: string;
   spriteAddress: string;
+  spriteStyle: any;
   harvestResult: RealValueReturn;
   harvestedSeedId: number;
 
@@ -40,7 +41,9 @@ export default class Field implements FieldInterface {
     this.seedMature = false;
     this.seedsNameLabel = this.getSeedsNameLabel(seedMap);
     this.seedsAgeLabel = this.getSeedsAgeLabel(seedMap);
-    this.spriteAddress = this.getSpriteAddress(seedMap);
+    let addressAndStyle = this.getSpriteAddressAndStyle(seedMap);
+    this.spriteAddress = addressAndStyle.sprite;
+    this.spriteStyle = addressAndStyle.style;
   }
 
   ageSeed(duration: number = null, seedMap: { [id: number] : Seed }) {
@@ -54,7 +57,9 @@ export default class Field implements FieldInterface {
           this.seedsAge += duration;
         }
         this.seedsAgeLabel = this.getSeedsAgeLabel(seedMap);
-        this.spriteAddress = this.getSpriteAddress(seedMap);
+        let addressAndStyle = this.getSpriteAddressAndStyle(seedMap);
+        this.spriteAddress = addressAndStyle.sprite;
+        this.spriteStyle = addressAndStyle.style;
         if (this.seedsAge >= (seed.statMap[StatNames.GROWING_TIME].value * 1000)) {
           this.seedsAge = (seed.statMap[StatNames.GROWING_TIME].value * 1000);
           this.seedMature = true;
@@ -94,7 +99,7 @@ export default class Field implements FieldInterface {
     }
   }
 
-  getSpriteAddress(seedMap: { [id: number] : Seed }) {
+  getSpriteAddressAndStyle(seedMap: { [id: number] : Seed }) {
     if (this.seedPlantedId != null) {
       let seed = seedMap[this.seedPlantedId];
       let cultivar: Cultivar = null;
@@ -119,7 +124,8 @@ export default class Field implements FieldInterface {
       }
       console.log('SPRITE_ADDRESS_BASE + matchingStage.sprite');
       console.log(SPRITE_ADDRESS_BASE + matchingStage.sprite);
-      return (SPRITE_ADDRESS_BASE + matchingStage.sprite);
+      return {sprite: (SPRITE_ADDRESS_BASE + matchingStage.sprite),
+        style: matchingStage.style};
     }
     else {
       return null;
@@ -137,6 +143,7 @@ export default class Field implements FieldInterface {
     this.seedsNameLabel = this.getSeedsNameLabel(seedMap);
     this.seedsAgeLabel = '';
     this.spriteAddress = null;
+    this.spriteStyle = null;
 
     return this.harvestResult;
   }
@@ -151,6 +158,7 @@ interface FieldInterface {
   seedMature: boolean;
   seedsAgeLabel: string;
   spriteAddress: string;
+  spriteStyle: any;
   harvestResult: RealValueReturn;
   harvestedSeedId: number;
 

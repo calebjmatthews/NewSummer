@@ -9,6 +9,7 @@ import Seed from '../../models/seed/seed';
 import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
+import { images } from '../../instances/images';
 
 class BreedingResultsHomeCard extends Component {
   props: BreedingResultsHomeCardProps;
@@ -27,18 +28,22 @@ class BreedingResultsHomeCard extends Component {
   render() {
     return (
       <div className="game-card field-card">
-        <BackButton spot={this.props.spot} />
-        {'Choose which seed to keep:'}
-        <div className="option-container">
-          {this.props.homestead.seedsBred.map((seed, index) => {
-            return (
-              <SeedDescription key={index} seed={seed}
-                spot={this.props.spot}
-                onConfirmClick={this.chooseSeed}
-                confirmText="Go" />
-            );
-          })}
+        <div className="game-card-body">
+          <BackButton spot={this.props.spot} />
+          {'Choose which seed to keep:'}
+          <div className="option-container">
+            {this.props.homestead.seedsBred.map((seed, index) => {
+              return (
+                <SeedDescription key={index} seed={seed}
+                  spot={this.props.spot}
+                  onConfirmClick={this.chooseSeed}
+                  confirmText="Go" />
+              );
+            })}
+          </div>
         </div>
+        <img className="game-card-background"
+          src={images.get('images/background.png')}></img>
       </div>
     );
   }

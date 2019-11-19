@@ -19,5 +19,6 @@ images.set('images/wheat3.png', require('../images/wheat3.png'));
 images.set('images/wheat4.png', require('../images/wheat4.png'));
 images.set('images/wheat5.png', require('../images/wheat5.png'));
 images.set('images/wheat6.png', require('../images/wheat6.png'));
+images.set('images/background.png', require('../images/background.png'));
 
 export { images }

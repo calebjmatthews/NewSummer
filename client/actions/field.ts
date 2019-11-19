@@ -34,7 +34,8 @@ export function plantSeed(field: Field, seed: Seed, seedMap: { [id: number] : Se
     seedMature: false,
     seedsNameLabel: newField.seedsNameLabel,
     seedsAgeLabel: newField.seedsAgeLabel,
-    spriteAddress: newField.spriteAddress
+    spriteAddress: newField.spriteAddress,
+    spriteStyle: newField.spriteStyle
   }
 }
 
@@ -45,6 +46,7 @@ export function ageAllSeeds(fields: { [id: number] : Field }, duration: number =
   let seedAgeLabels: { [id: number] : string } = {};
   let seedMatures: { [id: number] : string } = {};
   let spriteAddresses: { [id: number] : string } = {};
+  let spriteStyles: { [id: number] : string } = {};
   Object.keys(fields).map((fieldId) => {
     let newField = new Field(fields[fieldId]);
     newField.ageSeed(duration, seedMap);
@@ -52,13 +54,15 @@ export function ageAllSeeds(fields: { [id: number] : Field }, duration: number =
     seedAgeLabels[fieldId] = newField.seedsAgeLabel;
     seedMatures[fieldId] = newField.seedMature;
     spriteAddresses[fieldId] = newField.spriteAddress;
+    spriteStyles[fieldId] = newField.spriteStyle;
   });
 	return {
     type: SET_SEEDS_AGE,
     seedAges: seedAges,
     seedAgeLabels: seedAgeLabels,
     seedMatures: seedMatures,
-    spriteAddresses: spriteAddresses
+    spriteAddresses: spriteAddresses,
+    spriteStyles: spriteStyles
   };
 }
 

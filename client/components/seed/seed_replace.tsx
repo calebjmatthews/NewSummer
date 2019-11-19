@@ -13,6 +13,7 @@ import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
 import Card from '../../models/card';
+import { images } from '../../instances/images';
 
 class SeedReplaceCard extends Component {
   props: SeedReplaceCardProps;
@@ -59,37 +60,41 @@ class SeedReplaceCard extends Component {
       .getAllMatchingSeeds(newSeed.cultivarName, this.props.recordBook.seedMap);
     return (
       <div className="game-card field-card">
-        {'New:'}
-        <div className="option-container">
-          <SeedDescription key={newSeed.id} seed={newSeed}
-            spot={this.props.spot}
-            confirmText={null} />
+        <div className="game-card-body">
+          {'New:'}
+          <div className="option-container">
+            <SeedDescription key={newSeed.id} seed={newSeed}
+              spot={this.props.spot}
+              confirmText={null} />
+          </div>
+          {'Discard an old seed:'}
+          <div className="option-container">
+            {cultivarSeeds.map((seed) => {
+              let descriptionClassName: string = "seed-option";
+              if (this.state.seedSelected == seed.id) {
+                descriptionClassName = "seed-option selected";
+              }
+              return (
+                <SeedDescription key={seed.id} seed={seed}
+                  spot={this.props.spot}
+                  onConfirmClick={this.existingSeedSelect}
+                  confirmText={'Select'}
+                  descriptionClassName={descriptionClassName} />
+              );
+            })}
+          </div>
+          <div>
+            <button onClick={ () => this.replaceClick() }
+              disabled={this.state.seedSelected == null}>
+              {'Discard seed'}
+            </button>
+            <button onClick={ () => this.cancelClick() }>
+              {'Cancel'}
+            </button>
+          </div>
         </div>
-        {'Discard an old seed:'}
-        <div className="option-container">
-          {cultivarSeeds.map((seed) => {
-            let descriptionClassName: string = "seed-option";
-            if (this.state.seedSelected == seed.id) {
-              descriptionClassName = "seed-option selected";
-            }
-            return (
-              <SeedDescription key={seed.id} seed={seed}
-                spot={this.props.spot}
-                onConfirmClick={this.existingSeedSelect}
-                confirmText={'Select'}
-                descriptionClassName={descriptionClassName} />
-            );
-          })}
-        </div>
-        <div>
-          <button onClick={ () => this.replaceClick() }
-            disabled={this.state.seedSelected == null}>
-            {'Discard seed'}
-          </button>
-          <button onClick={ () => this.cancelClick() }>
-            {'Cancel'}
-          </button>
-        </div>
+        <img className="game-card-background"
+          src={images.get('images/background.png')}></img>
       </div>
     );
   }

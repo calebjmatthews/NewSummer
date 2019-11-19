@@ -45,8 +45,8 @@ class StateDisplayFieldCard extends Component {
 
     if (field.seedPlantedId != null) {
       return (
-        <div>
-          <img src={images.get(field.spriteAddress)} />
+        <div className="sprite-wrapper">
+          <img src={images.get(field.spriteAddress)} style={field.spriteStyle} />
         </div>
       )
     }
@@ -61,11 +61,13 @@ class StateDisplayFieldCard extends Component {
     if (field.seedPlantedId != null && field.seedMature == false) {
       return (
         <div className="game-card field-card">
-          <div className="field-card-body">
+          <div className="game-card-body">
             {this.renderPlant()}
             <div>{field.seedsNameLabel}</div>
             <div>{field.seedsAgeLabel}</div>
           </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       );
     }
@@ -73,13 +75,15 @@ class StateDisplayFieldCard extends Component {
     else {
       return (
         <div className="game-card field-card">
-          <div className="field-card-body">
+          <div className="game-card-body">
             {this.renderPlant()}
             <button onClick={() => this.fieldCardClick()}>
               <div>{field.seedsNameLabel}</div>
               <div>{field.seedsAgeLabel}</div>
             </button>
           </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       );
     }

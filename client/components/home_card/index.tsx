@@ -12,6 +12,7 @@ import TravelerCard from './traveler';
 
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
+import { images } from '../../instances/images';
 
 class HomeCard extends Component {
   props: HomeCardProps;
@@ -45,8 +46,12 @@ class HomeCard extends Component {
     else {
       return (
         <div className="game-card">
-          <TravelerRest spot={0}/>
-          <ExperimentalGarden spot={0}/>
+          <div className="game-card-body">
+            <TravelerRest spot={0}/>
+            <ExperimentalGarden spot={0}/>
+          </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       );
     }

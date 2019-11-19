@@ -8,6 +8,7 @@ import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
 import Card from '../../models/card';
+import { images } from '../../instances/images';
 
 import { plantSeed } from '../../actions/field';
 import { setCard } from '../../actions/card';
@@ -32,11 +33,15 @@ class PlantingFieldCard extends Component {
   render() {
     return (
       <div className="game-card field-card">
-        <BackButton spot={this.props.spot} />
-        {'Choose a seed to plant:'}
-        <SeedSelectCard spot={this.props.spot}
-          onConfirmClick={this.seedConfirmPlanting}
-          confirmText={'Plant'} />
+        <div className="game-card-body">
+          <BackButton spot={this.props.spot} />
+          {'Choose a seed to plant:'}
+          <SeedSelectCard spot={this.props.spot}
+            onConfirmClick={this.seedConfirmPlanting}
+            confirmText={'Plant'} />
+        </div>
+        <img className="game-card-background"
+          src={images.get('images/background.png')}></img>
       </div>
     );
   }

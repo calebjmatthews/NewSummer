@@ -14,6 +14,7 @@ import Homestead from '../../models/homestead';
 import CardState from '../../models/card_state';
 import RecordBook from '../../models/record_book';
 import Card from '../../models/card';
+import { images } from '../../instances/images';
 import { CardTypes } from '../../models/enums/card_types';
 
 class BreedingPairHomeCard extends Component {
@@ -49,39 +50,51 @@ class BreedingPairHomeCard extends Component {
     if (card.type == CardTypes.SEED_BREEDING_A) {
       return (
         <div className="game-card">
+        <div className="game-card-body">
           <BackButton spot={this.props.spot} />
           {'Choose a seed to breed:'}
           <SeedSelectCard spot={this.props.spot}
             onConfirmClick={this.seedSelectBreeding}
             confirmText={'Go'} />
         </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
+        </div>
       );
     }
     else if (card.type == CardTypes.SEED_BREEDING_B) {
       return (
         <div className="game-card">
-          <BackButton spot={this.props.spot} />
-          {'Breed ' + card.parentA.name + ' with:'}
-          <SeedSelectCard spot={this.props.spot}
-            onConfirmClick={this.seedSelectBreeding}
-            confirmText={'Go'} />
+          <div className="game-card-body">
+            <BackButton spot={this.props.spot} />
+            {'Breed ' + card.parentA.name + ' with:'}
+            <SeedSelectCard spot={this.props.spot}
+              onConfirmClick={this.seedSelectBreeding}
+              confirmText={'Go'} />
+          </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       );
     }
     else if (card.type == CardTypes.SEED_BREEDING_CONFIRM) {
       return (
         <div className="game-card">
-          {'Breed these two plants?'}
-          <div className="option-container">
-            <SeedDescription seed={card.parentA} spot={this.props.spot} />
-            <SeedDescription seed={card.parentB} spot={this.props.spot} />
+          <div className="game-card-body">
+            {'Breed these two plants?'}
+            <div className="option-container">
+              <SeedDescription seed={card.parentA} spot={this.props.spot} />
+              <SeedDescription seed={card.parentB} spot={this.props.spot} />
+            </div>
+            <button onClick={() => this.seedSelectBreeding(null)}>
+              {'Confirm'}
+            </button>
+            <button onClick={() => this.props.revertCard(this.props.spot)}>
+              {'Cancel'}
+            </button>
           </div>
-          <button onClick={() => this.seedSelectBreeding(null)}>
-            {'Confirm'}
-          </button>
-          <button onClick={() => this.props.revertCard(this.props.spot)}>
-            {'Cancel'}
-          </button>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       )
     }

@@ -5,6 +5,7 @@ import { clearHarvestResult } from '../../actions/field';
 import { utils } from '../../models/utils';
 
 import Field from '../../models/field';
+import { images } from '../../instances/images';
 
 class HarvestResultFieldCard extends Component {
   props: HarvestResultFieldCardProps;
@@ -22,7 +23,7 @@ class HarvestResultFieldCard extends Component {
     let harvestResult = this.props.fields[this.props.fieldId].harvestResult;
     return (
       <div className="game-card field-card">
-        <div className="harvest-body">
+        <div className="game-card-body harvest-body">
           <div className="harvest-comment">
             {harvestResult.comment}
           </div>
@@ -57,10 +58,12 @@ class HarvestResultFieldCard extends Component {
               {utils.formatMoney(harvestResult.value)}
             </div>
           </div>
+          <button onClick={() => this.okClick()}>
+            {'OK'}
+          </button>
         </div>
-        <button onClick={() => this.okClick()}>
-          {'OK'}
-        </button>
+        <img className="game-card-background"
+          src={images.get('images/background.png')}></img>
       </div>
     );
   }
