@@ -9,6 +9,7 @@ import Card from '../../models/card';
 import Seed from '../../models/seed/seed';
 import Family from '../../models/seed/family';
 import { families } from '../../instances/families';
+import { images } from '../../instances/images';
 import { CardTypes } from '../../models/enums/card_types';
 
 import { setCard } from '../../actions/card';
@@ -39,6 +40,21 @@ class StateDisplayFieldCard extends Component {
     }
   }
 
+  renderPlant() {
+    let field = this.props.fields[this.props.fieldId];
+
+    if (field.seedPlantedId != null) {
+      return (
+        <div>
+          <img src={images.get(field.spriteAddress)} />
+        </div>
+      )
+    }
+    else {
+      return null;
+    }
+  }
+
   render() {
     let field = this.props.fields[this.props.fieldId];
 
@@ -46,6 +62,7 @@ class StateDisplayFieldCard extends Component {
       return (
         <div className="game-card field-card">
           <div className="field-card-body">
+            {this.renderPlant()}
             <div>{field.seedsNameLabel}</div>
             <div>{field.seedsAgeLabel}</div>
           </div>
@@ -57,6 +74,7 @@ class StateDisplayFieldCard extends Component {
       return (
         <div className="game-card field-card">
           <div className="field-card-body">
+            {this.renderPlant()}
             <button onClick={() => this.fieldCardClick()}>
               <div>{field.seedsNameLabel}</div>
               <div>{field.seedsAgeLabel}</div>

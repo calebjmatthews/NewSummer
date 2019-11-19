@@ -33,7 +33,8 @@ export function plantSeed(field: Field, seed: Seed, seedMap: { [id: number] : Se
     seedsAge: 0,
     seedMature: false,
     seedsNameLabel: newField.seedsNameLabel,
-    seedsAgeLabel: newField.seedsAgeLabel
+    seedsAgeLabel: newField.seedsAgeLabel,
+    spriteAddress: newField.spriteAddress
   }
 }
 
@@ -43,18 +44,21 @@ export function ageAllSeeds(fields: { [id: number] : Field }, duration: number =
   let seedAges: { [id: number] : number } = {};
   let seedAgeLabels: { [id: number] : string } = {};
   let seedMatures: { [id: number] : string } = {};
+  let spriteAddresses: { [id: number] : string } = {};
   Object.keys(fields).map((fieldId) => {
     let newField = new Field(fields[fieldId]);
     newField.ageSeed(duration, seedMap);
     seedAges[fieldId] = newField.seedsAge;
     seedAgeLabels[fieldId] = newField.seedsAgeLabel;
     seedMatures[fieldId] = newField.seedMature;
+    spriteAddresses[fieldId] = newField.spriteAddress;
   });
 	return {
     type: SET_SEEDS_AGE,
     seedAges: seedAges,
     seedAgeLabels: seedAgeLabels,
-    seedMatures: seedMatures
+    seedMatures: seedMatures,
+    spriteAddresses: spriteAddresses
   };
 }
 

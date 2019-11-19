@@ -13,6 +13,14 @@ require('./styles/seed.css');
 require('./styles/header.css');
 require('./styles/field.css');
 
+require('./images/wheat0.png');
+require('./images/wheat1.png');
+require('./images/wheat2.png');
+require('./images/wheat3.png');
+require('./images/wheat4.png');
+require('./images/wheat5.png');
+require('./images/wheat6.png');
+
 // @ts-ignore
 const createStoreWithMiddleware = applyMiddleware(createStore);
 
