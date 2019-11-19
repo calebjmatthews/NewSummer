@@ -24,7 +24,7 @@ class ExperimentalGarden extends Component {
   }
 
   matureGardenClick() {
-    this.props.setCard({type: CardTypes.BREEDING_RESULTS, spot: this.props.spot}, 
+    this.props.setCard({type: CardTypes.BREEDING_RESULTS, spot: this.props.spot},
       this.props.spot);
   }
 
@@ -42,20 +42,20 @@ class ExperimentalGarden extends Component {
     else if (homestead.seedsBred.length > 0
       && homestead.breedingTimeRemaining == 0) {
       return (
-        <div className="home-card-option"
+        <button className="home-card-option"
           onClick={ () => this.matureGardenClick() }>
           <div>{'Experimental plants are mature!'}</div>
           <div>{'Gather a new seed'}</div>
-        </div>
+        </button>
       );
     }
     else {
       return (
-        <div className="home-card-option"
+        <button className="home-card-option"
           onClick={ () => this.emptyGardenClick() }>
           <div>{'Experimental Garden:'}</div>
           <div>{'Breed two seeds together'}</div>
-        </div>
+        </button>
       );
     }
   }

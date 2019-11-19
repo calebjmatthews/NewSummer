@@ -43,20 +43,20 @@ class TravelerRest extends Component {
     if (this.props.cast.currentlyVisiting != null
       && this.props.cast.saidHello == false) {
       return (
-        <div>
+        <button>
           <div>{'A traveler is visiting,'}</div>
           <div>{'Say hello!'}</div>
-        </div>
+        </button>
       );
     }
     else if (cast.currentlyVisiting != null && cast.saidHello == true) {
       let timeRemaining = '';
       timeRemaining = utils.formatDuration(cast.visitRemaining);
       return (
-        <div>
+        <button>
           <div>{'A traveler is visiting,'}</div>
           <div>{'And leaving in ' + timeRemaining}</div>
-        </div>
+        </button>
       );
     }
     return (

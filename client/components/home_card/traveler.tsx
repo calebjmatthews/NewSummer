@@ -75,9 +75,9 @@ class TravelerCard extends Component {
           <div className="game-card-body">
             <BackButton spot={this.props.spot} />
             {'Sorry, had to go!'}
-            <img className="game-card-background"
-              src={images.get('images/background.png')}></img>
           </div>
+          <img className="game-card-background"
+            src={images.get('images/background.png')}></img>
         </div>
       );
     }
