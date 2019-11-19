@@ -48,7 +48,7 @@ export default class Seed implements SeedInterface {
     this.statMap = this.applyCultivarToStats(this.statMap, this.cultivarName);
 
     this.name = this.adjectives[0].word + ' ' + this.cultivarName
-      + (this.numeral != undefined ? this.numeral : '');
+      + (this.numeral != undefined ? (' ' + this.numeral) : '');
 
     this.idealValue = this.determineIdealValueFromStats(this.statMap);
     this.descriptions = this.describeFromTraitsAndStats(this.traitTotalMap,
