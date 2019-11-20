@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import ParticleEmitter from './particle_emitter';
+
 import { dismissModal } from '../actions/modal';
 import Modal from '../models/modal';
 import { ModalTypes } from '../models/enums/modal_types';
@@ -26,6 +28,7 @@ class ModalContainer extends Component {
 
   renderModal(modal: Modal) {
     switch(modal.type) {
+
       case ModalTypes.ALERT:
         return (
           <div className="modal">
@@ -43,12 +46,20 @@ class ModalContainer extends Component {
             </div>
           </div>
         );
+
       case ModalTypes.BANNER_LARGE:
       return (
-        <div className="modal">
-          <div className="modal-header">{modal.title}</div>
+        <div className="modal modal-banner-large">
+          <div className="modal-header">
+            <h2>{modal.title}</h2>
+            <div className="subtitle">{modal.subtitle}</div>
+          </div>
           <div className="modal-body">
-            Message!
+            {modal.messages.map((message, index) => {
+              return (
+                <p key={index}>{message}</p>
+              );
+            })}
             <button type="button" className="button-dark"
               onClick={() => this.okClick()}>
               Great!
@@ -59,6 +70,13 @@ class ModalContainer extends Component {
     }
   }
 
+  renderParticles(modal: Modal) {
+    switch(modal.type) {
+      case (ModalTypes.BANNER_LARGE):
+        return(<ParticleEmitter type={'sparkle'} />);
+    }
+  }
+
   render() {
     let modal = this.props.modals[0];
 
@@ -66,6 +84,7 @@ class ModalContainer extends Component {
       return (
         <div className="modal-container">
           {this.renderModal(modal)}
+          {this.renderParticles(modal)}
           <div className="modal-background" onClick={() => this.backgroundClick()}></div>
         </div>
       );

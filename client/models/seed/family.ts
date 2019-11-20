@@ -18,6 +18,7 @@ import { Comparitors } from '../enums/comparitors';
 export default class Family implements FamilyInterface {
   nameScientific: string;
   nameCommon: string;
+  description: string;
   traitsMap: Map<string, Trait>;
   stats: Stat[];
   cultivars: Cultivar[];
@@ -667,6 +668,7 @@ function calcBetweenExtent(stat: Stat, definition: StatDefinition) {
 interface FamilyInterface {
   nameScientific: string;
   nameCommon: string;
+  description: string;
   traitsMap: Map<string, Trait>;
   stats: Stat[];
   cultivars: Cultivar[];

@@ -53,14 +53,14 @@ class SeedDescription extends Component {
           <div className="seed-icon-container">
             {seed.descriptions.map((description) => {
               let iconStyle = calcIconStyle(description.iconStyle);
-              let tooltipParent = (
-                <div className="seed-icon" style={iconStyle}>
-                  <FontAwesomeIcon icon={fontAwesome.get(description.icon)} />
-                </div>
-              );
               return (
                 <Tooltip key={description.title} iconStyle={iconStyle}
-                  description={description} parentElement={tooltipParent} />
+                  description={description}
+                  parentElement={(
+                  <div className="seed-icon" style={iconStyle}>
+                    <FontAwesomeIcon icon={fontAwesome.get(description.icon)} />
+                  </div>
+                )} />
               );
             })}
           </div>

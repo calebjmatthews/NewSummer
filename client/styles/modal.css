@@ -9,10 +9,9 @@
 }
 
 .modal {
-  z-index: 101;
+  z-index: 200;
   max-width: 50%;
   max-height: 50%;
-  border-radius: 1em;
 }
 
 .modal-header {
@@ -23,7 +22,7 @@
   font-weight: 300;
   letter-spacing: .06em;
   height: 3em;
-  background: #56AB2E;
+  background: #63638c;
   color: #fff;
   border-radius: 0.5em 0.5em 0 0;
 }
@@ -33,7 +32,6 @@
   flex-direction: column;
   padding: 1em;
   background: #fff;
-  color: #101b0a;
   border-radius: 0 0 0.5em 0.5em;
 }
 
@@ -44,4 +42,54 @@
   height: 100vh;
   opacity: 0.7;
   background: #101b0a;
+}
+
+.modal-banner-large.modal {
+  width: 100%;
+  max-height: unset;
+  max-width: unset;
+  background: linear-gradient(to bottom, #7476ae, #a68e88);;
+}
+
+.modal-banner-large .modal-header {
+  flex-direction: column;
+  height: unset;
+  background: unset;
+  color: unset;
+  border-radius: unset;
+}
+
+.modal-banner-large h2 {
+  margin-block-end: unset;
+  font-size: 1.6em;
+  font-weight: bolder;
+  letter-spacing: .06em;
+  color: #fff;
+  text-shadow: 0 2px 1px #000;
+}
+
+.modal-banner-large .subtitle {
+  margin-top: 0.5em;
+  width: 100%;
+  text-align: center;
+  line-height: 1.5;
+  background: #fff;
+}
+
+.modal-banner-large .modal-body {
+  align-items: center;
+  background: unset;
+  color: unset;
+  border-radius: unset;
+}
+
+.modal-banner-large button {
+  width: unset;
+  padding: 1em 3em;
+  background: #fff;
+  box-shadow: 0 0 3px 0px #00000070
+}
+
+.modal-banner-large p {
+  max-width: 75%;
 }

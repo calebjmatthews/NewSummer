@@ -4,6 +4,7 @@ import Seed from '../models/seed/seed';
 import RecordBook from '../models/record_book';
 import Modal from '../models/modal';
 import { ModalTypes } from '../models/enums/modal_types';
+import { families } from '../instances/families';
 
 export const SET_RECORD_BOOK = 'SET_RECORD_BOOK';
 export function setRecordBook(recordBook: RecordBook) {
@@ -18,15 +19,17 @@ export function recordSeed(seed: Seed, recordBook: RecordBook) {
     let isSeedNew = recordBook.recordSeed(seed);
 
     if(isSeedNew.familyNew) {
+      let family = families.get(seed.familyName);
       dispatch(addModal(new Modal({
-        type: ModalTypes.ALERT,
+        type: ModalTypes.BANNER_LARGE,
         title: (seed.familyName + ' Discovered!'),
-        messages: []
+        subtitle: ('Common name: "' + family.nameCommon + '"'),
+        messages: [family.description]
       })));
     }
     if (isSeedNew.cultivarNew) {
       dispatch(addModal(new Modal({
-        type: ModalTypes.ALERT,
+        type: ModalTypes.BANNER_LARGE,
         title: (seed.cultivarName + ' Discovered!'),
         messages: []
       })));

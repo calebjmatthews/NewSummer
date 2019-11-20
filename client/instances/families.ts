@@ -124,7 +124,10 @@ class Poaceae extends Family {
   constructor() {
     super({
       nameScientific: FamilyNames.POACEAE,
-      nameCommon: 'Grasses',
+      nameCommon: "Grasses",
+      description: `An extremely widespread and successful family on Earth, grasses
+        made up the majority of the world's food, and covered an impressive amount of
+        ground. Grasses are fast-growing, can grow back after being bitten down by grazing animals, and can be used for both food and building materials.`,
       traitsMap: traitsMap,
       stats: stats,
       cultivars: cultivars
