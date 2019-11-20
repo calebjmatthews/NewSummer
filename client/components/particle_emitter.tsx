@@ -15,7 +15,8 @@ export default class ParticleEmitter extends Component {
 
   componentDidMount() {
     this.initialBurst();
-    this.interval = setInterval(() => this.emit(), 100);
+    this.interval = setInterval(() => this.emit(),
+      Math.floor(Math.random() * 25 + 238));
   }
 
   componentWillUnmount() {
@@ -33,12 +34,11 @@ export default class ParticleEmitter extends Component {
 
     const baseStyles = {
       'sparkle': {
-        top: '0px',
-        left: '0px',
-        width: '1px',
-        height: '1px',
+        position: 'relative',
+        width: '4px',
+        height: '4px',
         background: '#fff',
-        boxShadow: '0 0 3px 3px #fff',
+        boxShadow: '0 0 1px 1px #fff',
         transform: 'translate(0px, 0px)',
         opacity: '1',
         transition: 'transform 1s ease-out, opacity 1s ease-out'
@@ -49,27 +49,43 @@ export default class ParticleEmitter extends Component {
       case ('sparkle'):
         utils.range(count).map(() => {
           let particleId = Math.floor(Math.random() * 1000000);
+          let startingStyle: any = Object.assign({}, baseStyles[type]);
+          let startingPoint = [
+            Math.floor(Math.random() * this.props.width),
+            Math.floor(Math.random() * this.props.height)
+          ];
+          startingStyle.left = (startingPoint[0] + 'px');
+          startingStyle.top = (startingPoint[1] + 'px');
+
           let newParticle = new Particle({
             id: particleId,
             type: type,
-            style: baseStyles[type],
+            style: startingStyle,
             animationTimeout: setTimeout(() => {
-              let newStyle = Object.assign({}, baseStyles[type]);
+              let newStyle = Object.assign({}, startingStyle);
               newStyle.opacity = '0';
+              let endingPoint: number[] = [];
+              if (this.props.direction == 'up' || this.props.direction == 'down') {
+                endingPoint[0] = Math.floor(Math.random() * 300 - 150);
+              }
+              if (this.props.direction == 'up') {
+                endingPoint[1] = Math.floor(Math.random() * 150 - 150);
+              }
+              else if (this.props.direction == 'down') {
+                endingPoint[1] = Math.floor(Math.random() * 150);
+              }
               newStyle.transform =  ( 'translate('
-                + Math.floor(Math.random() * 600 - 300) + 'px, '
-                + Math.floor(Math.random() * 600 - 300) + 'px)');
+                + endingPoint[0] + 'px, ' + endingPoint[1] + 'px)');
               this.setStyle(particleId, newStyle);
             }, 10),
             ageTimeout: setTimeout(() => {
-              this.ageOut(particleId)
+              this.ageOut(particleId);
             }, 1000)
           });
           particles.push(newParticle);
         });
         break;
     }
-
     return particles;
   }
 
@@ -104,8 +120,14 @@ export default class ParticleEmitter extends Component {
   }
 
   render() {
+    let style = {
+      'top': this.props.top,
+      'left': this.props.left,
+      'width': this.props.width,
+      'height': this.props.height
+    }
     return (
-      <div className="particle-emitter">
+      <div className="particle-emitter" style={style}>
         {Object.keys(this.state.particleMap).map((particleId) => {
           let particle = this.state.particleMap[particleId];
           return (
@@ -119,9 +141,12 @@ export default class ParticleEmitter extends Component {
 }
 
 interface ParticleEmitterProps {
-  width?: string;
-  height?: string;
+  width?: number;
+  height?: number;
+  top?: number;
+  left?: number;
   type: string;
+  direction?: string;
 }
 
 interface ParticleEmitterState {
