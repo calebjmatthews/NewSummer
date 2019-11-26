@@ -4,7 +4,7 @@ import Homestead from '../models/homestead';
 import Family from '../models/seed/family';
 import RealValueReturn from '../models/seed/real_value_return';
 
-import { gainDollars } from './homestead';
+import { gainDollars, addHarvestStack } from './homestead';
 
 export const SET_FIELDS = 'SET_FIELDS';
 export function setFields(fields: { [id: number] : Field }) {
@@ -71,15 +71,41 @@ export function harvestSeed(field: Field, homestead: Homestead,
   let newField = new Field(field);
   let harvestResult: RealValueReturn = newField.harvestSeed(seedMap);
   return function(dispatch: any) {
-    dispatch(gainDollars(harvestResult.value, homestead));
     dispatch(setField(newField));
   }
 }
 
-export const CLEAR_HARVEST_RESULT = 'CLEAR_HARVEST_RESULT';
-export function clearHarvestResult(field: Field) {
-  return {
-    type: CLEAR_HARVEST_RESULT,
-    fieldId: field.id
+export function sellAllHarvest(field: Field, homestead: Homestead) {
+  let newField = new Field(field);
+  return function(dispatch: any) {
+    dispatch(gainDollars(newField.harvestResult.value, homestead));
+    newField.harvestResult = null;
+    newField.harvestedSeedId = null;
+    dispatch(setField(newField));
+  }
+}
+
+export function sellHalfHarvest(field: Field, homestead: Homestead) {
+  let newField = new Field(field);
+  return function(dispatch: any) {
+    let quantityToSell = Math.ceil(newField.harvestResult.harvestStack.quantity / 2);
+    let valueOfSold = newField.harvestResult.harvestStack.totalValue / quantityToSell;
+    newField.harvestResult.harvestStack.quantity -= quantityToSell;
+    newField.harvestResult.harvestStack.totalValue -= valueOfSold;
+    dispatch(gainDollars(valueOfSold, homestead));
+    dispatch(addHarvestStack(homestead, newField.harvestResult.harvestStack));
+    newField.harvestResult = null;
+    newField.harvestedSeedId = null;
+    dispatch(setField(newField));
+  }
+}
+
+export function collectAllHarvest(field: Field, homestead: Homestead) {
+  let newField = new Field(field);
+  return function(dispatch: any) {
+    dispatch(addHarvestStack(homestead, newField.harvestResult.harvestStack));
+    newField.harvestResult = null;
+    newField.harvestedSeedId = null;
+    dispatch(setField(newField));
   }
 }

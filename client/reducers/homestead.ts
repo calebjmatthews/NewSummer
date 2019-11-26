@@ -1,6 +1,6 @@
 import {
   ADD_SEED, SET_DOLLARS, SET_BREEDING, SET_HOMESTEAD, SET_BREEDING_AGE, SET_INTER_SEED,
-  REMOVE_SEED
+  REMOVE_SEED, SET_HARVEST_STACK_MAP
 } from '../actions/homestead';
 import Homestead from '../models/homestead';
 
@@ -40,6 +40,10 @@ export default function
       return Object.assign(new Homestead(), homestead, {
         intermediateSeed: action.intermediateSeed
       });
+    case SET_HARVEST_STACK_MAP:
+      return Object.assign(new Homestead(), homestead, {
+        harvestStackMap: action.harvestStackMap
+      })
     case SET_HOMESTEAD:
       return new Homestead(action.homestead);
 		default:

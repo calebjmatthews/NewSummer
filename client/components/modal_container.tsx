@@ -105,9 +105,7 @@ class ModalContainer extends Component {
     switch(modal.type) {
       case (ModalTypes.BANNER_LARGE):
         let element = this.getModalElement();
-        if (this.state.modalExists) {
-          console.log("document.getElementsByClassName('modal-banner-large')");
-          console.log(document.getElementsByClassName('modal-banner-large'));
+        if (this.state.modalExists && element != undefined) {
           return(
             <div>
               <ParticleEmitter type={'sparkle'} direction={'up'}

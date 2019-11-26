@@ -170,11 +170,12 @@ export default class Seed implements SeedInterface {
     const family = families.get(this.familyName);
     return family.determineIdealValueFromStats(statMap);
   }
-  determineRealValue(statMap: { [id: string] : Stat }, temperature: number,
-    moisture: number, fertility: number, pests: number, disease: number) {
+  determineRealValue(seedId: number, statMap: { [id: string] : Stat },
+    temperature: number, moisture: number, fertility: number, pests: number,
+    disease: number) {
     let cultivarName = this.cultivarName;
     const family = families.get(this.familyName);
-    return family.determineRealValue(statMap, temperature, moisture, fertility,
+    return family.determineRealValue(seedId, statMap, temperature, moisture, fertility,
       pests, disease);
   }
   describeFromTraitsAndStats(traitTotalMap: Map<string, TraitTotal>,

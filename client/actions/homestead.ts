@@ -3,6 +3,7 @@ import { setCard } from './card';
 import Seed from '../models/seed/seed';
 import Homestead from '../models/homestead';
 import RecordBook from '../models/record_book';
+import HarvestStack from '../models/seed/harvest_stack';
 import { recordSeed } from './record_book';
 import { StatNames } from '../models/enums/stat_names';
 import { CardTypes } from '../models/enums/card_types';
@@ -115,5 +116,14 @@ export function replaceSeed(homestead: Homestead, oldSeed: Seed, newSeed: Seed,
         breedingAgeLabel: homestead.getBreedingAgeLabel()
       });
     }
+  }
+}
+
+export const SET_HARVEST_STACK_MAP = 'SET_HARVEST_STACK_MAP';
+export function addHarvestStack(homestead: Homestead, harvestStack: HarvestStack) {
+  homestead.addHarvestStack(harvestStack);
+  return {
+    type: SET_HARVEST_STACK_MAP,
+    harvestStackMap: homestead.harvestStackMap
   }
 }

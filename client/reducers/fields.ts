@@ -1,5 +1,5 @@
 import {
-  SET_FIELDS, SET_FIELD, SET_SEED_DATA, SET_SEEDS_AGE, CLEAR_HARVEST_RESULT
+  SET_FIELDS, SET_FIELD, SET_SEED_DATA, SET_SEEDS_AGE
 } from '../actions/field';
 import Field from '../models/field';
 
@@ -47,15 +47,6 @@ export default function
         })
       }
       return newFields;
-    case CLEAR_HARVEST_RESULT:
-      var field = fields[action.fieldId];
-      return {...fields,
-        [action.fieldId]: {
-          ...field,
-          harvestResult: null,
-          harvestedSeedId: null
-        }
-      }
     case SET_FIELDS:
       var newFields: { [id: number] : Field } = {};
       Object.keys(action.fields).map((fieldId) => {

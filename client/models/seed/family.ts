@@ -9,11 +9,13 @@ import SeedDescription from './seed_description';
 import RealValueReturn from './real_value_return';
 import MultiplierDescriptionSet from './multiplier_description_set';
 import MultiplierDescription from './multiplier_description';
+import HarvestStack from './harvest_stack';
 import { utils } from '../utils';
 
 import { TraitNames } from '../enums/trait_names';
 import { StatNames } from '../enums/stat_names';
 import { Comparitors } from '../enums/comparitors';
+import { QualityColors } from '../enums/quality_colors';
 
 export default class Family implements FamilyInterface {
   nameScientific: string;
@@ -172,8 +174,9 @@ export default class Family implements FamilyInterface {
     return value;
   }
 
-  determineRealValue(statMap: { [id: string] : Stat }, temperature: number,
-    moisture: number, fertility: number, pests: number, disease: number):
+  determineRealValue(seedId: number, statMap: { [id: string] : Stat },
+    temperature: number, moisture: number, fertility: number, pests: number,
+    disease: number):
     RealValueReturn {
     // Rows are the climate conditions of the field,
     //  columns are the plant's stat fit into a category
@@ -214,6 +217,7 @@ export default class Family implements FamilyInterface {
     }
     let baseValue = (statMap[StatNames.PLANT_QUALITY].value
       * statMap[StatNames.SEED_QUANTITY].value);
+    let quantity = Math.round(statMap[StatNames.SEED_QUANTITY].value);
     // Stat categories
     let statCats: StatFactor = new StatFactor();
     statCats.temperature = setCats(statMap[StatNames.TEMP_TOLERANCE].value,
@@ -239,10 +243,11 @@ export default class Family implements FamilyInterface {
     value +=  baseValue * multipliers.fertility;
     value +=  baseValue * multipliers.pests;
     value +=  baseValue * multipliers.disease;
+    let harvestStack = this.createHarvestStack(seedId, baseValue, value, quantity);
     let descriptions = describeMultipliers(baseValue, multipliers, statCats);
     let comment = commentOnDescriptions(descriptions);
-    return new RealValueReturn({baseValue: baseValue, value: value,
-      descriptions: descriptions, comment: comment});
+    return new RealValueReturn({baseValue: baseValue, harvestStack: harvestStack,
+      value: value, descriptions: descriptions, comment: comment});
 
     function setCats(value: number, boundary: number[]): number {
       if (value <= boundary[0]) { return 0; }
@@ -398,6 +403,38 @@ export default class Family implements FamilyInterface {
     descriptions.push(flavorDescription);
 
     return descriptions;
+  }
+
+  createHarvestStack(seedId: number, baseValue: number, value: number,
+    quantity: number): HarvestStack {
+    const indvMultiplier = (value / baseValue) / 2;
+    const actualQuantity = Math.round(quantity * indvMultiplier);
+    const qualityThresholds = {
+      5: QualityColors.RED,
+      20: QualityColors.ORANGE,
+      80: QualityColors.YELLOW,
+      320: QualityColors.GREEN,
+      1280: QualityColors.BLUE,
+      5120: QualityColors.INDIGO,
+      20480: QualityColors.VIOLET,
+      81920: QualityColors.RAINBOW,
+      327680: QualityColors.FLAME,
+      1310720: QualityColors.AURORA
+    }
+    let qualityColor: string = QualityColors.AURORA;
+    for (let iii = (Object.keys(qualityThresholds).length-1); iii >= 0; iii--) {
+      let threshold: any = Object.keys(qualityThresholds)[iii];
+      if (value < threshold) {
+        qualityColor = qualityThresholds[Object.keys(qualityThresholds)[iii]];
+      }
+    }
+
+    return new HarvestStack({
+      seedId: seedId,
+      quality: qualityColor,
+      quantity: actualQuantity,
+      totalValue: value
+    });
   }
 }
 

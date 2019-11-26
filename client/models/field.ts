@@ -122,8 +122,6 @@ export default class Field implements FieldInterface {
       if (matchingStage == null) {
         matchingStage = cultivar.stages[cultivar.stages.length-1];
       }
-      console.log('SPRITE_ADDRESS_BASE + matchingStage.sprite');
-      console.log(SPRITE_ADDRESS_BASE + matchingStage.sprite);
       return {sprite: (SPRITE_ADDRESS_BASE + matchingStage.sprite),
         style: matchingStage.style};
     }
@@ -134,8 +132,8 @@ export default class Field implements FieldInterface {
 
   harvestSeed(seedMap: { [id: number] : Seed }) {
     let seed = seedMap[this.seedPlantedId];
-    this.harvestResult = seed.determineRealValue(seed.statMap, this.temperature,
-      this.moisture, this.fertility, this.pests, this.disease);
+    this.harvestResult = seed.determineRealValue(seed.id, seed.statMap,
+      this.temperature, this.moisture, this.fertility, this.pests, this.disease);
     this.harvestedSeedId = this.seedPlantedId;
     this.seedPlantedId = null;
     this.seedsAge = 0;

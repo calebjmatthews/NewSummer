@@ -47,6 +47,7 @@ Cultivars:
 	- Sorghum: Drought and heat tolerant
 	- Sugar Cane: Cane investment, high sugar content
 	- Bamboo: Cane investment, high plant toughness
+* Fabaceae (Legumes)
 * Brassicaceae (Crucifers)
 * Solanaceae (Nightshade)
 * Rosaceae (Rose)
@@ -404,6 +405,14 @@ Has a type, which can display different styles of UI
 Exists as an array, therefore other arrays can be pending while one is active
 The active popup can be dismissed, removing it as [0] in the array
 
+Stored harvested crops
+~~~~~~~~~~~~~~~~~~~~~~
+- Math.floor(SEED_QUANTITY * (field suitability percentage)) bushels are produced of a given crop, and the value of each bushel is (final harvest value / number of bushels)
+- Stored crop data is kept in the homestead reducer, as a map of harvestId values tied to a CropHarvest object
+- Each HarvestStack contains a number of bushels and a quality rating (red star to violet star?)
+- Can store some huge number of HarvestStack, sell half of each, sell all, sell one by one, etc.
+- Eventually can use to complete quests, trade with travelers, give as gifts to travelers
+
 Minor display and gameplay polish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 X Breeding time dependent on growth time of babies
@@ -480,5 +489,7 @@ X Tap for brief icon descriptions
 X Roman numeral naming system
 X Simple NS pixel graphics for all plant stages
 X Flashy banner when finding new family/cultivars
-_ Pixel graphics linked with traits
+X Harvested crops as stored items
 _ Pixel graphics for different cultivars
+_ Icon for each cultivar
+_ Pixel graphics linked with traits

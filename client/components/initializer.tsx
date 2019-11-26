@@ -204,8 +204,9 @@ class Initializer extends Component {
     }
     else {
       field.ageSeed(diff, this.props.recordBook.seedMap);
-      let harvestValue = seed.determineRealValue(seed.statMap, field.temperature,
-        field.moisture, field.fertility, field.pests, field.disease).value;
+      let harvestValue = seed.determineRealValue(seed.id, seed.statMap,
+        field.temperature, field.moisture, field.fertility, field.pests,
+        field.disease).value;
       dollars = harvestValue * harvestCount;
       message = (seed.name + ' had ' + harvestCount + ' harvests for a total of '
         + utils.formatMoney(dollars) + '.');

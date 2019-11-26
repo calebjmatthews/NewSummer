@@ -1,5 +1,6 @@
 import Seed from './seed/seed';
 import RecordBook from './record_book';
+import HarvestStack from './seed/harvest_stack';
 import { utils } from './utils';
 import { AGE_INTERVAL } from '../constants';
 
@@ -8,6 +9,7 @@ export default class Homestead implements HomesteadInterface {
   maxSeeds: number;
   experimentalGardenSize: number;
   seedIds: number[];
+  harvestStackMap: { [idAndQuality: string] : HarvestStack };
   intermediateSeed: Seed;
   seedsBred: Seed[];
   breedingTimeRemaining: number;
@@ -23,12 +25,17 @@ export default class Homestead implements HomesteadInterface {
       homestead.seedsBred.map((seedBred) => {
         this.seedsBred.push(new Seed(seedBred));
       });
+      this.harvestStackMap = {};
+      Object.keys(homestead.harvestStackMap).map((id) => {
+        this.harvestStackMap[id] = new HarvestStack(homestead[id]);
+      })
     }
     else {
       this.dollars = 10;
       this.maxSeeds = 4;
       this.experimentalGardenSize = 2;
       this.seedIds = [];
+      this.harvestStackMap = {};
       this.intermediateSeed = null;
       this.seedsBred = [];
       this.breedingTimeRemaining = 0;
@@ -74,6 +81,15 @@ export default class Homestead implements HomesteadInterface {
       if (seedId == seed.id) { return false; }
       else { return true; }
     });
+  }
+
+  addHarvestStack(harvestStack: HarvestStack) {
+    let currentHarvestStack =
+      this.harvestStackMap[harvestStack.seedId + harvestStack.quality];
+    if (currentHarvestStack != undefined) {
+      harvestStack = harvestStack.combineWith(currentHarvestStack);
+    }
+    this.harvestStackMap[harvestStack.seedId + harvestStack.quality] = harvestStack;
   }
 
   breedSeeds(seedA: Seed, seedB: Seed): Seed {
@@ -130,6 +146,7 @@ interface HomesteadInterface {
   maxSeeds: number;
   experimentalGardenSize: number;
   seedIds: number[];
+  harvestStackMap: { [idAndQuality: string] : HarvestStack };
   intermediateSeed: Seed;
   seedsBred: Seed[];
   breedingTimeRemaining: number;
