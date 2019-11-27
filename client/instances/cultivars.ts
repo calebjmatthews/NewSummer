@@ -14,13 +14,13 @@ const CO = Comparitors;
 const style: any = { top: '84px', width: '30px' };
 
 const wheatStages = [
-  new CultivarStage({sprite: 'wheat0.png', duration: 0.1, style: style}),
-  new CultivarStage({sprite: 'wheat1.png', duration: 0.15, style: style}),
-  new CultivarStage({sprite: 'wheat2.png', duration: 0.15, style: style}),
-  new CultivarStage({sprite: 'wheat3.png', duration: 0.20, style: style}),
-  new CultivarStage({sprite: 'wheat4.png', duration: 0.20, style: style}),
-  new CultivarStage({sprite: 'wheat5.png', duration: 0.20, style: style}),
-  new CultivarStage({sprite: 'wheat6.png', duration: 0, style: style}),
+  new CultivarStage({sprite: 'wheat0', duration: 0.1, style: style}),
+  new CultivarStage({sprite: 'wheat1', duration: 0.15, style: style}),
+  new CultivarStage({sprite: 'wheat2', duration: 0.15, style: style}),
+  new CultivarStage({sprite: 'wheat3', duration: 0.20, style: style}),
+  new CultivarStage({sprite: 'wheat4', duration: 0.20, style: style}),
+  new CultivarStage({sprite: 'wheat5', duration: 0.20, style: style}),
+  new CultivarStage({sprite: 'wheat6', duration: 0, style: style}),
 ];
 
 export const grain = new Cultivar({

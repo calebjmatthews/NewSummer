@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fontAwesome } from '../../instances/font_awesome';
 
 import BackButton from '../back_button';
+import QualityJewel from '../quality_jewel';
 
 import Homestead from '../../models/homestead';
 import HarvestStack from '../../models/seed/harvest_stack';
@@ -42,38 +41,30 @@ class InventoryCard extends Component {
           </div>
         </div>
         <img className="game-card-background"
-          src={images.get('images/background.png')}></img>
+          src={images.get('background')}></img>
       </div>
     );
   }
 
   renderHarvestStack(harvestStack: HarvestStack) {
-    const qualityColors: { [colorName: string] : string } = {};
-    qualityColors[QualityColors.RED] = '#f44336';
-    qualityColors[QualityColors.ORANGE] = '#ff9800';
-    qualityColors[QualityColors.YELLOW] = '#ffeb3b';
-    qualityColors[QualityColors.GREEN] = '#8bc34a';
-    qualityColors[QualityColors.BLUE] = '#2196f3';
-    qualityColors[QualityColors.INDIGO] = '#673ab7';
-    qualityColors[QualityColors.VIOLET] = '#9c27b0';
-    qualityColors[QualityColors.RAINBOW] = '#cddc39';
-    qualityColors[QualityColors.FLAME] = '#ff5722';
-    qualityColors[QualityColors.AURORA] = '#00bcd4';
-
     let seed = this.props.recordBook.seedMap[harvestStack.seedId];
-    let style = { color: qualityColors[harvestStack.quality] };
     return (
       <div className="inventory-slot" key={harvestStack.seedId+harvestStack.quality}>
         <div className="inventory-slot-row">
-          <div>{seed.name.slice(0, 3)}</div>
-          <div>
-            <FontAwesomeIcon icon={fontAwesome.get('star')} style={style} />
+          <div className="inventory-slot-column">
+            <div>{seed.adjectives[0].word}</div>
+            <div>{seed.cultivarName + ' ' + seed.numeral}</div>
           </div>
-
+          <div className="inventory-icon-wrapper">
+            <img src={images.get('wild_grass_icon')} />
+          </div>
+          <div className="inventory-slot-column">
+            <QualityJewel qualityColor={harvestStack.quality} />
+            <div>{'x' + harvestStack.quantity}</div>
+          </div>
         </div>
-        <div className="inventory-slot-row">
-          <div></div>
-          <div>{'x' + harvestStack.quantity}</div>
+        <div className="inventory-value">
+          {utils.formatMoney(harvestStack.totalValue)}
         </div>
       </div>
     );

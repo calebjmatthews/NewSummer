@@ -43,7 +43,7 @@ class BreedingResultsHomeCard extends Component {
           </div>
         </div>
         <img className="game-card-background"
-          src={images.get('images/background.png')}></img>
+          src={images.get('background')}></img>
       </div>
     );
   }

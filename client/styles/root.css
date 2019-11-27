@@ -5,6 +5,7 @@ html {
 body {
   font-family: Helvetica, Arial, sans-serif;
   margin: unset;
+  text-shadow: 0 0 2px #000;
 }
 
 button {
@@ -15,6 +16,7 @@ button {
   color: #fff;
   width: 100%;
   border-radius: 0.25em;
+  text-shadow: 0 0 2px #000;
 }
 button:disabled {
   opacity: 0.5;
@@ -23,6 +25,7 @@ button:disabled {
 .button-dark {
   border-color: #000;
   color: #000;
+  text-shadow: none;
 }
 
 .main-container {
@@ -72,4 +75,9 @@ button:disabled {
 .tooltip.visible {
   display: flex;
   opacity: 0.95;
+}
+
+.jewel-icon {
+  width: 14px;
+  image-rendering: pixelated;
 }

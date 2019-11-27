@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fontAwesome } from '../../instances/font_awesome';
+
+import QualityJewel from '../quality_jewel';
 import { sellAllHarvest, sellHalfHarvest, collectAllHarvest }
   from '../../actions/field';
 import { utils } from '../../models/utils';
@@ -40,20 +40,7 @@ class HarvestResultFieldCard extends Component {
   }
 
   render() {
-    const qualityColors: { [colorName: string] : string } = {};
-    qualityColors[QualityColors.RED] = '#f44336';
-    qualityColors[QualityColors.ORANGE] = '#ff9800';
-    qualityColors[QualityColors.YELLOW] = '#ffeb3b';
-    qualityColors[QualityColors.GREEN] = '#8bc34a';
-    qualityColors[QualityColors.BLUE] = '#2196f3';
-    qualityColors[QualityColors.INDIGO] = '#673ab7';
-    qualityColors[QualityColors.VIOLET] = '#9c27b0';
-    qualityColors[QualityColors.RAINBOW] = '#cddc39';
-    qualityColors[QualityColors.FLAME] = '#ff5722';
-    qualityColors[QualityColors.AURORA] = '#00bcd4';
-
     let harvestResult = this.props.fields[this.props.fieldId].harvestResult;
-    let style = { 'color': qualityColors[harvestResult.harvestStack.quality] };
     let seed = this.props.recordBook.seedMap[harvestResult.harvestStack.seedId];
     let singleValue = harvestResult.harvestStack.totalValue /
       harvestResult.harvestStack.quantity
@@ -89,7 +76,7 @@ class HarvestResultFieldCard extends Component {
           <div>
             <div className="harvest-description-value">
               {seed.name + ' '}
-              <FontAwesomeIcon icon={fontAwesome.get('star')} style={style} />
+              <QualityJewel qualityColor={harvestResult.harvestStack.quality} />
               {' x ' + harvestResult.harvestStack.quantity + ' ='}
             </div>
             <div className="harvest-value-final">
@@ -108,7 +95,7 @@ class HarvestResultFieldCard extends Component {
           </div>
         </div>
         <img className="game-card-background"
-          src={images.get('images/background.png')}></img>
+          src={images.get('background')}></img>
       </div>
     );
   }

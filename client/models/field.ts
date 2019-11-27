@@ -8,8 +8,6 @@ import { utils } from './utils';
 import { families } from '../instances/families';
 import { AGE_INTERVAL } from '../constants';
 
-const SPRITE_ADDRESS_BASE = 'images/'
-
 export default class Field implements FieldInterface {
   id: number;
   name: string;
@@ -122,8 +120,7 @@ export default class Field implements FieldInterface {
       if (matchingStage == null) {
         matchingStage = cultivar.stages[cultivar.stages.length-1];
       }
-      return {sprite: (SPRITE_ADDRESS_BASE + matchingStage.sprite),
-        style: matchingStage.style};
+      return {sprite: matchingStage.sprite, style: matchingStage.style};
     }
     else {
       return null;

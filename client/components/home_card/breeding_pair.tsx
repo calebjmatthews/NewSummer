@@ -58,7 +58,7 @@ class BreedingPairHomeCard extends Component {
             confirmText={'Go'} />
         </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       );
     }
@@ -73,7 +73,7 @@ class BreedingPairHomeCard extends Component {
               confirmText={'Go'} />
           </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       );
     }
@@ -94,7 +94,7 @@ class BreedingPairHomeCard extends Component {
             </button>
           </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       )
     }

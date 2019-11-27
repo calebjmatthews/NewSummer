@@ -65,7 +65,7 @@ class TravelerCard extends Component {
             </div>
           </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       );
     }
@@ -77,7 +77,7 @@ class TravelerCard extends Component {
             {'Sorry, had to go!'}
           </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       );
     }

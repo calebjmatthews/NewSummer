@@ -67,7 +67,7 @@ class StateDisplayFieldCard extends Component {
             <div>{field.seedsAgeLabel}</div>
           </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       );
     }
@@ -83,7 +83,7 @@ class StateDisplayFieldCard extends Component {
             </button>
           </div>
           <img className="game-card-background"
-            src={images.get('images/background.png')}></img>
+            src={images.get('background')}></img>
         </div>
       );
     }
