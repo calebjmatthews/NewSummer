@@ -8,6 +8,7 @@ export default class Homestead implements HomesteadInterface {
   dollars: number;
   maxSeeds: number;
   experimentalGardenSize: number;
+  inventorySize: number;
   seedIds: number[];
   harvestStackMap: { [idAndQuality: string] : HarvestStack };
   intermediateSeed: Seed;
@@ -27,13 +28,14 @@ export default class Homestead implements HomesteadInterface {
       });
       this.harvestStackMap = {};
       Object.keys(homestead.harvestStackMap).map((id) => {
-        this.harvestStackMap[id] = new HarvestStack(homestead[id]);
+        this.harvestStackMap[id] = new HarvestStack(homestead.harvestStackMap[id]);
       })
     }
     else {
       this.dollars = 10;
       this.maxSeeds = 4;
       this.experimentalGardenSize = 2;
+      this.inventorySize = 50;
       this.seedIds = [];
       this.harvestStackMap = {};
       this.intermediateSeed = null;

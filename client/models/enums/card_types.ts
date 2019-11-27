@@ -7,5 +7,6 @@ export enum CardTypes {
   BREEDING_RESULTS = 'breedingResults',
   SEED_REPLACE_BUY = 'seedReplaceBuy',
   SEED_REPLACE_BREED = 'seedReplaceBreed',
-  SEED_BUYING = 'seedBuying'
+  SEED_BUYING = 'seedBuying',
+  INVENTORY_OPEN = 'inventoryOpen'
 }

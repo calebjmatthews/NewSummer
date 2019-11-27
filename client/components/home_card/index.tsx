@@ -9,6 +9,8 @@ import BreedingResultsHomeCard from './breeding_results';
 import SeedReplaceCard from '../seed/seed_replace';
 import TravelerRest from './traveler_rest';
 import TravelerCard from './traveler';
+import InventoryBox from './inventory_box';
+import InventoryCard from './inventory';
 
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
@@ -43,12 +45,16 @@ class HomeCard extends Component {
     else if (card.type == CardTypes.SEED_BUYING) {
       return <TravelerCard spot={this.props.spot} />
     }
+    else if (card.type == CardTypes.INVENTORY_OPEN) {
+      return <InventoryCard spot={this.props.spot} />
+    }
     else {
       return (
         <div className="game-card">
           <div className="game-card-body">
-            <TravelerRest spot={0}/>
-            <ExperimentalGarden spot={0}/>
+            <InventoryBox spot={0} />
+            <TravelerRest spot={0} />
+            <ExperimentalGarden spot={0} />
           </div>
           <img className="game-card-background"
             src={images.get('images/background.png')}></img>
@@ -64,10 +70,8 @@ interface HomeCardProps {
   cardState: CardState;
 }
 
-function mapStateToProps({ storehouseState, economyState, fieldsState,
-  cardNavState, recordBookState, cardState, autoIncrementState }) {
-  return { storehouseState, economyState, fieldsState, cardNavState,
-    recordBookState, cardState, autoIncrementState }
+function mapStateToProps({ cardState }) {
+  return { cardState }
 }
 
 export default connect(mapStateToProps)(HomeCard);

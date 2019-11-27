@@ -490,6 +490,7 @@ X Roman numeral naming system
 X Simple NS pixel graphics for all plant stages
 X Flashy banner when finding new family/cultivars
 X Harvested crops as stored items
+_ Inventory component
 _ Pixel graphics for different cultivars
 _ Icon for each cultivar
 _ Pixel graphics linked with traits
