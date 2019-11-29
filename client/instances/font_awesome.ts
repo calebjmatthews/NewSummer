@@ -4,7 +4,7 @@ import {
   faSkullCrossbones, faIceCream, faBreadSlice, faCarrot, faHollyBerry, faLemon,
   faFireAlt, faSquare, faMortarPestle, faCompress, faExpandArrowsAlt, faSpa,
   faArrowLeft, faCaretLeft, faCaretRight, faCaretUp, faCaretDown, faImage,
-  faCloudSun, faFillDrip, faStar
+  faCloudSun, faFillDrip, faStar, faCircle, faCheckCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 let fontAwesomeMap: Map<string, any> = new Map();
@@ -39,5 +39,7 @@ fontAwesomeMap.set('image', faImage);
 fontAwesomeMap.set('cloud-sun', faCloudSun);
 fontAwesomeMap.set('fill-drip', faFillDrip);
 fontAwesomeMap.set('star', faStar);
+fontAwesomeMap.set('circle', faCircle);
+fontAwesomeMap.set('check-circle', faCheckCircle);
 
 export const fontAwesome = fontAwesomeMap;

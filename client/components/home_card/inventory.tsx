@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fontAwesome } from '../../instances/font_awesome';
 
 import BackButton from '../back_button';
 import QualityJewel from '../quality_jewel';
@@ -14,9 +16,56 @@ import { images } from '../../instances/images';
 
 class InventoryCard extends Component {
   props: InventoryCardProps;
+  state: InventoryCardState;
 
   constructor(props: InventoryCardProps) {
     super(props);
+
+    this.state = {
+      buttons: {
+        detail: {
+          className: 'pseudo-button selected',
+          icon: 'check-circle',
+          label: ' Detail',
+          selected: true
+        },
+        sellOne: {
+          className: 'pseudo-button',
+          icon: 'circle',
+          label: ' Sell One',
+          selected: false
+        },
+        sellAll: {
+          className: 'pseudo-button',
+          icon: 'circle',
+          label: ' Sell All',
+          selected: false
+        }
+      }
+    };
+
+    this.buttonClick = this.buttonClick.bind(this);
+  }
+
+  buttonClick(buttonName: string) {
+    if (!this.state.buttons[buttonName].selected) {
+      let newButtons: { [buttonName: string] : InventoryButton } = {};
+      Object.keys(this.state.buttons).map((mButtonName) => {
+        newButtons[mButtonName] = {};
+        if (mButtonName == buttonName) {
+          newButtons[mButtonName].className = 'pseudo-button selected';
+          newButtons[mButtonName].icon = 'check-circle';
+          newButtons[mButtonName].selected = true;
+        }
+        else {
+          newButtons[mButtonName].className = 'pseudo-button';
+          newButtons[mButtonName].icon = 'circle';
+          newButtons[mButtonName].selected = false;
+        }
+        newButtons[mButtonName].label = this.state.buttons[mButtonName].label;
+      });
+      this.setState({ buttons: newButtons });
+    }
   }
 
   render() {
@@ -37,6 +86,11 @@ class InventoryCard extends Component {
                   </div>
                 );
               }
+            })}
+          </div>
+          <div className="button-container-vertical">
+            {Object.keys(this.state.buttons).map((buttonName) => {
+              return this.renderButton(buttonName);
             })}
           </div>
         </div>
@@ -69,6 +123,18 @@ class InventoryCard extends Component {
       </div>
     );
   }
+
+  renderButton(buttonName: string) {
+    let button = this.state.buttons[buttonName];
+    return (
+      <div key={buttonName} className={button.className}
+        onClick={() => this.buttonClick(buttonName)}>
+        <FontAwesomeIcon icon={fontAwesome.get(button.icon)} />
+        {button.label}
+        <div className="icon-spacer"></div>
+      </div>
+    );
+  }
 }
 
 interface InventoryCardProps {
@@ -78,8 +144,19 @@ interface InventoryCardProps {
   recordBook: RecordBook;
 }
 
+interface InventoryCardState {
+  buttons: { [buttonName: string] : InventoryButton};
+}
+
 function mapStateToProps({ homestead, recordBook }) {
   return { homestead, recordBook }
+}
+
+class InventoryButton {
+  className?: string;
+  icon?: string;
+  label?: string;
+  selected?: boolean;
 }
 
 export default connect(mapStateToProps)(InventoryCard);

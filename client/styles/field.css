@@ -58,7 +58,7 @@
 .inventory-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   overflow: auto;
   margin-top: 0.5em;
 }
@@ -69,7 +69,7 @@
   justify-content: space-between;
   width: 10.25em;
   height: 6.5em;
-  margin: 0.10em;
+  margin-bottom: 0.35em;
   font-size: 0.8em;
   border: 1px solid #fff;
   border-radius: 0.25em;
