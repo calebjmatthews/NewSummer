@@ -7,6 +7,7 @@ import { fontAwesome } from '../../instances/font_awesome';
 import BackButton from '../back_button';
 import QualityJewel from '../quality_jewel';
 import { setCard } from '../../actions/card';
+import { sellHarvestStacks } from '../../actions/economy';
 
 import Homestead from '../../models/homestead';
 import HarvestStack from '../../models/seed/harvest_stack';
@@ -87,6 +88,16 @@ class InventoryCard extends Component {
       this.props.setCard({type: CardTypes.SEED_DETAIL, selectedSeed: seed,
         spot: this.props.spot}, this.props.spot);
       break;
+
+      case 'sellOne':
+      this.props.sellHarvestStacks(this.props.homestead, harvestStackId, 1);
+      break;
+
+      case 'sellAll':
+      let harvestStack = this.props.homestead.harvestStackMap[harvestStackId];
+      this.props.sellHarvestStacks(this.props.homestead, harvestStackId,
+        harvestStack.quantity);
+      break;
     }
   }
 
@@ -166,6 +177,8 @@ interface InventoryCardProps {
   homestead: Homestead;
   recordBook: RecordBook;
   setCard: (card: Card, spot: number) => any;
+  sellHarvestStacks:
+    (homestead: Homestead, harvestStackId: string, amount: number) => any;
 }
 
 interface InventoryCardState {
@@ -185,7 +198,7 @@ function mapStateToProps({ homestead, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    setCard
+    setCard, sellHarvestStacks
   }, dispatch)
 }
 
