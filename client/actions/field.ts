@@ -89,7 +89,8 @@ export function sellHalfHarvest(field: Field, homestead: Homestead) {
   let newField = new Field(field);
   return function(dispatch: any) {
     let quantityToSell = Math.ceil(newField.harvestResult.harvestStack.quantity / 2);
-    let valueOfSold = newField.harvestResult.harvestStack.totalValue / quantityToSell;
+    let valueOfSold = newField.harvestResult.harvestStack.totalValue *
+      (quantityToSell / newField.harvestResult.harvestStack.quantity);
     newField.harvestResult.harvestStack.quantity -= quantityToSell;
     newField.harvestResult.harvestStack.totalValue -= valueOfSold;
     dispatch(gainDollars(valueOfSold, homestead));

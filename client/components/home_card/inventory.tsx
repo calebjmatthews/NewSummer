@@ -6,11 +6,14 @@ import { fontAwesome } from '../../instances/font_awesome';
 
 import BackButton from '../back_button';
 import QualityJewel from '../quality_jewel';
+import { setCard } from '../../actions/card';
 
 import Homestead from '../../models/homestead';
 import HarvestStack from '../../models/seed/harvest_stack';
 import RecordBook from '../../models/record_book';
+import Card from '../../models/card';
 import { QualityColors } from '../../models/enums/quality_colors';
+import { CardTypes } from '../../models/enums/card_types';
 import { utils } from '../../models/utils';
 import { images } from '../../instances/images';
 
@@ -45,6 +48,7 @@ class InventoryCard extends Component {
     };
 
     this.buttonClick = this.buttonClick.bind(this);
+    this.slotClick = this.slotClick.bind(this);
   }
 
   buttonClick(buttonName: string) {
@@ -65,6 +69,24 @@ class InventoryCard extends Component {
         newButtons[mButtonName].label = this.state.buttons[mButtonName].label;
       });
       this.setState({ buttons: newButtons });
+    }
+  }
+
+  slotClick(harvestStackId: string) {
+    let selButtonName: string = null;
+    Object.keys(this.state.buttons).map((buttonName) => {
+      if (this.state.buttons[buttonName].selected) {
+        selButtonName = buttonName;
+      }
+    });
+
+    switch(selButtonName) {
+      case 'detail':
+      let seed = this.props.recordBook.seedMap
+        [this.props.homestead.harvestStackMap[harvestStackId].seedId];
+      this.props.setCard({type: CardTypes.SEED_DETAIL, selectedSeed: seed,
+        spot: this.props.spot}, this.props.spot);
+      break;
     }
   }
 
@@ -103,7 +125,8 @@ class InventoryCard extends Component {
   renderHarvestStack(harvestStack: HarvestStack) {
     let seed = this.props.recordBook.seedMap[harvestStack.seedId];
     return (
-      <div className="inventory-slot" key={harvestStack.seedId+harvestStack.quality}>
+      <div className="inventory-slot" key={harvestStack.seedId+harvestStack.quality}
+        onClick={() => this.slotClick(harvestStack.seedId+harvestStack.quality)}>
         <div className="inventory-slot-row">
           <div className="inventory-slot-column">
             <div>{seed.adjectives[0].word}</div>
@@ -142,14 +165,11 @@ interface InventoryCardProps {
 
   homestead: Homestead;
   recordBook: RecordBook;
+  setCard: (card: Card, spot: number) => any;
 }
 
 interface InventoryCardState {
   buttons: { [buttonName: string] : InventoryButton};
-}
-
-function mapStateToProps({ homestead, recordBook }) {
-  return { homestead, recordBook }
 }
 
 class InventoryButton {
@@ -159,4 +179,15 @@ class InventoryButton {
   selected?: boolean;
 }
 
-export default connect(mapStateToProps)(InventoryCard);
+function mapStateToProps({ homestead, recordBook }) {
+  return { homestead, recordBook }
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return bindActionCreators({
+    setCard
+  }, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(InventoryCard);

@@ -6,7 +6,8 @@ import RecordBook from '../models/record_book';
 import Offer from '../models/traveler/offer';
 import { Traveler } from '../models/traveler/traveler';
 
-import {spendDollars, addAndRecordSeed, setHomestead, gainDollars} from './homestead';
+import {spendDollars, addAndRecordSeed, setHomestead, gainDollars, SET_HARVEST_STACK_MAP}
+  from './homestead';
 import {setCast} from './cast';
 import {setCard} from './card';
 
@@ -66,6 +67,32 @@ export function seedBuyCancel(economy: Economy, homestead: Homestead, spot: numb
       type: SET_ECONOMY,
       economy: economy
     };
+  }
+}
+
+export function sellHarvestStacks(homestead: Homestead, harvestStackId: string,
+  amount: number) {
+  let harvestStackMap = homestead.harvestStackMap;
+  let harvestStack = harvestStackMap[harvestStackId];
+  if (amount > harvestStack.quantity) {
+    amount = harvestStack.quantity;
+  }
+  let valueOfSold = harvestStack.totalValue * (amount / harvestStack.quantity);
+
+  if (amount == harvestStack.quantity) {
+    delete harvestStackMap[harvestStackId];
+  }
+  else {
+    harvestStack.quantity -= amount;
+    harvestStack.totalValue -= valueOfSold;
+    harvestStackMap[harvestStackId] = harvestStack
+  }
+  return function(dispatch: any) {
+    dispatch(gainDollars(valueOfSold, homestead));
+    dispatch({
+      type: SET_HARVEST_STACK_MAP,
+      harvestStackMap: harvestStackMap
+    });
   }
 }
 
