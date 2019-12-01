@@ -77,13 +77,66 @@ class Utils {
     return newObj;
   }
 
-  formatMoney(dollars: number): string {
+  formatMoney(dollars: number, long: boolean = false): string {
     let sign = '';
     if (dollars < 0) { sign = '-'; }
+    dollars = Math.abs(dollars);
     if (dollars < 100) {
-      return (sign + '$' + Math.abs(dollars).toFixed(2));
+      return (sign + '$' + dollars.toFixed(2));
     }
-    return (sign + '$' + Math.round(Math.abs(dollars)).toString());
+    if (long) {
+      return (sign + '$' + this.formatNumberLong(dollars));
+    }
+    return (sign + '$' + this.formatNumberShort(dollars));
+  }
+
+  // 1234567890 -> 1,234,567,890
+  formatNumberLong(number: number): string {
+    let strNumber = Math.round(number).toString();
+    let commaNumber = '';
+    let digitCount = 0;
+    for (let iii = (strNumber.length-1); iii >= 0; iii--) {
+      digitCount++;
+      if (digitCount % 3 == 0) {
+        commaNumber = (',' + strNumber[iii] + commaNumber);
+      }
+      else {
+        commaNumber = (strNumber[iii] + commaNumber);
+      }
+    }
+    if (commaNumber.slice(0, 1) == ',') {
+      return commaNumber.slice(1);
+    }
+    return commaNumber;
+  }
+
+  // 1234567890 -> 1.23B
+  formatNumberShort(number: number): string {
+    const exponents = {
+      3: 'K',
+      6: 'M',
+      9: 'B',
+      12: 'T',
+      15: 'Qa',
+      18: 'Qi',
+      21: 'Sx',
+      23: 'Sp',
+      25: 'Oc',
+      28: 'No',
+      30: 'De'
+    };
+    if (number < 1000) {
+      return Math.round(number).toString();
+    }
+    let powers = Object.keys(exponents);
+    let strNumber = '';
+    for (let iii = 0; iii < (powers.length-2); iii++) {
+      let power = parseInt(powers[iii]);
+      if (number >= Math.pow(10, power)) {
+        strNumber = (number / Math.pow(10, power)).toFixed(2) + exponents[power];
+      }
+    }
+    return strNumber;
   }
 
   numberToRoman(num: number): string {

@@ -492,6 +492,7 @@ X Flashy banner when finding new family/cultivars
 X Harvested crops as stored items
 X Harvest stack quality jewel component
 X Inventory component
+X More compact and expressful number display
 _ Autoplanting, harvesting, and collecting
 _ Pixel graphics for different cultivars
 _ Icon for each cultivar

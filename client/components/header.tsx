@@ -12,7 +12,7 @@ class Header extends Component {
   }
 
   render() {
-    let dollars = utils.formatMoney(this.props.homestead.dollars);
+    let dollars = utils.formatMoney(this.props.homestead.dollars, true);
     return (
       <div className="header">
         { dollars }
