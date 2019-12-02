@@ -30,6 +30,7 @@ export function plantSeed(field: Field, seed: Seed, seedMap: { [id: number] : Se
     type: SET_SEED_DATA,
     fieldId: newField.id,
     seedPlantedId: newField.seedPlantedId,
+    lastSeedId: newField.seedPlantedId,
     seedsAge: 0,
     seedMature: false,
     seedsNameLabel: newField.seedsNameLabel,

@@ -15,13 +15,38 @@ import { images } from '../../instances/images';
 
 class HarvestResultFieldCard extends Component {
   props: HarvestResultFieldCardProps;
+  state: HarvestResultFieldCardState;
+  interval: NodeJS.Timeout;
 
   constructor(props: HarvestResultFieldCardProps) {
     super(props);
+    this.state = { autoDelayRemaining: null };
 
     this.sellAllClick = this.sellAllClick.bind(this);
     this.sellHalfClick = this.sellHalfClick.bind(this);
     this.collectAllClick = this.collectAllClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.autoCollectCheck();
+    this.interval = setInterval(() => this.autoCollectCheck(), 1000);
+  }
+
+  componentWillUnmount() {
+    this.setState({ autoDelayRemaining: null });
+    clearInterval(this.interval);
+  }
+
+  autoCollectCheck() {
+    if (this.state.autoDelayRemaining != null && this.state.autoDelayRemaining <= 0) {
+      this.collectAllClick();
+    }
+    else if (this.state.autoDelayRemaining != null) {
+      this.setState({ autoDelayRemaining: (this.state.autoDelayRemaining - 1000) });
+    }
+    else {
+      this.setState({ autoDelayRemaining: 10000 });
+    }
   }
 
   sellAllClick() {
@@ -90,7 +115,8 @@ class HarvestResultFieldCard extends Component {
               {'Sell half'}
             </button>
             <button onClick={() => this.collectAllClick()}>
-              {'Collect all'}
+              <div>{'Collect all'}</div>
+              <div>{this.renderAutoCollect()}</div>
             </button>
           </div>
         </div>
@@ -98,6 +124,19 @@ class HarvestResultFieldCard extends Component {
           src={images.get('background')}></img>
       </div>
     );
+  }
+
+  renderAutoCollect() {
+    if (this.state.autoDelayRemaining != null) {
+      return (
+        <div>
+          {'Auto-collecting in ' + (this.state.autoDelayRemaining / 1000) + 's...'}
+        </div>
+      );
+    }
+    else {
+      return null;
+    }
   }
 }
 
@@ -110,6 +149,10 @@ interface HarvestResultFieldCardProps {
   sellAllHarvest: (field: Field, homestead: Homestead) => any;
   sellHalfHarvest: (field: Field, homestead: Homestead) => any;
   collectAllHarvest: (field: Field, homestead: Homestead) => any;
+}
+
+interface HarvestResultFieldCardState {
+  autoDelayRemaining: number;
 }
 
 function mapStateToProps({ fields, recordBook, homestead }) {

@@ -12,6 +12,7 @@ export default class Field implements FieldInterface {
   id: number;
   name: string;
   seedPlantedId: number;
+  lastSeedId: number;
   seedsNameLabel: string;
   seedsAge: number;
   seedMature: boolean;
@@ -35,6 +36,7 @@ export default class Field implements FieldInterface {
 
   plantSeed(aSeed: Seed, seedMap: { [id: number] : Seed }) {
     this.seedPlantedId = aSeed.id;
+    this.lastSeedId = aSeed.id;
     this.seedsAge = 0;
     this.seedMature = false;
     this.seedsNameLabel = this.getSeedsNameLabel(seedMap);
@@ -148,6 +150,7 @@ interface FieldInterface {
   id: number;
   name: string;
   seedPlantedId: number;
+  lastSeedId: number;
   seedsNameLabel: string;
   seedsAge: number;
   seedMature: boolean;
