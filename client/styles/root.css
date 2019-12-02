@@ -78,15 +78,27 @@ button:disabled {
   justify-content: flex-end;
   width: 100%;
 }
-.back-button {
+
+.icon-button {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   padding: 0;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   font-size: 0.8em;
+  cursor: pointer;
+}
+
+.strikethrough {
+  position: absolute;
+  width: 0.325em;
+  height: 2em;
+  background: #fff;
+  transform: rotate(135deg);
 }
 
 .tooltip {

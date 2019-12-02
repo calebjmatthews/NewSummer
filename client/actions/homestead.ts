@@ -127,3 +127,10 @@ export function addHarvestStack(homestead: Homestead, harvestStack: HarvestStack
     harvestStackMap: homestead.harvestStackMap
   }
 }
+
+export const TOGGLE_AUTO_ACTIONS = 'TOGGLE_AUTO_ACTIONS';
+export function toggleAutoActions() {
+  return {
+    type: TOGGLE_AUTO_ACTIONS
+  }
+}

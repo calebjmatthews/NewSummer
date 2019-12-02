@@ -9,6 +9,7 @@ export default class Homestead implements HomesteadInterface {
   maxSeeds: number;
   experimentalGardenSize: number;
   inventorySize: number;
+  autoOn: boolean;
   seedIds: number[];
   harvestStackMap: { [idAndQuality: string] : HarvestStack };
   intermediateSeed: Seed;
@@ -36,6 +37,7 @@ export default class Homestead implements HomesteadInterface {
       this.maxSeeds = 4;
       this.experimentalGardenSize = 2;
       this.inventorySize = 50;
+      this.autoOn = false;
       this.seedIds = [];
       this.harvestStackMap = {};
       this.intermediateSeed = null;
@@ -147,6 +149,8 @@ interface HomesteadInterface {
   dollars: number;
   maxSeeds: number;
   experimentalGardenSize: number;
+  inventorySize: number;
+  autoOn: boolean;
   seedIds: number[];
   harvestStackMap: { [idAndQuality: string] : HarvestStack };
   intermediateSeed: Seed;

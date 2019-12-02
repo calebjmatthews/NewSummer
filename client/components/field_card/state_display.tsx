@@ -41,39 +41,49 @@ class StateDisplayFieldCard extends Component {
   }
 
   autoHarvestCheck() {
-    let field = this.props.fields[this.props.fieldId];
+    if (this.props.homestead.autoOn) {
+      let field = this.props.fields[this.props.fieldId];
 
-    if (this.state.harvestDelayRemaining != null
-      && this.state.harvestDelayRemaining <= 0) {
-      this.fieldCardClick();
-      this.setState({ harvestDelayRemaining: null });
+      if (this.state.harvestDelayRemaining != null
+        && this.state.harvestDelayRemaining <= 0) {
+        this.fieldCardClick();
+        this.setState({ harvestDelayRemaining: null });
+      }
+      else if (this.state.harvestDelayRemaining != null) {
+        this.setState({
+          harvestDelayRemaining: (this.state.harvestDelayRemaining - 1000)
+        });
+      }
+      else if (field.seedMature == true) {
+        this.setState({ harvestDelayRemaining: 10000 });
+      }
     }
     else if (this.state.harvestDelayRemaining != null) {
-      this.setState({
-        harvestDelayRemaining: (this.state.harvestDelayRemaining - 1000)
-      });
-    }
-    else if (field.seedMature == true) {
-      this.setState({ harvestDelayRemaining: 10000 });
+      this.setState({ harvestDelayRemaining: null });
     }
   }
 
   autoPlantCheck() {
-    let field = this.props.fields[this.props.fieldId];
+    if (this.props.homestead.autoOn) {
+      let field = this.props.fields[this.props.fieldId];
 
-    if (this.state.plantDelayRemaining != null
-      && this.state.plantDelayRemaining <= 0) {
-      let seed = this.props.recordBook.seedMap[field.lastSeedId];
-      this.props.plantSeed(field, seed, this.props.recordBook.seedMap);
-      this.setState({ plantDelayRemaining: null });
+      if (this.state.plantDelayRemaining != null
+        && this.state.plantDelayRemaining <= 0) {
+        let seed = this.props.recordBook.seedMap[field.lastSeedId];
+        this.props.plantSeed(field, seed, this.props.recordBook.seedMap);
+        this.setState({ plantDelayRemaining: null });
+      }
+      else if (this.state.plantDelayRemaining != null) {
+        this.setState({
+          plantDelayRemaining: (this.state.plantDelayRemaining - 1000)
+        });
+      }
+      else if (field.seedPlantedId == null && field.lastSeedId != null) {
+        this.setState({ plantDelayRemaining: 10000 });
+      }
     }
     else if (this.state.plantDelayRemaining != null) {
-      this.setState({
-        plantDelayRemaining: (this.state.plantDelayRemaining - 1000)
-      });
-    }
-    else if (field.seedPlantedId == null && field.lastSeedId != null) {
-      this.setState({ plantDelayRemaining: 10000 });
+      this.setState({ plantDelayRemaining: null });
     }
   }
 

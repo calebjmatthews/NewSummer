@@ -23,7 +23,7 @@ class BackButton extends Component {
   render() {
     return (
       <div className="back-button-wrapper">
-        <button className="back-button"
+        <button className="icon-button"
           onClick={ () => this.backButtonClick() }>
           <FontAwesomeIcon icon={fontAwesome.get('arrow-left')} />
         </button>
