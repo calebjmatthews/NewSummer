@@ -40,6 +40,7 @@ class HarvestResultFieldCard extends Component {
   autoCollectCheck() {
     if (this.state.autoDelayRemaining != null && this.state.autoDelayRemaining <= 0) {
       this.collectAllClick();
+      this.setState({ autoDelayRemaining: null });
     }
     else if (this.state.autoDelayRemaining != null) {
       this.setState({ autoDelayRemaining: (this.state.autoDelayRemaining - 1000) });

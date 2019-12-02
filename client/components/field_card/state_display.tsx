@@ -13,41 +13,67 @@ import { images } from '../../instances/images';
 import { CardTypes } from '../../models/enums/card_types';
 
 import { setCard } from '../../actions/card';
-import { harvestSeed } from '../../actions/field';
+import { harvestSeed, plantSeed } from '../../actions/field';
 
 class StateDisplayFieldCard extends Component {
   props: FieldCardProps;
   state: FieldCardState;
-  interval: NodeJS.Timeout;
+  harvestInterval: NodeJS.Timeout;
+  plantInterval: NodeJS.Timeout;
 
   constructor(props: FieldCardProps) {
     super(props);
-    this.state = { autoDelayRemaining: null };
+    this.state = { harvestDelayRemaining: null, plantDelayRemaining: null };
 
     this.fieldCardClick = this.fieldCardClick.bind(this);
   }
 
   componentDidMount() {
     this.autoHarvestCheck();
-    this.interval = setInterval(() => this.autoHarvestCheck(), 1000);
+    this.harvestInterval = setInterval(() => this.autoHarvestCheck(), 1000);
+    this.plantInterval = setInterval(() => this.autoPlantCheck(), 1000);
   }
 
   componentWillUnmount() {
-    this.setState({ autoDelayRemaining: null });
-    clearInterval(this.interval);
+    this.setState({ harvestDelayRemaining: null, plantDelayRemaining: null });
+    clearInterval(this.harvestInterval);
+    clearInterval(this.plantInterval);
   }
 
   autoHarvestCheck() {
     let field = this.props.fields[this.props.fieldId];
 
-    if (this.state.autoDelayRemaining != null && this.state.autoDelayRemaining <= 0) {
+    if (this.state.harvestDelayRemaining != null
+      && this.state.harvestDelayRemaining <= 0) {
       this.fieldCardClick();
+      this.setState({ harvestDelayRemaining: null });
     }
-    else if (this.state.autoDelayRemaining != null) {
-      this.setState({ autoDelayRemaining: (this.state.autoDelayRemaining - 1000) });
+    else if (this.state.harvestDelayRemaining != null) {
+      this.setState({
+        harvestDelayRemaining: (this.state.harvestDelayRemaining - 1000)
+      });
     }
     else if (field.seedMature == true) {
-      this.setState({ autoDelayRemaining: 10000 });
+      this.setState({ harvestDelayRemaining: 10000 });
+    }
+  }
+
+  autoPlantCheck() {
+    let field = this.props.fields[this.props.fieldId];
+
+    if (this.state.plantDelayRemaining != null
+      && this.state.plantDelayRemaining <= 0) {
+      let seed = this.props.recordBook.seedMap[field.lastSeedId];
+      this.props.plantSeed(field, seed, this.props.recordBook.seedMap);
+      this.setState({ plantDelayRemaining: null });
+    }
+    else if (this.state.plantDelayRemaining != null) {
+      this.setState({
+        plantDelayRemaining: (this.state.plantDelayRemaining - 1000)
+      });
+    }
+    else if (field.seedPlantedId == null && field.lastSeedId != null) {
+      this.setState({ plantDelayRemaining: 10000 });
     }
   }
 
@@ -91,6 +117,7 @@ class StateDisplayFieldCard extends Component {
               <div>{field.seedsNameLabel}</div>
               <div>{field.seedsAgeLabel}</div>
               {this.renderAutoHarvest()}
+              {this.renderAutoPlant()}
             </button>
           </div>
           <img className="game-card-background"
@@ -117,10 +144,23 @@ class StateDisplayFieldCard extends Component {
   }
 
   renderAutoHarvest() {
-    if (this.state.autoDelayRemaining != null) {
+    if (this.state.harvestDelayRemaining != null) {
       return (
         <div>
-          {'Auto-harvesting in ' + (this.state.autoDelayRemaining / 1000) + 's...'}
+          {'Auto-harvesting in ' + (this.state.harvestDelayRemaining / 1000) + 's...'}
+        </div>
+      );
+    }
+    else {
+      return null;
+    }
+  }
+
+  renderAutoPlant() {
+    if (this.state.plantDelayRemaining != null) {
+      return (
+        <div>
+          {'Auto-replanting in ' + (this.state.plantDelayRemaining / 1000) + 's...'}
         </div>
       );
     }
@@ -140,10 +180,12 @@ interface FieldCardProps {
   setCard: (card: Card, spot: number) => any;
   harvestSeed: (field: Field, homestead: Homestead,
     seedMap: { [id: number] : Seed }) => any;
+  plantSeed: (field: Field, seed: Seed, seedMap: { [id: number] : Seed }) => any;
 }
 
 interface FieldCardState {
-  autoDelayRemaining: number;
+  harvestDelayRemaining: number;
+  plantDelayRemaining: number;
 }
 
 function mapStateToProps({ fields, homestead, recordBook }) {
@@ -152,7 +194,7 @@ function mapStateToProps({ fields, homestead, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    setCard, harvestSeed
+    setCard, harvestSeed, plantSeed
   }, dispatch)
 }
 
