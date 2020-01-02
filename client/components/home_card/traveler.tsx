@@ -31,7 +31,13 @@ class TravelerCard extends Component {
       recordBook: this.props.recordBook,
       cast: this.props.cast,
       economy: this.props.economy
-    }).text;
+    }).parseDialogueText({
+      fields: this.props.fields,
+      homestead: this.props.homestead,
+      recordBook: this.props.recordBook,
+      cast: this.props.cast,
+      economy: this.props.economy
+    });
 
     this.buySeed = this.buySeed.bind(this);
   }

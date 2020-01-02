@@ -57,6 +57,26 @@ export default class Dialogue implements DialogueInterface {
     });
     return valid;
   }
+
+  parseDialogueText(gameState: {
+    fields: { [id: number] : Field },
+    homestead: Homestead,
+    recordBook: RecordBook,
+    cast: Cast,
+    economy: Economy
+  }): string {
+    let pText = '';
+    let splitText = this.text.split('|');
+    splitText.map((piece, index) => {
+      if (index % 2 == 0) {
+        pText += (piece);
+      }
+      else if (index % 2 == 1) {
+        pText += parseDeepValue(gameState, piece.split(','));
+      }
+    });
+    return pText;
+  }
 }
 
 function parseDeepValue(object: any, propsSought: any[]) {
