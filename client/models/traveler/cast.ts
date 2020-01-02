@@ -1,12 +1,14 @@
 import Seed from '../seed/seed';
 import Offer from './offer';
+import { Traveler } from './traveler';
 import { SeedTrader } from '../../instances/travelers/seed_trader';
 import { TravelerRoles } from '../enums/traveler_roles';
 import { TRAVELER_DURATION, AGE_INTERVAL, CHECK_INTERVAL }
   from '../../constants';
+import { utils } from '../utils';
 
 export default class Cast implements CastInterface {
-  members: { [role: string] : any };
+  members: { [role: string] : Traveler };
   currentlyVisiting: string;
   visitRemaining: number;
   saidHello: boolean;
@@ -28,6 +30,32 @@ export default class Cast implements CastInterface {
         }
       });
     }
+  }
+
+  importCast(templateMap: {[role: string]: any}): Cast {
+    Object.keys(templateMap).map((role) => {
+      let template = templateMap[role];
+      let member = this.members[role];
+      Object.keys(template).map((prop) => {
+        member[prop] = template[prop];
+      });
+    });
+    return this;
+  }
+
+  exportCast(): Cast {
+    const exclustions = ['dialogues'];
+    let expCast = new Cast();
+    Object.keys(this).map((prop) => {
+      if (!exclustions.includes(prop)) {
+        expCast[prop] = utils.shallowClone(this[prop]);
+      }
+    });
+    return expCast;
+  }
+
+  getCurrentlyVisiting() {
+    return this.members[this.currentlyVisiting];
   }
 
   // Checks whether a given traveler has arrived in the last interval

@@ -15,13 +15,23 @@ import Seed from '../../models/seed/seed';
 import Offer from '../../models/traveler/offer';
 import Economy from '../../models/economy';
 import Card from '../../models/card';
+import Field from '../../models/field';
 import { images } from '../../instances/images';
 
 class TravelerCard extends Component {
   props: TravelerCardProps;
+  dialogueText: string;
 
   constructor(props: TravelerCardProps) {
     super(props);
+    let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
+    this.dialogueText = traveler.getDialogue({
+      fields: this.props.fields,
+      homestead: this.props.homestead,
+      recordBook: this.props.recordBook,
+      cast: this.props.cast,
+      economy: this.props.economy
+    }).text;
 
     this.buySeed = this.buySeed.bind(this);
   }
@@ -40,15 +50,16 @@ class TravelerCard extends Component {
   }
 
   render() {
+    let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
     if (this.props.cast.currentlyVisiting != null) {
       return (
         <div className="game-card field-card">
           <div className="game-card-body">
             <BackButton spot={this.props.spot} />
-            {'Buy a seed:'}
+            <div>{traveler.name + ': ' + this.dialogueText}</div>
+            <div>{'Buy a seed:'}</div>
             <div className="option-container">
-              {this.props.cast.members[this.props.cast.currentlyVisiting]
-                .currentOffers.map((offer, index) => {
+              {traveler.currentOffers.map((offer, index) => {
                 let seed = offer.item;
                 let confirmText = 'Sold';
                 if (offer.sold == false) {
@@ -87,6 +98,7 @@ class TravelerCard extends Component {
 interface TravelerCardProps {
   spot: number;
 
+  fields: { [id: number] : Field };
   cast: Cast;
   homestead: Homestead;
   recordBook: RecordBook;
@@ -96,8 +108,8 @@ interface TravelerCardProps {
   setCard: (cards: Card) => any;
 }
 
-function mapStateToProps({ cast, homestead, economy, recordBook }) {
-  return { cast, homestead, economy, recordBook }
+function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
+  return { fields, cast, homestead, economy, recordBook }
 }
 
 function mapDispatchToProps(dispatch: any) {

@@ -413,6 +413,17 @@ Stored harvested crops
 - Can store some huge number of HarvestStack, sell half of each, sell all, sell one by one, etc.
 - Eventually can use to complete quests, trade with travelers, give as gifts to travelers
 
+Baby dear, I love you so
+Take my hand and come, let go
+Through the sun we'll do-si-do
+Back to our hometown
+
+Population system
+~~~~~~~~~~~~~~~~~
+- As new crops are discovered, new traits are discovered, etc settlement(?) population will increase
+- At a certain point population will be capped, until features are made from building materials
+- Population can be used to create an expedition to a new land, which, upon success, will send back a new family of crops, and will periodically send seeds of this crop as gifts (daily?)
+
 Minor display and gameplay polish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 X Breeding time dependent on growth time of babies
@@ -493,7 +504,7 @@ X Harvested crops as stored items
 X Harvest stack quality jewel component
 X Inventory component
 X More compact and expressful number display
-_ Autoplanting, harvesting, and collecting
+X Autoplanting, harvesting, and collecting
 _ Pixel graphics for different cultivars
 _ Icon for each cultivar
 _ Pixel graphics linked with traits

@@ -3,11 +3,11 @@ import {
 } from '../actions/cast';
 import Cast from '../models/traveler/cast';
 import { Traveler } from '../models/traveler/traveler';
-import { startingSeedTrader } from '../instances/travelers/seed_trader';
+import { seedTraderTemplate } from '../instances/travelers/seed_trader';
 import { TravelerRoles } from '../models/enums/traveler_roles';
 
 let startingMembers: { [role: string] : Traveler } = {};
-startingMembers[TravelerRoles.SEED_TRADER] = startingSeedTrader;
+startingMembers[TravelerRoles.SEED_TRADER] = seedTraderTemplate;
 
 let startingCast: Cast = new Cast({
   members: startingMembers,

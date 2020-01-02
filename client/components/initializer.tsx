@@ -24,6 +24,7 @@ import { CultivarNames } from '../models/enums/cultivar_names';
 import { FamilyNames } from '../models/enums/family_names';
 import { TravelerRoles } from '../models/enums/traveler_roles';
 import { StatNames } from '../models/enums/stat_names';
+import { seedTraderTemplate } from '../instances/travelers/seed_trader';
 import { AGE_INTERVAL, STORAGE_SET_INTERVAL, TIME_AWAY_INTERVAL } from '../constants';
 
 class Initializer extends Component {
@@ -72,11 +73,12 @@ class Initializer extends Component {
       this.props.ageVisit(this.props.cast);
     }, AGE_INTERVAL);
     setInterval(() => {
+      let expCast = this.props.cast.exportCast();
       storageHandler.setLocalStorages({
         fields: this.props.fields,
         homestead: this.props.homestead,
         recordBook: this.props.recordBook,
-        cast: this.props.cast
+        cast: expCast
       });
     }, STORAGE_SET_INTERVAL);
     setInterval(() => {
@@ -88,7 +90,11 @@ class Initializer extends Component {
     this.props.setHomestead(new Homestead(localStorages.homestead));
     this.props.setFields(localStorages.fields);
     this.props.setRecordBook(new RecordBook(localStorages.recordBook));
-    this.props.setCast(new Cast(localStorages.cast));
+    let castTemplates: {[role: string]: any} = {};
+    castTemplates[TravelerRoles.SEED_TRADER] = seedTraderTemplate;
+    this.props.setCast(
+      new Cast(localStorages.cast).importCast(castTemplates)
+    );
   }
 
   checkTimeAway() {
