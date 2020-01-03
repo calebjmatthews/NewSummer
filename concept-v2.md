@@ -1,5 +1,8 @@
 Raise plants from wild origins to well-known crops and life entirely new.
 
+ssh -i newsummer calebjmatthews@167.172.248.24
+scp -i newsummer -r /Users/calebmatthews/newsummer-deploy calebjmatthews@167.172.248.24:/home/calebjmatthews/
+
 Basic gameplay:
 	- Cross-breed two plants (averaged time of the plants x2.5)
 	- Choose to keep one of the three resulting plants
