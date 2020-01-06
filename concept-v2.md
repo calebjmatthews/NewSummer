@@ -40,6 +40,7 @@ Example plant rendering:
 
 Cultivars:
 * Poaceae (Grasses)
+	- Wild Grass: Building material, grows very rapidly
 	- Corn: C4, high yield, high nutrient and light demand, seeds in ears
 	- Wheat: High yield, seeds in seed heads, relatively little protection
 	- Oats: Seeds in florets, tolerates high moisture
@@ -51,12 +52,14 @@ Cultivars:
 	- Sugar Cane: Cane investment, high sugar content
 	- Bamboo: Cane investment, high plant toughness
 * Fabaceae (Legumes)
+	- Wild Legume: Food, restored N, grows rapidly
+	- 
+* Cucurbitaceae (Gourd)
 * Brassicaceae (Crucifers)
 * Solanaceae (Nightshade)
 * Rosaceae (Rose)
 * Lamiaceae (Mint)
 * Rutaceae (Citrus)
-* Cucurbitaceae (Gourd)
 * Apiaceae (Celery)
 
 Traits:
@@ -508,7 +511,7 @@ X Harvest stack quality jewel component
 X Inventory component
 X More compact and expressful number display
 X Autoplanting, harvesting, and collecting
-_ State-based dialogue for travelers
+X State-based dialogue for travelers
 _ Pixel graphics for different cultivars
 _ Icon for each cultivar
 _ Pixel graphics linked with traits
