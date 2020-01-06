@@ -38,10 +38,10 @@ export default function
       return Object.assign(new Cast(), cast, {
         members: {
           ...cast.members,
-          [member.role] : {
+          [member.role] : new Traveler({
             ...member,
             dialogueHistory: action.dialogueHistory
-          }
+          })
         }
       });
     case SET_CAST:

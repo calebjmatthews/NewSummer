@@ -30,7 +30,11 @@ class TravelerCard extends Component {
 
   constructor(props: TravelerCardProps) {
     super(props);
+    console.log('this');
+    console.log(this);
     let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
+    console.log('traveler');
+    console.log(traveler);
     let dialogue = traveler.getDialogue({
       fields: this.props.fields,
       homestead: this.props.homestead,

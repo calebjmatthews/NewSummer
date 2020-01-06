@@ -44,13 +44,28 @@ export default class Cast implements CastInterface {
   }
 
   exportCast(): Cast {
-    const exclustions = ['dialogues'];
-    let expCast = new Cast();
-    Object.keys(this).map((prop) => {
-      if (!exclustions.includes(prop)) {
-        expCast[prop] = utils.shallowClone(this[prop]);
-      }
+    let expMembers = {};
+    Object.keys(this.members).map((travelerRole) => {
+      let traveler = this.members[travelerRole];
+      expMembers[travelerRole] = new Traveler({
+        role: traveler.role,
+        frequency: traveler.frequency,
+        dialogueHistory: traveler.dialogueHistory,
+        name: traveler.name,
+        affection: traveler.affection,
+        currentOffers: traveler.currentOffers.slice(),
+        gifts: traveler.gifts,
+
+        dialogues: null,
+      });
     });
+    let expCast = new Cast({
+      members: expMembers,
+      currentlyVisiting: this.currentlyVisiting,
+      visitRemaining: this.visitRemaining,
+      saidHello: this.saidHello
+    });
+
     return expCast;
   }
 
@@ -106,7 +121,6 @@ export default class Cast implements CastInterface {
   ageVisit(duration = null): void {
     if (this.currentlyVisiting != null && this.saidHello == true) {
       if (duration != null) {
-        console.log(this.visitRemaining);
         this.visitRemaining -= (duration);
       }
       else {
