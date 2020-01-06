@@ -508,6 +508,7 @@ X Harvest stack quality jewel component
 X Inventory component
 X More compact and expressful number display
 X Autoplanting, harvesting, and collecting
+_ State-based dialogue for travelers
 _ Pixel graphics for different cultivars
 _ Icon for each cultivar
 _ Pixel graphics linked with traits

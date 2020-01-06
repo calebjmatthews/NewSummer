@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import { buySeedAttempt } from '../../actions/economy';
 import { setCard } from '../../actions/card';
+import { addModal } from '../../actions/modal';
 import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 import { utils } from '../../models/utils';
@@ -16,22 +17,48 @@ import Offer from '../../models/traveler/offer';
 import Economy from '../../models/economy';
 import Card from '../../models/card';
 import Field from '../../models/field';
+import Dialogue from '../../models/traveler/dialogue';
+import Modal from '../../models/modal';
+import { ModalTypes } from '../../models/enums/modal_types';
 import { images } from '../../instances/images';
 
 class TravelerCard extends Component {
   props: TravelerCardProps;
+  dialogue: Dialogue;
   dialogueText: string;
 
   constructor(props: TravelerCardProps) {
     super(props);
     let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
-    this.dialogueText = traveler.getDialogue({
+    let dialogue = traveler.getDialogue({
       fields: this.props.fields,
       homestead: this.props.homestead,
       recordBook: this.props.recordBook,
       cast: this.props.cast,
       economy: this.props.economy
-    }).parseDialogueText({
+    });
+
+    if (dialogue.important == true) {
+      this.props.addModal(new Modal({
+        type: ModalTypes.ALERT,
+        title: 'A traveler...',
+        messages: [dialogue.parseDialogueText({
+          fields: this.props.fields,
+          homestead: this.props.homestead,
+          recordBook: this.props.recordBook,
+          cast: this.props.cast,
+          economy: this.props.economy
+        })]
+      }));
+      dialogue = traveler.getDialogue({
+        fields: this.props.fields,
+        homestead: this.props.homestead,
+        recordBook: this.props.recordBook,
+        cast: this.props.cast,
+        economy: this.props.economy
+      }, false);
+    }
+    this.dialogueText = dialogue.parseDialogueText({
       fields: this.props.fields,
       homestead: this.props.homestead,
       recordBook: this.props.recordBook,
@@ -112,6 +139,7 @@ interface TravelerCardProps {
   buySeedAttempt: (economy: Economy, homestead: Homestead, cast: Cast,
     recordBook: RecordBook, offer: Offer, spot: number) => any;
   setCard: (cards: Card) => any;
+  addModal: (modal: Modal) => any;
 }
 
 function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
@@ -120,7 +148,7 @@ function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    buySeedAttempt, setCard
+    buySeedAttempt, setCard, addModal
   }, dispatch)
 }
 
