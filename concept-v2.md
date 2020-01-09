@@ -53,7 +53,19 @@ Cultivars:
 	- Bamboo: Cane investment, high plant toughness
 * Fabaceae (Legumes)
 	- Wild Legume: Food, restored N, grows rapidly
-	- 
+	- Peas
+	- Peanuts
+	- Chickpeas
+	- Soy Beans
+	- Green Beans
+	- Lentils
+	- Kidney Beans
+	- Black Beans
+	- Alfalfa
+	- Liquorice
+	- Tamarind
+	- Mesquite
+	- Carob
 * Cucurbitaceae (Gourd)
 * Brassicaceae (Crucifers)
 * Solanaceae (Nightshade)

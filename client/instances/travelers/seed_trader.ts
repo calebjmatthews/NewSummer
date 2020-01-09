@@ -2,7 +2,7 @@ import { Traveler, TravelerInterface } from '../../models/traveler/traveler';
 import Offer from '../../models/traveler/offer';
 import Seed from '../../models/seed/seed';
 import Dialogue from '../../models/traveler/dialogue';
-import DialogueCondition from '../../models/traveler/dialogue_condition';
+import Condition from '../../models/traveler/condition';
 import { FamilyNames } from '../../models/enums/family_names';
 import { TravelerRoles } from '../../models/enums/traveler_roles';
 import { Comparitors } from '../../models/enums/comparitors';
@@ -66,7 +66,7 @@ let seedTraderTemplate = new SeedTrader({
   frequency: .2,
   dialogues: [
     new Dialogue({id: 0,
-      conditions: [new DialogueCondition({
+      conditions: [new Condition({
         props: ['cast', 'getCurrentlyVisiting()', 'dialogueHistory', '0'],
         comparitor: Comparitors.EQUAL_TO,
         values: ['undefined'],
@@ -77,7 +77,7 @@ let seedTraderTemplate = new SeedTrader({
       text: 'Look at this, a farmer trying to grow something worthwhile in the grasslands! I\'m |cast,getCurrentlyVisiting(),name|, pleasure to meet you.'
     }),
     new Dialogue({id: 1,
-      conditions: [new DialogueCondition({
+      conditions: [new Condition({
         props: ['cast', 'getCurrentlyVisiting()', 'dialogueHistory', '1'],
         comparitor: Comparitors.EQUAL_TO,
         values: ['undefined'],

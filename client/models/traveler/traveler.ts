@@ -36,7 +36,7 @@ export class Traveler implements TravelerInterface {
     let validDialogues: Dialogue[] = [];
     for (let index = 0; index < this.dialogues.length; index++) {
       let dialogue = this.dialogues[index];
-      if (dialogue.dialogueValid(gameState) == true
+      if (dialogue.isValid(gameState, dialogue.conditions) == true
         && (importantAllowed == true
         || (importantAllowed == false && dialogue.important == false))) {
         if (dialogue.probability == 1) {

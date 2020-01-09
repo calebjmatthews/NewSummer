@@ -1,11 +1,11 @@
-export default class DialogueCondition {
+export default class Condition implements ConditionInterface {
   props: any[];
   comparitor: string;
   values: string[];
   type: string;
 
-  constructor(dialogueCondition: DialogueConditionInterface) {
-    Object.assign(this, dialogueCondition);
+  constructor(condition: ConditionInterface) {
+    Object.assign(this, condition);
   }
 
   getValues(): any[] {
@@ -33,7 +33,7 @@ export default class DialogueCondition {
   }
 }
 
-interface DialogueConditionInterface {
+interface ConditionInterface {
   props: any[];
   comparitor: string;
   values: string[];
