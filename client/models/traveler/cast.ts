@@ -57,6 +57,7 @@ export default class Cast implements CastInterface {
         gifts: traveler.gifts,
 
         dialogues: null,
+        requests: null
       });
     });
     let expCast = new Cast({
@@ -69,8 +70,12 @@ export default class Cast implements CastInterface {
     return expCast;
   }
 
-  getCurrentlyVisiting() {
+  getCurrentlyVisiting(): Traveler {
     return this.members[this.currentlyVisiting];
+  }
+
+  getByTravelerRole(travelerRole: string): Traveler {
+    return this.members[travelerRole];
   }
 
   // Checks whether a given traveler has arrived in the last interval

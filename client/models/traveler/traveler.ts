@@ -1,5 +1,6 @@
 import Offer from './offer';
 import Dialogue from './dialogue';
+import Request from './request';
 import Field from '../../models/field';
 import Homestead from '../../models/homestead';
 import RecordBook from '../../models/record_book';
@@ -10,12 +11,13 @@ export class Traveler implements TravelerInterface {
   role: string;
   frequency: number;
   dialogues: Dialogue[];
-  dialogueHistory: {[id: number]: number};
+  requests: Request[];
 
-  name?: string
-  affection?: number;
-  currentOffers?: Offer[];
-  gifts?: any[];
+  name: string
+  affection: number;
+  currentOffers: Offer[];
+  gifts: any[];
+  dialogueHistory: {[id: number]: number};
 
   constructor(traveler: TravelerInterface) {
     Object.assign(this, traveler);
@@ -63,10 +65,11 @@ export interface TravelerInterface {
   role: string;
   frequency: number;
   dialogues: Dialogue[];
-  dialogueHistory: {[id: number]: number};
+  requests: Request[];
 
-  name?: string
-  affection?: number;
-  currentOffers?: Offer[];
-  gifts?: any[];
+  name: string
+  affection: number;
+  currentOffers: Offer[];
+  gifts: any[];
+  dialogueHistory: {[id: number]: number};
 }

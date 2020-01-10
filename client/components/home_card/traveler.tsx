@@ -30,43 +30,6 @@ class TravelerCard extends Component {
 
   constructor(props: TravelerCardProps) {
     super(props);
-    let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
-    let dialogue = traveler.getDialogue({
-      fields: this.props.fields,
-      homestead: this.props.homestead,
-      recordBook: this.props.recordBook,
-      cast: this.props.cast,
-      economy: this.props.economy
-    });
-
-    if (dialogue.important == true) {
-      this.props.addModal(new Modal({
-        type: ModalTypes.ALERT,
-        title: 'A traveler...',
-        messages: [dialogue.parseDialogueText({
-          fields: this.props.fields,
-          homestead: this.props.homestead,
-          recordBook: this.props.recordBook,
-          cast: this.props.cast,
-          economy: this.props.economy
-        })]
-      }));
-      dialogue = traveler.getDialogue({
-        fields: this.props.fields,
-        homestead: this.props.homestead,
-        recordBook: this.props.recordBook,
-        cast: this.props.cast,
-        economy: this.props.economy
-      }, false);
-    }
-    this.dialogueText = dialogue.parseDialogueText({
-      fields: this.props.fields,
-      homestead: this.props.homestead,
-      recordBook: this.props.recordBook,
-      cast: this.props.cast,
-      economy: this.props.economy
-    });
-    this.props.setDialogueHistory(traveler.role, traveler.dialogueHistory);
 
     this.buySeed = this.buySeed.bind(this);
   }
@@ -91,7 +54,7 @@ class TravelerCard extends Component {
         <div className="game-card field-card">
           <div className="game-card-body">
             <BackButton spot={this.props.spot} />
-            <div>{traveler.name + ': ' + this.dialogueText}</div>
+            <div>{this.renderDialogue()}</div>
             <div>{'Buy a seed:'}</div>
             <div className="option-container">
               {traveler.currentOffers.map((offer, index) => {
@@ -128,6 +91,15 @@ class TravelerCard extends Component {
       );
     }
   }
+
+  renderDialogue() {
+    let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
+    return (
+      <div>
+        {'Talk to ' + traveler.name}
+      </div>
+    );
+  }
 }
 
 interface TravelerCardProps {
@@ -141,7 +113,6 @@ interface TravelerCardProps {
   buySeedAttempt: (economy: Economy, homestead: Homestead, cast: Cast,
     recordBook: RecordBook, offer: Offer, spot: number) => any;
   setCard: (cards: Card) => any;
-  addModal: (modal: Modal) => any;
   setDialogueHistory: (travelerRole: string, dialogueHistory: {[id: number]: number})
     => any;
 }
@@ -152,7 +123,7 @@ function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    buySeedAttempt, setCard, addModal, setDialogueHistory
+    buySeedAttempt, setCard, setDialogueHistory
   }, dispatch)
 }
 
