@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { buySeedAttempt } from '../../actions/economy';
 import { setCard } from '../../actions/card';
 import { addModal } from '../../actions/modal';
-import { setDialogueHistory } from '../../actions/cast';
+import { recordDialogueHistory } from '../../actions/record_book';
 import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 import { utils } from '../../models/utils';
@@ -113,8 +113,8 @@ interface TravelerCardProps {
   buySeedAttempt: (economy: Economy, homestead: Homestead, cast: Cast,
     recordBook: RecordBook, offer: Offer, spot: number) => any;
   setCard: (cards: Card) => any;
-  setDialogueHistory: (travelerRole: string, dialogueHistory: {[id: number]: number})
-    => any;
+  recordDialogueHistory: (travelerRole: string, dialogueId: number,
+    recordBook: RecordBook) => any;
 }
 
 function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
@@ -123,7 +123,7 @@ function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    buySeedAttempt, setCard, setDialogueHistory
+    buySeedAttempt, setCard, recordDialogueHistory
   }, dispatch)
 }
 

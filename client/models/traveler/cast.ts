@@ -50,7 +50,6 @@ export default class Cast implements CastInterface {
       expMembers[travelerRole] = new Traveler({
         role: traveler.role,
         frequency: traveler.frequency,
-        dialogueHistory: traveler.dialogueHistory,
         name: traveler.name,
         affection: traveler.affection,
         currentOffers: traveler.currentOffers.slice(),

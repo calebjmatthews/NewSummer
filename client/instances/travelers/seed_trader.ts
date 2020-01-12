@@ -63,7 +63,8 @@ let seedTraderTemplate = new SeedTrader({
     new Dialogue({
       id: 0,
       conditions: [new Condition({
-        props: ['cast', 'getCurrentlyVisiting()', 'dialogueHistory', '0'],
+        props: ['recordBook', ('getDialogueCount('
+          + TravelerRoles.SEED_TRADER + ', 0)')],
         comparitor: Comparitors.EQUAL_TO,
         values: ['undefined'],
         type: 'string'
@@ -75,7 +76,8 @@ let seedTraderTemplate = new SeedTrader({
     new Dialogue({
       id: 1,
       conditions: [new Condition({
-        props: ['cast', 'getCurrentlyVisiting()', 'dialogueHistory', '1'],
+        props: ['recordBook', ('getDialogueCount('
+          + TravelerRoles.SEED_TRADER + ', 1)')],
         comparitor: Comparitors.EQUAL_TO,
         values: ['undefined'],
         type: 'string'
@@ -127,8 +129,7 @@ let seedTraderTemplate = new SeedTrader({
   name: 'Susanna Pol',
   affection:  0,
   currentOffers: [],
-  gifts: [],
-  dialogueHistory: {}
+  gifts: []
 });
 
 export { SeedTrader, seedTraderTemplate };

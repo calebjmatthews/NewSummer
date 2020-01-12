@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { setCast, sayHello, setDialogueHistory } from '../../actions/cast';
+import { setCast, sayHello } from '../../actions/cast';
 import { setCard } from '../../actions/card';
 import { addModal } from '../../actions/modal';
+import { recordDialogueHistory } from '../../actions/record_book';
 
 import Cast from '../../models/traveler/cast';
 import Homestead from '../../models/homestead';
@@ -64,7 +65,8 @@ class TravelerRest extends Component {
           economy: this.props.economy
         })]
       }));
-      this.props.setDialogueHistory(traveler.role, traveler.dialogueHistory);
+      this.props.recordDialogueHistory(traveler.role, dialogue.id,
+        this.props.recordBook);
     }
   }
 
@@ -115,8 +117,8 @@ interface TravelerRestProps {
   setCard: (card: Card, spot: number) => any;
   sayHello: (cast: Cast) => any;
   addModal: (modal: Modal) => any;
-  setDialogueHistory: (travelerRole: string, dialogueHistory: {[id: number]: number})
-    => any;
+  recordDialogueHistory: (travelerRole: string, dialogueId: number,
+    recordBook: RecordBook) => any;
 }
 
 function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
@@ -125,7 +127,7 @@ function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    setCard, sayHello, addModal, setDialogueHistory
+    setCard, sayHello, addModal, recordDialogueHistory
   }, dispatch)
 }
 

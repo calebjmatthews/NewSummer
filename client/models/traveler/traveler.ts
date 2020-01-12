@@ -17,7 +17,6 @@ export class Traveler implements TravelerInterface {
   affection: number;
   currentOffers: Offer[];
   gifts: any[];
-  dialogueHistory: {[id: number]: number};
 
   constructor(traveler: TravelerInterface) {
     Object.assign(this, traveler);
@@ -42,10 +41,6 @@ export class Traveler implements TravelerInterface {
         && (importantAllowed == true
         || (importantAllowed == false && dialogue.important == false))) {
         if (dialogue.probability == 1) {
-          if (this.dialogueHistory[dialogue.id] == undefined) {
-            this.dialogueHistory[dialogue.id] = 0;
-          }
-          this.dialogueHistory[dialogue.id]++;
           return dialogue;
         }
         else {
@@ -53,10 +48,7 @@ export class Traveler implements TravelerInterface {
         }
       }
     }
-    if (this.dialogueHistory[validDialogues[0].id] == undefined) {
-      this.dialogueHistory[validDialogues[0].id] = 0;
-    }
-    this.dialogueHistory[validDialogues[0].id]++;
+    
     return validDialogues[0];
   }
 }
@@ -71,5 +63,4 @@ export interface TravelerInterface {
   affection: number;
   currentOffers: Offer[];
   gifts: any[];
-  dialogueHistory: {[id: number]: number};
 }

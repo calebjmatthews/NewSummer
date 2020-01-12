@@ -1,8 +1,10 @@
 import Seed from './seed/seed';
 import { utils } from './utils';
+import { TravelerRoles } from './enums/traveler_roles';
 
 export default class RecordBook implements RecordBookInterface {
   seedMap: { [id: number] : Seed };
+  dialogueHistories: {[travelerRole: string]: {[id: number]: number}};
   lastTime: Date;
 
   constructor(recordBook: RecordBookInterface = null) {
@@ -11,12 +13,26 @@ export default class RecordBook implements RecordBookInterface {
       Object.keys(recordBook.seedMap).map((seedId) => {
         this.seedMap[seedId] = new Seed(recordBook.seedMap[seedId]);
       });
+      this.dialogueHistories = recordBook.dialogueHistories;
       this.lastTime = new Date(recordBook.lastTime);
     }
     else {
       this.seedMap = {};
+      this.dialogueHistories = {};
       this.lastTime = new Date(Date.now());
     }
+    this.dialogueHistories = this.initDialogueHistories(this.dialogueHistories);
+  }
+
+  initDialogueHistories(dialogueHistories: {[travelerRole: string]:
+    {[id: number]: number}}): {[travelerRole: string]: {[id: number]: number}} {
+    Object.keys(TravelerRoles).map((key) => {
+      let travelerRole = TravelerRoles[key];
+      if (dialogueHistories[travelerRole] == undefined) {
+        dialogueHistories[travelerRole] = {};
+      }
+    });
+    return dialogueHistories;
   }
 
   getCultivarNames(familyName: string = null) {
@@ -37,7 +53,7 @@ export default class RecordBook implements RecordBookInterface {
   recordSeed(seed: Seed) {
     let seedNew = this.isSeedNew(seed);
 
-    let numeralRes = this.getNumeral(seed);
+    let numeralRes = this.getSeedNumeral(seed);
     seed.numeral = numeralRes.numeral;
     seed.name = seed.adjectives[0].word + ' ' + seed.cultivarName
       + (seed.numeral.length > 0 ? (' ' + seed.numeral) : '');
@@ -68,7 +84,7 @@ export default class RecordBook implements RecordBookInterface {
     return {familyNew: familyNew, cultivarNew: cultivarNew};
   }
 
-  getNumeral(seed: Seed) {
+  getSeedNumeral(seed: Seed) {
     let numeral = '';
 
     const nameBase = seed.adjectives[0].word + seed.cultivarName;
@@ -95,9 +111,22 @@ export default class RecordBook implements RecordBookInterface {
 
     return {numeral: numeral, alsoChangedId: alsoChangedId};
   }
+
+  getDialogueCount(travelerRole: string, dialogueId: number) {
+    return this.dialogueHistories[travelerRole][dialogueId];
+  }
+
+  recordDialogueHistory(travelerRole: string, dialogueId: number) {
+    if (this.dialogueHistories[travelerRole][dialogueId] == undefined) {
+      this.dialogueHistories[travelerRole][dialogueId] = 0;
+    }
+    this.dialogueHistories[travelerRole][dialogueId]++;
+    return this.dialogueHistories[travelerRole][dialogueId]++;
+  }
 }
 
 interface RecordBookInterface {
   seedMap: { [id: number] : Seed };
+  dialogueHistories: {[travelerRole: string]: {[id: number]: number}};
   lastTime: Date;
 }

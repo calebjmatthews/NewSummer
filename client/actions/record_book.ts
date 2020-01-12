@@ -42,6 +42,18 @@ export function recordSeed(seed: Seed, recordBook: RecordBook) {
   }
 }
 
+export const SET_DIALOGUE_COUNT = 'SET_DIALOGUE_COUNT';
+export function recordDialogueHistory(travelerRole: string, dialogueId: number,
+  recordBook: RecordBook) {
+  let dialogueCount = recordBook.recordDialogueHistory(travelerRole, dialogueId);
+  return {
+    type: SET_DIALOGUE_COUNT,
+    travelerRole: travelerRole,
+    dialogueId: dialogueId,
+    dialogueCount: dialogueCount
+  }
+}
+
 export const SET_LAST_TIME = 'SET_LAST_TIME';
 export function setLastTime() {
   return {

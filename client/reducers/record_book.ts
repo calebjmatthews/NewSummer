@@ -1,5 +1,5 @@
 import {
-  SET_RECORD_BOOK, SET_LAST_TIME
+  SET_RECORD_BOOK, SET_LAST_TIME, SET_DIALOGUE_COUNT
 } from '../actions/record_book';
 import RecordBook from '../models/record_book';
 
@@ -15,6 +15,17 @@ export default function
       });
     case SET_RECORD_BOOK:
       return new RecordBook(action.recordBook);
+    case SET_DIALOGUE_COUNT:
+      let dialogueHistory = recordBook[action.travelerRole];
+      return Object.assign(new RecordBook(), recordBook, {
+        dialogueHistories: {
+          ...recordBook.dialogueHistories,
+          [action.travelerRole]: {
+            ...dialogueHistory,
+            [action.dialogueId]: action.dialogueCount
+          }
+        }
+      });
 		default:
 			return recordBook;
 	}

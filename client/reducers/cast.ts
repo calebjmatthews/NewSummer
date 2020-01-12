@@ -1,5 +1,5 @@
 import {
-  SET_CAST, SET_VISIT_AGE, SET_VISITING, SAID_HELLO, SET_DIALOGUE_HISTORY
+  SET_CAST, SET_VISIT_AGE, SET_VISITING, SAID_HELLO
 } from '../actions/cast';
 import Cast from '../models/traveler/cast';
 import { Traveler } from '../models/traveler/traveler';
@@ -32,17 +32,6 @@ export default function
     case SAID_HELLO:
       return Object.assign(new Cast(), cast, {
         saidHello: true
-      });
-    case SET_DIALOGUE_HISTORY:
-      var member = cast.members[action.travelerRole];
-      return Object.assign(new Cast(), cast, {
-        members: {
-          ...cast.members,
-          [member.role] : new Traveler({
-            ...member,
-            dialogueHistory: action.dialogueHistory
-          })
-        }
       });
     case SET_CAST:
       return new Cast(action.cast);

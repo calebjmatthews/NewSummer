@@ -74,13 +74,3 @@ export function sayHello(cast: Cast) {
     type: null
   }
 }
-
-export const SET_DIALOGUE_HISTORY = 'SET_DIALOGUE_HISTORY';
-export function setDialogueHistory(travelerRole: string,
-  dialogueHistory: {[id: number]: number}) {
-  return {
-    type: SET_DIALOGUE_HISTORY,
-    travelerRole: travelerRole,
-    dialogueHistory: dialogueHistory
-  }
-}

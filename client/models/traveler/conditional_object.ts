@@ -62,7 +62,7 @@ function parseDeepValue(object: any, propsSought: any[]) {
       let params = paramSplit.split(',');
       objectLayer[functionName] = objectLayer[functionName].bind(objectLayer);
       if (params[0].length > 0) {
-        objectLayer = objectLayer[functionName].call(params);
+        objectLayer = objectLayer[functionName].call(objectLayer, ...params);
       }
       else {
         objectLayer = objectLayer[functionName].call();
