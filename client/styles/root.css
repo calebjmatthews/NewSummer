@@ -131,3 +131,10 @@ button:disabled {
 .icon-spacer {
   width: 16px;
 }
+
+#particle-canvas {
+  z-index: 150;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

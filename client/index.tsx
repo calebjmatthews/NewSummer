@@ -12,7 +12,6 @@ require('./styles/modal.css');
 require('./styles/seed.css');
 require('./styles/header.css');
 require('./styles/field.css');
-require('./styles/particle.css');
 
 // @ts-ignore
 const createStoreWithMiddleware = applyMiddleware(createStore);

@@ -442,6 +442,13 @@ Population system
 - At a certain point population will be capped, until features are made from building materials
 - Population can be used to create an expedition to a new land, which, upon success, will send back a new family of crops, and will periodically send seeds of this crop as gifts (daily?)
 
+Request system
+~~~~~~~~~~~~~~
+- Can receive requests by talking with travelers, special banner when new quest is received
+- Quest checking function is called every time certain actions happen, such as harvesting a plant, breeding a plant, or selling a good
+- Can complete requests in request menu, special banner when quests are completed
+- Request menu shows currently pending requests and completed requests
+
 Minor display and gameplay polish
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 X Breeding time dependent on growth time of babies
@@ -524,6 +531,7 @@ X Inventory component
 X More compact and expressful number display
 X Autoplanting, harvesting, and collecting
 X State-based dialogue for travelers
+_ Request system
 _ Pixel graphics for different cultivars
 _ Icon for each cultivar
 _ Pixel graphics linked with traits

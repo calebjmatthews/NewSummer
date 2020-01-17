@@ -3,162 +3,124 @@ import React, { Component } from 'react';
 import { utils } from '../models/utils';
 
 export default class ParticleEmitter extends Component {
-  props: ParticleEmitterProps;
-  state: ParticleEmitterState;
-  interval: NodeJS.Timeout;
-
-  constructor(props: ParticleEmitterProps) {
-    super(props);
-
-    this.state = { particleMap: {} };
-  }
+  width: number = window.innerWidth;
+  height: number = window.innerHeight;
+  particleMap: {[id: number] : Particle} = {};
+  particleCreationInterval: number = 100;
+  particleCreatedLast: number = 0;
 
   componentDidMount() {
-    this.initialBurst();
-    this.interval = setInterval(() => this.emit(),
-      Math.floor(Math.random() * 25 + 238));
-  }
-
-  componentWillUnmount() {
-    Object.keys(this.state.particleMap).map((particleId) => {
-      let particle: Particle = this.state.particleMap[particleId];
-      clearTimeout(particle.ageTimeout);
-      clearTimeout(particle.animationTimeout);
+    window.requestAnimationFrame((timestamp) => {
+      this.createParticles(200, timestamp);
+      this.manageDrawing(timestamp)
     });
-    this.setState({ particleMap: {} });
-    clearInterval(this.interval);
   }
 
-  createParticles(type: string, count: number): Particle[] {
-    let particles: Particle[] = [];
-
-    const baseStyles = {
-      'sparkle': {
-        position: 'relative',
-        width: '4px',
-        height: '4px',
-        background: '#fff',
-        boxShadow: '0 0 1px 1px #fff',
-        transform: 'translate(0px, 0px)',
-        opacity: '1',
-        transition: 'transform 1s ease-out, opacity 1s ease-out'
+  manageDrawing(timestamp: number) {
+    let canvas: any = document.getElementById('particle-canvas');
+    if (canvas != null) {
+      if (this.particleCreatedLast < (timestamp - this.particleCreationInterval)) {
+        this.createParticle(timestamp);
       }
+
+      this.moveParticles(timestamp);
+
+      let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+      ctx.clearRect(0, 0, this.width, this.height);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      Object.keys(this.particleMap).map((id, index) => {
+        let particle = this.particleMap[id];
+        ctx.fillRect(
+          (particle.x - particle.width),
+          (particle.y - particle.height),
+          particle.width,
+          particle.height
+        )
+      });
+
+      requestAnimationFrame((timestamp) => {
+        this.manageDrawing(timestamp)
+      });
     }
+  }
 
-    switch(type) {
-      case ('sparkle'):
-        utils.range(count).map(() => {
-          let particleId = Math.floor(Math.random() * 1000000);
-          let startingStyle: any = Object.assign({}, baseStyles[type]);
-          let startingPoint = [
-            Math.floor(Math.random() * this.props.width),
-            Math.floor(Math.random() * this.props.height)
-          ];
-          startingStyle.left = (startingPoint[0] + 'px');
-          startingStyle.top = (startingPoint[1] + 'px');
+  createParticles(count: number, timestamp: number) {
+    utils.range(count).map(() => {
+      this.createParticle(timestamp);
+    });
+  }
 
-          let newParticle = new Particle({
-            id: particleId,
-            type: type,
-            style: startingStyle,
-            animationTimeout: setTimeout(() => {
-              let newStyle = Object.assign({}, startingStyle);
-              newStyle.opacity = '0';
-              let endingPoint: number[] = [];
-              if (this.props.direction == 'up' || this.props.direction == 'down') {
-                endingPoint[0] = Math.floor(Math.random() * 300 - 150);
-              }
-              if (this.props.direction == 'up') {
-                endingPoint[1] = Math.floor(Math.random() * 150 - 150);
-              }
-              else if (this.props.direction == 'down') {
-                endingPoint[1] = Math.floor(Math.random() * 150);
-              }
-              newStyle.transform =  ( 'translate('
-                + endingPoint[0] + 'px, ' + endingPoint[1] + 'px)');
-              this.setStyle(particleId, newStyle);
-            }, 10),
-            ageTimeout: setTimeout(() => {
-              this.ageOut(particleId);
-            }, 1000)
-          });
-          particles.push(newParticle);
-        });
-        break;
+  createParticle(timestamp: number) {
+    let velocityX = (((this.width / 2) / 1000) * Math.random())
+      * (Math.random()*0.5 + 0.5);
+    let velocityY = (((this.width / 2) / 1000) - velocityX)
+      * (Math.random()*0.5 + 0.5);
+    let diceRoll = Math.random();
+    if (diceRoll < 0.5 && diceRoll >= 0.25) {
+      velocityX *= -1;
     }
-    return particles;
+    else if (diceRoll < 0.75 && diceRoll >= 0.5) {
+      velocityY *= -1;
+    }
+    else if (diceRoll >= 0.75) {
+      velocityX *= -1;
+      velocityY *= -1;
+    }
+    let newParticle = new Particle({
+      id: Math.floor(Math.random() * 1000000),
+      type: 'sparkle',
+      startingTime: timestamp,
+      x: (this.width / 2),
+      y: (this.height / 2),
+      width: 4,
+      height: 4,
+      velocityX: velocityX,
+      velocityY: velocityY
+    });
+    this.particleMap[newParticle.id] = newParticle;
   }
 
-  initialBurst() {
-    let particleMap: {[id: number] : Particle} = {};
-    let particles = this.createParticles(this.props.type, 10);
-    particles.map((particle) => {
-      particleMap[particle.id] = particle;
-    })
-    this.setState({ particleMap: particleMap });
+  moveParticles(timestamp: number) {
+    Object.keys(this.particleMap).map((id, index) => {
+      let particle = this.particleMap[id];
+      let timeElapsed = timestamp - particle.startingTime;
+      let newX = (this.width / 2) + (particle.velocityX * (timeElapsed));
+      let newY = (this.height / 2) + (particle.velocityY * (timeElapsed));
+
+      if (newX < (0 - (particle.width / 2))
+        || newX > (this.width + (particle.width / 2))
+        || newY < (0 - (particle.height / 2))
+        || newY > (this.height + (particle.height / 2))) {
+        this.destroyParticle(particle);
+      }
+      else {
+        particle.x = newX;
+        particle.y = newY;
+      }
+    });
   }
 
-  emit() {
-    let particleMap = this.state.particleMap;
-    let particles = this.createParticles(this.props.type, 1);
-    particles.map((particle) => {
-      particleMap[particle.id] = particle;
-    })
-    this.setState({ particleMap: particleMap });
-  }
-
-  setStyle(particleId: number, style: any) {
-    let particleMap = this.state.particleMap;
-    particleMap[particleId].style = style;
-    this.setState({ particleMap: particleMap });
-  }
-
-  ageOut(particleId: number) {
-    let particleMap = this.state.particleMap;
-    delete particleMap[particleId];
-    this.setState({ particleMap: particleMap });
+  destroyParticle(particle: Particle) {
+    delete this.particleMap[particle.id];
   }
 
   render() {
-    let style = {
-      'top': this.props.top,
-      'left': this.props.left,
-      'width': this.props.width,
-      'height': this.props.height
-    }
     return (
-      <div className="particle-emitter" style={style}>
-        {Object.keys(this.state.particleMap).map((particleId) => {
-          let particle = this.state.particleMap[particleId];
-          return (
-            <div key={particleId} className={particle.type}
-              style={particle.style}></div>
-          );
-        })}
-      </div>
+      <canvas id="particle-canvas" width={this.width} height={this.height}></canvas>
     );
   }
-}
-
-interface ParticleEmitterProps {
-  width?: number;
-  height?: number;
-  top?: number;
-  left?: number;
-  type: string;
-  direction?: string;
-}
-
-interface ParticleEmitterState {
-  particleMap: {[id: number] : Particle};
 }
 
 class Particle {
   id: number;
   type: string;
-  style: any;
-  animationTimeout: NodeJS.Timeout;
-  ageTimeout: NodeJS.Timeout;
+  startingTime: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  velocityX: number;
+  velocityY: number;
 
   constructor(particle: Particle) {
     Object.assign(this, particle);

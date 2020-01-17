@@ -107,14 +107,7 @@ class ModalContainer extends Component {
         let element = this.getModalElement();
         if (this.state.modalExists && element != undefined) {
           return(
-            <div>
-              <ParticleEmitter type={'sparkle'} direction={'up'}
-                top={element.offsetTop} left={0}
-                width={element.scrollWidth} height={0} />
-              <ParticleEmitter type={'sparkle'} direction={'down'}
-                top={(element.offsetTop + element.clientHeight)} left={0}
-                width={element.scrollWidth} height={0} />
-            </div>
+            <ParticleEmitter />
           );
         }
         else {
