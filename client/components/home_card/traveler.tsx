@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { buySeedAttempt } from '../../actions/economy';
 import { setCard } from '../../actions/card';
 import { addModal } from '../../actions/modal';
-import { recordDialogueHistory } from '../../actions/record_book';
+import { recordInDialogueHistory } from '../../actions/record_book';
 import SeedDescription from '../seed/seed_description';
 import BackButton from '../back_button';
 import { utils } from '../../models/utils';
@@ -32,6 +32,7 @@ class TravelerCard extends Component {
     super(props);
 
     this.buySeed = this.buySeed.bind(this);
+    this.viewDialogue = this.viewDialogue.bind(this);
   }
 
   buySeed(seed: Seed) {
@@ -45,6 +46,36 @@ class TravelerCard extends Component {
 
     return this.props.buySeedAttempt(this.props.economy, this.props.homestead,
       this.props.cast, this.props.recordBook, matchingOffer, this.props.spot);
+  }
+
+  viewDialogue() {
+    let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
+    let dialogue: Dialogue = null;
+    if (this.props.cast.currentDialogue == null) {
+      dialogue = traveler.getNewDialogue({
+        fields: this.props.fields,
+        homestead: this.props.homestead,
+        recordBook: this.props.recordBook,
+        cast: this.props.cast,
+        economy: this.props.economy
+      }, false);
+      this.props.recordInDialogueHistory(traveler.role, dialogue.index,
+        this.props.recordBook);
+    }
+    else {
+      dialogue = traveler.getDialogueByIndex(this.props.cast.currentDialogue);
+    }
+    this.props.addModal(new Modal({
+      type: ModalTypes.ALERT,
+      title: 'A traveler...',
+      messages: [dialogue.parseDialogueText({
+        fields: this.props.fields,
+        homestead: this.props.homestead,
+        recordBook: this.props.recordBook,
+        cast: this.props.cast,
+        economy: this.props.economy
+      })]
+    }));
   }
 
   render() {
@@ -95,9 +126,9 @@ class TravelerCard extends Component {
   renderDialogue() {
     let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
     return (
-      <div>
+      <button onClick={ () => this.viewDialogue() }>
         {'Talk to ' + traveler.name}
-      </div>
+      </button>
     );
   }
 }
@@ -113,8 +144,9 @@ interface TravelerCardProps {
   buySeedAttempt: (economy: Economy, homestead: Homestead, cast: Cast,
     recordBook: RecordBook, offer: Offer, spot: number) => any;
   setCard: (cards: Card) => any;
-  recordDialogueHistory: (travelerRole: string, dialogueId: number,
+  recordInDialogueHistory: (travelerRole: string, dialogueId: number,
     recordBook: RecordBook) => any;
+  addModal: (modal: Modal) => any;
 }
 
 function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
@@ -123,7 +155,7 @@ function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    buySeedAttempt, setCard, recordDialogueHistory
+    buySeedAttempt, setCard, recordInDialogueHistory, addModal
   }, dispatch)
 }
 

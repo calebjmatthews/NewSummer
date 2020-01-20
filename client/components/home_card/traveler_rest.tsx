@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { setCast, sayHello } from '../../actions/cast';
 import { setCard } from '../../actions/card';
 import { addModal } from '../../actions/modal';
-import { recordDialogueHistory } from '../../actions/record_book';
+import { recordInDialogueHistory } from '../../actions/record_book';
 
 import Cast from '../../models/traveler/cast';
 import Homestead from '../../models/homestead';
@@ -45,7 +45,7 @@ class TravelerRest extends Component {
 
   displayDialogueIfImportant() {
     let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
-    let dialogue = traveler.getDialogue({
+    let dialogue = traveler.getNewDialogue({
       fields: this.props.fields,
       homestead: this.props.homestead,
       recordBook: this.props.recordBook,
@@ -65,7 +65,7 @@ class TravelerRest extends Component {
           economy: this.props.economy
         })]
       }));
-      this.props.recordDialogueHistory(traveler.role, dialogue.id,
+      this.props.recordInDialogueHistory(traveler.role, dialogue.index,
         this.props.recordBook);
     }
   }
@@ -117,7 +117,7 @@ interface TravelerRestProps {
   setCard: (card: Card, spot: number) => any;
   sayHello: (cast: Cast) => any;
   addModal: (modal: Modal) => any;
-  recordDialogueHistory: (travelerRole: string, dialogueId: number,
+  recordInDialogueHistory: (travelerRole: string, dialogueId: number,
     recordBook: RecordBook) => any;
 }
 
@@ -127,7 +127,7 @@ function mapStateToProps({ fields, cast, homestead, economy, recordBook }) {
 
 function mapDispatchToProps(dispatch: any) {
   return bindActionCreators({
-    setCard, sayHello, addModal, recordDialogueHistory
+    setCard, sayHello, addModal, recordInDialogueHistory
   }, dispatch)
 }
 

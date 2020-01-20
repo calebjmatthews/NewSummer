@@ -9,7 +9,7 @@ import Economy from '../../models/economy';
 import { Comparitors } from '../enums/comparitors';
 
 export default class Dialogue extends ConditionalObject implements DialogueInterface {
-  id: number;
+  index: number;
   conditions: Condition[];
   important: boolean;
   probability: number;
@@ -64,7 +64,7 @@ function parseDeepValue(object: any, propsSought: any[]) {
 }
 
 interface DialogueInterface {
-  id: number;
+  index: number;
   conditions: Condition[];
   important: boolean;
   probability: number;

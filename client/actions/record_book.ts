@@ -43,9 +43,9 @@ export function recordSeed(seed: Seed, recordBook: RecordBook) {
 }
 
 export const SET_DIALOGUE_COUNT = 'SET_DIALOGUE_COUNT';
-export function recordDialogueHistory(travelerRole: string, dialogueId: number,
+export function recordInDialogueHistory(travelerRole: string, dialogueId: number,
   recordBook: RecordBook) {
-  let dialogueCount = recordBook.recordDialogueHistory(travelerRole, dialogueId);
+  let dialogueCount = recordBook.recordInDialogueHistory(travelerRole, dialogueId);
   return {
     type: SET_DIALOGUE_COUNT,
     travelerRole: travelerRole,

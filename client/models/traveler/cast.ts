@@ -10,6 +10,7 @@ import { utils } from '../utils';
 export default class Cast implements CastInterface {
   members: { [role: string] : Traveler };
   currentlyVisiting: string;
+  currentDialogue: number;
   visitRemaining: number;
   saidHello: boolean;
 
@@ -62,6 +63,7 @@ export default class Cast implements CastInterface {
     let expCast = new Cast({
       members: expMembers,
       currentlyVisiting: this.currentlyVisiting,
+      currentDialogue: this.currentDialogue,
       visitRemaining: this.visitRemaining,
       saidHello: this.saidHello
     });
@@ -111,6 +113,10 @@ export default class Cast implements CastInterface {
     return travelerRole;
   }
 
+  setDialogue(dialogueId: number) {
+    this.currentDialogue = dialogueId;
+  }
+
   startVisit(travelerRole: string): void {
     this.currentlyVisiting = travelerRole;
     this.visitRemaining = TRAVELER_DURATION;
@@ -140,6 +146,7 @@ export default class Cast implements CastInterface {
 interface CastInterface {
   members: { [role: string] : any };
   currentlyVisiting: string;
+  currentDialogue: number;
   visitRemaining: number;
   saidHello: boolean;
 }

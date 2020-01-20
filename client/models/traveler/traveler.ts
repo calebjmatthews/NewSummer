@@ -27,7 +27,7 @@ export class Traveler implements TravelerInterface {
     return null;
   }
 
-  getDialogue(gameState: {
+  getNewDialogue(gameState: {
     fields: { [id: number] : Field },
     homestead: Homestead,
     recordBook: RecordBook,
@@ -48,8 +48,12 @@ export class Traveler implements TravelerInterface {
         }
       }
     }
-    
+
     return validDialogues[0];
+  }
+
+  getDialogueByIndex(index: number) {
+    return this.dialogues[index];
   }
 }
 

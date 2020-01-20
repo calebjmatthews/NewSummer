@@ -61,7 +61,7 @@ let seedTraderTemplate = new SeedTrader({
   frequency: .2,
   dialogues: [
     new Dialogue({
-      id: 0,
+      index: 0,
       conditions: [new Condition({
         props: ['recordBook', ('getDialogueCount('
           + TravelerRoles.SEED_TRADER + ', 0)')],
@@ -74,7 +74,7 @@ let seedTraderTemplate = new SeedTrader({
       text: 'Look at this, a farmer trying to grow something worthwhile in the grasslands! I\'m |cast,getCurrentlyVisiting(),name|, pleasure to meet you.'
     }),
     new Dialogue({
-      id: 1,
+      index: 1,
       conditions: [new Condition({
         props: ['recordBook', ('getDialogueCount('
           + TravelerRoles.SEED_TRADER + ', 1)')],
@@ -87,21 +87,21 @@ let seedTraderTemplate = new SeedTrader({
       text: 'You came in with the first shipload, right? You must have, or you wouldn\'t be out this far, this quickly.'
     }),
     new Dialogue({
-      id: 2,
+      index: 2,
       conditions: [],
       important: false,
       probability: 0.1,
       text: 'Ah... Just let me rest my legs, it\'s been a long, dusty road.'
     }),
     new Dialogue({
-      id: 3,
+      index: 3,
       conditions: [],
       important: false,
       probability: 0.1,
       text: 'If you ever get ahold of some rye, let me know. My mother used to make a hearty rye bread that would stick with you all day.'
     }),
     new Dialogue({
-      id: 4,
+      index: 4,
       conditions: [],
       important: false,
       probability: 0.1,

@@ -116,7 +116,7 @@ export default class RecordBook implements RecordBookInterface {
     return this.dialogueHistories[travelerRole][dialogueId];
   }
 
-  recordDialogueHistory(travelerRole: string, dialogueId: number) {
+  recordInDialogueHistory(travelerRole: string, dialogueId: number) {
     if (this.dialogueHistories[travelerRole][dialogueId] == undefined) {
       this.dialogueHistories[travelerRole][dialogueId] = 0;
     }
