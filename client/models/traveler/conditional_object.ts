@@ -6,6 +6,7 @@ import Cast from '../../models/traveler/cast';
 import Economy from '../../models/economy';
 
 import { Comparitors } from '../enums/comparitors';
+import { utils } from '../utils';
 
 export default class ConditionalObject {
   constructor(conditionalObject: any) {
@@ -21,7 +22,7 @@ export default class ConditionalObject {
   }, conditions: Condition[]): boolean {
     let valid = true;
     conditions.map((condition) => {
-      let stateValue = parseDeepValue(gameState, condition.props);
+      let stateValue = utils.parseDeepValue(gameState, condition.props);
       switch(condition.comparitor) {
         case Comparitors.EQUAL_TO:
         if (stateValue != condition.getValues()[0]) {
@@ -51,26 +52,4 @@ export default class ConditionalObject {
     });
     return valid;
   }
-}
-
-function parseDeepValue(object: any, propsSought: any[]) {
-  let objectLayer = object[propsSought[0]];
-  propsSought.slice(1).map((propSought) => {
-    if (propSought.includes('(')) {
-      let functionName = propSought.split('(')[0];
-      let paramSplit = propSought.split('(')[1].replace(')', '');
-      let params = paramSplit.split(',');
-      objectLayer[functionName] = objectLayer[functionName].bind(objectLayer);
-      if (params[0].length > 0) {
-        objectLayer = objectLayer[functionName].call(objectLayer, ...params);
-      }
-      else {
-        objectLayer = objectLayer[functionName].call();
-      }
-    }
-    else {
-      objectLayer = objectLayer[propSought];
-    }
-  });
-  return objectLayer;
 }

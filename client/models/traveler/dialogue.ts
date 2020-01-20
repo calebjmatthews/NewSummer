@@ -7,6 +7,7 @@ import Cast from '../../models/traveler/cast';
 import Economy from '../../models/economy';
 
 import { Comparitors } from '../enums/comparitors';
+import { utils } from '../utils';
 
 export default class Dialogue extends ConditionalObject implements DialogueInterface {
   index: number;
@@ -34,33 +35,11 @@ export default class Dialogue extends ConditionalObject implements DialogueInter
         pText += (piece);
       }
       else if (index % 2 == 1) {
-        pText += parseDeepValue(gameState, piece.split(','));
+        pText += utils.parseDeepValue(gameState, piece.split(','));
       }
     });
     return pText;
   }
-}
-
-function parseDeepValue(object: any, propsSought: any[]) {
-  let objectLayer = object[propsSought[0]];
-  propsSought.slice(1).map((propSought) => {
-    if (propSought.includes('(')) {
-      let functionName = propSought.split('(')[0];
-      let paramSplit = propSought.split('(')[1].replace(')', '');
-      let params = paramSplit.split(',');
-      objectLayer[functionName] = objectLayer[functionName].bind(objectLayer);
-      if (params[0].length > 0) {
-        objectLayer = objectLayer[functionName].call(params);
-      }
-      else {
-        objectLayer = objectLayer[functionName].call();
-      }
-    }
-    else {
-      objectLayer = objectLayer[propSought];
-    }
-  });
-  return objectLayer;
 }
 
 interface DialogueInterface {

@@ -198,6 +198,28 @@ class Utils {
 
     return result;
   }
+
+  parseDeepValue(object: any, propsSought: any[]) {
+    let objectLayer = object[propsSought[0]];
+    propsSought.slice(1).map((propSought) => {
+      if (propSought.includes('(')) {
+        let functionName = propSought.split('(')[0];
+        let paramSplit = propSought.split('(')[1].replace(')', '');
+        let params = paramSplit.split(',');
+        objectLayer[functionName] = objectLayer[functionName].bind(objectLayer);
+        if (params[0].length > 0) {
+          objectLayer = objectLayer[functionName].call(params);
+        }
+        else {
+          objectLayer = objectLayer[functionName].call();
+        }
+      }
+      else {
+        objectLayer = objectLayer[propSought];
+      }
+    });
+    return objectLayer;
+  }
 }
 
 export let utils = new Utils();
