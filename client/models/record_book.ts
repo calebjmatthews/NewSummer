@@ -113,6 +113,14 @@ export default class RecordBook implements RecordBookInterface {
   }
 
   getDialogueCount(travelerRole: string, dialogueId: number) {
+    console.log('travelerRole');
+    console.log(travelerRole);
+    console.log('dialogueId');
+    console.log(dialogueId);
+    console.log('this.dialogueHistories[travelerRole]');
+    console.log(this.dialogueHistories[travelerRole]);
+    console.log("this.dialogueHistories['Seed Trader']");
+    console.log(this.dialogueHistories['Seed Trader']);
     return this.dialogueHistories[travelerRole][dialogueId];
   }
 

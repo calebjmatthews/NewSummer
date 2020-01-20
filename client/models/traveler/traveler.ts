@@ -35,6 +35,8 @@ export class Traveler implements TravelerInterface {
     economy: Economy
   }, importantAllowed: boolean = true): Dialogue {
     let validDialogues: Dialogue[] = [];
+    let dialogueThresholds: number[] = [0];
+    let probSum: number = 0;
     for (let index = 0; index < this.dialogues.length; index++) {
       let dialogue = this.dialogues[index];
       if (dialogue.isValid(gameState, dialogue.conditions) == true
@@ -45,11 +47,28 @@ export class Traveler implements TravelerInterface {
         }
         else {
           validDialogues.push(dialogue);
+          dialogueThresholds.push(dialogueThresholds[dialogueThresholds.length-1]
+            + dialogue.probability)
+          probSum += dialogue.probability;
         }
       }
     }
+    dialogueThresholds.push(10000);
 
-    return validDialogues[0];
+    let selDialogue = validDialogues[0];
+    let roll = Math.random() * probSum;
+    console.log('dialogueThresholds');
+    console.log(dialogueThresholds);
+    console.log('roll');
+    console.log(roll);
+    for (let index = 0; index < validDialogues.length; index++) {
+      let dialogue = validDialogues[index];
+      if (roll <= dialogueThresholds[index] && roll <= dialogueThresholds[index+1]) {
+        selDialogue = dialogue;
+      }
+    }
+
+    return selDialogue;
   }
 
   getDialogueByIndex(index: number) {

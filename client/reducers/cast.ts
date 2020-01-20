@@ -12,6 +12,7 @@ startingMembers[TravelerRoles.SEED_TRADER] = seedTraderTemplate;
 let startingCast: Cast = new Cast({
   members: startingMembers,
   currentlyVisiting: null,
+  currentDialogue: null,
   visitRemaining: null,
   saidHello: false
 });
