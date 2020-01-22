@@ -110,12 +110,14 @@ let seedTraderTemplate = new SeedTrader({
   ],
   requests: [
     new Request({
-      id: 0,
+      index: 0,
       name: 'Proof of a Start',
       travelerRoleRequesting: TravelerRoles.SEED_TRADER,
+      requestingDialogue: ['I see the fields, I see your farmhouse, but it\'s hard to believe anyone could be serious about growing crops in the middle of nowhere.', 'Still, a reliable source of food and folk could move out here...', 'I tell you what, grow me some grass, any kind of simple grass, and there will be something in it for you.'],
       description: ('Bring |cast,getByTravelerRole('
         + TravelerRoles.SEED_TRADER + '),name| a successfully grown grass to prove '
         + 'that you\'re able to nuture something.'),
+      completingDialogue: ['There it is. It\'s a plant, and you grew it yourself. A long way from a functional farm, but it\'s a start.'],
       conditionsToRequest: [],
       costsToComplete: [new StackCost({
         family: FamilyNames.POACEAE,

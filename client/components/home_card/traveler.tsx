@@ -48,6 +48,34 @@ class TravelerCard extends Component {
       this.props.cast, this.props.recordBook, matchingOffer, this.props.spot);
   }
 
+  talkClick() {
+    let newRequestShown = this.viewRequest();
+    if (newRequestShown == false) {
+      this.viewDialogue();
+    }
+  }
+
+  viewRequest() {
+    let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
+    let newRequest = traveler.getNewRequest({
+      fields: this.props.fields,
+      homestead: this.props.homestead,
+      recordBook: this.props.recordBook,
+      cast: this.props.cast,
+      economy: this.props.economy
+    });
+    if (newRequest != null) {
+      this.props.addModal(new Modal({
+        type: ModalTypes.ALERT,
+        title: 'A request!',
+        messages: newRequest.requestingDialogue
+      }));
+    }
+    else {
+      return false;
+    }
+  }
+
   viewDialogue() {
     let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
     let dialogue: Dialogue = null;
@@ -126,7 +154,7 @@ class TravelerCard extends Component {
   renderDialogue() {
     let traveler = this.props.cast.members[this.props.cast.currentlyVisiting];
     return (
-      <button onClick={ () => this.viewDialogue() }>
+      <button onClick={ () => this.talkClick() }>
         {'Talk to ' + traveler.name}
       </button>
     );

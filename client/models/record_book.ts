@@ -5,6 +5,7 @@ import { TravelerRoles } from './enums/traveler_roles';
 export default class RecordBook implements RecordBookInterface {
   seedMap: { [id: number] : Seed };
   dialogueHistories: {[travelerRole: string]: {[id: number]: number}};
+  requestHistories: {[travelerRole: string]: {[id: number]: number}};
   lastTime: Date;
 
   constructor(recordBook: RecordBookInterface = null) {
@@ -14,6 +15,7 @@ export default class RecordBook implements RecordBookInterface {
         this.seedMap[seedId] = new Seed(recordBook.seedMap[seedId]);
       });
       this.dialogueHistories = recordBook.dialogueHistories;
+      this.requestHistories = recordBook.requestHistories;
       this.lastTime = new Date(recordBook.lastTime);
     }
     else {
@@ -113,14 +115,6 @@ export default class RecordBook implements RecordBookInterface {
   }
 
   getDialogueCount(travelerRole: string, dialogueId: number) {
-    console.log('travelerRole');
-    console.log(travelerRole);
-    console.log('dialogueId');
-    console.log(dialogueId);
-    console.log('this.dialogueHistories[travelerRole]');
-    console.log(this.dialogueHistories[travelerRole]);
-    console.log("this.dialogueHistories['Seed Trader']");
-    console.log(this.dialogueHistories['Seed Trader']);
     return this.dialogueHistories[travelerRole][dialogueId];
   }
 
@@ -136,5 +130,6 @@ export default class RecordBook implements RecordBookInterface {
 interface RecordBookInterface {
   seedMap: { [id: number] : Seed };
   dialogueHistories: {[travelerRole: string]: {[id: number]: number}};
+  requestHistories: {[travelerRole: string]: {[id: number]: number}};
   lastTime: Date;
 }

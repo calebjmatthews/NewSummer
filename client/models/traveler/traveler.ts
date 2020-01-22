@@ -74,6 +74,23 @@ export class Traveler implements TravelerInterface {
   getDialogueByIndex(index: number) {
     return this.dialogues[index];
   }
+
+  getNewRequest(gameState: {
+    fields: { [id: number] : Field },
+    homestead: Homestead,
+    recordBook: RecordBook,
+    cast: Cast,
+    economy: Economy
+  }): Request {
+    let newRequest: Request = null;
+    for (let index = (this.requests.length-1); index >= 0; index--) {
+      let request = this.requests[index];
+      if (request.isValid(gameState, request.conditionsToRequest)) {
+        newRequest = request;
+      }
+    }
+    return newRequest;
+  }
 }
 
 export interface TravelerInterface {

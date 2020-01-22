@@ -4,10 +4,12 @@ import RequestProgress from './request_progress';
 import StackCost from './stack_cost';
 
 export default class Request extends ConditionalObject implements RequestInterface {
-  id: number;
+  index: number;
   name: string;
   travelerRoleRequesting: string;
+  requestingDialogue: string[];
   description: string;
+  completingDialogue: string[];
   conditionsToRequest: Condition[];
   costsToComplete: StackCost[];
   conditionsToComplete: Condition[];
@@ -21,10 +23,12 @@ export default class Request extends ConditionalObject implements RequestInterfa
 }
 
 interface RequestInterface {
-  id: number;
+  index: number;
   name: string;
   travelerRoleRequesting: string;
+  requestingDialogue: string[];
   description: string;
+  completingDialogue: string[];
   conditionsToRequest: Condition[];
   costsToComplete: StackCost[];
   conditionsToComplete: Condition[];
