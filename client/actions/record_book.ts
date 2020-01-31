@@ -54,6 +54,12 @@ export function recordInDialogueHistory(travelerRole: string, dialogueId: number
   }
 }
 
+export const RECORD_REQUEST_STARTED = 'RECORD_REQUEST_STARTED';
+export function recordRequestStarted(travelerRole: string, requestIndex: number,
+  recordBook: RecordBook){
+  let requestState = recordBook.recordRequestStarted(travelerRole, requestIndex);
+}
+
 export const SET_LAST_TIME = 'SET_LAST_TIME';
 export function setLastTime() {
   return {

@@ -70,6 +70,15 @@ class TravelerCard extends Component {
         title: 'A request!',
         messages: newRequest.requestingDialogue
       }));
+      this.props.addModal(new Modal({
+        type: ModalTypes.ALERT,
+        title: 'A request!',
+        messages: [
+          newRequest.description,
+          ('Request: ' + newRequest.costsToComplete),
+          ('Reward: ' + newRequest.reward)
+        ]
+      }));
     }
     else {
       return false;

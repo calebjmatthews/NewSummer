@@ -4,8 +4,9 @@ import { TravelerRoles } from './enums/traveler_roles';
 
 export default class RecordBook implements RecordBookInterface {
   seedMap: { [id: number] : Seed };
-  dialogueHistories: {[travelerRole: string]: {[id: number]: number}};
-  requestHistories: {[travelerRole: string]: {[id: number]: number}};
+  dialogueHistories: {[travelerRole: string]: {[index: number]: number}};
+  requestsCurrent: {[travelerRole: string]: {[index: number]: boolean}};
+  requestHistories: {[travelerRole: string]: {[index: number]: number}};
   lastTime: Date;
 
   constructor(recordBook: RecordBookInterface = null) {
@@ -15,26 +16,36 @@ export default class RecordBook implements RecordBookInterface {
         this.seedMap[seedId] = new Seed(recordBook.seedMap[seedId]);
       });
       this.dialogueHistories = recordBook.dialogueHistories;
+      this.requestsCurrent = recordBook.requestsCurrent;
       this.requestHistories = recordBook.requestHistories;
       this.lastTime = new Date(recordBook.lastTime);
     }
     else {
       this.seedMap = {};
       this.dialogueHistories = {};
+      this.requestsCurrent = {};
+      this.requestHistories = {};
       this.lastTime = new Date(Date.now());
     }
-    this.dialogueHistories = this.initDialogueHistories(this.dialogueHistories);
+    this.initMaps(this.dialogueHistories, this.requestsCurrent, this.requestHistories);
   }
 
-  initDialogueHistories(dialogueHistories: {[travelerRole: string]:
-    {[id: number]: number}}): {[travelerRole: string]: {[id: number]: number}} {
+  initMaps(
+    dialogueHistories: {[travelerRole: string]: {[id: number]: number}},
+    requestsCurrent: {[travelerRole: string]: {[id: number]: boolean}},
+    requestHistories: {[travelerRole: string]: {[id: number]: number}}): void {
     Object.keys(TravelerRoles).map((key) => {
       let travelerRole = TravelerRoles[key];
-      if (dialogueHistories[travelerRole] == undefined) {
-        dialogueHistories[travelerRole] = {};
+      if (this.dialogueHistories[travelerRole] == undefined) {
+        this.dialogueHistories[travelerRole] = {};
+      }
+      if (this.requestsCurrent[travelerRole] == undefined) {
+        this.requestsCurrent[travelerRole] = {};
+      }
+      if (this.requestHistories[travelerRole] == undefined) {
+        this.requestHistories[travelerRole] = {};
       }
     });
-    return dialogueHistories;
   }
 
   getCultivarNames(familyName: string = null) {
@@ -118,18 +129,32 @@ export default class RecordBook implements RecordBookInterface {
     return this.dialogueHistories[travelerRole][dialogueId];
   }
 
-  recordInDialogueHistory(travelerRole: string, dialogueId: number) {
+  recordInDialogueHistory(travelerRole: string, dialogueId: number): number {
     if (this.dialogueHistories[travelerRole][dialogueId] == undefined) {
       this.dialogueHistories[travelerRole][dialogueId] = 0;
     }
     this.dialogueHistories[travelerRole][dialogueId]++;
     return this.dialogueHistories[travelerRole][dialogueId]++;
   }
+
+  recordRequestStarted(travelerRole: string, requestIndex: number): boolean {
+    this.requestsCurrent[travelerRole][requestIndex] = true;
+    return this.requestsCurrent[travelerRole][requestIndex];
+  }
+
+  recordRequestCompleted(travelerRole: string, requestIndex: number): number {
+    if (this.requestHistories[travelerRole][requestIndex] == undefined) {
+      this.requestHistories[travelerRole][requestIndex] = 0;
+    }
+    this.requestHistories[travelerRole][requestIndex]++;
+    return this.requestHistories[travelerRole][requestIndex]++;
+  }
 }
 
 interface RecordBookInterface {
   seedMap: { [id: number] : Seed };
-  dialogueHistories: {[travelerRole: string]: {[id: number]: number}};
-  requestHistories: {[travelerRole: string]: {[id: number]: number}};
+  dialogueHistories: {[travelerRole: string]: {[index: number]: number}};
+  requestsCurrent: {[travelerRole: string]: {[index: number]: boolean}};
+  requestHistories: {[travelerRole: string]: {[index: number]: number}};
   lastTime: Date;
 }

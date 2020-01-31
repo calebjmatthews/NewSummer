@@ -8,5 +8,6 @@ export enum CardTypes {
   SEED_REPLACE_BUY = 'seedReplaceBuy',
   SEED_REPLACE_BREED = 'seedReplaceBreed',
   SEED_BUYING = 'seedBuying',
-  INVENTORY_OPEN = 'inventoryOpen'
+  INVENTORY_OPEN = 'inventoryOpen',
+  REQUESTS_OPEN = 'requestsOpen'
 }

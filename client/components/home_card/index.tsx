@@ -11,6 +11,8 @@ import TravelerRest from './traveler_rest';
 import TravelerCard from './traveler';
 import InventoryBox from './inventory_box';
 import InventoryCard from './inventory';
+import RequestBox from './request_box';
+import RequestListCard from './request_list';
 
 import CardState from '../../models/card_state';
 import { CardTypes } from '../../models/enums/card_types';
@@ -48,10 +50,14 @@ class HomeCard extends Component {
     else if (card.type == CardTypes.INVENTORY_OPEN) {
       return <InventoryCard spot={this.props.spot} />
     }
+    else if (card.type == CardTypes.REQUESTS_OPEN) {
+      return <RequestListCard spot={this.props.spot} />
+    }
     else {
       return (
         <div className="game-card">
           <div className="game-card-body">
+            <RequestBox spot={0} />
             <InventoryBox spot={0} />
             <TravelerRest spot={0} />
             <ExperimentalGarden spot={0} />
